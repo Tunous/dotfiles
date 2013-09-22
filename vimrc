@@ -1,37 +1,41 @@
 "
-"									 ___	 _____(_)_______ ___ _______________
-"									 __ | / /__  / __  __ `__ \__  ___/_	___/
-"									 __ |/ / _	/  _	/ / / / /_	/		 / /__
-"									 _____/  /_/	 /_/ /_/ /_/ /_/		 \___/
+"                  ___	 _____(_)_______ ___ _______________
+"                  __ | / /__  / __  __ `__ \__  ___/_	___/
+"                  __ |/ / _	/  _	/ / / / /_	/		 / /__
+"                  _____/  /_/	 /_/ /_/ /_/ /_/		 \___/
 "
-" Initial settings ----------------------------------------------------------
-" Plugin settings {{{
+" Plugins -----------------------------------------------------------------
+" Vundle {{{
+" ----------------------------------------
+" Manage all plugins
 
-" Path settings {{{
-
+" It's required to turn file type off to make vundle work propetly
 filetype off
+
+" Set correct path for bundles
 set rtp+=$VIM/vimfiles/bundle/vundle
 call vundle#rc('$VIM/vimfiles/bundle/')
-
-"}}}
-" Vundle {{{
 
 Bundle 'gmarik/vundle'
 
 "}}}
 " Fugitive {{{
+" ----------------------------------------
+" Use git inside of vim
 
 Bundle 'tpope/vim-fugitive'
 
 " }}}
 
 " Airline {{{
+" ----------------------------------------
+" Nice looking statusline
 
 Bundle 'bling/vim-airline'
 
 " Symbols {{{
 
-let g:airline_powerline_fonts = 1		 " Use poweline fonts
+let g:airline_powerline_fonts = 1		 " Poweline fonts
 let g:airline_left_sep = ''				 " Left separator
 let g:airline_right_sep = ''				 " Right separator
 let g:airline_left_alt_sep = ''		 " Alternative left separator
@@ -81,8 +85,8 @@ map <F12> :!ctags -R --sort=yes --c++-kinds=+pl --fields=+iaS --extra=+q .<CR>
 
 "}}}
 
-" }}}
-" Set main settings {{{
+" Actual settings ---------------------------------------------------------
+" Main settings {{{
 
 filetype plugin indent on
 syntax on
@@ -91,7 +95,7 @@ set nocompatible
 set encoding=utf-8
 
 "}}}
-" Set theme settings {{{
+" Theme settings {{{
 
 set guifont=Inconsolata-dz_for_Powerline:h9:cEASTEUROPE  " Inconsolata font
 
@@ -100,7 +104,6 @@ colorscheme customized																	 " Use my own theme
 
 "}}}
 
-" Actual settings -----------------------------------------------------------
 " Set options {{{
 
 " Gui options {{{
@@ -347,7 +350,7 @@ augroup temp
 	autocmd!
 	autocmd BufWritePost customized.vim colorscheme customized
 augroup END
-nnoremap <leader>vt :split c:\Lukas\ProgramFiles\Vim\vimfiles\colors\customized.vim<CR>
+nnoremap <leader>vt :split $VIM/vimfiles/colors/customized.vim<CR>
 
 "}}}
 
