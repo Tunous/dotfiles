@@ -38,9 +38,6 @@ let g:airline_left_sep = ''				 " Left separator
 let g:airline_right_sep = ''				 " Right separator
 let g:airline_left_alt_sep = ''		 " Alternative left separator
 let g:airline_right_alt_sep = ''		 " Alternative right separator
-let g:airline_symbols.branch = ''	 " Branch icon
-let g:airline_symbols.readonly = '' " Readonly icon
-let g:airline_symbols.linenr = ''	 " Line number icon
 
 "}}}
 
