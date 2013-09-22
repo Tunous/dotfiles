@@ -20,17 +20,15 @@ Bundle 'gmarik/vundle'
 
 "}}}
 " Fugitive {{{
-" ----------------------------------------
-" Use git inside of vim
 
+" Use git inside of vim
 Bundle 'tpope/vim-fugitive'
 
 " }}}
 
 " Airline {{{
-" ----------------------------------------
-" Nice looking statusline
 
+" Nice looking statusline
 Bundle 'bling/vim-airline'
 
 " Symbols {{{
@@ -90,7 +88,7 @@ map <F12> :!ctags -R --sort=yes --c++-kinds=+pl --fields=+iaS --extra=+q .<CR>
 
 filetype plugin indent on
 syntax on
-language messages pl.utf-8
+language messages en_US.utf-8
 set nocompatible
 set encoding=utf-8
 
@@ -221,9 +219,9 @@ inoremap <Esc> Ooops, use jk instead...
 "}}}
 " Open vimrc file {{{
 
-nnoremap <leader>ve  :edit $MYVIMRC<CR>
-nnoremap <leader>vs  :split $MYVIMRC<CR>
-nnoremap <leader>vv  :vsplit $MYVIMRC<CR>
+nnoremap <leader>ve  :edit $VIM/vimfiles/vimrc<CR>
+nnoremap <leader>vs  :split $VIM/vimfiles/vimrc<CR>
+nnoremap <leader>vv  :vsplit $VIM/vimfiles/vimrc<CR>
 
 "}}}
 " Other {{{
