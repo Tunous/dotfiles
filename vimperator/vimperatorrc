@@ -1,29 +1,33 @@
+" Gui elements
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 set status=input,location,history,bookmark
 
-set runtimepath=~/.vimperator
+" Big letters instead of numbers for hinttags
 set hintchars=HJKLASDFGYUIOPQWERTNMZXCVB
 
-set "extendedhinttags=//*[@onclick or @onmouseover or @onmousedown or @onmouseup or @oncommand or @class='lk' or @role='link' or @role='button' or @role='option'] | //input[not(@type='hidden')] | //a | //area | //iframe | //textarea | //button | //select | //xhtml:input[not(@type='hidden')] | //xhtml:a | //xhtml:area | //xhtml:iframe | //xhtml:textarea | //xhtml:button | //xhtml:select | //div[contains(@class,'J-K-I J-J5-Ji')]"
-set "hinttags=//*[@onclick or @onmouseover or @onmousedown or @onmouseup or @oncommand or @class='lk' or @role='link' or @role='button' or @role='option'] | //input[not(@type='hidden')] | //a | //area | //iframe | //textarea | //button | //select | //xhtml:input[not(@type='hidden')] | //xhtml:a | //xhtml:area | //xhtml:iframe | //xhtml:textarea | //xhtml:button | //xhtml:select | //div[contains(@class,'J-K-I J-J5-Ji')]"
-
+" Updated change page patterns
 set nextpattern=\\bnastępn,\\bdalej,\\bnext,^>$,^(>>|»)$,^(>|»),(>|»)$,\\bmore\\b
 set previouspattern=\\bpoprzedni,\\bwstecz,\\bprev|previous\\b,^<$,^(<<|«)$,^(<|«),(<|«)$
 
+" Better <Leader>
 let mapleader = ','
 
+" Open bookmarks
 noremap B :bmarks<CR>
 
-" Chanege tabs
+" Move between tabs
 noremap J gt
 noremap K gT
 
 " Stay in normal mode after loading page
 set focuscontent
 
+" Toggle stylesheet
 nnoremap <Leader>s :styletoggle -name<Space>
 
 noremap <C-l> :nohlsearch<CR>
+
+" Source vimperatorrc file
 noremap <silent> <Leader>v :source ~/_vimperatorrc<CR>
 
 " Functions --------------------------------------------------------------
@@ -50,278 +54,11 @@ map <silent> <F9> :js toggleElement('nav-bar')<CR>
 "}}}
 
 " Styles -----------------------------------------------------------------
-" Toolbars {{{
-
-style -name Toolbars chrome://* <<EOF
-
-@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-
-/* Small tweaks {{{ */
-
-/* Hide back button if it's disabled */
-#back-button[disabled] { visibility: collapse !important; }
-
-/* }}} */
-/* Bookmarks and navigation bar {{{ */
-
-#nav-bar,
-#PersonalToolbar {
-background: #eee !important;
-padding: 0 3px 0 25px !important;
-margin: 0 1px 0 1px !important;
-
-border: none !important;
-        border-radius: 0 !important;
-}
-
-#PersonalToolbar {
-display: none;
-         border-top: none !important;
-}
-
-/* Show bookmarks on hover and newtab page */
-#main-window[stylish-url="about:newtab"] #PersonalToolbar,
-#PersonalToolbar[customizing],
-#nav-bar[customizing],
-#navigator-toolbox:hover #PersonalToolbar,
-#navigator-toolbox:hover #nav-bar {
-display: inherit;
-}
-
-/* }}} */
-/* Addons bar {{{ */
-
-
-#addon-bar:not([customizing]) {
-padding: 2px 2px 2px 0 !important;
-
-border: 0 !important;
-        border-radius: 0 3px 0 5px !important;
-
-background: #eee !important;
-
-            box-shadow: 0 0 0 1px rgba(0,0,0,.25) inset,
-              0 0 0 2px rgba(255,255,255,.5) inset !important;
-
-position: fixed !important;
-left: 1px !important;
-
-height: 23px !important;
-
-        /* Animation (hiding) */
-bottom: -23px !important;
-opacity: 0.5 !important;
-         -moz-transition: bottom 0.25s 0.5s ease-in, opacity 0.1s 0.65s ease-in !important;
-}
-
-/* Animation (showing) */
-#addon-bar:hover {
-bottom: 0px !important;
-opacity: 1 !important;
-         -moz-transition: bottom .25s .25s, opacity 0.01s 0.25s !important;
-}
-
-/* Show addons bar box */
-
-/* Hide close button */
-#addonbar-closebutton {
-display: none !important;
-}
-
-#addon-bar > toolbarspacer,
-#addon-bar > toolbarspring {
-background: #ddd !important;
-
-            box-shadow: 0 0 0 1px rgba(0,0,0,.25) inset !important;
-
-            border-radius: 0 0 0 4px !important;
-
-height: 20px !important;
-width: 25px !important;
-
-position: absolute  !important;
-left: 0 !important;
-top: -20px !important;
-
-opacity: 1 !important;
-         -moz-transition: opacity 0.5s 0.75s !important;
-}
-#addon-bar:hover > toolbarspacer,
-#addon-bar:hover > toolbarspring {
-opacity: 0 !important;
-         -moz-transition: opacity 0.05s 0.25s !important;
-}
-/* }}} */
-
-EOF
-"}}}
-" Vertical Tabs {{{
-
-style -name VerticalTabs chrome://* <<EOF
-
-@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
-
-
-/* Default style tweaks {{{ */
-
-.tabbrowser-tab .tab-icon-image { margin: 3px 0 8px 0px !important; } /**/
-
-/* }}} */
-/* Tabs {{{ */
-
-/* Tabs panel {{{ */
-
-#tabbrowser-tabs {
-background: #eee !important;
-
-border: none !important;
-        border-radius: 0 0 0 4px !important;
-        border-radius: 0 !important;
-
-        /* Size 25px */
-        min-width: 325px !important;
-        max-width: 325px !important;
-        margin-right: -300px !important;
-        padding-top: 30px !important;
-}
-
-/* }}} */
-/* Tabs {{{ */
-
-.tabbrowser-tab {
-background: none !important;
-
-border: none !important;
-        border-radius: 0 !important;
-
-        max-height: 23px !important;
-        min-height: 23px !important;
-
-        max-width: -moz-fit-content !important;
-        min-width: -moz-fit-content !important;
-width: -moz-fit-content !important;
-
-       /* Correct popup size */
-display: list-item !important;
-
-margin: 1px 0 1px 0 !important;
-}
-
-/* }}} */
-/* Selected tab {{{ */
-
-.tabbrowser-tab[selected] {
-background: white !important;
-            box-shadow: -2px 0 5px rgba(0,0,0,.2) !important;
-}
-.tabbrowser-tab[selected]:hover {
-  background-color: rgb(60,80,100) !important;
-}
-
-/* }}} */
-/* Pinned tab {{{ */
-
-.tabbrowser-tab[pinned] {
-background: #ddd !important;
-            border-radius: 10px 0 0 10px !important;
-}
-
-/* }}} */
-/* Small tweaks {{{ */
-
-.tabbrowser-tab .tab-icon-image { margin: 0 0 4px 0; }
-.tabbrowser-tab:not([pinned]) .tab-icon-image:not([src]) { visibility: visible !important; }
-.tabbrowser-tab:first-child { margin-top: 5px !important; }
-.tabbrowser-tab[busy]:hover:not([selected]) .tab-text { margin-left: 0px !important; }
-.tabbrowser-tab[titlechanged]:not([selected]) { background: rgb(240,200,100) !important; }
-
-/* }}} */
-
-/* }}} */
-/* Popup text {{{ */
-
-.tabbrowser-tab:not(:hover) .tab-text {
-visibility: collapse !important;
-width: 0 !important;
-       max-width: 0 !important;
-}
-.tabbrowser-tab:hover .tab-text {
-  max-height: 23px !important;
-  min-height: 23px !important;
-
-  max-width: 300px !important;
-  min-width: -moz-fit-content !important;
-width: -moz-fit-content !important;
-
-color: white !important;
-       background-color: rgb(60,80,100) !important;
-
-border: 3px solid rgb(60,80,100) !important;
-        border-radius: 0 4px 4px 0 !important;
-
-padding: 0 5px 0 5px !important;
-margin: 0 0 4px 5px !important;
-
-display: table-cell !important;
-
-         -moz-transition: max-width .5s !important;
-}
-
-/* Make popups appear on top of main window */
-.tabbrowser-tab > .tab-stack {
-  z-index: 1;
-position: relative;
-}
-
-/* }}} */
-/* Close button {{{ */
-
-/* Swap text & close button */
-.tabbrowser-tab .tab       { -moz-box-ordinal-group: 3 !important; }
-.tabbrowser-tab .tab-label { -moz-box-ordinal-group: 4 !important; }
-
-/* Hide close button */
-.tabbrowser-tab .tab-close-button {
-visibility: collapse !important;
-}
-/* Show close button on hover */
-.tabbrowser-tab[selected]:not([pinned]):hover .tab-close-button {
-visibility: visible !important;
-margin: 0 -2px 3px 0 !important;
-}
-
-/* Hide favicon and throbber on hover */
-.tabbrowser-tab[selected]:not([pinned]):hover .tab-icon-image,
-  .tabbrowser-tab[selected]:not([pinned]):hover .tab-throbber {
-display: none !important;
-  }
-
-/* }}} */
-/* Fixes {{{ */
-
-/* Reomver splitter and theme stuff */
-.tab-content { border: none !important; }
-#verticaltabs-splitter { display: none !important; }
-
-/* Fix padding caused by tab arrows */
-.tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox {
-  -moz-padding-start: 0 !important;
-  -moz-padding-end: 0 !important;
-}
-
-/* Main window */
-#main-window browser {
-  /*border-radius: 4px 0 0 0 !important;*/
-  box-shadow: 0 0 10px 3px rgba(0,0,0,.2) !important;
-}
-
-/* Make vimpoerator box show on top of tabs */
-.liberator-container { z-index: 2 !important; }
-
-/* }}} */
-
-EOF
-"}}}
+source ~/vimperator/styles/Toolbars.vim
+source ~/vimperator/styles/VerticalTabs.vim
+
+" This one is not working :(
+source ~/vimperator/styles/Scrollbars.vim
 
 " End {{{
 
