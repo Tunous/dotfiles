@@ -348,7 +348,7 @@ augroup temp
   autocmd BufWritePost customized.vim colorscheme customized
 augroup END
 nnoremap <leader>vt :split $VIM/vimfiles/colors/customized.vim<CR>
-noremap <leader>vr :edit $HOME/_vimperatorrc<CR>
+noremap <leader>vr :edit $HOME/vimperator/vimperatorrc<CR>
 
 "}}}
 
