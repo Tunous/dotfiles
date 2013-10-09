@@ -6,8 +6,6 @@
 "
 " Plugins -----------------------------------------------------------------
 " Vundle {{{
-" ----------------------------------------
-" Manage all plugins
 
 " It's required to turn file type off to make vundle work propetly
 filetype off
@@ -242,6 +240,9 @@ nmap <leader>l :set list!<CR>
 
 " Yank to end of line
 nnoremap Y y$
+
+" Save file
+nnoremap <Enter> :w<CR>
 
 "}}}
 
