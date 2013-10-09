@@ -1,8 +1,8 @@
 "
 "                  ___   _____(_)_______ ___ _______________
 "                  __ | / /__  / __  __ `__ \__  ___/_  ___/
-"                  __ |/ / _    /  _    / / / / /_  /        / /__
-"                  _____/  /_/   /_/ /_/ /_/ /_/         \___/
+"                  __ |/ / _  /  _    / / / / /_/    / /__
+"                  _____/  /_/   /_/ /_/ /_/ /_/     \___/
 "
 " Plugins -----------------------------------------------------------------
 " Vundle {{{
@@ -48,6 +48,8 @@ let g:airline#extensions#tabline#enabled = 1
 Bundle 'altercation/vim-colors-solarized'
 
 "}}}
+
+Bundle 'flazz/vim-colorschemes'
 
 " Formatting --------------------------------------------------------------{{{
 
@@ -130,7 +132,17 @@ set autoindent         " Always set autoindenting on
 set copyindent         " Copy the previous indentation on autoindenting
 
 "}}}
+" Bakcup and swap files {{{
+
+silent execute '!mkdir "'.$VIMRUNTIME.'/temp"'
+silent execute '!del "'.$VIMRUNTIME.'/temp/*~"'
+set backupdir=$VIMRUNTIME/temp//
+set directory=$VIMRUNTIME/temp//
+
+"}}}
 " Other {{{
+
+set wildmenu
 
 set autoread                                " Read file if it was modified outside of vim
 set autowrite                               " Writie file after executing specific commands
@@ -156,9 +168,10 @@ set nolist
 set listchars=tab:\ ,eol:¬
 
 set lines=50
-set columns=120
+set columns=175
 
 "}}}"
+
 
 "}}}
 " Key mappings {{{
@@ -172,16 +185,23 @@ inoremap <leader><leader> <leader>
 
 "}}}
 
-" Arrows keys to navigate between windows {{{
+" Nvigation {{{
 
+" Chamge windows
 noremap <Up> <C-W>k
 noremap <Down> <C-W>j
 noremap <Left> <C-W>h
 noremap <Right> <C-W>l
+
+" Don't use arrow keys
 inoremap <Up> <NOP>
 inoremap <Down> <NOP>
 inoremap <Left> <NOP>
 inoremap <Right> <NOP>
+
+" Scroll page
+noremap <Space> <C-D>
+noremap <S-Space> <C-U>
 
 "}}}
 " Smart semicolon and function braces {{{
@@ -230,6 +250,7 @@ nnoremap Y y$
 
 "}}}
 " Functions {{{
+
 " Insert header preprocessor gates {{{
 
 function! s:insert_gates()
@@ -276,20 +297,27 @@ endfunction
 
 "}}}
 " Autocommands {{{
+
 " Relative numbers {{{
+
 augroup relative_numbers
   autocmd!
-  " Use relatie number in active window...
-  autocmd WinEnter           * set relativenumber
-  autocmd BufNewFile,BufRead * set relativenumber
-  autocmd WinLeave           * set norelativenumber
-  " ... but not in insert mode
-  autocmd InsertEnter * set norelativenumber
-  autocmd InsertLeave * set relativenumber
+  " Turn on relative numbers
+  autocmd WinEnter            * set relativenumber
+  autocmd BufNewFile,BufRead  * set relativenumber
+  autocmd FocusGained         * set relativenumber
+  autocmd InsertLeave         * set relativenumber
+
+  " Turn off relative numbers
+  autocmd WinLeave            * set norelativenumber
+  autocmd FocusLost           * set norelativenumber
+  autocmd InsertEnter         * set norelativenumber
+
 augroup END
 
 "}}}
 " Other {{{
+
 augroup other
   autocmd!
   autocmd BufWritePost vimrc source $MYVIMRC                         " Automatically source vimrc after saving
@@ -322,7 +350,10 @@ augroup temp
   autocmd BufWritePost customized.vim colorscheme customized
 augroup END
 nnoremap <leader>vt :split $VIM/vimfiles/colors/customized.vim<CR>
+noremap <leader>vr :edit $HOME/_vimperatorrc<CR>
 
+source $VIM/vimfiles/random.vim
 "}}}
 
-" vim: foldmethod=marker: foldlevel=0
+
+" vim: foldmethod=marker: foldlevel=0:
