@@ -44,9 +44,6 @@ let g:airline_right_alt_sep = ''      " Alternative right separator
 " Show buffers line when there is only one tab open
 let g:airline#extensions#tabline#enabled = 1
 
-" Solarized colorscheme (Remove!)
-Bundle 'altercation/vim-colors-solarized'
-
 "}}}
 
 Bundle 'flazz/vim-colorschemes'
@@ -69,7 +66,7 @@ Bundle 'godlygeek/tabular'
 Bundle 'matze/vim-move'
 
 " Go to matching header/source file
-Bundle 'vim-scripts/a.vim'
+Bundle 'a.vim'
 
 "}}}
 
@@ -352,8 +349,7 @@ augroup END
 nnoremap <leader>vt :split $VIM/vimfiles/colors/customized.vim<CR>
 noremap <leader>vr :edit $HOME/_vimperatorrc<CR>
 
-source $VIM/vimfiles/random.vim
 "}}}
 
-
+" End {{{
 " vim: foldmethod=marker: foldlevel=0:
