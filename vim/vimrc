@@ -21,6 +21,12 @@ Bundle 'gmarik/vundle'
 " Use git inside of vim
 Bundle 'tpope/vim-fugitive'
 
+augroup fugitive
+  autocmd!
+  " Auto-clean fugitive buffers
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END
+
 " }}}
 
 " Airline {{{
