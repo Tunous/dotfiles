@@ -203,11 +203,9 @@ noremap <Space> <C-D>
 noremap <S-Space> <C-U>
 
 "}}}
-" Smart semicolon and function braces {{{
+" Smart semicolon {{{
 
 inoremap <leader>; <C-o>A;
-inoremap <leader>} <C-o>A {<Return>}<C-o>k<C-o>o
-inoremap <leader>{ <C-o>A {<Return>}<C-o>k<C-o>o
 
 "}}}
 " 'jk' to leave insert mode {{{
