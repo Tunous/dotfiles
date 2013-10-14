@@ -1,3 +1,4 @@
+"{{{1
 "   ___      ___  __     ___      ___    _______    _______   _______        __  ___________  ______     _______    _______    ______
 "  |"  \    /"  ||" \   |"  \    /"  |  |   __ "\  /"     "| /"      \      /""\("     _   ")/    " \   /"      \  /"      \  /" _  "\
 "   \   \  //  / ||  |   \   \  //   |  (. |__) :)(: ______)|:        |    /    \)__/  \\__/// ____  \ |:        ||:        |(: ( \___)
@@ -6,6 +7,7 @@
 "      \\   /    /\  |\ |.  \    /:  | /|__/ \    (:      "||:  __   \  /   /  \\  \\:  |  \        /  |:  __   \ |:  __   \ (:   _) \
 "       \__/    (__\_|_)|___|\__/|___|(_______)    \_______)|__|  \___)(___/    \___)\__|   \"_____/   |__|  \___)|__|  \___) \_______)
 "
+"}}}
 " Gui elements -----------------------------------------------------------
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 set status=input,location,history,bookmark
@@ -38,10 +40,15 @@ noremap <C-l> :nohlsearch<CR>
 " Source vimperatorrc file
 noremap <silent> <Leader>v :source ~/_vimperatorrc<CR>
 
-" Functions --------------------------------------------------------------
-" Toggle css elements {{{
+" Abbreviations
+cabbrev ps panorama switch
+cabbrev pu panorama push
+cabbrev pl panorama pull
 
-" Code {{{
+" Functions --------------------------------------------------------------
+" Toggle css elements {{{2
+
+" Code {{{3
 
 javascript <<EOF
 
@@ -52,7 +59,7 @@ toggleElement = function (name) {
 EOF
 
 "}}}
-" Mappings {{{
+" Mappings {{{3
 
 " Toggle navigation bar
 map <silent> <F9> :js toggleElement('nav-bar')<CR>
@@ -61,9 +68,9 @@ map <silent> <F9> :js toggleElement('nav-bar')<CR>
 
 "}}}
 
-" End {{{
+" End {{{2
 
 "source ~/test.vim
 echo "vimperatorrc sourced"
 
-" vim: ts=2 sw=2 sts=2 foldmethod=marker foldlevel=0 ft=vimperator
+" vim: ts=2 sw=2 sts=2 foldmethod=marker foldlevel=1 ft=vimperator
