@@ -53,6 +53,9 @@ Bundle 'scrooloose/nerdcommenter'
 
 " Automatically close quotes, brackets, etc.
 Bundle 'Raimondi/delimitMate'
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
+let delimitMate_balance_matchpairs = 1
 
 " Line up text
 Bundle 'godlygeek/tabular'
