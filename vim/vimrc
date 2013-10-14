@@ -10,8 +10,8 @@
 " Vundle {{{
 
 " Set correct path for bundles
-set rtp+=$VIM/vimfiles/bundle/vundle
-call vundle#rc('$VIM/vimfiles/bundle/')
+set rtp+=$HOME/vimfiles/bundle/vundle
+call vundle#rc('$HOME/vimfiles/bundle/')
 
 Bundle 'gmarik/vundle'
 
@@ -218,9 +218,9 @@ inoremap <Esc> Ooops, use jk instead...
 "}}}
 " Open vimrc file {{{
 
-nnoremap <leader>ve  :edit $VIM/vimfiles/vimrc<CR>
-nnoremap <leader>vs  :split $VIM/vimfiles/vimrc<CR>
-nnoremap <leader>vv  :vsplit $VIM/vimfiles/vimrc<CR>
+nnoremap <leader>ve  :edit $HOME/vimfiles/vimrc<CR>
+nnoremap <leader>vs  :split $HOME/vimfiles/vimrc<CR>
+nnoremap <leader>vv  :vsplit $HOME/vimfiles/vimrc<CR>
 
 "}}}
 " Other {{{
@@ -349,7 +349,7 @@ augroup temp
   autocmd!
   autocmd BufWritePost customized.vim colorscheme customized
 augroup END
-nnoremap <leader>vt :split $VIM/vimfiles/colors/customized.vim<CR>
+nnoremap <leader>vt :split $HOME/vimfiles/colors/customized.vim<CR>
 noremap <leader>vr :edit $HOME/vimperator/vimperatorrc<CR>
 
 "}}}
