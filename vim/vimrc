@@ -54,7 +54,7 @@ Bundle 'flazz/vim-colorschemes'
 " Formatting --------------------------------------------------------------{{{
 
 " Easy commenting of selected lines
-Bundle 'scrooloose/nerdcommenter'
+Bundle 'tomtom/tcomment_vim'
 
 " Automatically close quotes, brackets, etc.
 Bundle 'Raimondi/delimitMate'
