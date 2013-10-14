@@ -232,11 +232,6 @@ nnoremap <F2> :call Preserve("normal gg=G")<CR> :call Preserve("%s/\\s\\+$//e")<
 " Capitalize word next to cursor
 inoremap <C-u> <Esc>:call Preserve("normal gUiw")<CR>a
 
-" Toggle fullscreen
-if has("gui_running")
-  nnoremap <F11> :call <SID>ToggleFullscreen()<CR>
-endif
-
 " Toggle `set list`
 nmap <leader>l :set list!<CR>
 
@@ -253,7 +248,7 @@ nnoremap <Enter> :w<CR>
 
 " Insert header preprocessor gates {{{
 
-function! s:insert_gates()
+function! s:InsertCppGates()
   let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
   execute "normal! i#ifndef " .gatename
   execute "normal! o#define " .gatename
@@ -281,17 +276,21 @@ endfunction
 "}}}
 " Toggle fullscreen {{{
 
-let s:fullscreen_on = 1
+let s:fullscreen = 0
 
-function! s:ToggleFullscreen()
-  if s:fullscreen_on
+function! s:ToggleFullScreen()
+  if s:fullscreen == 1
+    let s:fullscreen = 0
     simalt ~P
-    let s:fullscreen_on = 0
   else
+    let s:fullscreen = 1
     simalt ~s
-    let s:fullscreen_on = 1
   endif
 endfunction
+
+if has("gui_running")
+  nnoremap <F11> :call <SID>ToggleFullScreen()<CR>
+endif
 
 "}}}
 
@@ -321,9 +320,8 @@ augroup END
 augroup other
   autocmd!
   autocmd BufWritePost vimrc source $MYVIMRC                         " Automatically source vimrc after saving
-  autocmd BufNewFile,BufRead *.{h,hpp} call <SID>insert_gates()      " Automatically add header file getes
+  autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()    " Automatically add header file getes
   autocmd CursorHoldI * stopinsert                                   " Stop insert mode after inactivity
-  autocmd VimEnter * call <SID>ToggleFullscreen()                    " Set fullscreen on startup
 
   autocmd BufEnter,BufNew *.{c,cpp,h,hpp} compiler mingw
 augroup END
