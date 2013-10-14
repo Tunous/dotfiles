@@ -165,8 +165,9 @@ set listchars=tab:\ ,eol:¬
 set lines=50
 set columns=175
 
-"}}}"
+set foldmethod=marker
 
+"}}}"
 
 "}}}
 " Key mappings {{{
