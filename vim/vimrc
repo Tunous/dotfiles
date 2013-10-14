@@ -1,14 +1,13 @@
-"
-"                  ___   _____(_)_______ ___ _______________
-"                  __ | / /__  / __  __ `__ \__  ___/_  ___/
-"                  __ |/ / _  /  _    / / / / /_/    / /__
-"                  _____/  /_/   /_/ /_/ /_/ /_/     \___/
+"   ___      ___  __     ___      ___   _______    ______
+"  |"  \    /"  ||" \   |"  \    /"  | /"      \  /" _  "\
+"   \   \  //  / ||  |   \   \  //   ||:        |(: ( \___)
+"    \\  \/. ./  |:  |   /\\  \/.    ||_____/   ) \/ \
+"     \.    //   |.  |  |: \.        | //      /  //  \ _
+"      \\   /    /\  |\ |.  \    /:  ||:  __   \ (:   _) \
+"       \__/    (__\_|_)|___|\__/|___||__|  \___) \_______)
 "
 " Plugins -----------------------------------------------------------------
 " Vundle {{{
-
-" It's required to turn file type off to make vundle work propetly
-filetype off
 
 " Set correct path for bundles
 set rtp+=$VIM/vimfiles/bundle/vundle
@@ -137,7 +136,7 @@ set directory=$VIMRUNTIME/temp//
 "}}}
 " Other {{{
 
-set wildmenu
+set wildmenu " Use wildmenu for commandline autocompletion
 
 set autoread                                " Read file if it was modified outside of vim
 set autowrite                               " Writie file after executing specific commands
