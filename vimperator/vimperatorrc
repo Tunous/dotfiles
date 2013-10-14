@@ -1,4 +1,12 @@
-" Gui elements
+" Styles {{{ -------------------------------------------------------------
+"source ~/vimperator/styles/Toolbars.vim
+"source ~/vimperator/styles/VerticalTabs.vim
+
+hi ContentSeparator     border-top: 1px solid white; z-index: 999; position: relative;
+
+" }}}
+
+" Gui elements -----------------------------------------------------------
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 set status=input,location,history,bookmark
 
@@ -52,13 +60,6 @@ map <silent> <F9> :js toggleElement('nav-bar')<CR>
 "}}}
 
 "}}}
-
-" Styles -----------------------------------------------------------------
-source ~/vimperator/styles/Toolbars.vim
-source ~/vimperator/styles/VerticalTabs.vim
-
-" This one is not working :(
-source ~/vimperator/styles/Scrollbars.vim
 
 " End {{{
 
