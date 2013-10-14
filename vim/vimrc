@@ -63,9 +63,6 @@ Bundle 'godlygeek/tabular'
 "}}}
 " Navigation {{{
 
-" Move lines by holding alt
-Bundle 'matze/vim-move'
-
 " Go to matching header/source file
 Bundle 'a.vim'
 
