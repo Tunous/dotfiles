@@ -320,6 +320,20 @@ if has("gui_running")
 endif
 
 "}}}
+" Jump to last position when opening file {{{
+
+autocmd BufReadPost * call SetCursorPosition()
+
+function! SetCursorPosition()
+    if &filetype !~ 'svn\|commit\c'
+        if line("'\"") > 0 && line("'\"") <= line("$")
+            exe "normal! g`\""
+            normal! zz
+        endif
+    end
+endfunction
+
+"}}}
 
 "}}}
 " Autocommands {{{
