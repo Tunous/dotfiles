@@ -1,23 +1,20 @@
 @echo off
-title Autolink
-
-goto init
+title winAutolink
 
 rem Start program ----------------------------------------------------------
 :init
   set target=%~dp0
-  rem TODO: Delete me, I'm temprorary:
-    goto select_links
-  goto check_Permissions
+  goto check_permissions
 
 rem Check administrator permissions ----------------------------------------
-:check_Permissions
+:check_permissions
   echo Administrative permissions required. Detecting permissions...
 
   net session >nul 2>&1
   if %errorLevel% == 0 (
     echo Success: Administrative permissions confirmed.
-    goto check_Path
+    cls
+    goto select_links
   ) else (
     echo Failure: Current permissions inadequate.
     goto end
@@ -25,7 +22,7 @@ rem Check administrator permissions ----------------------------------------
 
 rem Select what to link ----------------------------------------------------
 :select_links
-  echo Select what you want to link:
+  echo Please select which files to link:
   echo 1. Vim
   echo 2. Vimperator
   echo 3. Both
@@ -36,26 +33,26 @@ rem Select what to link ----------------------------------------------------
   if %choose% gtr 3 ( goto error )
   if %choose% lss 1 ( goto error )
 
-  goto check_Path
+  goto check_path
 
 rem Check if current location contains repository -------------------------
-:check_Path
+:check_path
   cd %target%
 
   if %choose% == 1 (
     if exist vim/vimrc (
-      goto link_Vim
+      goto link_vim
     )
   )
   if %choose% == 2 (
     if exist vimperator/vimperatorrc (
-      goto link_Vimp
+      goto link_vimp
     )
   )
   if %choose% == 3 (
     if exist vim\vimrc (
       if exist vimperator\vimperatorrc (
-        goto link_Vim
+        goto link_vim
       )
     )
   )
@@ -63,42 +60,42 @@ rem Check if current location contains repository -------------------------
   if %errorLevel% == 1 ( goto error )
 
   echo Looks like repository is not here.
-  goto get_Target
+  goto get_target
 
 rem Get from user location of repository -----------------------------------
-:get_Target
+:get_target
   set /p target="Please write correct path of repository: "
 
   if %errorLevel% == 0 (
     cls
-    goto check_Path
+    goto check_path
   ) else (
     goto error
   )
 
 rem Link vim files ---------------------------------------------------------
-:link_Vim
+:link_vim
   rem Go to home directory
   cd %USERPROFILE%
 
-  echo Linking vim files.
+  echo Linking vim files...
   echo.
 
   if exist vimfiles (
-    echo "vimfiles" folder already exists. Skipping to next file.
+    echo vimfiles folder already exists. Skipping to next file.
   ) else (
-    mklink /D vimfiles %batchdir%vim
+    mklink /D vimfiles %target%vim
   )
   if exist _vimrc (
-    echo "_vimrc" already exists. Skipping to next file.
+    echo _vimrc file already exists. Skipping to next file.
   ) else (
-    mklink _vimrc %batchdir%vim\vimrc
+    mklink _vimrc %target%vim\vimrc
   )
 
   if %choose% == 3 (
     echo.
     set choose=0
-    goto link_Vimp
+    goto link_vimp
   )
 
   if %errorLevel% == 0 (
@@ -108,22 +105,22 @@ rem Link vim files ---------------------------------------------------------
   )
 
 rem Link vimperator files --------------------------------------------------
-:link_Vimp
+:link_vimp
   rem Go to home directory
   cd %USERPROFILE%
 
-  echo Linking vimperator files.
+  echo Linking vimperator files...
   echo.
 
   if exist vimperator (
-    echo "vimperator" folder already exists. Skipping to next file.
+    echo vimperator folder already exists. Skipping to next file.
   ) else (
-    mklink /D vimperator %batchdir%vimperator
+    mklink /D vimperator %target%vimperator
   )
   if exist _vimperatorrc (
-    echo "_vimperatorrc" already exists. Skipping to next file.
+    echo _vimperatorrc file already exists. Skipping to next file.
   ) else (
-    mklink _vimperatorrc %batchdir%vimperator\vimperatorrc
+    mklink _vimperatorrc %target%vimperator\vimperatorrc
   )
 
   if %errorLevel% == 0 (
@@ -134,7 +131,6 @@ rem Link vimperator files --------------------------------------------------
 
 rem End program ------------------------------------------------------------
 :error
-  echo.
   echo Error: Something went wrong.
   goto end
 
