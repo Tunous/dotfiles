@@ -92,8 +92,16 @@ colorscheme customized      " Use my own theme
 
 "}}}
 
-" Set options {{{
+" Settting options {{{
 
+" Bakcup and swap files {{{
+
+set nobackup
+
+silent execute '!mkdir "'.$VIM.'\temp"'
+set directory=$VIM\temp\\\
+
+"}}}
 " Gui options {{{
 
 if has("gui_running")
@@ -101,10 +109,11 @@ if has("gui_running")
 endif
 
 "}}}
-" Smart scrolling {{{
+" Mouse {{{
 
-set scrolloff=10          " Minimal number of screen lines to keep above or below cursor
-set sidescrolloff=15      " Minimal number od screen linw to keep above or below cursor
+if has("moouse")
+  set mouse=a         " Can use mouse in all modes
+endif
 
 "}}}
 " Search options {{{
@@ -115,11 +124,16 @@ set ignorecase      " Ignore case when searching...
 set smartcase       " unless I use uppercase characters
 
 "}}}
-" Mouse {{{
+" Size {{{
 
-if has("moouse")
-  set mouse=a         " Can use mouse in all modes
-endif
+set lines=50
+set columns=175
+
+"}}}
+" Smart scrolling {{{
+
+set scrolloff=10          " Minimal number of screen lines to keep above or below cursor
+set sidescrolloff=15      " Minimal number od screen linw to keep above or below cursor
 
 "}}}
 " Tabs and spaces {{{
@@ -132,14 +146,13 @@ set autoindent         " Always set autoindenting on
 set copyindent         " Copy the previous indentation on autoindenting
 
 "}}}
-" Bakcup and swap files {{{
+" Undo files {{{
 
-silent execute '!mkdir "'.$VIMRUNTIME.'/temp"'
-silent execute '!del "'.$VIMRUNTIME.'/temp/*~"'
-set backupdir=$VIMRUNTIME/temp//
-set directory=$VIMRUNTIME/temp//
+silent execute '!mkdir "'.$VIM.'\undofiles"'
+set undodir=$VIM\undofiles
+set undofile
 
-"}}}
+"}}}"
 " Other {{{
 
 set wildmenu " Use wildmenu for commandline autocompletion
@@ -164,11 +177,8 @@ set visualbell                              " Don't beep
 
 set nowrap                                  " Don't wrap lines
 
-set nolist
-set listchars=tab:\ ,eol:¬
-
-set lines=50
-set columns=175
+set nolist " Dont' show listchars by default
+set listchars=tab:\ ,eol:¬ " Set listchars
 
 set foldmethod=marker
 
@@ -181,11 +191,14 @@ set foldmethod=marker
 
 let mapleader="," " Use ',' as leader
 
-" Pressing leader 2 times inserts it as normal character
-inoremap <leader><leader> <leader>
-
 "}}}
 
+" 'jk' to leave insert mode {{{
+
+inoremap jk <Esc>
+inoremap <Esc> Ooops, use jk instead...
+
+"}}}
 " Nvigation {{{
 
 " Chamge windows
@@ -205,43 +218,55 @@ noremap <Space> <C-D>
 noremap <S-Space> <C-U>
 
 "}}}
+" Open vimrc file {{{
+
+" Vim
+nnoremap <leader>ve  :edit $HOME/vimfiles/vimrc<CR>
+nnoremap <leader>vs  :split $HOME/vimfiles/vimrc<CR>
+nnoremap <leader>vv  :vsplit $HOME/vimfiles/vimrc<CR>
+
+" Vimperator
+nnoremap <leader>vr :edit $HOME/vimperator/vimperatorrc<CR>
+
+"}}}
 " Smart semicolon {{{
 
 inoremap <leader>; <C-o>A;
 
 "}}}
-" 'jk' to leave insert mode {{{
-
-inoremap jk <Esc>
-inoremap <Esc> Ooops, use jk instead...
-
-"}}}
-" Open vimrc file {{{
-
-nnoremap <leader>ve  :edit $HOME/vimfiles/vimrc<CR>
-nnoremap <leader>vs  :split $HOME/vimfiles/vimrc<CR>
-nnoremap <leader>vv  :vsplit $HOME/vimfiles/vimrc<CR>
-
-"}}}
 " Other {{{
-
-" Turn off highlighting for current search
-nnoremap <C-L> :nohlsearch<CR>
-
-" Indend whole file and remove trailing spaces
-nnoremap <F2> :call Preserve("normal gg=G")<CR> :call Preserve("%s/\\s\\+$//e")<CR>
 
 " Capitalize word next to cursor
 inoremap <C-u> <Esc>:call Preserve("normal gUiw")<CR>a
 
+" Indend whole file and remove trailing whitespaces
+nnoremap <F2> :call Preserve("normal gg=G")<CR> :call Preserve("%s/\\s\\+$//e")<CR>
+
+" Save file
+nnoremap <Enter> :w<CR>
+
 " Toggle `set list`
 nmap <leader>l :set list!<CR>
+
+" Turn off highlighting for current search
+nnoremap <C-L> :nohlsearch<CR>
 
 " Yank to end of line
 nnoremap Y y$
 
-" Save file
-nnoremap <Enter> :w<CR>
+"}}}
+
+"}}}
+" Commands {{{
+
+" Math {{{
+
+" :Calc
+:command! -nargs=+ Calc :py print <args>
+:py from cmath import *
+
+" Insert mode math
+ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
 "}}}
 
@@ -313,7 +338,6 @@ augroup relative_numbers
   autocmd WinLeave            * set norelativenumber
   autocmd FocusLost           * set norelativenumber
   autocmd InsertEnter         * set norelativenumber
-
 augroup END
 
 "}}}
@@ -321,25 +345,13 @@ augroup END
 
 augroup other
   autocmd!
-  autocmd BufWritePost vimrc source $MYVIMRC                         " Automatically source vimrc after saving
-  autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()    " Automatically add header file getes
+  autocmd BufWritePost vimrc source $MYVIMRC                         " Source vimrc after saving
+  autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()    " Add header file preprocessor getes
   autocmd CursorHoldI * stopinsert                                   " Stop insert mode after inactivity
-
-  autocmd BufEnter,BufNew *.{c,cpp,h,hpp} compiler mingw
+  autocmd BufEnter,BufNew *.{c,cpp,h,hpp} compiler mingw             " Select compiler for c/c++ files
 augroup END
 
 "}}}
-
-"}}}
-
-" Math {{{
-
-" :Calc
-:command! -nargs=+ Calc :py print <args>
-:py from cmath import *
-
-" Insert mode math
-ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
 
 "}}}
 
@@ -350,7 +362,7 @@ augroup temp
   autocmd BufWritePost customized.vim colorscheme customized
 augroup END
 nnoremap <leader>vt :split $HOME/vimfiles/colors/customized.vim<CR>
-noremap <leader>vr :edit $HOME/vimperator/vimperatorrc<CR>
+
 
 "}}}
 
