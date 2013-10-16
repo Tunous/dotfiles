@@ -325,12 +325,12 @@ endif
 autocmd BufReadPost * call SetCursorPosition()
 
 function! SetCursorPosition()
-    if &filetype !~ 'svn\|commit\c'
-        if line("'\"") > 0 && line("'\"") <= line("$")
-            exe "normal! g`\""
-            normal! zz
-        endif
-    end
+  if &filetype !~ 'svn\|commit\c'
+    if line("'\"") > 0 && line("'\"") <= line("$")
+      exe "normal! g`\""
+      normal! zz
+    endif
+  end
 endfunction
 
 "}}}
@@ -363,6 +363,7 @@ augroup other
   autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()    " Add header file preprocessor getes
   autocmd CursorHoldI * stopinsert                                   " Stop insert mode after inactivity
   autocmd BufEnter,BufNew *.{c,cpp,h,hpp} compiler mingw             " Select compiler for c/c++ files
+  autocmd filetype svn,*commit* setlocal spell                       " Spell check when writing commit logs
 augroup END
 
 "}}}
