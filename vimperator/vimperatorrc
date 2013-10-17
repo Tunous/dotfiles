@@ -29,6 +29,10 @@ noremap B :bmarks<CR>
 noremap J gt
 noremap K gT
 
+" Faster scrolling
+noremap j <Down>
+noremap k <Up>
+
 " Stay in normal mode after loading page
 set focuscontent
 
