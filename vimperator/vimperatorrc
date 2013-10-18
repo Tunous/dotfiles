@@ -63,7 +63,7 @@ noremap k <Up>
 "}}}
 " Sourcing {{{3
 
-noremap <silent> <Leader>v :source ~/_vimperatorrc<CR> " Source vimperatorrc file
+noremap <silent> <Leader>v :source ~/_vimperatorrc<CR>
 
 "}}}
 
