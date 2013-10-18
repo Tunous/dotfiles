@@ -86,11 +86,6 @@ rem Link vim files ---------------------------------------------------------
   ) else (
     mklink /D vimfiles %target%vim
   )
-  if exist _vimrc (
-    echo _vimrc file already exists. Skipping to next file.
-  ) else (
-    mklink _vimrc %target%vim\vimrc
-  )
 
   if %choose% == 3 (
     echo.
