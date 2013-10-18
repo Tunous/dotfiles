@@ -8,46 +8,74 @@
 "       \__/    (__\_|_)|___|\__/|___|(_______)    \_______)|__|  \___)(___/    \___)\__|   \"_____/   |__|  \___)|__|  \___) \_______)
 "
 "}}}
-" Gui elements -----------------------------------------------------------
+
+" Vimperatorrc -----------------------------------------------------------
+" Setting options {{{2
+
+" Gui elements {{{3
+
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 set status=input,location,history,bookmark
 
-" Big letters instead of numbers for hinttags
+"}}}
+" Hintchars {{{3
+
 set hintchars=HJKLASDFGYUIOPQWERTNMZXCVB
 
-" Updated change page patterns
+"}}}
+" Change page patterns {{{3
+
 set nextpattern=\\bnastępn,\\bdalej,\\bnext,^>$,^(>>|»)$,^(>|»),(>|»)$,\\bmore\\b
 set previouspattern=\\bpoprzedni,\\bwstecz,\\bprev|previous\\b,^<$,^(<<|«)$,^(<|«),(<|«)$
 
-" Better <Leader>
+"}}}
+" Other {{{3
+
+set focuscontent
+
+"}}}
+
+"}}}
+" Key mappings {{{2
+
+" Leader {{{3
+
 let mapleader = ','
 
-" Open bookmarks
+"}}}
+
+" Bookmarks {{{3
+
 noremap B :bmarks<CR>
 
-" Move between tabs
+"}}}
+" Tabs navigation {{{3
+
 noremap J gt
 noremap K gT
 
-" Faster scrolling
+"}}}
+" Faster scrolling {{{3
+
 noremap j <Down>
 noremap k <Up>
 
-" Stay in normal mode after loading page
-set focuscontent
+"}}}
+" Sourcing {{{3
 
-" Toggle stylesheet
-nnoremap <Leader>s :styletoggle -name<Space>
+noremap <silent> <Leader>v :source ~/_vimperatorrc<CR> " Source vimperatorrc file
 
-noremap <C-l> :nohlsearch<CR>
+"}}}
 
-" Source vimperatorrc file
-noremap <silent> <Leader>v :source ~/_vimperatorrc<CR>
+"}}}
+" Abbreviations {{{2
 
-" Abbreviations
+" Panorama
 cabbrev ps panorama switch
 cabbrev pu panorama push
 cabbrev pl panorama pull
+
+"}}}
 
 " Functions --------------------------------------------------------------
 " Toggle css elements {{{2
