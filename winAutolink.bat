@@ -9,16 +9,28 @@ rem Start program ----------------------------------------------------------
 rem Check administrator permissions ----------------------------------------
 :check_permissions
   echo Administrative permissions required. Detecting permissions...
-
   net session >nul 2>&1
+
   if %errorLevel% == 0 (
     echo Success: Administrative permissions confirmed.
-    cls
+    echo.
     goto select_links
   ) else (
-    echo Failure: Current permissions inadequate.
-    goto end
+    echo Requesting administrative privileges...
+    goto UAC_prompt
   )
+
+rem Show admin prompt ------------------------------------------------------
+:UAC_prompt
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+    set params = %*:"=""
+    echo UAC.ShellExecute "%~s0", "%params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
+
+    "%temp%\getadmin.vbs" >nul
+    exit /B
+    if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
+
+    goto select_links
 
 rem Select what to link ----------------------------------------------------
 :select_links
@@ -29,7 +41,6 @@ rem Select what to link ----------------------------------------------------
   echo.
 
   set /p choose=
-  cls
   if %choose% gtr 3 ( goto error )
   if %choose% lss 1 ( goto error )
 
@@ -126,6 +137,7 @@ rem Link vimperator files --------------------------------------------------
 
 rem End program ------------------------------------------------------------
 :error
+  echo.
   echo Error: Something went wrong.
   goto end
 
@@ -135,6 +147,6 @@ rem End program ------------------------------------------------------------
   goto end
 
 :end
-  echo.
-  pause
-  exit
+  pause >nul
+  cls
+  exit /B
