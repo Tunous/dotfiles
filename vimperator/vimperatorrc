@@ -9,6 +9,8 @@
 "
 "}}}
 
+colorscheme custom
+
 " Vimperatorrc -----------------------------------------------------------
 " Setting options {{{2
 
@@ -31,7 +33,17 @@ set previouspattern=\\bpoprzedni,\\bwstecz,\\bprev|previous\\b,^<$,^(<<|«)$,^(<
 "}}}
 " Other {{{3
 
+" Try to always stay in normal mode
 set focuscontent
+
+" List of completions when using :[tab]open
+set complete=Ssl
+
+" Suggestion engine when using :[tab]open
+set suggestengines=g
+
+" Turn on animations
+set animations
 
 "}}}
 
