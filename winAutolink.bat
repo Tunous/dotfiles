@@ -14,6 +14,10 @@ rem Check administrator permissions ----------------------------------------
   if %errorLevel% == 0 (
     echo Success: Administrative permissions confirmed.
     echo.
+
+    rem If exists remove file created by UAC_prompt
+    if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
+
     goto select_links
   ) else (
     echo Requesting administrative privileges...
@@ -28,9 +32,6 @@ rem Show admin prompt ------------------------------------------------------
 
     "%temp%\getadmin.vbs" >nul
     exit /B
-    if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
-
-    goto select_links
 
 rem Select what to link ----------------------------------------------------
 :select_links
