@@ -112,7 +112,7 @@ EOF
 " Mappings {{{3
 
 " Toggle navigation bar
-map <silent> <F9> :js toggleElement('nav-bar')<CR>
+map <F9> :js toggleElement('nav-bar')<CR>
 
 "}}}
 
