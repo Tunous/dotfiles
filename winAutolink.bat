@@ -23,7 +23,7 @@ rem Check administrator permissions ----------------------------------------
 rem Show admin prompt ------------------------------------------------------
 :UAC_prompt
     echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-    set params = %*:"=""
+    set params=%1
     echo UAC.ShellExecute "%~s0", "%params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
 
     "%temp%\getadmin.vbs" >nul
@@ -32,16 +32,30 @@ rem Show admin prompt ------------------------------------------------------
 
 rem Select what to link ----------------------------------------------------
 :select_links
-  echo Please select which files to link:
-  echo 1. Vim
-  echo 2. Vimperator
-  echo 3. Both
-  echo.
+  if "%~1"=="" (
+    echo Please select which files to link:
+    echo 1. Vim
+    echo 2. Vimperator
+    echo 3. All
+    echo.
 
-  set /p choose=
-  if %choose% == 1 ( goto link_vim )
-  if %choose% == 2 ( goto link_vimp )
-  if %choose% == 3 ( goto link_vim )
+    set /p choose=
+    echo.
+  ) else (
+    set choose=%~1
+  )
+
+  if "%choose%" == "1" ( goto link_vim )
+  if "%choose%" == "2" ( goto link_vimp )
+  if "%choose%" == "3" ( goto link_vim )
+
+  if "%choose%" == "vim" ( goto link_vim )
+  if "%choose%" == "vimp" ( goto link_vimp )
+  if "%choose%" == "all" ( 
+    set choose=3
+    goto link_vim
+  )
+
   goto error
 
 rem Link vim files ---------------------------------------------------------
@@ -60,7 +74,6 @@ rem Link vim files ---------------------------------------------------------
 
   if %choose% == 3 (
     echo.
-    set choose=0
     goto link_vimp
   )
 
