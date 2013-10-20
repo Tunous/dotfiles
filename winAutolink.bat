@@ -39,33 +39,9 @@ rem Select what to link ----------------------------------------------------
   echo.
 
   set /p choose=
-  if %choose% gtr 3 ( goto error )
-  if %choose% lss 1 ( goto error )
-
-  goto check_path
-
-rem Check if current location contains repository -------------------------
-:check_path
-  cd %target%
-
-  if %choose% == 1 (
-    if exist vim/vimrc (
-      goto link_vim
-    )
-  )
-  if %choose% == 2 (
-    if exist vimperator/vimperatorrc (
-      goto link_vimp
-    )
-  )
-  if %choose% == 3 (
-    if exist vim\vimrc (
-      if exist vimperator\vimperatorrc (
-        goto link_vim
-      )
-    )
-  )
-
+  if %choose% == 1 ( goto link_vim )
+  if %choose% == 2 ( goto link_vimp )
+  if %choose% == 3 ( goto link_vim )
   goto error
 
 rem Link vim files ---------------------------------------------------------
