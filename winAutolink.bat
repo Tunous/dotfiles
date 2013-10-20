@@ -51,7 +51,7 @@ rem Select what to link ----------------------------------------------------
 
   if "%choose%" == "vim" ( goto link_vim )
   if "%choose%" == "vimp" ( goto link_vimp )
-  if "%choose%" == "all" ( 
+  if "%choose%" == "all" (
     set choose=3
     goto link_vim
   )
