@@ -14,10 +14,6 @@ rem Check administrator permissions ----------------------------------------
   if %errorLevel% == 0 (
     echo Success: Administrative permissions confirmed.
     echo.
-
-    rem If exists remove file created by UAC_prompt
-    if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
-
     goto select_links
   ) else (
     echo Requesting administrative privileges...
@@ -31,6 +27,7 @@ rem Show admin prompt ------------------------------------------------------
     echo UAC.ShellExecute "%~s0", "%params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
 
     "%temp%\getadmin.vbs" >nul
+    if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
     exit /B
 
 rem Select what to link ----------------------------------------------------
@@ -69,21 +66,7 @@ rem Check if current location contains repository -------------------------
     )
   )
 
-  if %errorLevel% == 1 ( goto error )
-
-  echo Looks like repository is not here.
-  goto get_target
-
-rem Get from user location of repository -----------------------------------
-:get_target
-  set /p target="Please write correct path of repository: "
-
-  if %errorLevel% == 0 (
-    cls
-    goto check_path
-  ) else (
-    goto error
-  )
+  goto error
 
 rem Link vim files ---------------------------------------------------------
 :link_vim
