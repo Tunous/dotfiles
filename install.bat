@@ -1,10 +1,12 @@
 @echo off
-title winAutolink
+title Dotfiles installation script
+
 
 rem Start program ----------------------------------------------------------
 :init
-  set target=%~dp0
+  set source=%~dp0
   goto check_permissions
+
 
 rem Check administrator permissions ----------------------------------------
 :check_permissions
@@ -20,23 +22,25 @@ rem Check administrator permissions ----------------------------------------
     goto UAC_prompt
   )
 
+
 rem Show admin prompt ------------------------------------------------------
 :UAC_prompt
-    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-    set params=%1
-    echo UAC.ShellExecute "%~s0", "%params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
+  echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+  set params=%~1
+  echo UAC.ShellExecute "%~s0", "%params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
 
-    "%temp%\getadmin.vbs" >nul
-    if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
-    exit /B
+  "%temp%\getadmin.vbs" >nul
+  if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
+  exit /B
+
 
 rem Select what to link ----------------------------------------------------
 :select_links
   if "%~1"=="" (
-    echo Please select which files to link:
-    echo 1. Vim
-    echo 2. Vimperator
-    echo 3. All
+    echo Please select what you want to do:
+    echo 1. Link vim files
+    echo 2. Link vimperator files
+    echo 3. Link all files
     echo.
 
     set /p choose=
@@ -58,6 +62,7 @@ rem Select what to link ----------------------------------------------------
 
   goto error
 
+
 rem Link vim files ---------------------------------------------------------
 :link_vim
   rem Go to home directory
@@ -69,10 +74,10 @@ rem Link vim files ---------------------------------------------------------
   if exist vimfiles (
     echo vimfiles folder already exists. Skipping to next file.
   ) else (
-    mklink /D vimfiles %target%vim
+    mklink /D vimfiles %source%vim
   )
 
-  if %choose% == 3 (
+  if "%choose%" == "3" (
     echo.
     goto link_vimp
   )
@@ -82,6 +87,7 @@ rem Link vim files ---------------------------------------------------------
   ) else (
     goto error
   )
+
 
 rem Link vimperator files --------------------------------------------------
 :link_vimp
@@ -94,12 +100,12 @@ rem Link vimperator files --------------------------------------------------
   if exist vimperator (
     echo vimperator folder already exists. Skipping to next file.
   ) else (
-    mklink /D vimperator %target%vimperator
+    mklink /D vimperator %source%vimperator
   )
   if exist _vimperatorrc (
     echo _vimperatorrc file already exists. Skipping to next file.
   ) else (
-    mklink _vimperatorrc %target%vimperator\vimperatorrc
+    mklink _vimperatorrc %source%vimperator\vimperatorrc
   )
 
   if %errorLevel% == 0 (
@@ -107,6 +113,7 @@ rem Link vimperator files --------------------------------------------------
   ) else (
     goto error
   )
+
 
 rem End program ------------------------------------------------------------
 :error
