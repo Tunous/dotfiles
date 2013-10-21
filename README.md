@@ -19,13 +19,12 @@ vim +BundleInstall +qall
 
 ### install.bat
 This file is used to symlink the appropriate files in `dotfiles` to your home directory.
-Currently only windows version is supported.
 
 Available arguments:
 * `all` - Do all the stuff
 * `vim` - Link vim files and create pathrc file
 * `vimp` - Link vimperator files
-* 'pathrc' - Create pathrc file
+* `pathrc` - Create pathrc file
 
 ### pathrc.vim
 This files contains all settings that are specific to machine.
