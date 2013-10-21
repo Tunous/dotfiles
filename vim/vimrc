@@ -6,12 +6,11 @@
 "      \\   /    /\  |\ |.  \    /:  ||:  __   \ (:   _) \
 "       \__/    (__\_|_)|___|\__/|___||__|  \___) \_______)
 "
+" Pathrc file -------------------------------------------------------------
+source $HOME\vimfiles\pathrc.vim
+
 " Plugins -----------------------------------------------------------------
 " Vundle {{{
-
-" Set correct path for bundles
-set rtp+=$HOME/vimfiles/bundle/vundle
-call vundle#rc('$HOME/vimfiles/bundle/')
 
 Bundle 'gmarik/vundle'
 
@@ -48,8 +47,6 @@ let g:airline_right_alt_sep = ''      " Alternative right separator
 let g:airline#extensions#tabline#enabled = 1
 
 "}}}
-
-Bundle 'flazz/vim-colorschemes'
 
 " Formatting --------------------------------------------------------------{{{
 
@@ -218,17 +215,6 @@ noremap <Space> <C-D>
 noremap <S-Space> <C-U>
 
 "}}}
-" Open vimrc file {{{
-
-" Vim
-nnoremap <leader>ve  :edit $HOME/vimfiles/vimrc<CR>
-nnoremap <leader>vs  :split $HOME/vimfiles/vimrc<CR>
-nnoremap <leader>vv  :vsplit $HOME/vimfiles/vimrc<CR>
-
-" Vimperator
-nnoremap <leader>vr :edit $HOME/vimperator/vimperatorrc<CR>
-
-"}}}
 " Smart semicolon {{{
 
 inoremap <leader>; <C-o>A;
@@ -370,13 +356,12 @@ augroup END
 
 "}}}
 
-" Temporary mappings {{{
+" Temporary {{{
 
 augroup temp
   autocmd!
   autocmd BufWritePost customized.vim colorscheme customized
 augroup END
-nnoremap <leader>vt :split $HOME/vimfiles/colors/customized.vim<CR>
 
 
 "}}}
