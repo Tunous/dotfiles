@@ -243,20 +243,6 @@ nnoremap Y y$
 "}}}
 
 "}}}
-" Commands {{{
-
-" Math {{{
-
-" :Calc
-:command! -nargs=+ Calc :py print <args>
-:py from cmath import *
-
-" Insert mode math
-ino <C-A> <C-O>yiW<End>=<C-R>=<C-R>0<CR>
-
-"}}}
-
-"}}}
 " Functions {{{
 
 " Insert header preprocessor gates {{{
