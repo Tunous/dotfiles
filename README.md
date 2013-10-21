@@ -22,10 +22,5 @@ This file is used to symlink the appropriate files in `dotfiles` to your home di
 
 Available arguments:
 * `all` - Do all the stuff
-* `vim` - Link vim files and create pathrc file
+* `vim` - Link vim files
 * `vimp` - Link vimperator files
-* `pathrc` - Create pathrc file
-
-### pathrc.vim
-This files contains all settings that are specific to machine.
-It's necessary to create it after cloning repository, because without it vim won't be able to work correctly.

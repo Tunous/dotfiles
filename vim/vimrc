@@ -6,11 +6,12 @@
 "      \\   /    /\  |\ |.  \    /:  ||:  __   \ (:   _) \
 "       \__/    (__\_|_)|___|\__/|___||__|  \___) \_______)
 "
-" Pathrc file -------------------------------------------------------------
-source $HOME\vimfiles\pathrc.vim
-
 " Plugins -----------------------------------------------------------------
 " Vundle {{{
+
+" Path settings
+set rtp+=$HOME\dotfiles\vim\bundle\vundle
+call vundle#rc('$HOME\dotfiles\vim\bundle\')
 
 Bundle 'gmarik/vundle'
 
@@ -218,6 +219,18 @@ noremap <S-Space> <C-U>
 " Smart semicolon {{{
 
 inoremap <leader>; <C-o>A;
+
+"}}}
+" Open config files {{{
+
+" Open vimrc
+nnoremap <leader>vv :split C:\Users\Lukas\dotfiles\vim\vimrc<CR>
+
+" Open vimperatorrc
+nnoremap <leader>vp :split C:\Users\Lukas\dotfiles\vimperator\vimperatorrc<CR>
+
+" Open customized colorscheme
+nnoremap <leader>vt :split C:\Users\Lukas\dotfiles\vim\colors\customized.vim<CR>
 
 "}}}
 " Other {{{

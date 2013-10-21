@@ -41,23 +41,18 @@ rem Select what to link ---------------------------------------------------
     echo 1. Link vim files
     echo 2. Link vimperator files
     echo 3. Link all files
-    echo 4. Create pathrc file
     echo.
 
     set /p choose=
     echo.
-  ) else (
-    set choose=%~1
-  )
+  ) else ( set choose=%~1 )
 
   if "%choose%" == "1" ( goto link_vim )
   if "%choose%" == "2" ( goto link_vimp )
   if "%choose%" == "3" ( goto link_vimp )
-  if "%choose%" == "4" ( goto create_pathrc )
 
   if "%choose%" == "vim" ( goto link_vim )
   if "%choose%" == "vimp" ( goto link_vimp )
-  if "%choose%" == "pathrc" ( goto create_pathrc )
   if "%choose%" == "all" (
     set choose=3
     goto link_vimp
@@ -90,11 +85,7 @@ rem Link vimperator files -------------------------------------------------
     goto link_vim
   )
 
-  if %errorLevel% == 0 (
-    goto success
-  ) else (
-    goto error
-  )
+  if %errorLevel% == 0 ( goto success ) else ( goto error )
 
 
 rem Link vim files --------------------------------------------------------
@@ -111,53 +102,7 @@ rem Link vim files --------------------------------------------------------
     mklink /D vimfiles %location%vim
   )
 
-  goto create_pathrc
-
-
-rem Create pathrc file ----------------------------------------------------
-:create_pathrc
-  echo.
-  echo Creating pathrc file...
-  rem Variables
-
-  set file=%location%vim\pathrc.vim
-
-  set vimrc=%location%vim\vimrc
-  set vimprc=%location%vimperator\vimperatorrc
-  set color=%location%vim\colors\customized.vim
-  set bundle=%location%vim\bundle\
-
-  rem Target content
-
-  >%file% echo ^" File containing all path specific options
-
-  >>%file% echo.
-  >>%file% echo ^" Vundle paths ------------------------------------------------------------
-
-  >>%file% echo.
-  >>%file% echo set rtp+=%bundle%vundle
-  >>%file% echo call vundle#rc('%bundle%')
-
-  >>%file% echo.
-  >>%file% echo ^" Mappings ----------------------------------------------------------------
-
-  >>%file% echo.
-  >>%file% echo ^" Open vimrc mapping
-  >>%file% echo nnoremap ^<leader^>vv :split %vimrc%^<CR^>
-
-  >>%file% echo.
-  >>%file% echo ^" Open vimperatorrc mapping
-  >>%file% echo nnoremap ^<leader^>vp :split %vimprc%^<CR^>
-
-  >>%file% echo.
-  >>%file% echo ^" Open customized colorscheme mapping
-  >>%file% echo nnoremap ^<leader^>vt :split %color%^<CR^>
-
-  if %errorLevel% == 0 (
-    goto success
-  ) else (
-    goto error
-  )
+  if %errorLevel% == 0 ( goto success ) else ( goto error )
 
 
 rem End program -----------------------------------------------------------
