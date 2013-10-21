@@ -111,7 +111,7 @@ endif
 "}}}
 " Mouse {{{
 
-if has("moouse")
+if has("mouse")
   set mouse=a         " Can use mouse in all modes
 endif
 
