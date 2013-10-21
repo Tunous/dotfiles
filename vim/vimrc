@@ -10,8 +10,8 @@
 " Vundle {{{
 
 " Path settings
-set rtp+=$HOME\dotfiles\vim\bundle\vundle
-call vundle#rc('$HOME\dotfiles\vim\bundle\')
+set rtp+=$HOME/dotfiles/vim/bundle/vundle
+call vundle#rc('$HOME/dotfiles/vim/bundle/')
 
 Bundle 'gmarik/vundle'
 
@@ -96,8 +96,8 @@ colorscheme customized      " Use my own theme
 
 set nobackup
 
-silent execute '!mkdir "'.$VIM.'\temp" >nul 2>&1'
-set directory=$VIM\temp\\\
+silent execute '!mkdir "'.$VIM.'/temp" >nul 2>&1'
+set directory=$VIM/temp//
 
 "}}}
 " Gui options {{{
@@ -146,8 +146,8 @@ set copyindent         " Copy the previous indentation on autoindenting
 "}}}
 " Undo files {{{
 
-silent execute '!mkdir "'.$VIM.'\undofiles" >nul 2>&1'
-set undodir=$VIM\undofiles
+silent execute '!mkdir "'.$VIM.'/undofiles" >nul 2>&1'
+set undodir=$VIM/undofiles
 set undofile
 
 "}}}"
@@ -224,13 +224,13 @@ inoremap <leader>; <C-o>A;
 " Open config files {{{
 
 " Open vimrc
-nnoremap <leader>vv :split C:\Users\Lukas\dotfiles\vim\vimrc<CR>
+nnoremap <leader>vv :split C:/Users/Lukas/dotfiles/vim/vimrc<CR>
 
 " Open vimperatorrc
-nnoremap <leader>vp :split C:\Users\Lukas\dotfiles\vimperator\vimperatorrc<CR>
+nnoremap <leader>vp :split C:/Users/Lukas/dotfiles/vimperator/vimperatorrc<CR>
 
 " Open customized colorscheme
-nnoremap <leader>vt :split C:\Users\Lukas\dotfiles\vim\colors\customized.vim<CR>
+nnoremap <leader>vt :split C:/Users/Lukas/dotfiles/vim/colors/customized.vim<CR>
 
 "}}}
 " Other {{{
