@@ -8,7 +8,7 @@ git clone https://github.com/Tunous/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
 # Link files
-install.bat arg # See install.bat for available arguments
+install.bat all
 
 # Init and update submodules
 git submodule update --init
@@ -22,6 +22,11 @@ This file is used to symlink the appropriate files in `dotfiles` to your home di
 Currently only windows version is supported.
 
 Available arguments:
-* `all` - Link all files
-* `vim` - Link only vim files
-* `vimp` - Link only vimperator files
+* `all` - Do all the stuff
+* `vim` - Link vim files and create pathrc file
+* `vimp` - Link vimperator files
+* 'pathrc' - Create pathrc file
+
+### pathrc.vim
+This files contains all settings that are specific to machine.
+It's necessary to create it after cloning repository, because without it vim won't be able to work correctly.
