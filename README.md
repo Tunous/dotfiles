@@ -8,7 +8,7 @@ git clone https://github.com/Tunous/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
 # Link files
-winAutolink.bat arg # See Autolink for available arguments
+install.bat arg # See install.bat for available arguments
 
 # Init and update submodules
 git submodule update --init
@@ -17,7 +17,7 @@ git submodule update --init
 vim +BundleInstall +qall
 ```
 
-### Autolink
+### install.bat
 This file is used to symlink the appropriate files in `dotfiles` to your home directory.
 Currently only windows version is supported.
 
