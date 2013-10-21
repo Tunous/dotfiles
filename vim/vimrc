@@ -95,7 +95,7 @@ colorscheme customized      " Use my own theme
 
 set nobackup
 
-silent execute '!mkdir "'.$VIM.'\temp"'
+silent execute '!mkdir "'.$VIM.'\temp" >nul 2>&1'
 set directory=$VIM\temp\\\
 
 "}}}
@@ -145,7 +145,7 @@ set copyindent         " Copy the previous indentation on autoindenting
 "}}}
 " Undo files {{{
 
-silent execute '!mkdir "'.$VIM.'\undofiles"'
+silent execute '!mkdir "'.$VIM.'\undofiles" >nul 2>&1'
 set undodir=$VIM\undofiles
 set undofile
 
