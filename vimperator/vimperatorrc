@@ -120,7 +120,4 @@ map <F9> :js toggleElement('nav-bar')<CR>
 
 " End {{{2
 
-"source ~/test.vim
-echo "vimperatorrc sourced"
-
 " vim: ts=2 sw=2 sts=2 foldmethod=marker foldlevel=1 ft=vimperator
