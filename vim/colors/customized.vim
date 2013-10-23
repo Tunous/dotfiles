@@ -31,8 +31,8 @@ let s:C.fgDark        = "#5E6C70"
 let s:C.fgVeryDark    = "#425054"
 
 " Background colors
-let s:C.bg            = "#252525"
-let s:C.bgLight       = "#303030"
+let s:C.bg            = "#202020"
+let s:C.bgLight       = "#2D2D2D"
 
 let s:C.blue          = "#0a9dff"
 
