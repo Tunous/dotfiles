@@ -203,6 +203,8 @@ set listchars=tab:▸\ ,trail:·               " Listchars
 
 set foldmethod=marker                       " Use marker foldmethod
 
+set synmaxcol=1000                          " Dont' highlight very long lines - makes vim faster
+
 "}}}"
 
 "}}}
