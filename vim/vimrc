@@ -61,11 +61,13 @@ augroup END
 
 Bundle 'scrooloose/nerdtree'
 
+let NERDTreeDirArrows=1
+
 augroup NerdTree
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 augroup END
 
-nnoremap <Leader>n :NERDTreeToggle<CR>
+nnoremap <Leader>t :NERDTreeToggle<CR>
 
 "}}}
 " Tabular {{{
@@ -186,10 +188,10 @@ set visualbell                              " Don't beep
 
 set nowrap                                  " Don't wrap lines
 
-set nolist " Dont' show listchars by default
-set listchars=tab:\ ,eol:¬ " Set listchars
+set list                                    " Show list chars
+set listchars=tab:▸\ ,trail:·               " Listchars
 
-set foldmethod=marker
+set foldmethod=marker                       " Use marker foldmethod
 
 "}}}"
 
@@ -198,7 +200,8 @@ set foldmethod=marker
 
 " Leader {{{
 
-let mapleader="," " Use ',' as leader
+" Use ',' as leader
+let mapleader=","
 
 "}}}
 
