@@ -45,18 +45,6 @@ let delimitMate_expand_space = 1
 let delimitMate_balance_matchpairs = 1
 
 "}}}
-" Tabular {{{
-
-" Line up text
-Bundle 'godlygeek/tabular'
-
-"}}}
-" Tcomment {{{
-
-" Comment selected text
-Bundle 'tomtom/tcomment_vim'
-
-"}}}
 " Fugitive {{{
 
 " Use git inside of vim
@@ -74,9 +62,22 @@ augroup END
 Bundle 'scrooloose/nerdtree'
 
 augroup NerdTree
-  autocmd vimenter * if !argc() | NERDTree $HOME | endif
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 augroup END
+
+nnoremap <Leader>n :NERDTreeToggle<CR>
+
+"}}}
+" Tabular {{{
+
+" Line up text
+Bundle 'godlygeek/tabular'
+
+"}}}
+" Tcomment {{{
+
+" Comment selected text
+Bundle 'tomtom/tcomment_vim'
 
 "}}}
 
