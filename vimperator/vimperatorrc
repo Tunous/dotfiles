@@ -92,6 +92,7 @@ cabbrev pl panorama pull
 
 silent qmark t http://translate.google.com/?hl=pl&sl=en&tl=pl
 silent qmark T http://translate.google.com/?hl=pl&sl=pl&tl=en
+silent qmark c http://www.color-hex.com/color-palette/847
 
 "}}}
 
