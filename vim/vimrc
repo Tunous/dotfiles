@@ -113,7 +113,6 @@ Bundle 'tomtom/tcomment_vim'
 "}}}
 
 " Actual settings ---------------------------------------------------------
-
 " Settting options {{{
 
 " Bakcup and swap files {{{
@@ -243,13 +242,13 @@ inoremap <Leader>; <C-o>A;
 " Open config files {{{
 
 " Open vimrc
-nnoremap <Leader>vv :edit C:/Users/Lukas/dotfiles/vim/vimrc<CR>
+nnoremap <Leader>vv :edit $HOME/dotfiles/vim/vimrc<CR>
 
 " Open vimperatorrc
-nnoremap <Leader>vp :edit C:/Users/Lukas/dotfiles/vimperator/vimperatorrc<CR>
+nnoremap <Leader>vp :edit $HOME/dotfiles/vimperator/vimperatorrc<CR>
 
 " Open customized colorscheme
-nnoremap <Leader>vt :edit C:/Users/Lukas/dotfiles/vim/colors/customized.vim<CR>
+nnoremap <Leader>vt :edit $HOME/dotfiles/vim/colors/customized.vim<CR>
 
 "}}}
 " Other {{{
@@ -274,7 +273,6 @@ nnoremap Y y$
 
 "}}}
 
-" nnoremap <Leader>n :NERDTreeToggle<CR>
 "}}}
 " Functions {{{
 
