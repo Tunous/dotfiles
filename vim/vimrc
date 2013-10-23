@@ -93,7 +93,8 @@ set encoding=utf-8
 "}}}
 " Theme settings {{{
 
-set guifont=Inconsolata-dz_for_Powerline:h9:cEASTEUROPE  " Inconsolata font
+set guifont=Inconsolata-dz_for_Powerline:h9:cEASTEUROPE   " Inconsolata font
+set guifont=Meslo_LG_S_for_Powerline:h8:cANSI             " Meslo font
 
 set background=dark         " Set dark background
 colorscheme customized      " Use my own theme
