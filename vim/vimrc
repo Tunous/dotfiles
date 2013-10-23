@@ -6,6 +6,34 @@
 "      \\   /    /\  |\ |.  \    /:  ||:  __   \ (:   _) \
 "       \__/    (__\_|_)|___|\__/|___||__|  \___) \_______)
 "
+" Main settings -----------------------------------------------------------
+" Initial settings {{{
+"
+filetype plugin indent on
+syntax on
+
+language messages en_US.utf-8
+
+set nocompatible
+set encoding=utf-8
+
+"}}}
+" Theme settings {{{
+
+set guifont=Inconsolata-dz_for_Powerline:h9:cEASTEUROPE   " Inconsolata font
+set guifont=Meslo_LG_S_for_Powerline:h8:cANSI             " Meslo font
+
+set background=dark         " Set dark background
+colorscheme customized      " Use my own theme
+
+"}}}
+" Leader {{{
+
+" Use ',' as leader
+let mapleader=","
+
+"}}}
+
 " Plugins -----------------------------------------------------------------
 " Vundle {{{
 
@@ -64,10 +92,11 @@ Bundle 'scrooloose/nerdtree'
 let NERDTreeDirArrows=1
 
 augroup NerdTree
+  autocmd!
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 augroup END
 
-nnoremap <Leader>t :NERDTreeToggle<CR>
+nnoremap <Leader>n :NERDTreeToggle<CR>
 
 "}}}
 " Tabular {{{
@@ -84,24 +113,6 @@ Bundle 'tomtom/tcomment_vim'
 "}}}
 
 " Actual settings ---------------------------------------------------------
-" Main settings {{{
-
-filetype plugin indent on
-syntax on
-language messages en_US.utf-8
-set nocompatible
-set encoding=utf-8
-
-"}}}
-" Theme settings {{{
-
-set guifont=Inconsolata-dz_for_Powerline:h9:cEASTEUROPE   " Inconsolata font
-set guifont=Meslo_LG_S_for_Powerline:h8:cANSI             " Meslo font
-
-set background=dark         " Set dark background
-colorscheme customized      " Use my own theme
-
-"}}}
 
 " Settting options {{{
 
@@ -198,12 +209,6 @@ set foldmethod=marker                       " Use marker foldmethod
 "}}}
 " Key mappings {{{
 
-" Leader {{{
-
-" Use ',' as leader
-let mapleader=","
-
-"}}}
 
 " 'jk' to leave insert mode {{{
 
@@ -232,19 +237,19 @@ noremap <S-Space> <C-U>
 "}}}
 " Smart semicolon {{{
 
-inoremap <leader>; <C-o>A;
+inoremap <Leader>; <C-o>A;
 
 "}}}
 " Open config files {{{
 
 " Open vimrc
-nnoremap <leader>vv :edit C:/Users/Lukas/dotfiles/vim/vimrc<CR>
+nnoremap <Leader>vv :edit C:/Users/Lukas/dotfiles/vim/vimrc<CR>
 
 " Open vimperatorrc
-nnoremap <leader>vp :edit C:/Users/Lukas/dotfiles/vimperator/vimperatorrc<CR>
+nnoremap <Leader>vp :edit C:/Users/Lukas/dotfiles/vimperator/vimperatorrc<CR>
 
 " Open customized colorscheme
-nnoremap <leader>vt :edit C:/Users/Lukas/dotfiles/vim/colors/customized.vim<CR>
+nnoremap <Leader>vt :edit C:/Users/Lukas/dotfiles/vim/colors/customized.vim<CR>
 
 "}}}
 " Other {{{
@@ -259,7 +264,7 @@ nnoremap <F2> :call Preserve("normal gg=G")<CR> :call Preserve("%s/\\s\\+$//e")<
 nnoremap <Enter> :w<CR>
 
 " Toggle `set list`
-nmap <leader>l :set list!<CR>
+nmap <Leader>l :set list!<CR>
 
 " Turn off highlighting for current search
 nnoremap <C-L> :nohlsearch<CR>
@@ -269,6 +274,7 @@ nnoremap Y y$
 
 "}}}
 
+" nnoremap <Leader>n :NERDTreeToggle<CR>
 "}}}
 " Functions {{{
 
