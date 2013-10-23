@@ -1,0 +1,32 @@
+" Default color
+hi! Normal              background:  #eeeeee;
+
+" Remove empty space above command line
+hi! ContentSeparator    display: none;
+hi! CmdLine             margin: -1px 0 0 0; background: #eeeeee;
+
+" Completion box {{{
+
+hi CompIcon             margin-right: 5px;
+hi CompItem[selected]   background: #888888;
+hi CompItem[selected]>* color: #eee;
+hi CompTitle            background: #666666; color: #eee; margin-bottom: 10px;
+hi CompTitle>*          padding: 2px .5ex;
+hi CompMsg              background: #eeeeee;
+hi CompGroup:not(:first-of-type)            margin: 0;
+
+" Selection indicator
+hi Filter border-radius: 4px; background: #666666; border: 1px solid #666666; color: #eeeeee;
+
+"}}}
+" Hints {{{
+
+hi Hint         font-family: Source Sans Pro, Sans; font-size: 7pt; font-weight: bold; color: #E0E0E0; border: 1px solid #202020; border-radius: 2px; background-color: #484848; margin: 1px 0 0 1px; padding: 0 2px 0 2px;
+
+hi HintElem     background-color: #323232; color: #e0e0e0;
+hi HintActive   background-color: #609c6c; color: #eeeeee;
+
+"}}}
+
+" End {{{
+" vim: ts=2 sw=2 sts=2 foldmethod=marker foldlevel=0 ft=vimperator
