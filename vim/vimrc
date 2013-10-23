@@ -16,18 +16,6 @@ call vundle#rc('$HOME/dotfiles/vim/bundle/')
 Bundle 'gmarik/vundle'
 
 "}}}
-" Fugitive {{{
-
-" Use git inside of vim
-Bundle 'tpope/vim-fugitive'
-
-augroup fugitive
-  autocmd!
-  " Auto-clean fugitive buffers
-  autocmd BufReadPost fugitive://* set bufhidden=delete
-augroup END
-
-" }}}
 
 " Airline {{{
 
@@ -48,11 +36,7 @@ let g:airline_right_alt_sep = ''      " Alternative right separator
 let g:airline#extensions#tabline#enabled = 1
 
 "}}}
-
-" Formatting --------------------------------------------------------------{{{
-
-" Easy commenting of selected lines
-Bundle 'tomtom/tcomment_vim'
+" DelimitMate {{{
 
 " Automatically close quotes, brackets, etc.
 Bundle 'Raimondi/delimitMate'
@@ -60,14 +44,39 @@ let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 let delimitMate_balance_matchpairs = 1
 
+"}}}
+" Tabular {{{
+
 " Line up text
 Bundle 'godlygeek/tabular'
 
 "}}}
-" Navigation {{{
+" Tcomment {{{
 
-" Go to matching header/source file
-Bundle 'a.vim'
+" Comment selected text
+Bundle 'tomtom/tcomment_vim'
+
+"}}}
+" Fugitive {{{
+
+" Use git inside of vim
+Bundle 'tpope/vim-fugitive'
+
+augroup fugitive
+  autocmd!
+  " Auto-clean fugitive buffers
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END
+
+" }}}
+" NERDTree {{{
+
+Bundle 'scrooloose/nerdtree'
+
+augroup NerdTree
+  autocmd vimenter * if !argc() | NERDTree $HOME | endif
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup END
 
 "}}}
 
