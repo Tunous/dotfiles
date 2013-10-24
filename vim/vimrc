@@ -96,7 +96,7 @@ augroup NerdTree
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 augroup END
 
-nnoremap <Leader>n :NERDTreeToggle<CR>
+nnoremap <Leader>t :NERDTreeToggle<CR>
 
 "}}}
 " Tabular {{{
@@ -212,9 +212,10 @@ set synmaxcol=120                           " Limit syntax highlight of long lin
 
 " Buffers navigation {{{
 
-nnoremap gN :bp<CR>
-nnoremap gn :bn<CR>
-nnoremap gb :ls<CR>:b<Space>
+nnoremap <Leader>p :bp<CR>
+nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <Leader>d :Bdelete<CR>
 
 "}}}
 " 'jk' to leave insert mode {{{
@@ -370,11 +371,20 @@ augroup END
 
 augroup other
   autocmd!
-  autocmd BufWritePost vimrc source $MYVIMRC                         " Source vimrc after saving
-  autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()    " Add header file preprocessor getes
-  autocmd CursorHoldI * stopinsert                                   " Stop insert mode after inactivity
-  autocmd BufEnter,BufNew *.{c,cpp,h,hpp} compiler mingw             " Select compiler for c/c++ files
-  autocmd filetype svn,*commit* setlocal spell                       " Spell check when writing commit logs
+  " Source vimrc after saving and reopen folds
+  autocmd BufWritePost vimrc source $MYVIMRC | :normal zv
+
+  " Add header file preprocessor getes
+  autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()
+
+  " Stop insert mode after inactivity
+  autocmd CursorHoldI * stopinsert
+
+  " Select compiler for c/c++ files
+  autocmd BufEnter,BufNew *.{c,cpp,h,hpp} compiler mingw
+
+  " Spell check when writing commit logs
+  autocmd filetype svn,*commit* setlocal spell
 augroup END
 
 "}}}
