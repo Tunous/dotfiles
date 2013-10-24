@@ -210,7 +210,13 @@ set synmaxcol=120                           " Limit syntax highlight of long lin
 "}}}
 " Key mappings {{{
 
+" Buffers navigation {{{
 
+nnoremap gN :bp<CR>
+nnoremap gn :bn<CR>
+nnoremap gb :ls<CR>:b<Space>
+
+"}}}
 " 'jk' to leave insert mode {{{
 
 inoremap jk <Esc>
