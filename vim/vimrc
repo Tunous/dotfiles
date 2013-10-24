@@ -176,7 +176,7 @@ set undofile
 "}}}"
 " Other {{{
 
-set wildmenu " Use wildmenu for commandline autocompletion
+set wildmenu                                " Use wildmenu for commandline autocompletion
 
 set autoread                                " Read file if it was modified outside of vim
 set autowrite                               " Writie file after executing specific commands
@@ -184,7 +184,7 @@ set autochdir                               " Automatically change working direc
 
 set hidden                                  " Allow not saved buffers in background
 
-set clipboard=unnamed                       " Share system clipboard
+set clipboard^=unnamed                      " Share system clipboard
 set showcmd                                 " Show executed command in commands line
 
 set cursorcolumn                            " Highlight cursor column...
@@ -203,7 +203,7 @@ set listchars=tab:▸\ ,trail:·               " Listchars
 
 set foldmethod=marker                       " Use marker foldmethod
 
-set synmaxcol=1000                          " Dont' highlight very long lines - makes vim faster
+set synmaxcol=120                           " Limit syntax highlight of long lines
 
 "}}}"
 
@@ -219,7 +219,7 @@ inoremap <Esc> Ooops, use jk instead...
 "}}}
 " Nvigation {{{
 
-" Chamge windows
+" Change windows
 noremap <Up> <C-W>k
 noremap <Down> <C-W>j
 noremap <Left> <C-W>h
@@ -236,11 +236,6 @@ noremap <Space> <C-D>
 noremap <S-Space> <C-U>
 
 "}}}
-" Smart semicolon {{{
-
-inoremap <Leader>; <C-o>A;
-
-"}}}
 " Open config files {{{
 
 " Open vimrc
@@ -251,6 +246,11 @@ nnoremap <Leader>vp :edit $HOME/dotfiles/vimperator/vimperatorrc<CR>
 
 " Open customized colorscheme
 nnoremap <Leader>vt :edit $HOME/dotfiles/vim/colors/customized.vim<CR>
+
+"}}}
+" End semicolon {{{
+
+inoremap <Leader>; <C-o>A;
 
 "}}}
 " Other {{{
@@ -289,6 +289,20 @@ function! s:InsertCppGates()
 endfunction
 
 "}}}
+" Jump to last position when opening file {{{
+
+autocmd BufReadPost * call SetCursorPosition()
+
+function! SetCursorPosition()
+  if &filetype !~ 'svn\|commit\c'
+    if line("'\"") > 0 && line("'\"") <= line("$")
+      exe "normal! g`\""
+      normal! zz
+    endif
+  end
+endfunction
+
+"}}}
 " Save current position and execute command {{{
 
 function! Preserve(command)
@@ -323,20 +337,6 @@ endfunction
 if has("gui_running")
   nnoremap <F11> :call <SID>ToggleFullScreen()<CR>
 endif
-
-"}}}
-" Jump to last position when opening file {{{
-
-autocmd BufReadPost * call SetCursorPosition()
-
-function! SetCursorPosition()
-  if &filetype !~ 'svn\|commit\c'
-    if line("'\"") > 0 && line("'\"") <= line("$")
-      exe "normal! g`\""
-      normal! zz
-    endif
-  end
-endfunction
 
 "}}}
 
