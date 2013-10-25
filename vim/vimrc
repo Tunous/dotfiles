@@ -285,6 +285,34 @@ nnoremap Y y$
 "}}}
 " Functions {{{
 
+" Delete current buffer without closing its split {{{
+
+" Source: https://gist.github.com/noahfrederick/7130087
+
+function! s:Bdelete(bang) abort
+  let l:current_buffer = bufnr("%")
+  let l:alternate_buffer = bufnr("#")
+
+  if buflisted(l:alternate_buffer)
+    execute "buffer" . a:bang . " #"
+  else
+    execute "bnext" . a:bang
+  endif
+
+  if bufnr("%") == l:current_buffer
+    edit.
+  endif
+
+  if buflisted(l:current_buffer)
+    execute "bdelete" . a:bang . " " . l:current_buffer
+  endif
+endfunction
+
+if !exists(":Bdelete")
+  command -bang -bar Bdelete call <SID>Bdelete(<q-bang>)
+endif
+
+"}}}
 " Insert header preprocessor gates {{{
 
 function! s:InsertCppGates()
@@ -343,35 +371,6 @@ endfunction
 
 if has("gui_running")
   nnoremap <F11> :call <SID>ToggleFullScreen()<CR>
-endif
-
-"}}}
-" Delete current buffer without closing its split {{{
-
-" Author: noahfredierick
-" Source: https://gist.github.com/noahfrederick/7130087
-
-function! s:Bdelete(bang) abort
-  let l:current_buffer = bufnr("%")
-  let l:alternate_buffer = bufnr("#")
-
-  if buflisted(l:alternate_buffer)
-    execute "buffer" . a:bang . " #"
-  else
-    execute "bnext" . a:bang
-  endif
-
-  if bufnr("%") == l:current_buffer
-    new
-  endif
-
-  if buflisted(l:current_buffer)
-    execute "bdelete" . a:bang . " " . l:current_buffer
-  endif
-endfunction
-
-if !exists(":Bdelete")
-  command -bang -bar Bdelete call <SID>Bdelete(<q-bang>)
 endif
 
 "}}}
