@@ -1,3 +1,4 @@
+
 " Default color
 hi! Normal              background:  #eeeeee;
 
@@ -26,6 +27,15 @@ hi Hint         font-family: Source Sans Pro, Sans; font-size: 7pt; font-weight:
 hi HintElem     background-color: #323232; color: #e0e0e0;
 hi HintActive   background-color: #609c6c; color: #eeeeee;
 
+"}}}
+
+" Stylesheets {{{
+
+style -name LiberatorTop chrome://* <<EOF
+
+.liberator-container { z-index: 999 !important; }
+
+EOF
 "}}}
 
 " End {{{
