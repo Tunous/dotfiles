@@ -173,7 +173,7 @@ background-color: rgb(75,75,75) !important;
 
 /* Main window shadow */
 #main-window browser {
-  box-shadow: 0 0 10px 3px rgba(0,0,0,.2) !important;
+  box-shadow: 0 0 10px rgba(0,0,0,.2) !important;
 }
 
 /* Bookmarks and navigation bar */
@@ -192,8 +192,12 @@ background-color: rgb(75,75,75) !important;
 #browser-border-end,
 #browser-bottombox { display: none !important; }
 
+/* Hide nav-bar elements */
+.urlbar-history-dropmarker,
+#go-button { display: none !important; }
+
 /* Hide back/forward button if it's disabled */
-#back-button[disabled] { visibility: collapse !important; }
+#back-button[disabled],
 #forward-button[disabled] { visibility: collapse !important; }
 
 
