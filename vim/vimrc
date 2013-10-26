@@ -50,7 +50,6 @@ let s:vundleSrc = 'http://github.com/gmarik/vundle.git'
 function! s:VundleClone()
   if !isdirectory(s:vundleDir)
     exec 'silent !git clone '.s:vundleSrc.' '.shellescape(s:vundleDir, 1)
-    echo "Cloned vundle repository"
   endif
 endfunction
 
