@@ -14,6 +14,12 @@ colorscheme custom
 " Vimperatorrc -----------------------------------------------------------
 " Setting options {{{2
 
+" Change page patterns {{{3
+
+set nextpattern=\\bnastępn,\\bdalej,\\bnext,^>$,^(>>|»)$,^(>|»),(>|»)$,\\bmore\\b
+set previouspattern=\\bpoprzedni,\\bwstecz,\\bprev|previous\\b,^<$,^(<<|«)$,^(<|«),(<|«)$
+
+"}}}
 " Gui elements {{{3
 
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
@@ -23,12 +29,6 @@ set status=input,location,history,bookmark
 " Hintchars {{{3
 
 set hintchars=HJKLASDFGYUIOPQWERTNMZXCVB
-
-"}}}
-" Change page patterns {{{3
-
-set nextpattern=\\bnastępn,\\bdalej,\\bnext,^>$,^(>>|»)$,^(>|»),(>|»)$,\\bmore\\b
-set previouspattern=\\bpoprzedni,\\bwstecz,\\bprev|previous\\b,^<$,^(<<|«)$,^(<|«),(<|«)$
 
 "}}}
 " Other {{{3
@@ -44,6 +44,9 @@ set suggestengines=g
 
 " Turn on animations
 set animations
+
+" Visual bell instead of system beep
+set visualbell
 
 "}}}
 
@@ -61,12 +64,6 @@ let mapleader = ','
 noremap B :bmarks<CR>
 
 "}}}
-" Tabs navigation {{{3
-
-noremap J gt
-noremap K gT
-
-"}}}
 " Faster scrolling {{{3
 
 noremap j <Down>
@@ -76,6 +73,12 @@ noremap k <Up>
 " Sourcing {{{3
 
 noremap <silent> <Leader>v :source ~/_vimperatorrc<CR>
+
+"}}}
+" Tabs navigation {{{3
+
+noremap J gt
+noremap K gT
 
 "}}}
 
