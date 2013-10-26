@@ -1,9 +1,8 @@
 
 " Default color
 hi! Normal              background: #eeeeee;
-hi! StatusLine          background: #eeeeee;
 
-hi! InfoMsg             background: #eeeeee; color: red;
+hi! InfoMsg             color: red;
 hi! WarningMsg          color: red; font-weight: bold;
 hi! Bell                display: none
 
