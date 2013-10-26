@@ -1,6 +1,8 @@
-# Tunous's dotfiles
+Tunous's dotfiles
+===================
 
-### Windows Installation
+Windows Installation
+--------------------
 
 ```sh
 # Clone repository
