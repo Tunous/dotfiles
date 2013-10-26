@@ -68,6 +68,7 @@ let g:airline#extensions#tabline#enabled = 1
 
 " Automatically close quotes, brackets, etc.
 Bundle 'Raimondi/delimitMate'
+
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 let delimitMate_balance_matchpairs = 1
@@ -78,13 +79,16 @@ let delimitMate_balance_matchpairs = 1
 " Use git inside of vim
 Bundle 'tpope/vim-fugitive'
 
+" Auto-clean fugitive buffers {{{
+
 if has('autocmd')
   augroup fugitive
     autocmd!
-    " Auto-clean fugitive buffers
     autocmd BufReadPost fugitive://* set bufhidden=delete
   augroup END
 endif
+
+"}}}
 
 " }}}
 " NERDTree {{{
@@ -93,12 +97,16 @@ Bundle 'scrooloose/nerdtree'
 
 let NERDTreeDirArrows=1
 
+" Close vim if only NERDTree is open {{{
+
 if has('autocmd')
   augroup nerdTree
     autocmd!
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
   augroup END
 endif
+
+"}}}
 
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
@@ -335,11 +343,9 @@ function! s:InsertCppGates()
 endfunction
 
 "}}}
-" Jump to last position when opening file {{{
+" Return to last cursor position {{{
 
-autocmd BufReadPost * call SetCursorPosition()
-
-function! SetCursorPosition()
+function! s:SetCursorPosition()
   if &filetype !~ 'svn\|commit\c'
     if line("'\"") > 0 && line("'\"") <= line("$")
       exe "normal! g`\""
@@ -370,7 +376,7 @@ endfunction
 
 let s:fullscreen = 0
 
-function! s:ToggleFullScreen()
+function! ToggleFullScreen()
   if s:fullscreen == 1
     let s:fullscreen = 0
     simalt ~P
@@ -381,7 +387,7 @@ function! s:ToggleFullScreen()
 endfunction
 
 if has("gui_running")
-  nnoremap <F11> :call <SID>ToggleFullScreen()<CR>
+  nnoremap <F11> :call ToggleFullScreen()<CR>
 endif
 
 "}}}
@@ -425,6 +431,9 @@ if has('autocmd')
 
     " Spell check when writing commit logs
     autocmd filetype svn,*commit* setlocal spell
+
+    " Return to last cursor position
+    autocmd BufReadPost * call <SID>SetCursorPosition()
   augroup END
 
   "}}}
@@ -439,7 +448,6 @@ if has('autocmd')
 endif
 
 "}}}
-
 
 " End {{{
 " vim: foldmethod=marker: foldlevel=0:
