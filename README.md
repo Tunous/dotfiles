@@ -1,5 +1,5 @@
 Tunous's dotfiles
-===================
+=================
 
 Windows Installation
 --------------------
@@ -11,9 +11,6 @@ cd ~/dotfiles
 
 # Link files
 install.bat all
-
-# Init and update submodules
-git submodule update --init
 
 # Install vim bundles
 vim +BundleInstall +qall
