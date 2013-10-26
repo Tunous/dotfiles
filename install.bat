@@ -1,12 +1,11 @@
 @echo off
 title Dotfiles installation script
 
-
 rem Start program ---------------------------------------------------------
 :init
-  set location=%~dp0
+  set dotfiles=%~dp0
+  set home=%USERPROFILE%\
   goto check_permissions
-
 
 rem Check administrator permissions ---------------------------------------
 :check_permissions
@@ -16,12 +15,12 @@ rem Check administrator permissions ---------------------------------------
   if %errorLevel% == 0 (
     echo Success: Administrative permissions confirmed.
     echo.
-    goto select_links
+
+    goto link_vimp
   ) else (
     echo Requesting administrative privileges...
     goto UAC_prompt
   )
-
 
 rem Show admin prompt -----------------------------------------------------
 :UAC_prompt
@@ -33,90 +32,43 @@ rem Show admin prompt -----------------------------------------------------
   if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
   exit /B
 
-
-rem Select what to link ---------------------------------------------------
-:select_links
-  if "%~1"=="" (
-    echo Please select what you want to do:
-    echo 1. Link vim files
-    echo 2. Link vimperator files
-    echo 3. Link all files
-    echo.
-
-    set /p choose=
-    echo.
-  ) else ( set choose=%~1 )
-
-  if "%choose%" == "1" ( goto link_vim )
-  if "%choose%" == "2" ( goto link_vimp )
-  if "%choose%" == "3" ( goto link_vimp )
-
-  if "%choose%" == "vim" ( goto link_vim )
-  if "%choose%" == "vimp" ( goto link_vimp )
-  if "%choose%" == "all" (
-    set choose=3
-    goto link_vimp
-  )
-
-  goto error
-
-
 rem Link vimperator files -------------------------------------------------
 :link_vimp
-  rem Go to home directory
-  cd %USERPROFILE%
-
   echo Linking vimperator files...
   echo.
 
-  if exist vimperator (
+  if exist %home%vimperator (
     echo vimperator folder already exists. Skipping to next file.
   ) else (
-    mklink /D vimperator %location%vimperator
+    mklink /D %home%vimperator %dotfiles%vimperator
   )
-  if exist _vimperatorrc (
+  if exist %home%_vimperatorrc (
     echo _vimperatorrc file already exists. Skipping to next file.
   ) else (
-    mklink _vimperatorrc %location%vimperator\vimperatorrc
+    mklink %home%_vimperatorrc %dotfiles%vimperator\vimperatorrc
   )
-
-  if "%choose%" == "3" (
-    echo.
-    goto link_vim
-  )
-
-  if %errorLevel% == 0 ( goto success ) else ( goto error )
-
 
 rem Link vim files --------------------------------------------------------
 :link_vim
-  rem Go to home directory
-  cd %USERPROFILE%
-
   echo Linking vim files...
   echo.
 
-  if exist vimfiles (
+  if exist %home%vimfiles (
     echo vimfiles folder already exists. Skipping to next file.
   ) else (
-    mklink /D vimfiles %location%vim
+    mklink /D %home%vimfiles %dotfiles%vim
   )
 
-  if %errorLevel% == 0 ( goto success ) else ( goto error )
+rem Install vim bundles ---------------------------------------------------
+:install_bundles
+  if not exist %dotfiles%vim\bundle\vundle (
+    git clone http://github.com/gmarik/vundle.git "%dotfiles%vim\bundle\vundle"
+  )
+  gvim +BundleInstall +qall
 
-
-rem End program -----------------------------------------------------------
-:error
-  echo.
-  echo Error: Something went wrong.
-  goto end
-
-:success
-  echo.
-  echo Success: Everything finished.
-  goto end
-
+rem End script ------------------------------------------------------------
 :end
-  pause >nul
-  cls
-  exit /B
+  echo.
+  echo Setup complete.
+
+rem vim: foldmethod=indent
