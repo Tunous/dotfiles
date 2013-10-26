@@ -1,74 +1,47 @@
 @echo off
 title Dotfiles installation script
 
-rem Start program ---------------------------------------------------------
-:init
-  set dotfiles=%~dp0
-  set home=%USERPROFILE%\
-  goto check_permissions
-
-rem Check administrator permissions ---------------------------------------
-:check_permissions
-  echo Administrative permissions required. Detecting permissions...
+rem Check admin {{{
   net session >nul 2>&1
-
-  if %errorLevel% == 0 (
-    echo Success: Administrative permissions confirmed.
-    echo.
-
-    goto link_vimp
+  if %errorlevel% == 0 (
+    goto continue
   ) else (
-    echo Requesting administrative privileges...
-    goto UAC_prompt
+    echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
+    set params=%~1
+    echo UAC.ShellExecute "%~s0", "%params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
+
+    "%temp%\getadmin.vbs" >nul
+    if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
+    exit /B
   )
 
-rem Show admin prompt -----------------------------------------------------
-:UAC_prompt
-  echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
-  set params=%~1
-  echo UAC.ShellExecute "%~s0", "%params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
+:continue
+rem Set variables
+  set home=%userprofile%
+  set dotfiles=%home%\dotfiles
 
-  "%temp%\getadmin.vbs" >nul
-  if exist "%temp%\getadmin.vbs" ( del "%temp%\getadmin.vbs" )
-  exit /B
-
-rem Link vimperator files -------------------------------------------------
-:link_vimp
-  echo Linking vimperator files...
-  echo.
-
-  if exist %home%vimperator (
-    echo vimperator folder already exists. Skipping to next file.
+rem Clone/update repository
+  if not exist %dotfiles% (
+    git clone http://github.com/Tunous/dotfiles.git "%dotfiles%"
   ) else (
-    mklink /D %home%vimperator %dotfiles%vimperator
-  )
-  if exist %home%_vimperatorrc (
-    echo _vimperatorrc file already exists. Skipping to next file.
-  ) else (
-    mklink %home%_vimperatorrc %dotfiles%vimperator\vimperatorrc
+    cd "%dotfiles%"
+    git pull
   )
 
-rem Link vim files --------------------------------------------------------
-:link_vim
-  echo Linking vim files...
-  echo.
+rem Link files
+  mklink /d "%home%\vimperator"    "%dotfiles%\vimperator"
+  mklink    "%home%\_vimperatorrc" "%dotfiles%\vimperator\vimperatorrc"
+  mklink /d "%home%\vimfiles"      "%dotfiles%\vim"
 
-  if exist %home%vimfiles (
-    echo vimfiles folder already exists. Skipping to next file.
-  ) else (
-    mklink /D %home%vimfiles %dotfiles%vim
+rem Clone vundle repository
+  if not exist "%dotfiles%\vim\bundle" (
+    mkdir "%dotfiles%\vim\bundle"
+  )
+  if not exist "%dotfiles%\vim\bundle\vundle" (
+    git clone http://github.com/gmarik/vundle.git "%dotfiles%\bundle\vundle"
   )
 
-rem Install vim bundles ---------------------------------------------------
-:install_bundles
-  if not exist %dotfiles%vim\bundle\vundle (
-    git clone http://github.com/gmarik/vundle.git "%dotfiles%vim\bundle\vundle"
-  )
-  gvim +BundleInstall +qall
-
-rem End script ------------------------------------------------------------
-:end
-  echo.
-  echo Setup complete.
+rem Update vim bundles
+  gvim +BundleInstall! +BundleClean +qall
 
 rem vim: foldmethod=indent
