@@ -8,7 +8,7 @@
 "
 " Main settings -----------------------------------------------------------
 " Initial settings {{{
-"
+
 filetype plugin indent on
 syntax on
 
@@ -37,9 +37,32 @@ let mapleader=","
 " Plugins -----------------------------------------------------------------
 " Vundle {{{
 
-" Path settings
-set rtp+=$HOME/dotfiles/vim/bundle/vundle
-call vundle#rc('$HOME/dotfiles/vim/bundle/')
+" Set variables {{{
+
+let s:bundleDir = $HOME.'/dotfiles/vim/bundle/'
+let s:vundleDir = s:bundleDir.'vundle'
+let s:vundleSrc = 'http://github.com/gmarik/vundle.git'
+
+"}}}
+" Install vundle if it doesn't exist {{{
+
+" Clone vundle repostory
+function! s:VundleClone()
+  if !isdirectory(s:vundleDir)
+    exec 'silent !git clone '.s:vundleSrc.' '.shellescape(s:vundleDir, 1)
+    echo "Cloned vundle repository"
+  endif
+endfunction
+
+call <SID>VundleClone()
+
+"}}}
+" Set paths {{{
+
+exec 'set rtp+='.s:vundleDir
+call vundle#rc(s:bundleDir)
+
+"}}}
 
 Bundle 'gmarik/vundle'
 
