@@ -23,8 +23,8 @@ set encoding=utf-8
 set guifont=Inconsolata-dz_for_Powerline:h9:cEASTEUROPE   " Inconsolata font
 set guifont=Meslo_LG_S_for_Powerline:h8:cANSI             " Meslo font
 
-set background=dark         " Set dark background
-colorscheme customized      " Use my own theme
+set background=dark                                       " Set dark background
+colorscheme customized                                    " Use my own theme
 
 "}}}
 " Leader {{{
@@ -78,11 +78,13 @@ let delimitMate_balance_matchpairs = 1
 " Use git inside of vim
 Bundle 'tpope/vim-fugitive'
 
-augroup fugitive
-  autocmd!
-  " Auto-clean fugitive buffers
-  autocmd BufReadPost fugitive://* set bufhidden=delete
-augroup END
+if has('autocmd')
+  augroup fugitive
+    autocmd!
+    " Auto-clean fugitive buffers
+    autocmd BufReadPost fugitive://* set bufhidden=delete
+  augroup END
+endif
 
 " }}}
 " NERDTree {{{
@@ -91,10 +93,12 @@ Bundle 'scrooloose/nerdtree'
 
 let NERDTreeDirArrows=1
 
-augroup NerdTree
-  autocmd!
-  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-augroup END
+if has('autocmd')
+  augroup nerdTree
+    autocmd!
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+  augroup END
+endif
 
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
@@ -125,24 +129,26 @@ set directory=$VIM/temp//
 "}}}
 " Gui options {{{
 
+" Don't use any gui options
 if has("gui_running")
-  set guioptions= " I don't want any guioptions
+  set guioptions=
 endif
 
 "}}}
 " Mouse {{{
 
+" Can use mouse in all modes
 if has("mouse")
-  set mouse=a         " Can use mouse in all modes
+  set mouse=a
 endif
 
 "}}}
 " Search options {{{
 
-set hlsearch        " Highlight search terms
-set incsearch       " Show search matches as I type
-set ignorecase      " Ignore case when searching...
-set smartcase       " unless I use uppercase characters
+set hlsearch                      " Highlight search terms
+set incsearch                     " Show search matches as I type
+set ignorecase                    " Ignore case when searching...
+set smartcase                     " unless I use uppercase characters
 
 "}}}
 " Size {{{
@@ -153,18 +159,18 @@ set columns=175
 "}}}
 " Smart scrolling {{{
 
-set scrolloff=10          " Minimal number of screen lines to keep above or below cursor
-set sidescrolloff=15      " Minimal number od screen linw to keep above or below cursor
+set scrolloff=10                  " Minimal number of screen lines to keep above or below cursor
+set sidescrolloff=15              " Minimal number od screen linw to keep above or below cursor
 
 "}}}
 " Tabs and spaces {{{
 
-set tabstop=4          " Number of spaces for tab
-set shiftwidth=2       " Number of spaces to use for indenting
-set softtabstop=2      " Number of spaces that tab count's for
-set expandtab          " Use spaces instead of tabs
-set autoindent         " Always set autoindenting on
-set copyindent         " Copy the previous indentation on autoindenting
+set tabstop=4                     " Number of spaces for tab
+set shiftwidth=2                  " Number of spaces to use for indenting
+set softtabstop=2                 " Number of spaces that tab counts for
+set expandtab                     " Use spaces instead of tabs
+set autoindent                    " Always set autoindenting on
+set copyindent                    " Copy the previous indentation on autoindenting
 
 "}}}
 " Undo files {{{
@@ -176,34 +182,39 @@ set undofile
 "}}}"
 " Other {{{
 
-set wildmenu                                " Use wildmenu for commandline autocompletion
+set wildmenu                      " Use wildmenu for commandline autocompletion
 
-set autoread                                " Read file if it was modified outside of vim
-set autowrite                               " Writie file after executing specific commands
-set autochdir                               " Automatically change working directory to directory of current file
+set autoread                      " Read file if it was modified outside of vim
+set autochdir                     " Automatically change working directory to directory of current file
 
-set hidden                                  " Allow not saved buffers in background
+set hidden                        " Allow hidden buffers
 
-set clipboard^=unnamed                      " Share system clipboard
-set showcmd                                 " Show executed command in commands line
+set clipboard^=unnamed            " Share system clipboard
 
-set cursorcolumn                            " Highlight cursor column...
-set cursorline                              " ...and line
+set showcmd                       " Show executed command in commands line
 
-set backspace=indent,eol,start              " Make backspace delete everything in insert mode
-set number                                  " Show line numbers relative to current psition
+set cursorcolumn                  " Highlight cursor column...
+set cursorline                    " ...and line
 
-set laststatus=2                            " Always show statusline
-set visualbell                              " Don't beep
+set backspace=indent,eol,start    " Make backspace delete everything in insert mode
 
-set nowrap                                  " Don't wrap lines
+set number                        " Show line numbers
 
-set list                                    " Show list chars
-set listchars=tab:▸\ ,trail:·               " Listchars
+set laststatus=2                  " Always show statusline
 
-set foldmethod=marker                       " Use marker foldmethod
+" Don't beep and don't flash screen
+set visualbell
+set t_vb=
 
-set synmaxcol=120                           " Limit syntax highlight of long lines
+set nowrap                        " Don't wrap lines
+
+" Show list chars
+set list
+set listchars=tab:▸\ ,trail:·
+
+set foldmethod=marker             " Use marker foldmethod
+
+set synmaxcol=120                 " Limit syntax highlight of long lines
 
 "}}}"
 
@@ -378,56 +389,57 @@ endif
 "}}}
 " Autocommands {{{
 
-" Relative numbers {{{
+if has('autocmd')
+  " Relative numbers {{{
 
-augroup relative_numbers
-  autocmd!
-  " Turn on relative numbers
-  autocmd WinEnter            * if &number | set relativenumber | endif
-  autocmd BufNewFile,BufRead  * if &number | set relativenumber | endif
-  autocmd FocusGained         * if &number | set relativenumber | endif
-  autocmd InsertLeave         * if &number | set relativenumber | endif
+  augroup relativeNumbers
+    autocmd!
+    " Turn on relative numbers
+    autocmd WinEnter            * if &number | set relativenumber | endif
+    autocmd BufNewFile,BufRead  * if &number | set relativenumber | endif
+    autocmd FocusGained         * if &number | set relativenumber | endif
+    autocmd InsertLeave         * if &number | set relativenumber | endif
 
-  " Turn off relative numbers
-  autocmd WinLeave            * if &number | set norelativenumber | endif
-  autocmd FocusLost           * if &number | set norelativenumber | endif
-  autocmd InsertEnter         * if &number | set norelativenumber | endif
-augroup END
+    " Turn off relative numbers
+    autocmd WinLeave            * if &number | set norelativenumber | endif
+    autocmd FocusLost           * if &number | set norelativenumber | endif
+    autocmd InsertEnter         * if &number | set norelativenumber | endif
+  augroup END
+
+  "}}}
+  " Other {{{
+
+  augroup other
+    autocmd!
+    " Source vimrc after saving and reopen folds
+    autocmd BufWritePost vimrc source $MYVIMRC | :normal zv
+
+    " Add header file preprocessor getes
+    autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()
+
+    " Stop insert mode after inactivity
+    autocmd CursorHoldI * stopinsert
+
+    " Select compiler for c/c++ files
+    autocmd BufEnter,BufNew *.{c,cpp,h,hpp} compiler mingw
+
+    " Spell check when writing commit logs
+    autocmd filetype svn,*commit* setlocal spell
+  augroup END
+
+  "}}}
+  " Temporary {{{
+
+  augroup temp
+    autocmd!
+    autocmd BufWritePost customized.vim colorscheme customized
+  augroup END
+
+  "}}}
+endif
 
 "}}}
-" Other {{{
 
-augroup other
-  autocmd!
-  " Source vimrc after saving and reopen folds
-  autocmd BufWritePost vimrc source $MYVIMRC | :normal zv
-
-  " Add header file preprocessor getes
-  autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()
-
-  " Stop insert mode after inactivity
-  autocmd CursorHoldI * stopinsert
-
-  " Select compiler for c/c++ files
-  autocmd BufEnter,BufNew *.{c,cpp,h,hpp} compiler mingw
-
-  " Spell check when writing commit logs
-  autocmd filetype svn,*commit* setlocal spell
-augroup END
-
-"}}}
-
-"}}}
-
-" Temporary {{{
-
-augroup temp
-  autocmd!
-  autocmd BufWritePost customized.vim colorscheme customized
-augroup END
-
-
-"}}}
 
 " End {{{
 " vim: foldmethod=marker: foldlevel=0:
