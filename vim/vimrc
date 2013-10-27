@@ -128,10 +128,10 @@ Bundle 'tomtom/tcomment_vim'
 
 " Bakcup and swap files {{{
 
+" Don't create swap and backup files
 set nobackup
-
-silent execute '!mkdir "'.$VIM.'/temp" >nul 2>&1'
-set directory=$VIM/temp//
+set nowritebackup
+set noswapfile
 
 "}}}
 " Gui options {{{
