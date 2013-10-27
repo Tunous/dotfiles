@@ -201,8 +201,6 @@ set autochdir                     " Automatically change working directory to di
 
 set hidden                        " Allow hidden buffers
 
-set clipboard^=unnamed            " Share system clipboard
-
 set showcmd                       " Show executed command in commands line
 
 set cursorcolumn                  " Highlight cursor column...
