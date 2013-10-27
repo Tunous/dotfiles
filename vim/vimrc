@@ -9,13 +9,13 @@
 " Main settings -----------------------------------------------------------
 " Initial settings {{{
 
-filetype plugin indent on
-syntax on
+set nocompatible
+set encoding=utf-8
 
 language messages en_US.utf-8
 
-set nocompatible
-set encoding=utf-8
+filetype plugin indent on
+syntax on
 
 "}}}
 " Theme settings {{{
@@ -23,8 +23,8 @@ set encoding=utf-8
 set guifont=Inconsolata-dz_for_Powerline:h9:cEASTEUROPE   " Inconsolata font
 set guifont=Meslo_LG_S_for_Powerline:h8:cANSI             " Meslo font
 
-set background=dark                                       " Set dark background
 colorscheme customized                                    " Use my own theme
+set background=dark                                       " Set dark background
 
 "}}}
 " Leader {{{
@@ -84,12 +84,10 @@ Bundle 'tpope/vim-fugitive'
 
 " Auto-clean fugitive buffers {{{
 
-if has('autocmd')
-  augroup fugitive
-    autocmd!
-    autocmd BufReadPost fugitive://* set bufhidden=delete
-  augroup END
-endif
+augroup fugitive
+  autocmd!
+  autocmd BufReadPost fugitive://* set bufhidden=delete
+augroup END
 
 "}}}
 
@@ -102,12 +100,10 @@ let NERDTreeDirArrows=1
 
 " Close vim if only NERDTree is open {{{
 
-if has('autocmd')
-  augroup nerdTree
-    autocmd!
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-  augroup END
-endif
+augroup nerdTree
+  autocmd!
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+augroup END
 
 "}}}
 
@@ -205,7 +201,7 @@ set clipboard^=unnamed            " Share system clipboard
 set showcmd                       " Show executed command in commands line
 
 set cursorcolumn                  " Highlight cursor column...
-set cursorline                    " ...and line
+set cursorline                    " ... and line
 
 set backspace=indent,eol,start    " Make backspace delete everything in insert mode
 
@@ -284,8 +280,8 @@ inoremap <Leader>; <C-o>A;
 "}}}
 " Other {{{
 
-" Capitalize word next to cursor
-inoremap <C-u> <Esc>:call Preserve("normal gUiw")<CR>a
+" Change capitalization of word next to cursor
+inoremap <C-u> <Esc>:call Preserve("normal g~iw")<CR>a
 
 " Indend whole file and remove trailing whitespaces
 nnoremap <F2> :call Preserve("normal gg=G")<CR> :call Preserve("%s/\\s\\+$//e")<CR>
@@ -308,8 +304,6 @@ nnoremap Y y$
 " Functions {{{
 
 " Delete current buffer without closing its split {{{
-
-" Source: https://gist.github.com/noahfrederick/7130087
 
 function! s:Bdelete(bang) abort
   let l:current_buffer = bufnr("%")
@@ -398,57 +392,55 @@ endif
 "}}}
 " Autocommands {{{
 
-if has('autocmd')
-  " Relative numbers {{{
+" Relative numbers {{{
 
-  augroup relativeNumbers
-    autocmd!
-    " Turn on relative numbers
-    autocmd WinEnter            * if &number | set relativenumber | endif
-    autocmd BufNewFile,BufRead  * if &number | set relativenumber | endif
-    autocmd FocusGained         * if &number | set relativenumber | endif
-    autocmd InsertLeave         * if &number | set relativenumber | endif
+augroup relativeNumbers
+  autocmd!
+  " Turn on relative numbers
+  autocmd WinEnter            * if &number | set relativenumber | endif
+  autocmd BufNewFile,BufRead  * if &number | set relativenumber | endif
+  autocmd FocusGained         * if &number | set relativenumber | endif
+  autocmd InsertLeave         * if &number | set relativenumber | endif
 
-    " Turn off relative numbers
-    autocmd WinLeave            * if &number | set norelativenumber | endif
-    autocmd FocusLost           * if &number | set norelativenumber | endif
-    autocmd InsertEnter         * if &number | set norelativenumber | endif
-  augroup END
+  " Turn off relative numbers
+  autocmd WinLeave            * if &number | set norelativenumber | endif
+  autocmd FocusLost           * if &number | set norelativenumber | endif
+  autocmd InsertEnter         * if &number | set norelativenumber | endif
+augroup END
 
-  "}}}
-  " Other {{{
+"}}}
+" Other {{{
 
-  augroup other
-    autocmd!
-    " Source vimrc after saving and reopen folds
-    autocmd BufWritePost vimrc source $MYVIMRC | :normal zv
+augroup other
+  autocmd!
+  " Source vimrc after saving and reopen folds
+  autocmd BufWritePost vimrc source $MYVIMRC | :normal zv
 
-    " Add header file preprocessor getes
-    autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()
+  " Add header file preprocessor getes
+  autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()
 
-    " Stop insert mode after inactivity
-    autocmd CursorHoldI * stopinsert
+  " Stop insert mode after inactivity
+  autocmd CursorHoldI * stopinsert
 
-    " Select compiler for c/c++ files
-    autocmd BufEnter,BufNew *.{c,cpp,h,hpp} compiler mingw
+  " Select compiler for c/c++ files
+  autocmd BufEnter,BufNew *.{c,cpp,h,hpp} compiler mingw
 
-    " Spell check when writing commit logs
-    autocmd filetype svn,*commit* setlocal spell
+  " Spell check when writing commit logs
+  autocmd filetype svn,*commit* setlocal spell
 
-    " Return to last cursor position
-    autocmd BufReadPost * call <SID>SetCursorPosition()
-  augroup END
+  " Return to last cursor position
+  autocmd BufReadPost * call <SID>SetCursorPosition()
+augroup END
 
-  "}}}
-  " Temporary {{{
+"}}}
+" Temporary {{{
 
-  augroup temp
-    autocmd!
-    autocmd BufWritePost customized.vim colorscheme customized
-  augroup END
+augroup temp
+  autocmd!
+  autocmd BufWritePost customized.vim colorscheme customized
+augroup END
 
-  "}}}
-endif
+"}}}
 
 "}}}
 
