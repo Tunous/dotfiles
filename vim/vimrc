@@ -182,8 +182,13 @@ set copyindent                    " Copy the previous indentation on autoindenti
 "}}}
 " Undo files {{{
 
-silent execute '!mkdir "'.$VIM.'/undofiles" >nul 2>&1'
-set undodir=$VIM/undofiles
+let s:undofilesDir = $VIM . '/undofiles'
+
+if !isdirectory(s:undofilesDir)
+  silent execute '!mkdir "' . s:undofilesDir . '" >nul 2>&1'
+endif
+
+execute 'set undodir=' . s:undofilesDir
 set undofile
 
 "}}}"
