@@ -247,6 +247,10 @@ inoremap <Esc> Ooops, use jk instead...
 "}}}
 " Nvigation {{{
 
+" Better navigation with wrapped lines
+nnoremap j gj
+nnoremap k gk
+
 " Change windows
 noremap <Up> <C-W>k
 noremap <Down> <C-W>j
