@@ -213,7 +213,8 @@ set cursorline                    " ... and line
 
 set backspace=indent,eol,start    " Make backspace delete everything in insert mode
 
-set number                        " Show line numbers
+set number                        " Show line numbers...
+set relativenumber                " ... and use relative numbers
 
 set laststatus=2                  " Always show statusline
 
