@@ -171,8 +171,8 @@ set columns=175
 "}}}
 " Smart scrolling {{{
 
-set scrolloff=10                  " Minimal number of screen lines to keep above or below cursor
-set sidescrolloff=15              " Minimal number od screen linw to keep above or below cursor
+set scrolloff=10
+set sidescrolloff=15
 
 "}}}
 " Tabs and spaces {{{
