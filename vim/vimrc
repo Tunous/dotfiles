@@ -92,6 +92,11 @@ augroup END
 "}}}
 
 " }}}
+" Gitv {{{
+
+Bundle 'gregsexton/gitv'
+
+"}}}
 " NERDTree {{{
 
 Bundle 'scrooloose/nerdtree'
