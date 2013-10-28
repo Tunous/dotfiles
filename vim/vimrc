@@ -429,9 +429,6 @@ augroup other
   " Stop insert mode after inactivity
   autocmd CursorHoldI * stopinsert
 
-  " Select compiler for c/c++ files
-  autocmd BufEnter,BufNew *.{c,cpp,h,hpp} compiler mingw
-
   " Spell check when writing commit logs
   autocmd filetype svn,*commit* setlocal spell
 
