@@ -20,7 +20,6 @@ syntax on
 "}}}
 " Theme settings {{{
 
-set guifont=Inconsolata-dz_for_Powerline:h9:cEASTEUROPE   " Inconsolata font
 set guifont=Meslo_LG_S_for_Powerline:h8:cANSI             " Meslo font
 
 colorscheme customized                                    " Use my own theme
