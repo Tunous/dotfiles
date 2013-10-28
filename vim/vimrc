@@ -404,23 +404,6 @@ endif
 "}}}
 " Autocommands {{{
 
-" Relative numbers {{{
-
-augroup relativeNumbers
-  autocmd!
-  " Turn on relative numbers
-  autocmd WinEnter            * if &number | set relativenumber | endif
-  autocmd BufNewFile,BufRead  * if &number | set relativenumber | endif
-  autocmd FocusGained         * if &number | set relativenumber | endif
-  autocmd InsertLeave         * if &number | set relativenumber | endif
-
-  " Turn off relative numbers
-  autocmd WinLeave            * if &number | set norelativenumber | endif
-  autocmd FocusLost           * if &number | set norelativenumber | endif
-  autocmd InsertEnter         * if &number | set norelativenumber | endif
-augroup END
-
-"}}}
 " Other {{{
 
 augroup other
