@@ -301,6 +301,9 @@ nnoremap <F2> :call Preserve("normal gg=G")<CR> :call Preserve("%s/\\s\\+$//e")<
 " Save file
 nnoremap <Enter> :w<CR>
 
+" Source vimrc
+nnoremap <Leader>s :source $MYVIMRC<CR>zv
+
 " Toggle `set list`
 nmap <Leader>l :set list!<CR>
 
@@ -408,9 +411,6 @@ endif
 
 augroup other
   autocmd!
-  " Source vimrc after saving and reopen folds
-  autocmd BufWritePost vimrc source $MYVIMRC | :normal zv
-
   " Add header file preprocessor getes
   autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()
 
