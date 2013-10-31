@@ -49,9 +49,37 @@ CloneRepo() {
   fi
 }
 
+CreateSymlinks() {
+  title "Trying to link $1 files..."
+
+  if [ "$1" = "vim" ]; then
+    [ -e "$repoDir/vim" ] &&
+      ln -s "$repoDir/vim" "$HOME/vimfiles"
+
+    ret="$?"
+
+  elif [ "$1" = "vimperator" ]; then
+    [ -e "$repoDir/vimperator" ] &&
+      ln -s "$repoDir/vimperator" "$HOME/vimperator"
+
+    ret="$?"
+
+    [ -e "$repoDir/vimperator/vimperatorrc" ] &&
+      ln -s "$repoDir/vimperator/vimperatorrc" "$HOME/_vimperatorrc"
+
+    [ "$?" = '0' ] || ret='1'
+  fi
+
+  result "$ret" "Successfully symlinked $1 files" "Failed to symlink $1 files"
+}
+
 # Check path
 ProgramExists "vim"
 ProgramExists "git"
 
 # Clone/update dotfiles repository
 CloneRepo "$repoName" "$repoDir" 'http://github.com/Tunous/dotfiles.git'
+
+# Create symlinks
+CreateSymlinks "vim"
+CreateSymlinks "vimperator"
