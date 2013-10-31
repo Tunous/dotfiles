@@ -73,6 +73,13 @@ CreateSymlinks() {
   result "$ret" "Successfully symlinked $1 files" "Failed to symlink $1 files"
 }
 
+SetupPlugins() {
+  title "Updating plugins for vim..."
+  vim -u "$HOME/vimfiles/vimrc" +qall #+BundleInstall! +BundleClean +qall
+
+  result "0" "Plugins updated"
+}
+
 # Check path
 ProgramExists "vim"
 ProgramExists "git"
@@ -86,3 +93,9 @@ CreateSymlinks "vimperator"
 
 # Clone/update vundle
 CloneRepo "vundle" "$repoDir/vim/bundle/vundle" 'http://github.com/gmarik/vundle.git'
+
+# Install and update vim plugins
+SetupPlugins
+
+# Print end message
+title "Done. Thanks for installing $repoName"
