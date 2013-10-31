@@ -101,25 +101,23 @@ CloneRepo() {
 # --------------------------------------------------
 # Create symlinks
 
+lnif () {
+  [ -e "$1" ] &&
+    ln -s "$1" "$2"
+
+  [ "$?" = '0' ] || ret='1'
+}
+
 CreateSymlinks() {
   title "Trying to link $1 files..."
 
+  ret='0'
+
   if [ "$1" = "vim" ]; then
-    [ -e "$repoDir/vim" ] &&
-      ln -s "$repoDir/vim" "$HOME/vimfiles"
-
-    ret="$?"
-
+    lnif "$repoDir/vim" "$HOME/vimfiles"
   elif [ "$1" = "vimperator" ]; then
-    [ -e "$repoDir/vimperator" ] &&
-      ln -s "$repoDir/vimperator" "$HOME/vimperator"
-
-    ret="$?"
-
-    [ -e "$repoDir/vimperator/vimperatorrc" ] &&
-      ln -s "$repoDir/vimperator/vimperatorrc" "$HOME/_vimperatorrc"
-
-    [ "$?" = '0' ] || ret='1'
+    lnif "$repoDir/vimperator" "$HOME/vimperator"
+    lnif "$repoDir/vimperator/vimperatorrc" "$HOME/_vimperatorrc"
   fi
 
   result "$ret" "Successfully symlinked $1 files" "Failed to symlink $1 files"
