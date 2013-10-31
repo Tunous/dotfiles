@@ -248,7 +248,7 @@ set synmaxcol=120                 " Limit syntax highlight of long lines
 nnoremap <Leader>p :bp<CR>
 nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>b :ls<CR>:b<Space>
-nnoremap <Leader>d :Bdelete<CR>
+nnoremap <Leader>d :bd<CR>
 
 "}}}
 " 'jk' to leave insert mode {{{
@@ -325,32 +325,6 @@ nnoremap Y y$
 "}}}
 " Functions {{{
 
-" Delete current buffer without closing its split {{{
-
-function! s:Bdelete(bang) abort
-  let l:current_buffer = bufnr("%")
-  let l:alternate_buffer = bufnr("#")
-
-  if buflisted(l:alternate_buffer)
-    execute "buffer" . a:bang . " #"
-  else
-    execute "bnext" . a:bang
-  endif
-
-  if bufnr("%") == l:current_buffer
-    edit.
-  endif
-
-  if buflisted(l:current_buffer)
-    execute "bdelete" . a:bang . " " . l:current_buffer
-  endif
-endfunction
-
-if !exists(":Bdelete")
-  command -bang -bar Bdelete call <SID>Bdelete(<q-bang>)
-endif
-
-"}}}
 " Insert header preprocessor gates {{{
 
 function! s:InsertCppGates()
