@@ -2,6 +2,9 @@
 repoName="dotfiles"
 repoDir="$HOME/$repoName"
 
+# Functions -------------------------------------------------------------------
+# Helper functions {{{
+
 msg() {
   printf '%b\n' "$1" >&2
 }
@@ -29,6 +32,9 @@ ProgramExists() {
 
   result "$ret" "" "To continue you first need to install $1." !
 }
+
+# }}}
+# Main functions {{{
 
 UpdateRepo() {
   title "Trying to update $1..."
@@ -80,6 +86,11 @@ SetupPlugins() {
   result "0" "Plugins updated"
 }
 
+# }}}
+
+# Main ------------------------------------------------------------------------
+# This is the body of script {{{
+
 # Check path
 ProgramExists "vim"
 ProgramExists "git"
@@ -99,3 +110,5 @@ SetupPlugins
 
 # Print end message
 title "Done. Thanks for installing $repoName"
+
+# }}}
