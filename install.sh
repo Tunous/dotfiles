@@ -5,14 +5,22 @@ repoDir="$HOME/$repoName"
 # Functions -------------------------------------------------------------------
 # Helper functions {{{
 
+# msg {{{
+
 msg() {
   printf '%b\n' "$1" >&2
 }
+
+# }}}
+# title {{{
 
 title() {
   msg "\n---------------------------------------------------"
   msg "> $1\n"
 }
+
+# }}}
+# result {{{
 
 result() {
   if [ "$1" -eq '0' ]; then
@@ -26,6 +34,9 @@ result() {
   fi
 }
 
+# }}}
+# ProgramExists {{{
+
 ProgramExists() {
   ret='0'
   type $1 >/dev/null 2>&1 || ret='1'
@@ -34,7 +45,11 @@ ProgramExists() {
 }
 
 # }}}
+
+# }}}
 # Main functions {{{
+
+# UpdateRepo {{{
 
 UpdateRepo() {
   title "Trying to update $1..."
@@ -45,6 +60,9 @@ UpdateRepo() {
   result "$?" "Successfully updated $1" "Failed to update $1"
 }
 
+# }}}
+# Clone Repo {{{
+
 CloneRepo() {
   if [ ! -e "$2/.git" ]; then
     title "Clonning ${1}..."
@@ -54,6 +72,9 @@ CloneRepo() {
     UpdateRepo "$1" "$2"
   fi
 }
+
+# }}}
+# CreateSymlinks {{{
 
 CreateSymlinks() {
   title "Trying to link $1 files..."
@@ -79,12 +100,17 @@ CreateSymlinks() {
   result "$ret" "Successfully symlinked $1 files" "Failed to symlink $1 files"
 }
 
+# }}}
+# SetupPlugins {{{
+
 SetupPlugins() {
   title "Updating plugins for vim..."
   vim -u "$HOME/vimfiles/vimrc" +qall #+BundleInstall! +BundleClean +qall
 
   result "0" "Plugins updated"
 }
+
+# }}}
 
 # }}}
 
