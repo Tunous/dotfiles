@@ -116,6 +116,11 @@ augroup END
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
 "}}}
+" Surround {{{
+
+Bundle 'tpope/vim-surround'
+
+"}}}
 " Tabular {{{
 
 " Line up text
