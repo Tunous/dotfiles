@@ -83,3 +83,6 @@ CloneRepo "$repoName" "$repoDir" 'http://github.com/Tunous/dotfiles.git'
 # Create symlinks
 CreateSymlinks "vim"
 CreateSymlinks "vimperator"
+
+# Clone/update vundle
+CloneRepo "vundle" "$repoDir/vim/bundle/vundle" 'http://github.com/gmarik/vundle.git'
