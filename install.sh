@@ -6,6 +6,8 @@ repoDir="$HOME/$repoName"
 # Helper functions {{{
 
 # msg {{{
+# --------------------------------------------------
+# Print normal message
 
 msg() {
   printf '%b\n' "$1" >&2
@@ -13,6 +15,8 @@ msg() {
 
 # }}}
 # title {{{
+# --------------------------------------------------
+# Print title message
 
 title() {
   msg "\n---------------------------------------------------"
@@ -21,6 +25,14 @@ title() {
 
 # }}}
 # result {{{
+# --------------------------------------------------
+# Print success or fail message basing on specified value
+#
+# Arguments:
+# $1 - "Expression value" - If is equal to 0 function prints success message
+# $2 - "Success message"
+# $3 - "Fail message"
+# $4 - !                  - If specified stops script on fail message
 
 result() {
   if [ "$1" -eq '0' ]; then
@@ -36,6 +48,8 @@ result() {
 
 # }}}
 # ProgramExists {{{
+# --------------------------------------------------
+# Check if program exists in PATH
 
 ProgramExists() {
   ret='0'
@@ -50,6 +64,8 @@ ProgramExists() {
 # Main functions {{{
 
 # UpdateRepo {{{
+# --------------------------------------------------
+# Update git repository
 
 UpdateRepo() {
   title "Trying to update $1..."
@@ -62,6 +78,13 @@ UpdateRepo() {
 
 # }}}
 # Clone Repo {{{
+# --------------------------------------------------
+# Clone git repository
+#
+# Arguments:
+# $1 - "Name of repository"
+# $2 - "Target directory of repository"
+# $3 - "Git uri of repository"
 
 CloneRepo() {
   if [ ! -e "$2/.git" ]; then
@@ -75,6 +98,8 @@ CloneRepo() {
 
 # }}}
 # CreateSymlinks {{{
+# --------------------------------------------------
+# Create symlinks
 
 CreateSymlinks() {
   title "Trying to link $1 files..."
@@ -102,6 +127,8 @@ CreateSymlinks() {
 
 # }}}
 # SetupPlugins {{{
+# --------------------------------------------------
+# Install and update vim plugins
 
 SetupPlugins() {
   title "Updating plugins for vim..."
