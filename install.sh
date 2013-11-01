@@ -36,10 +36,10 @@ title() {
 
 result() {
   if [ "$1" -eq '0' ]; then
-    [ -z "$2" ] ||
+    [ -n "$2" ] &&
       msg "\e[32m$2\e[0m"
   else
-    [ -z "$3" ] ||
+    [ -n "$3" ] &&
       msg "\e[31m$3\e[0m"
 
     [ "$4" = ! ] && exit 1
@@ -88,7 +88,7 @@ UpdateRepo() {
 
 CloneRepo() {
   if [ ! -e "$2/.git" ]; then
-    title "Clonning ${1}..."
+    title "Clonning $1..."
     git clone "$3" "$2"
     result "$?" "Successfully cloned $1" "Failed to clone $1"
   else
@@ -105,7 +105,7 @@ lnif () {
   [ -e "$1" ] &&
     ln -s "$1" "$2"
 
-  [ "$?" = '0' ] || ret='1'
+  [ "$?" -eq '0' ] || ret='1'
 }
 
 CreateSymlinks() {
@@ -130,7 +130,7 @@ CreateSymlinks() {
 
 SetupPlugins() {
   title "Updating plugins for vim..."
-  vim -u "$HOME/vimfiles/vimrc" +qall #+BundleInstall! +BundleClean +qall
+  vim -u "$HOME/vimfiles/vimrc" +BundleInstall! +BundleClean +qall
 
   result "0" "Plugins updated"
 }
