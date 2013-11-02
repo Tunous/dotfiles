@@ -97,7 +97,7 @@ CloneRepo() {
 }
 
 # }}}
-# CreateSymlinks {{{
+# Symlink {{{
 # --------------------------------------------------
 # Create symlinks
 
@@ -108,7 +108,7 @@ lnif () {
   [ "$?" -eq '0' ] || ret='1'
 }
 
-CreateSymlinks() {
+Symlink() {
   title "Trying to link $1 files..."
 
   ret='0'
@@ -150,8 +150,8 @@ ProgramExists "git"
 CloneRepo "$repoName" 'Tunous/dotfiles' "$repoDir"
 
 # Create symlinks
-CreateSymlinks "vim"
-CreateSymlinks "vimperator"
+Symlink "vim"
+Symlink "vimperator"
 
 # Clone/update vundle
 CloneRepo "vundle" 'gmarik/vundle' "$repoDir/vim/bundle/vundle"
