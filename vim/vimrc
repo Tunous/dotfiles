@@ -307,6 +307,9 @@ nnoremap <Enter> :w<CR>
 " Source vimrc
 nnoremap <Leader>s :source $MYVIMRC<CR>zv
 
+" Toggle fold
+nnoremap <Space> za
+
 " Toggle `set list`
 nmap <Leader>l :set list!<CR>
 
