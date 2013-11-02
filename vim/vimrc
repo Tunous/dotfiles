@@ -275,10 +275,6 @@ inoremap <Down> <NOP>
 inoremap <Left> <NOP>
 inoremap <Right> <NOP>
 
-" Scroll page
-noremap <Space> <C-D>
-noremap <S-Space> <C-U>
-
 "}}}
 " Open config files {{{
 
