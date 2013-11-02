@@ -17,7 +17,7 @@ language messages en_US.utf-8
 filetype plugin indent on
 syntax on
 
-"}}}
+" }}}
 " Theme settings {{{
 
 set guifont=Meslo_LG_S_for_Powerline:h8:cANSI             " Meslo font
@@ -27,13 +27,13 @@ if has("gui_running")
 endif
 set background=dark                                       " Set dark background
 
-"}}}
+" }}}
 " Leader {{{
 
 " Use ',' as leader
 let mapleader=","
 
-"}}}
+" }}}
 
 " Plugins -----------------------------------------------------------------
 " Vundle {{{
@@ -43,11 +43,11 @@ let mapleader=","
 set rtp+=$HOME/dotfiles/vim/bundle/vundle
 call vundle#rc('$HOME/dotfiles/vim/bundle/')
 
-"}}}
+" }}}
 
 Bundle 'gmarik/vundle'
 
-"}}}
+" }}}
 
 " Airline {{{
 
@@ -62,12 +62,12 @@ let g:airline_right_sep = ''          " Right separator
 let g:airline_left_alt_sep = ''       " Alternative left separator
 let g:airline_right_alt_sep = ''      " Alternative right separator
 
-"}}}
+" }}}
 
 " Show buffers line when there is only one tab open
 let g:airline#extensions#tabline#enabled = 1
 
-"}}}
+" }}}
 " DelimitMate {{{
 
 " Automatically close quotes, brackets, etc.
@@ -77,7 +77,7 @@ let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
 let delimitMate_balance_matchpairs = 1
 
-"}}}
+" }}}
 " Fugitive {{{
 
 " Use git inside of vim
@@ -90,14 +90,14 @@ augroup fugitive
   autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
 
-"}}}
+" }}}
 
 " }}}
 " Gitv {{{
 
 Bundle 'gregsexton/gitv'
 
-"}}}
+" }}}
 " NERDTree {{{
 
 Bundle 'scrooloose/nerdtree'
@@ -111,28 +111,28 @@ augroup nerdTree
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 augroup END
 
-"}}}
+" }}}
 
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
-"}}}
+" }}}
 " Surround {{{
 
 Bundle 'tpope/vim-surround'
 
-"}}}
+" }}}
 " Tabular {{{
 
 " Line up text
 Bundle 'godlygeek/tabular'
 
-"}}}
+" }}}
 " Tcomment {{{
 
 " Comment selected text
 Bundle 'tomtom/tcomment_vim'
 
-"}}}
+" }}}
 
 " Actual settings ---------------------------------------------------------
 " Settting options {{{
@@ -144,7 +144,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-"}}}
+" }}}
 " Gui options {{{
 
 " Don't use any gui options
@@ -152,7 +152,7 @@ if has("gui_running")
   set guioptions=
 endif
 
-"}}}
+" }}}
 " Mouse {{{
 
 " Can use mouse in all modes
@@ -160,7 +160,7 @@ if has("mouse")
   set mouse=a
 endif
 
-"}}}
+" }}}
 " Search options {{{
 
 set hlsearch                      " Highlight search terms
@@ -168,19 +168,19 @@ set incsearch                     " Show search matches as I type
 set ignorecase                    " Ignore case when searching...
 set smartcase                     " unless I use uppercase characters
 
-"}}}
+" }}}
 " Size {{{
 
 set lines=50
 set columns=175
 
-"}}}
+" }}}
 " Smart scrolling {{{
 
 set scrolloff=10
 set sidescrolloff=15
 
-"}}}
+" }}}
 " Tabs and spaces {{{
 
 set tabstop=4                     " Number of spaces for tab
@@ -190,7 +190,7 @@ set expandtab                     " Use spaces instead of tabs
 set autoindent                    " Always set autoindenting on
 set copyindent                    " Copy the previous indentation on autoindenting
 
-"}}}
+" }}}
 " Undo files {{{
 
 let s:undofilesDir = $VIM . '/undofiles'
@@ -202,7 +202,7 @@ endif
 execute 'set undodir=' . s:undofilesDir
 set undofile
 
-"}}}"
+" }}}
 " Other {{{
 
 set wildmenu                      " Use wildmenu for commandline autocompletion
@@ -218,9 +218,6 @@ set cursorcolumn                  " Highlight cursor column...
 set cursorline                    " ... and line
 
 set backspace=indent,eol,start    " Make backspace delete everything in insert mode
-
-set number                        " Show line numbers...
-set relativenumber                " ... and use relative numbers
 
 set laststatus=2                  " Always show statusline
 
@@ -238,9 +235,9 @@ set foldmethod=marker             " Use marker foldmethod
 
 set synmaxcol=120                 " Limit syntax highlight of long lines
 
-"}}}"
+" }}}
 
-"}}}
+" }}}
 " Key mappings {{{
 
 " Buffers navigation {{{
@@ -250,13 +247,13 @@ nnoremap <Leader>n :bn<CR>
 nnoremap <Leader>b :ls<CR>:b<Space>
 nnoremap <Leader>d :bd<CR>
 
-"}}}
+" }}}
 " 'jk' to leave insert mode {{{
 
 inoremap jk <Esc>
 inoremap <Esc> Ooops, use jk instead...
 
-"}}}
+" }}}
 " Nvigation {{{
 
 " Better navigation with wrapped lines
@@ -275,7 +272,7 @@ inoremap <Down> <NOP>
 inoremap <Left> <NOP>
 inoremap <Right> <NOP>
 
-"}}}
+" }}}
 " Open config files {{{
 
 " Open vimrc
@@ -287,12 +284,12 @@ nnoremap <Leader>vp :edit $HOME/dotfiles/vimperator/vimperatorrc<CR>
 " Open customized colorscheme
 nnoremap <Leader>vt :edit $HOME/dotfiles/vim/colors/customized.vim<CR>
 
-"}}}
+" }}}
 " End semicolon {{{
 
 inoremap <Leader>; <C-o>A;
 
-"}}}
+" }}}
 " Other {{{
 
 " Change capitalization of word next to cursor
@@ -319,9 +316,9 @@ nnoremap <C-L> :nohlsearch<CR>
 " Yank to end of line
 nnoremap Y y$
 
-"}}}
+" }}}
 
-"}}}
+" }}}
 " Functions {{{
 
 " Insert header preprocessor gates {{{
@@ -334,7 +331,7 @@ function! s:InsertCppGates()
   normal! kk
 endfunction
 
-"}}}
+" }}}
 " Return to last cursor position {{{
 
 function! s:SetCursorPosition()
@@ -346,7 +343,7 @@ function! s:SetCursorPosition()
   end
 endfunction
 
-"}}}
+" }}}
 " Save current position and execute command {{{
 
 function! Preserve(command)
@@ -363,7 +360,7 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 
-"}}}
+" }}}
 " Toggle fullscreen {{{
 
 let s:fullscreen = 0
@@ -382,11 +379,52 @@ if has("gui_running")
   nnoremap <F11> :call ToggleFullScreen()<CR>
 endif
 
-"}}}
+" }}}
+" Toggle number column {{{
 
-"}}}
+let s:NumberExclude = [ '', 'nerdtree', 'help' ]
+
+function! NumberToggle(what)
+  if index(s:NumberExclude, &ft) >= 0
+    " Do nothing
+
+  elseif a:what == 'on'
+    " Turn on relative numbers
+    setlocal number
+    setlocal relativenumber
+
+  elseif a:what == 'off'
+    " Turn off numbers
+    setlocal nonumber
+    setlocal norelativenumber
+
+  elseif a:what == 'norel'
+    " Turn on normal numbers
+    setlocal number
+    setlocal norelativenumber
+  endif
+endfunction
+
+" }}}
+
+" }}}
 " Autocommands {{{
 
+" Relative numbers {{{
+
+augroup relnum
+  au!
+  au BufEnter    * call NumberToggle('on')
+  au BufLeave    * call NumberToggle('off')
+
+  au InsertEnter * call NumberToggle('norel')
+  au InsertLeave * call NumberToggle('on')
+
+  au FocusLost   * call NumberToggle('norel')
+  au FocusGained * call NumberToggle('on')
+augroup END
+
+" }}}
 " Other {{{
 
 augroup other
@@ -404,7 +442,7 @@ augroup other
   autocmd BufReadPost * call <SID>SetCursorPosition()
 augroup END
 
-"}}}
+" }}}
 " Temporary {{{
 
 augroup temp
@@ -412,9 +450,9 @@ augroup temp
   autocmd BufWritePost customized.vim colorscheme customized
 augroup END
 
-"}}}
+" }}}
 
-"}}}
+" }}}
 
 " End {{{
 " vim: foldmethod=marker: foldlevel=0:
