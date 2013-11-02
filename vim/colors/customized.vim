@@ -25,14 +25,30 @@ endif
 
 let s:C = {}
 
-" Basic text colors
-let s:C.fg            = "#829496"
-let s:C.fgDark        = "#5E6C70"
-let s:C.fgVeryDark    = "#425054"
+" Background
+let s:C.bgN  = "#282828"       " Basic background
+let s:C.bgL  = "#303030"       " Light background tone
 
-" Background colors
-let s:C.bg            = "#202020"
-let s:C.bgLight       = "#2D2D2D"
+if &background == "light"
+  let s:C.bgN  = "#eee8d5"       " Basic background
+  let s:C.bgL  = "#fdf6e3"       " Light background tone
+endif
+
+" Foreground
+let s:C.fgN  = "#829496"       " Basic foreground
+let s:C.fgD  = "#5E6C70"       " Dark foreground tone
+let s:C.fgVD = "#425054"       " Very dark foreground tone
+
+let s:C.Syellow      = "#b58900"
+let s:C.Sorange      = "#cb4b16"
+let s:C.Sred         = "#dc322f"
+let s:C.Smagenta     = "#d33682"
+let s:C.Sviolet      = "#6c71c4"
+let s:C.Sblue        = "#268bd2"
+let s:C.Scyan        = "#2aa198"
+
+let s:green       = "#719e07" "experimental
+let s:C.Green         = "#719e07"
 
 let s:C.blue          = "#0a9dff"
 let s:C.lightGreen    = "#b1d631"
@@ -126,39 +142,39 @@ endfunction
 " Actual colorscheme ----------------------------------------------------------
 " General/UI {{{
 
-call s:HL('Normal'       , 'fg'          , 'bg'            , 'none')
+call s:HL('Normal'       , 'fgN'          , 'bgN'            , 'none')
 
-call s:HL('Folded'       , 'fgVeryDark'  , 'none')
+call s:HL('Folded'       , 'fgVD'  , 'none')
 
-call s:HL('VertSplit'    , 'fgDark'      , 'bgLight'       , 'none')
+call s:HL('VertSplit'    , 'fgD'      , 'bgL'       , 'none')
 
-call s:HL('CursorLine'   , 'bg bgLight')
-call s:HL('CursorColumn' , 'bg bgLight')
-call s:HL('ColorColumn'  , 'bg bgLight')
+call s:HL('CursorLine'   , 'bg bgL')
+call s:HL('CursorColumn' , 'bg bgL')
+call s:HL('ColorColumn'  , 'bg bgL')
 
-call s:HL('TabLine'      , 'fgDark'      , 'bg'            , 'underline')
-call s:HL('TabLineFill'  , 'fgDark'      , 'bg'            , 'underline')
-call s:HL('TabLineSel'   , 'fg'          , 'st none')
+call s:HL('TabLine'      , 'fgD'      , 'bgN'            , 'underline')
+call s:HL('TabLineFill'  , 'fgD'      , 'bgN'            , 'underline')
+call s:HL('TabLineSel'   , 'fgN'          , 'st none')
 
-call s:HL('MatchParen'   , 'blue'        , 'bgLight'       , 'st bold')
+call s:HL('MatchParen'   , 'blue'        , 'bgL'       , 'st bold')
 
-call s:HL('NonText'      , 'fgVeryDark')
-call s:HL('SpecialKey'   , 'fgVeryDark')
+call s:HL('NonText'      , 'fgVD')
+call s:HL('SpecialKey'   , 'fgVD')
 
-call s:HL('Visual'       , 'fg'          , 'visual')
-call s:HL('VisualNOS'    , 'fg'          , 'visual')
+call s:HL('Visual'       , 'fgN'          , 'visual')
+call s:HL('VisualNOS'    , 'fgN'          , 'visual')
 
 call s:HL('Search'       , 'Yellow'      , 'none'          , 'reverse')
 call s:HL('IncSearch'    , 'Orange')
 
-call s:HL('Underlined'   , 'fg'       , 'st underline')
+call s:HL('StatusLine'   , 'fgVD'  , 'bgN'            , 'reverse')
+call s:HL('StatusLineNC' , 'bgL'     , 'fgN'            , 'reverse')
 
-call s:HL('StatusLine'   , 'fgVeryDark'  , 'bg'            , 'reverse')
-call s:HL('StatusLineNC' , 'bgLight'     , 'fg'            , 'reverse')
-
-call s:HL('WildMenu', '#33ff1c', 'bg', 'underline')
+call s:HL('WildMenu', '#33ff1c', 'bgN', 'underline')
 
 call s:HL('Directory', '#4b6a77')
+call s:HL('Directory', 'Sblue')
+hi! link Directory Identifier
 
 call s:HL('Title', 'lightGreen', 'st none')
 
@@ -174,74 +190,85 @@ call s:HL('Title', 'lightGreen', 'st none')
 "}}}
 " Gutter {{{
 
-call s:HL('LineNr'     , 'fgDark' , 'none')
-call s:HL('SignColumn' , 'fgDark' , 'bgLight')
-call s:HL('FoldColumn' , 'fgDark' , 'bgLight')
+call s:HL('LineNr'     , 'fgD' , 'none')
+call s:HL('SignColumn' , 'fgD' , 'bgL')
+call s:HL('FoldColumn' , 'fgD' , 'bgL')
 
 " }}}
 " Cursor {{{
 
-call s:HL('Cursor', 'fg', 'bg', 'reverse')
+call s:HL('Cursor', 'fgN', 'bgN', 'reverse')
 "call s:hl('vcursor', 'coal', 'tardis', 'bold')
 "call s:HL('iCursor', 'coal', 'tardis', 'none')
 
 " }}}
 " Syntax highlighting {{{
 
-call s:HL('Special', 'fg')
+call s:HL('Comment',      'fgD' , 'st italic')
+"       *Comment          any comment
 
-call s:HL('Comment'        , 'fgDark' , 'st italic')
-call s:HL('Todo'           , 'lightGreen'  , 'none'       , 'st bold')
-call s:HL('SpecialComment' , 'fgDark' , 'st italic')
+call s:HL('Constant',     'Green')
+"       *Constant         any constant
+"        String           a string constant "this is a string"
+"        Character        a character constant: 'c', '\n'
+"        Number           a number constant: 234, 0xff
+"        Boolean          a boolean constant: TRUE, false
+"        Float            a floating point constant: 2.3e10
 
-call s:HL('String', 'LightBlue')
-call s:HL('String', '#95e454')
-call s:HL('String', '#689f3a')
+call s:HL('Identifier',   'Sblue')
+"       *Identifier       any variable name
+"        Function         function name (also: methods for classes)
 
-call s:HL('Statement', '#FABC57', 'st none')
-" call s:HL('Statement', '#8ac6f2', 'st none')
-"call s:HL('Keyword')
-"call s:HL('Conditional')
-"call s:HL('Operator')
-"call s:HL('Label')
-"call s:HL('Repeat')
+call s:HL('Statement',    'Syellow', 'st none')
+"       *Statement        any statement
+"        Conditional      if, then, else, endif, switch, etc.
+"        Repeat           for, do, while, etc.
+"        Label            case, default, etc.
+"        Operator         "sizeof", "+", "*", etc.
+"        Keyword          any other keyword
+"        Exception        try, catch, throw
 
-call s:HL('Identifier', '#4b6a77')
-"call s:HL('Function')
+call s:HL('PreProc',      'Sorange')
+"       *PreProc          generic Preprocessor
+"        Include          preprocessor #include
+"        Define           preprocessor #define
+"        Macro            same as Define
+"        PreCondit        preprocessor #if, #else, #endif, etc.
 
-call s:HL('PreProc', '#506D54')
-"call s:HL('Macro')
-"call s:HL('Define')
-"call s:HL('PreCondit')
+call s:HL('Type',         'Syellow', 'st none')
+"        StorageClass     static, register, volatile, etc.
+"        Structure        struct, union, enum, etc.
+"        Typedef          A typedef
 
-call s:HL('Constant', 'lightGreen')
-"call s:HL('Character')
-" call s:HL('Boolean', 'lightGreen')
+call s:HL('Special',      'Sred')
+"       *Special          any special symbol
+"        SpecialChar      special character in a constant
+"        Tag              you can use CTRL-] on this
+"        Delimiter        character that needs attention
+"        SpecialComment   special things inside a comment
+"        Debug            debugging statements
 
-call s:HL('Number', '#ff9800')
-"call s:HL('Float')
+call s:HL('Underlined',   'Sviolet'       , 'st underline')
+"       *Underlined       text that stands out, HTML links
 
-"call s:HL('SpecialChar')
+call s:HL('Ignore',       'none', 'none', 'none')
+"       *Ignore           left blank, hidden  |hl-Ignore|
 
-call s:HL('Type', '#297980', 'st none')
-call s:HL('Type', '#cdd129', 'st none')
-"call s:HL('StorageClass')
-"call s:HL('Structure')
-"call s:HL('Typedef')
+call s:HL('Error',        'Red', 'none')
+"       *Error            any erroneous construct
 
-"call s:HL('Exception')
-
-call s:HL('Error', 'Red', 'none')
-"call s:HL('Debug')
-"call s:HL('Ignore')
+call s:HL('Todo',         'Green'  , 'none'       , 'st bold')
+"       *Todo             anything that needs extra attention; mostly the
+"                         keywords TODO FIXME and XXX
 
 " }}}
 " Completion Menu {{{
 
-call s:HL('Pmenu', 'fg', 'bgLight', 'none')
-call s:HL('PmenuSel', 'bg', '#b1d631', 'bold')
-call s:HL('PmenuSbar', 'bg bg')
-call s:HL('PmenuThumb', 'bg bgLight')
+call s:HL('Pmenu', 'fgN', 'bgL', 'none')
+call s:HL('PmenuSel', 'bgN', '#b1d631', 'bold')
+call s:HL('PmenuSel', 'bgN', 'Green', 'bold')
+call s:HL('PmenuSbar', 'bg bgN')
+call s:HL('PmenuThumb', 'bg bgL')
 " }}}
 " Diffs {{{
 
