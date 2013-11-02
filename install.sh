@@ -83,16 +83,16 @@ UpdateRepo() {
 #
 # Arguments:
 # $1 - "Name of repository"
-# $2 - "Target directory of repository"
-# $3 - "Git uri of repository"
+# $2 - "Git_user/repository"
+# $3 - "Target directory of repository"
 
 CloneRepo() {
-  if [ ! -e "$2/.git" ]; then
-    title "Clonning $1..."
-    git clone "$3" "$2"
+  if [ ! -e "$3/.git" ]; then
+    title "Clonning ${1}..."
+    git clone "http://github.com/${2}.git" "$3"
     result "$?" "Successfully cloned $1" "Failed to clone $1"
   else
-    UpdateRepo "$1" "$2"
+    UpdateRepo "$1" "$3"
   fi
 }
 
@@ -147,14 +147,14 @@ ProgramExists "vim"
 ProgramExists "git"
 
 # Clone/update dotfiles repository
-CloneRepo "$repoName" "$repoDir" 'http://github.com/Tunous/dotfiles.git'
+CloneRepo "$repoName" 'Tunous/dotfiles' "$repoDir"
 
 # Create symlinks
 CreateSymlinks "vim"
 CreateSymlinks "vimperator"
 
 # Clone/update vundle
-CloneRepo "vundle" "$repoDir/vim/bundle/vundle" 'http://github.com/gmarik/vundle.git'
+CloneRepo "vundle" 'gmarik/vundle' "$repoDir/vim/bundle/vundle"
 
 # Install and update vim plugins
 SetupPlugins
