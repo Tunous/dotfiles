@@ -114,10 +114,10 @@ CreateSymlinks() {
   ret='0'
 
   if [ "$1" = "vim" ]; then
-    lnif "$repoDir/vim" "$HOME/vimfiles"
+    lnif "$repoDir/vim" "$HOME/.vim"
   elif [ "$1" = "vimperator" ]; then
     lnif "$repoDir/vimperator" "$HOME/vimperator"
-    lnif "$repoDir/vimperator/vimperatorrc" "$HOME/_vimperatorrc"
+    lnif "$repoDir/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
   fi
 
   result "$ret" "Successfully symlinked $1 files" "Failed to symlink $1 files"
