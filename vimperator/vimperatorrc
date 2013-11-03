@@ -7,7 +7,7 @@
 "      \\   /    /\  |\ |.  \    /:  | /|__/ \    (:      "||:  __   \  /   /  \\  \\:  |  \        /  |:  __   \ |:  __   \ (:   _) \
 "       \__/    (__\_|_)|___|\__/|___|(_______)    \_______)|__|  \___)(___/    \___)\__|   \"_____/   |__|  \___)|__|  \___) \_______)
 "
-"}}}
+" }}}
 
 colorscheme custom
 
@@ -19,18 +19,18 @@ colorscheme custom
 set nextpattern=\\bnastępn,\\bdalej,\\bnext,^>$,^(>>|»)$,^(>|»),(>|»)$,\\bmore\\b
 set previouspattern=\\bpoprzedni,\\bwstecz,\\bprev|previous\\b,^<$,^(<<|«)$,^(<|«),(<|«)$
 
-"}}}
+" }}}
 " Gui elements {{{3
 
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 set status=input,location,history,bookmark
 
-"}}}
+" }}}
 " Hintchars {{{3
 
 set hintchars=HJKLASDFGYUIOPQWERTNMZXCVB
 
-"}}}
+" }}}
 " Other {{{3
 
 " Try to always stay in normal mode
@@ -48,41 +48,41 @@ set animations
 " Visual bell instead of system beep
 set visualbell
 
-"}}}
+" }}}
 
-"}}}
+" }}}
 " Key mappings {{{2
 
 " Leader {{{3
 
 let mapleader = ','
 
-"}}}
+" }}}
 
 " Bookmarks {{{3
 
 noremap B :bmarks<CR>
 
-"}}}
+" }}}
 " Faster scrolling {{{3
 
 noremap j <Down>
 noremap k <Up>
 
-"}}}
+" }}}
 " Sourcing {{{3
 
 noremap <silent> <Leader>v :source ~/_vimperatorrc<CR>
 
-"}}}
+" }}}
 " Tabs navigation {{{3
 
 noremap J gt
 noremap K gT
 
-"}}}
+" }}}
 
-"}}}
+" }}}
 " Abbreviations {{{2
 
 " Panorama
@@ -90,14 +90,14 @@ cabbrev ps panorama switch
 cabbrev pu panorama push
 cabbrev pl panorama pull
 
-"}}}
+" }}}
 " Quickmarks {{{2
 
 silent qmark t http://translate.google.com/?hl=pl&sl=en&tl=pl
 silent qmark T http://translate.google.com/?hl=pl&sl=pl&tl=en
 silent qmark c http://www.color-hex.com/color-palette/847
 
-"}}}
+" }}}
 
 " Functions --------------------------------------------------------------
 " Toggle css elements {{{2
@@ -112,16 +112,15 @@ toggleElement = function (name) {
 
 EOF
 
-"}}}
+" }}}
 " Mappings {{{3
 
 " Toggle navigation bar
 map <F9> :js toggleElement('nav-bar')<CR>
 
-"}}}
+" }}}
 
-"}}}
+" }}}
 
 " End {{{2
-
-" vim: ts=2 sw=2 sts=2 foldmethod=marker foldlevel=1 ft=vimperator
+" vim:ts=2:sw=2:sts=2:fdm=marker:fdl=1:ft=vimperator
