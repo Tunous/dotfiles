@@ -171,8 +171,12 @@ set smartcase                     " unless I use uppercase characters
 " }}}
 " Size {{{
 
-set lines=50
-set columns=175
+if !exists("s:fullscreen")
+  let s:fullscreen = 0
+
+  set lines=50
+  set columns=175
+endif
 
 " }}}
 " Smart scrolling {{{
@@ -362,8 +366,6 @@ endfunction
 
 " }}}
 " Toggle fullscreen {{{
-
-let s:fullscreen = 0
 
 function! ToggleFullScreen()
   if s:fullscreen == 1
