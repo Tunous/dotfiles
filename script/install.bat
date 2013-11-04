@@ -3,9 +3,7 @@ title Dotfiles installation script
 
 rem Check admin {{{
   net session >nul 2>&1
-  if %errorlevel% == 0 (
-    goto continue
-  ) else (
+  if not %errorlevel% == 0 (
     echo Set UAC = CreateObject^("Shell.Application"^) > "%temp%\getadmin.vbs"
     set params=%~1
     echo UAC.ShellExecute "%~s0", "%params%", "", "runas", 1 >> "%temp%\getadmin.vbs"
@@ -15,7 +13,6 @@ rem Check admin {{{
     exit /B
   )
 
-:continue
 rem Set variables
   set home=%userprofile%
   set dotfiles=%home%\dotfiles
