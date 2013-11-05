@@ -35,7 +35,7 @@ rem Clone vundle repository
     mkdir "%dotfiles%\vim\bundle"
   )
   if not exist "%dotfiles%\vim\bundle\vundle" (
-    git clone http://github.com/gmarik/vundle.git "%dotfiles%\bundle\vundle"
+    git clone http://github.com/gmarik/vundle.git "%dotfiles%\vim\bundle\vundle"
   )
 
 rem Update vim bundles
