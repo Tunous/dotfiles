@@ -23,7 +23,7 @@ syntax on
 set guifont=Meslo_LG_S_for_Powerline:h8:cANSI             " Meslo font
 
 if has("gui_running")
-  colorscheme customized                                    " Use my own theme
+  colorscheme customized                                  " Use my own theme
 endif
 set background=dark                                       " Set dark background
 
