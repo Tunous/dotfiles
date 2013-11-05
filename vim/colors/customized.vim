@@ -284,10 +284,10 @@ call s:HL('PmenuThumb', 'bg bgH')
 " }}}
 " Diffs {{{
 
-call s:HL('DiffDelete', '#dc322f', 'none', 'none')
-call s:HL('DiffAdd', '#719e07', 'none', 'none')
-call s:HL('DiffChange', '#b58900', 'none', 'none')
-call s:HL('DiffText', '#268bd2', 'none', 'none')
+call s:HL('DiffDelete', 'Red', '#420f0e', 'none')
+call s:HL('DiffAdd', 'Green', '#212f02', 'none')
+call s:HL('DiffChange', 'Yellow', '#362900', 'none')
+call s:HL('DiffText', 'Blue', '#0b293f', 'none')
 
 " }}}
 " Spelling {{{
