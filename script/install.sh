@@ -116,7 +116,7 @@ Symlink() {
   if [ "$1" = "vim" ]; then
     lnif "$repoDir/vim" "$HOME/.vim"
   elif [ "$1" = "vimperator" ]; then
-    lnif "$repoDir/vimperator" "$HOME/vimperator"
+    lnif "$repoDir/vimperator" "$HOME/.vimperator"
     lnif "$repoDir/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
   fi
 
@@ -130,7 +130,7 @@ Symlink() {
 
 SetupPlugins() {
   title "Updating plugins for vim..."
-  vim -u "$HOME/vimfiles/vimrc" +BundleInstall! +BundleClean +qall
+  vim -u "$HOME/dotfiles/vim/vimrc" +BundleInstall! +BundleClean +qall
 
   result "0" "Plugins updated"
 }
@@ -158,6 +158,8 @@ CloneRepo "vundle" 'gmarik/vundle' "$repoDir/vim/bundle/vundle"
 
 # Install and update vim plugins
 SetupPlugins
+
+cd ~/dotfiles
 
 # Print end message
 title "Done. Thanks for installing $repoName"
