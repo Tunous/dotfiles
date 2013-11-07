@@ -40,7 +40,7 @@ set focuscontent
 set complete=Ssl
 
 " Suggestion engine when using :[tab]open
-set suggestengines=g
+set suggestengines=google
 
 " Turn on animations
 set animations
