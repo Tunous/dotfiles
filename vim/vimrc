@@ -200,7 +200,7 @@ set copyindent                    " Copy the previous indentation on autoindenti
 let s:undofilesDir = $VIM . '/undofiles'
 
 if !isdirectory(s:undofilesDir)
-  silent execute '!mkdir "' . s:undofilesDir . '" >/dev/nul 2>&1'
+  silent execute '!mkdir "' . s:undofilesDir . '" >/dev/null 2>&1'
 endif
 
 execute 'set undodir=' . s:undofilesDir
