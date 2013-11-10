@@ -20,10 +20,11 @@ syntax on
 " }}}
 " Theme settings {{{
 
-" set guifont=Meslo_LG_S_for_Powerline:h8:cANSI             " Meslo font
-
-if has("gui_running")
-  colorscheme customized                                  " Use my own theme
+" Font
+if has('win32') || has('win64')
+  set guifont=Meslo_LG_S_for_Powerline:h8:cANSI
+elseif has('unix')
+  set guifont=Ubuntu\ Mono\ for\ Powerline\ 11
 endif
 set background=dark                                       " Set dark background
 
