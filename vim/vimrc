@@ -26,7 +26,12 @@ if has('win32') || has('win64')
 elseif has('unix')
   set guifont=Ubuntu\ Mono\ for\ Powerline\ 11
 endif
-set background=dark                                       " Set dark background
+
+" Use 256 colors
+set t_Co=256
+
+set background=dark                                     " Set dark background
+colorscheme customized                                  " Use my own theme
 
 " }}}
 " Leader {{{
