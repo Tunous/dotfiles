@@ -83,15 +83,7 @@ noremap K gT
 " }}}
 
 " }}}
-" Abbreviations {{{2
-
-" Panorama
-cabbrev ps panorama switch
-cabbrev pu panorama push
-cabbrev pl panorama pull
-
-" }}}
-" Quickmarks {{{2
+" Quickmarks {{{
 
 silent qmark t http://translate.google.com/?hl=pl&sl=en&tl=pl
 silent qmark T http://translate.google.com/?hl=pl&sl=pl&tl=en
