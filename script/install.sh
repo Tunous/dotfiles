@@ -102,10 +102,12 @@ CloneRepo() {
 # Create symlinks
 
 lnif () {
-  [ -e "$1" ] &&
+  if [ -e "$2" ]; then
+    ret=1
+  else
     ln -s "$1" "$2"
-
-  [ "$?" -eq '0' ] || ret='1'
+    ret="$?"
+  fi
 }
 
 Symlink() {
