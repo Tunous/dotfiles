@@ -1,4 +1,4 @@
-"{{{1
+"{{{
 "   ___      ___  __     ___      ___    _______    _______   _______        __  ___________  ______     _______    _______    ______
 "  |"  \    /"  ||" \   |"  \    /"  |  |   __ "\  /"     "| /"      \      /""\("     _   ")/    " \   /"      \  /"      \  /" _  "\
 "   \   \  //  / ||  |   \   \  //   |  (. |__) :)(: ______)|:        |    /    \)__/  \\__/// ____  \ |:        ||:        |(: ( \___)
@@ -12,26 +12,26 @@
 colorscheme custom
 
 " Vimperatorrc -----------------------------------------------------------
-" Setting options {{{2
+" Setting options {{{
 
-" Change page patterns {{{3
+" Change page patterns {{{
 
 set nextpattern=\\bnastępn,\\bdalej,\\bnext,^>$,^(>>|»)$,^(>|»),(>|»)$,\\bmore\\b
 set previouspattern=\\bpoprzedni,\\bwstecz,\\bprev|previous\\b,^<$,^(<<|«)$,^(<|«),(<|«)$
 
 " }}}
-" Gui elements {{{3
+" Gui elements {{{
 
 set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
 set status=input,location,history,bookmark
 
 " }}}
-" Hintchars {{{3
+" Hintchars {{{
 
 set hintchars=HJKLASDFGYUIOPQWERTNMZXCVB
 
 " }}}
-" Other {{{3
+" Other {{{
 
 " Try to always stay in normal mode
 set focuscontent
@@ -51,31 +51,31 @@ set visualbell
 " }}}
 
 " }}}
-" Key mappings {{{2
+" Key mappings {{{
 
-" Leader {{{3
+" Leader {{{
 
 let mapleader = ','
 
 " }}}
 
-" Bookmarks {{{3
+" Bookmarks {{{
 
 noremap B :bmarks<CR>
 
 " }}}
-" Faster scrolling {{{3
+" Faster scrolling {{{
 
 noremap j <Down>
 noremap k <Up>
 
 " }}}
-" Sourcing {{{3
+" Sourcing {{{
 
-noremap <silent> <Leader>v :source ~/_vimperatorrc<CR>
+noremap <silent> <Leader>v :source ~/.vimperatorrc<CR>
 
 " }}}
-" Tabs navigation {{{3
+" Tabs navigation {{{
 
 noremap J gt
 noremap K gT
@@ -92,9 +92,9 @@ silent qmark c http://www.color-hex.com/color-palette/847
 " }}}
 
 " Functions --------------------------------------------------------------
-" Toggle css elements {{{2
+" Toggle css elements {{{
 
-" Code {{{3
+" Code {{{
 
 javascript <<EOF
 
@@ -105,14 +105,14 @@ toggleElement = function (name) {
 EOF
 
 " }}}
-" Mappings {{{3
+" Mappings {{{
 
 " Toggle navigation bar
-map <F9> :js toggleElement('nav-bar')<CR>
+command! toggleNavBar javascript toggleElement('nav-bar')
 
 " }}}
 
 " }}}
 
-" End {{{2
-" vim:ts=2:sw=2:sts=2:fdm=marker:fdl=1:ft=vimperator
+" End {{{
+" vim:ts=2:sw=2:sts=2:fdm=marker:fdl=0:ft=vimperator
