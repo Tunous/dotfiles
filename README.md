@@ -12,7 +12,7 @@ cd ~/dotfiles
 
 ```sh
 # 2. Run automated script
-sh ./script/install.sh
+./script/install.sh
 
 # Windows users run this instead:
 script\install.bat
