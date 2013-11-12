@@ -13,7 +13,6 @@
   min-width: 325px !important;
   max-width: 325px !important;
   margin-right: -300px !important;
-  padding-top: 30px !important;
 }
 
 /* Tabs */
@@ -54,13 +53,6 @@
   border-radius: 10px 0 0 10px !important;
 }
 
-/* Small tweaks */
-.tabbrowser-tab .tab-icon-image { margin: 0 0 4px 0; }
-.tabbrowser-tab:not([pinned]) .tab-icon-image:not([src]) { visibility: visible !important; }
-.tabbrowser-tab:first-child { margin-top: 5px !important; }
-.tabbrowser-tab[busy]:hover:not([selected]) .tab-text { margin-left: 0px !important; }
-.tabbrowser-tab[titlechanged]:not([selected]) { background: rgb(240,200,100) !important; }
-
 /* Popup text */
 .tabbrowser-tab:not(:hover) .tab-text {
   visibility: collapse !important;
@@ -82,7 +74,7 @@
   border-radius: 0 4px 4px 0 !important;
 
   padding: 0 5px 0 5px !important;
-  margin: 0 0 4px 5px !important;
+  margin: -7px 0 0 5px !important;
 
   display: table-cell !important;
   opacity: .8 !important;
@@ -110,7 +102,7 @@
 /* Show close button on hover */
 .tabbrowser-tab[selected]:not([pinned]):hover .tab-close-button {
   visibility: visible !important;
-  margin: 0 -2px 3px 0 !important;
+  margin: 0 0px 6px 2px !important;
 }
 
 /* Hide favicon and throbber on hover */
@@ -124,7 +116,13 @@
 /* Reomver splitter and theme stuff */
 .tab-content { border: none !important; }
 #verticaltabs-splitter { display: none !important; }
-.tabbrowser-tab .tab-icon-image { margin: 3px 0 8px 0px !important; }
+.tabbrowser-tab .tab-icon-image { margin: 3px 0 7px 4px !important; }
+.tabbrowser-tab .tab-throbber { margin-left: 5px !important; }
+.tabbrowser-tab:not([pinned]) .tab-icon-image:not([src]) { visibility: visible !important; }
+.tabbrowser-tab:first-child { margin-top: 5px !important; }
+.tabbrowser-tab[busy]:hover:not([selected]) .tab-text { margin-left: 0px !important; }
+.tabbrowser-tab[titlechanged]:not([selected]) { background: rgb(240,200,100) !important; }
+
 
 /* Fix padding caused by tab arrows */
 .tabbrowser-arrowscrollbox > .arrowscrollbox-scrollbox {
@@ -132,44 +130,13 @@
   -moz-padding-end: 0 !important;
 }
 
-/* Tabs toolbar as window dragging place */
-#TabsToolbar {
-  position: fixed !important;
-  top: 2px;
-  left: 2px;
-
-  min-height: 25px !important;
-  max-height: none !important;
-  height: 98% !important;
-
-  min-width: 25px !important;
-  max-width: 25px !important;
-
-  padding: 12px 0 0 2px !important;
-
-  border: none !important;
-  background: transparent !important;
-}
-
-/* Dark theme
-
-/* Currently disabled *//*
-
-#tabbrowser-tabs {
-background-color: rgb(45,45,45) !important;
-}
-.tabbrowser-tab[pinned] {
-background-color: rgb(30,65,105) !important;
-}
-.tabbrowser-tab[selected] {
-background-color: rgb(75,75,75) !important;
-}*/
-
 
 
 /* ::: Toolbar ::: */
 
 
+
+#TabsToolbar { margin: 0 0 0 -10px !important; }
 
 /* Main window shadow */
 #main-window browser {
