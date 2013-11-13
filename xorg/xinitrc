@@ -1,0 +1,11 @@
+# Load resources
+xrdb -merge ~/.Xresources
+
+# Add terminus font
+# xset +fp /usr/local/share/fonts/terminus
+xset +fp ~/.fonts/terminus
+xset fp rehash
+
+# Run bspwm
+sxhkd &
+exec bspwm

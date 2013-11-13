@@ -120,6 +120,9 @@ Symlink() {
   elif [ "$1" = "vimperator" ]; then
     lnif "$repoDir/vimperator" "$HOME/.vimperator"
     lnif "$repoDir/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
+  elif [ "$1" = "xorg" ]; then
+    lnif "$repoDir/xorg/xinitrc" "$HOME/.xinitrc"
+    lnif "$repoDir/xorg/Xresources" "$HOME/.Xresources"
   fi
 
   result "$ret" "Successfully symlinked $1 files" "Failed to symlink $1 files"
@@ -154,6 +157,7 @@ CloneRepo "$repoName" 'Tunous/dotfiles' "$repoDir"
 # Create symlinks
 Symlink "vim"
 Symlink "vimperator"
+Symlink "xorg"
 
 # Clone/update vundle
 CloneRepo "vundle" 'gmarik/vundle' "$repoDir/vim/bundle/vundle"
