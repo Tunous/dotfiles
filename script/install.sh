@@ -120,6 +120,9 @@ Symlink() {
   elif [ "$1" = "vimperator" ]; then
     lnif "$repoDir/vimperator" "$HOME/.vimperator"
     lnif "$repoDir/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
+  elif [ "$1" = "bspwm" ]; then
+    lnif "$repoDir/bspwm/bspwmrc" "$HOME/.config/bspwm/bspwmrc"
+    lnif "$repoDir/bspwm/sxhkdrc" "$HOME/.config/sxhkd/sxhkdrc"
   elif [ "$1" = "xorg" ]; then
     lnif "$repoDir/xorg/xinitrc" "$HOME/.xinitrc"
     lnif "$repoDir/xorg/Xresources" "$HOME/.Xresources"
@@ -157,6 +160,7 @@ ProgramExists "git"
 CloneRepo "$repoName" 'Tunous/dotfiles' "$repoDir"
 
 # Create symlinks
+Symlink "bspwm"
 Symlink "profile"
 Symlink "vim"
 Symlink "vimperator"

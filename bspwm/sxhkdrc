@@ -1,0 +1,136 @@
+# ::: BSPWM hotkeys ::: #
+
+# Close bspwm
+super + alt + Escape
+    bspc quit && pkill panel
+
+# Close window
+super + w
+    bspc window -c
+
+# Chanege layout of desktop
+super + t
+    bspc desktop -l next
+
+# Balance windows size
+super + b
+    bspc desktop -B
+
+# Toggle state of window
+super + {s,f}
+    bspc window -t {floating,fullscreen}
+
+# Focus last window, desktop
+super + {grave,Tab}
+    bspc {window,desktop} -f last
+
+# Swap with last window
+super + apostrophe
+    bspc window -s last
+
+# Switch windows basing on history of selection
+super + {o,i}
+    bspc control --record-history off; \
+    bspc window {older,newer} -f; \
+    bspc control --record-history on
+
+# Move window to preselection
+super + y
+    bspc window -w last.manual
+
+# Swap with biggest window
+super + m
+    bspc window -s biggest
+
+# Focus, swap window in direction
+super + {_,shift + }{h,j,k,l}
+    bspc window -{f,s} {left,down,up,right}
+
+# Go to next, previous window
+super + {_,shift + }c
+    bspc window -f {next,prev}
+
+# Swap all windows
+super + {comma,period}
+    bspc desktop -C {backward,forward}
+
+# Change desktop
+super + bracket{left,right}
+    bspc desktop -f {prev,next}
+
+# Preselect splitting area
+super + ctrl + {h,j,k,l}
+    bspc window -p {left,down,up,right}
+
+# Cancel preselection
+super + ctrl + {_,shift + }space
+    bspc {window -p cancel,desktop -c}
+
+# Push size of window
+super + alt + {h,j,k,l}
+    bspc window -e {left,down,up,right} push
+
+# Pull size of window
+super + alt + shift + {h,j,k,l}
+    bspc window -e {right,up,down,left} pull
+
+# Change window ratio (preselection size)
+super + ctrl + {1-9}
+    bspc window -r 0.{1-9}
+
+# Select desktop, move window to desktop
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,window -d} ^{1-9,10}
+
+# Resize gaps
+alt + minus
+    bspc config -d focused window_gap $((`bspc config -d focused window_gap` + 5 ))
+
+alt + equal
+    bspc config -d focused window_gap $((`bspc config -d focused window_gap` - 5 ))
+
+
+# ::: Mouse settings ::: #
+
+
+# Select window
+~button1
+    bspc pointer -g focus
+
+# Move, resize window
+super + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
+
+super + !button{1-3}
+    bspc pointer -t %i %i
+
+super + @button{1-3}
+    bspc pointer -u
+
+
+# ::: WM independent hotkeys ::: #
+
+
+# Start urxvt
+super + Return
+    urxvt
+
+# Start firefox
+alt + f
+    firefox
+
+# Start ranger
+alt + r
+    urxvt -e ranger
+
+# Restart panel
+alt + z
+    pkill panel; panel
+
+# Start dmenu
+super + space
+    dmenu_run -nb "#262626" -nf "#9e9e9e" -sb "#262626" -sf "#87af00"
+
+# Reload sxhkd config
+super + Escape
+    pkill -USR1 -x sxhkd
