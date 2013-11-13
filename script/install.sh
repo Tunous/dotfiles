@@ -123,6 +123,8 @@ Symlink() {
   elif [ "$1" = "xorg" ]; then
     lnif "$repoDir/xorg/xinitrc" "$HOME/.xinitrc"
     lnif "$repoDir/xorg/Xresources" "$HOME/.Xresources"
+  elif [ "$1" = "profile" ]; then
+    lnif "$repoDir/profile" "$HOME/.profile"
   fi
 
   result "$ret" "Successfully symlinked $1 files" "Failed to symlink $1 files"
@@ -155,6 +157,7 @@ ProgramExists "git"
 CloneRepo "$repoName" 'Tunous/dotfiles' "$repoDir"
 
 # Create symlinks
+Symlink "profile"
 Symlink "vim"
 Symlink "vimperator"
 Symlink "xorg"
