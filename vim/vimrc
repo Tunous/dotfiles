@@ -242,7 +242,7 @@ set listchars=tab:▸\ ,trail:·
 
 set foldmethod=marker             " Use marker foldmethod
 
-set synmaxcol=120                 " Limit syntax highlight of long lines
+set synmaxcol=300                 " Limit syntax highlight of long lines
 
 " }}}
 
@@ -301,8 +301,8 @@ inoremap <Leader>; <C-o>A;
 " }}}
 " Other {{{
 
-" Change capitalization of word next to cursor
-inoremap <C-u> <Esc>:call Preserve("normal g~iw")<CR>a
+" Capitalize word next to cursor
+inoremap <C-u> <Esc>:call Preserve("normal gUiw")<CR>a
 
 " Indend whole file and remove trailing whitespaces
 nnoremap <F2> :call Preserve("normal gg=G")<CR> :call Preserve("%s/\\s\\+$//e")<CR>
