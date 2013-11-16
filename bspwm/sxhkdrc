@@ -34,13 +34,18 @@ super + {o,i}
     bspc window {older,newer} -f; \
     bspc control --record-history on
 
-# Move window to preselection
-super + y
-    bspc window -w last.manual
-
 # Swap with biggest window
 super + m
     bspc window -s biggest
+
+# Select window
+super + {h,j,k,l}
+    bspc window -f {left,down,up,right}
+
+# Move window
+super + shift + {h,j,k,l}
+    d={left,down,up,right}; \
+    bspc window $d -w focused.manual || bspc window -w $d.manual || bspc window -s $d || bspc window -m $d -f
 
 # Focus, swap window in direction
 super + {_,shift + }{h,j,k,l}
