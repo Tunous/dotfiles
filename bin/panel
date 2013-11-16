@@ -18,8 +18,6 @@ flavor=${1:-dzen2}
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
 
-xtitle -s > "$PANEL_FIFO" &
-clock -si1 > "$PANEL_FIFO" &
 bspc control --subscribe > "$PANEL_FIFO" &
 
 # }}}

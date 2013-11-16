@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # Variables {{{
 
@@ -92,7 +92,8 @@ Print() { #{{{
 
 # }}}
 
-while read -r line ; do
+while :; do
+  read -r -t 1 line
   Desks $line
   echo "$(Print)"
 done
