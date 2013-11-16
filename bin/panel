@@ -1,34 +1,42 @@
 #! /bin/sh
 
+# Init {{{
+
 if [ $(pgrep -cx panel) -gt 1 ] ; then
-    printf "%s\n" "The panel is already running." >&2
-    exit 1
+  printf "%s\n" "The panel is already running." >&2
+  exit 1
 fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-flavor=${1:-bar}
+flavor=${1:-dzen2}
+
+
+# }}}
+# Fifo {{{
 
 [ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
 mkfifo "$PANEL_FIFO"
 
+xtitle -s > "$PANEL_FIFO" &
+clock -si1 > "$PANEL_FIFO" &
+bspc control --subscribe > "$PANEL_FIFO" &
+
+# }}}
+# Variables {{{
+
 PANEL_HEIGHT=18
+FONT_FAMILY='-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-1'
+DZEN="dzen2 -h $PANEL_HEIGHT -dock -ta l -title-name panel -fn $FONT_FAMILY -e 'button3=;'"
+
+# }}}
+
 bspc config top_padding $PANEL_HEIGHT
 
-bspc control --subscribe > "$PANEL_FIFO" &
-xtitle -sf 'T%s' > "$PANEL_FIFO" &
-clock -si1 -f 'S%H:%M:%S' > "$PANEL_FIFO" &
-
+# Run selected panel
 case "$flavor" in
-    bar)
-        cat "$PANEL_FIFO" | panel_bar | bar &
-        ;;
-    dzen2)
-        . panel_colors
-        FONT_FAMILY='DejaVu Sans'
-        FONT_SIZE=11
-        cat "$PANEL_FIFO" | panel_dzen2 -f "$FONT_FAMILY" -s "$FONT_SIZE" | dzen2 -h $PANEL_HEIGHT -dock -ta l -title-name panel -fn "${FONT_FAMILY}:pixelsize=${FONT_SIZE}" -fg "$COLOR_FOREGROUND" -bg "$COLOR_BACKGROUND" &
-        ;;
+  bar) cat "$PANEL_FIFO" | panel_bar | bar & ;;
+  dzen2) cat "$PANEL_FIFO" | panel_dzen2 | $DZEN & ;;
 esac
 
 wait

@@ -1,0 +1,98 @@
+#! /bin/sh
+
+# Variables {{{
+
+NORMIFS=$IFS
+FIELDIFS=':'
+PADDING='  '
+
+# }}}
+# Functions {{{
+
+Time() { #{{{
+  printf "^p(_RIGHT)^p(-72)%s^p(_CENTER)" "$(date +%H:%M:%S)"
+} #}}}
+
+Title() { #{{{
+  printf "$(xtitle)"
+} #}}}
+
+Separator() { #{{{
+  printf " ^fg(#262626)^bg(#262626)^r(150x2)^fg()^bg() "
+} #}}}
+
+Desks() { #{{{
+  case "$1" in
+    W*)
+      # bspwm internal state
+      DESK="$PADDING"
+      IFS=$FIELDIFS
+      set -- ${1#?}
+      while [ $# -gt 0 ] ; do
+        item=$1
+        name=${item#?}
+        case $item in
+          [OoFfUu]*)
+            case $item in
+              O*)
+                # focused occupied desktop
+                FG='#F6F9FF'
+                BG='#5C5955'
+                ;;
+              F*)
+                # focused free desktop
+                FG='#F6F9FF'
+                BG='#6D561C'
+                ;;
+              U*)
+                # focused urgent desktop
+                FG='#34322E'
+                BG='#F9A299'
+                ;;
+              o*)
+                # occupied desktop
+                FG='#A3A6AB'
+                BG='#34322E'
+                ;;
+              f*)
+                # free desktop
+                FG='#6F7277'
+                BG='#34322E'
+                ;;
+              u*)
+                # urgent desktop
+                FG='#F9A299'
+                BG='#34322E'
+                ;;
+            esac
+            DESK="${DESK}^fg($FG)^bg($BG)^ca(1, bspc desktop -f ${name})^ca(2, bspc window -d ${name}) ${name} ^ca()^ca()^fg()^bg()"
+            ;;
+          L*)
+            # layout
+            layout=$(printf "${name}" | sed 's/\(.\).*/\U\1/')
+            DESK="$DESK^ca(1, bspc desktop -l next) $layout ^ca()"
+            ;;
+          *)
+            # Other stuff
+            ;;
+        esac
+        shift
+      done
+      IFS=$NORMIFS
+      ;;
+  esac
+  printf "$DESK"
+} #}}}
+
+Print() { #{{{
+  Separator
+  Title
+  Time
+} #}}}
+
+# }}}
+
+while read -r line ; do
+  Desks $line
+  echo "$(Print)"
+done
