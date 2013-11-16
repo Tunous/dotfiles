@@ -76,7 +76,7 @@ let s:C.DarkBlue    = ['#0b293f', '0']
 
 function! s:HL(group, ...)
   " Arguments: group, guifg, guibg, gui, guisp
-  let histring = 'hi ' . a:group . ' '
+  let histring = 'hi! ' . a:group . ' '
 
   if a:0 >=1 && strlen(a:1)
     let color = get(s:C, a:1)
@@ -178,7 +178,7 @@ call s:HL('Constant',     'Green')
 "        Boolean          a boolean constant: TRUE, false
 "        Float            a floating point constant: 2.3e10
 
-call s:HL('Identifier',   'Blue')
+call s:HL('Identifier',   'Blue', 'none', 'none')
 "       *Identifier       any variable name
 "        Function         function name (also: methods for classes)
 
