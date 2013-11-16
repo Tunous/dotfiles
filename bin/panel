@@ -25,7 +25,7 @@ bspc control --subscribe > "$PANEL_FIFO" &
 # }}}
 # Variables {{{
 
-PANEL_HEIGHT=18
+PANEL_HEIGHT=15
 FONT_FAMILY='-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-1'
 DZEN="dzen2 -h $PANEL_HEIGHT -dock -ta l -title-name panel -fn $FONT_FAMILY -e 'button3=;'"
 
