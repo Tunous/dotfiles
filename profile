@@ -6,8 +6,11 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 # Add bin and dotfiles/bin in to path
-if [ -d "$HOME/bin" ] ; then
-  PATH="$HOME/bin:$HOME/dotfiles/bin:$PATH"
+if [ -d "$HOME/bin" ]; then
+  PATH="$HOME/bin:$PATH"
+fi
+if [ -d "$HOME/dotfiles/bin" ]; then
+  PATH="$HOME/dotfiles/bin:$PATH"
 fi
 
 # Panel
