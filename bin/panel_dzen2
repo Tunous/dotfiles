@@ -93,7 +93,7 @@ Print() { #{{{
 # }}}
 
 while :; do
-  read -r -t 1 line
+  read -r -t .1 line
   Desks $line
   echo "$(Print)"
 done
