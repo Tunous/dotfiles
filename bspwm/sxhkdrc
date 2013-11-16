@@ -125,7 +125,7 @@ alt + r
 
 # Restart panel
 alt + z
-    pkill panel; panel
+    pkill panel; pkill dzen2; panel
 
 # Start dmenu
 super + space
