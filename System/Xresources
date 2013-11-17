@@ -1,7 +1,7 @@
 ! Disable scrollbar
 URxvt*scrollBar: false
 
-! Hybrid Terminal Colours {{{
+! Colors {{{
 
 ! TODO Not finished
 #define t_background   #262626
