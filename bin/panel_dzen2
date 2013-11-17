@@ -22,12 +22,13 @@ Separator() { #{{{
 } #}}}
 
 Desks() { #{{{
-  case "$1" in
+  read -r -t .1 line
+  case "$line" in
     W*)
       # bspwm internal state
       DESK="$PADDING"
       IFS=$FIELDIFS
-      set -- ${1#?}
+      set -- ${line#?}
       while [ $# -gt 0 ] ; do
         item=$1
         name=${item#?}
@@ -93,7 +94,6 @@ Print() { #{{{
 # }}}
 
 while :; do
-  read -r -t .1 line
-  Desks $line
+  Desks
   echo "$(Print)"
 done
