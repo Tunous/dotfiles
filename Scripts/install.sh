@@ -124,9 +124,10 @@ Symlink() {
     lnif "$repoDir/WM/bspwm/bspwmrc" "$HOME/.config/bspwm/bspwmrc"
     lnif "$repoDir/WM/bspwm/sxhkdrc" "$HOME/.config/sxhkd/sxhkdrc"
   elif [ "$1" = "system" ]; then
+    lnif "$repoDir/System/compton.conf" "$HOME/.config/compton.conf"
+    lnif "$repoDir/System/profile" "$HOME/.profile"
     lnif "$repoDir/System/xinitrc" "$HOME/.xinitrc"
     lnif "$repoDir/System/Xresources" "$HOME/.Xresources"
-    lnif "$repoDir/System/profile" "$HOME/.profile"
   fi
 
   result "$ret" "Successfully symlinked $1 files" "Failed to symlink $1 files"
