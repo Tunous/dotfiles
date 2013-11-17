@@ -23,8 +23,12 @@ bspc control --subscribe > "$PANEL_FIFO" &
 # Variables {{{
 
 PANEL_HEIGHT=15
-FONT_FAMILY='-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-1'
-DZEN="dzen2 -h $PANEL_HEIGHT -dock -ta l -title-name panel -fn $FONT_FAMILY -e 'button3=;'"
+# FONT='-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-1'
+FONT='DejaVu Sans'
+FONT_SIZE=11
+FG='#9e9e9e'
+BG='#262626'
+EVENTS='"button3=;"'
 
 # }}}
 
@@ -33,7 +37,7 @@ bspc config top_padding $PANEL_HEIGHT
 # Run selected panel
 case "$flavor" in
   bar) cat "$PANEL_FIFO" | panel_bar | bar & ;;
-  dzen2) cat "$PANEL_FIFO" | panel_dzen2 | $DZEN & ;;
+  dzen2) cat "$PANEL_FIFO" | panel_dzen2 | dzen2 -h "$PANEL_HEIGHT" -fg "$FG" -bg "$BG" -fn "${FONT}:pixelsize=$FONT_SIZE" -ta 'l' -e "$EVENTS" & ;;
 esac
 
 wait

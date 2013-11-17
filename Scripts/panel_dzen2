@@ -4,77 +4,58 @@
 
 NORMIFS=$IFS
 FIELDIFS=':'
-PADDING='  '
 
 # }}}
 # Functions {{{
 
 Time() { #{{{
-  printf "^p(_RIGHT)^p(-72)%s^p(_CENTER)" "$(date +%H:%M:%S)"
+  printf "^p(_RIGHT)^p(-80)%s" "^i(/home/luke/dotfiles/WM/icons/clock.xbm) $(date +%H:%M:%S)"
 } #}}}
 
 Title() { #{{{
-  printf "$(xtitle)"
-} #}}}
-
-Separator() { #{{{
-  printf " ^fg(#262626)^bg(#262626)^r(150x2)^fg()^bg() "
+  printf "^p(_LEFT)%s ^p()" "$(xtitle)"
 } #}}}
 
 Desks() { #{{{
   read -r -t .1 line
+
   case "$line" in
     W*)
       # bspwm internal state
-      DESK="$PADDING"
+      DESK="  "
       IFS=$FIELDIFS
       set -- ${line#?}
+
       while [ $# -gt 0 ] ; do
         item=$1
         name=${item#?}
+        icon=" • "
+
         case $item in
           [OoFfUu]*)
             case $item in
-              O*)
-                # focused occupied desktop
-                FG='#F6F9FF'
-                BG='#5C5955'
+              [OFU]*) # Focused desktop
+                FG='#ffffff'
+                BG='#262626'
                 ;;
-              F*)
-                # focused free desktop
-                FG='#F6F9FF'
-                BG='#6D561C'
+
+              o*) # Occupied desktop
+                FG='#5e6c70'
+                BG='#262626'
                 ;;
-              U*)
-                # focused urgent desktop
-                FG='#34322E'
-                BG='#F9A299'
+
+              f*) # Free desktop
+                FG='#000000'
+                BG='#262626'
                 ;;
-              o*)
-                # occupied desktop
-                FG='#A3A6AB'
-                BG='#34322E'
-                ;;
-              f*)
-                # free desktop
-                FG='#6F7277'
-                BG='#34322E'
-                ;;
-              u*)
-                # urgent desktop
-                FG='#F9A299'
-                BG='#34322E'
+
+              u*) # Urgent desktop
+                FG='#000000'
+                BG='#262626'
                 ;;
             esac
-            DESK="${DESK}^fg($FG)^bg($BG)^ca(1, bspc desktop -f ${name})^ca(2, bspc window -d ${name}) ${name} ^ca()^ca()^fg()^bg()"
-            ;;
-          L*)
-            # layout
-            layout=$(printf "${name}" | sed 's/\(.\).*/\U\1/')
-            DESK="$DESK^ca(1, bspc desktop -l next) $layout ^ca()"
-            ;;
-          *)
-            # Other stuff
+
+            DESK="${DESK}^fg($FG)^bg($BG)^ca(1, bspc desktop -f ${name})^ca(2, bspc window -d ${name}) ${icon} ^ca()^ca()^fg()^bg()"
             ;;
         esac
         shift
@@ -82,18 +63,15 @@ Desks() { #{{{
       IFS=$NORMIFS
       ;;
   esac
-  printf "$DESK"
-} #}}}
 
-Print() { #{{{
-  Separator
-  Title
-  Time
+  printf "^p(_CENTER)^p(-130)$DESK^p()"
 } #}}}
 
 # }}}
 
 while :; do
+  Title
   Desks
-  echo "$(Print)"
+  Time
+  echo
 done
