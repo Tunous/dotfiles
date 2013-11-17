@@ -47,9 +47,9 @@ super + shift + {h,j,k,l}
     d={left,down,up,right}; \
     bspc window $d -w focused.manual || bspc window -w $d.manual || bspc window -s $d || bspc window -m $d -f
 
-# Focus, swap window in direction
-super + {_,shift + }{h,j,k,l}
-    bspc window -{f,s} {left,down,up,right}
+# Move window to preselection
+super + y
+    bspc window -w last.manual
 
 # Go to next, previous window
 super + {_,shift + }c
@@ -74,6 +74,10 @@ super + ctrl + {_,shift + }space
 # Push size of window
 super + alt + {h,j,k,l}
     bspc window -e {left,down,up,right} push
+
+# Rotate desktop
+super + {r,R}
+    bspc desktop -R {90,270}
 
 # Pull size of window
 super + alt + shift + {h,j,k,l}
