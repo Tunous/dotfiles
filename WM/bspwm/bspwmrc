@@ -10,11 +10,11 @@ bspc config borderless_monocle    true
 bspc config gapless_monocle       true
 bspc config focus_follows_pointer true
 
-# Mouse pointer
-xsetroot -cursor_name arrow &
-
 # Wallpaper
 hsetroot -fill ~/Dropbox/Wallpapers/a.png
+
+# Mouse pointer
+xsetroot -cursor_name left_ptr
 unclutter -idle 2 &
 
 panel &
