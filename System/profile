@@ -9,8 +9,8 @@ fi
 if [ -d "$HOME/bin" ]; then
   PATH="$HOME/bin:$PATH"
 fi
-if [ -d "$HOME/dotfiles/bin" ]; then
-  PATH="$HOME/dotfiles/bin:$PATH"
+if [ -d "$HOME/dotfiles/Scripts" ]; then
+  PATH="$HOME/dotfiles/Scripts:$PATH"
 fi
 
 # Panel

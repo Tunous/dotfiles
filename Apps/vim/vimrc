@@ -46,8 +46,8 @@ let mapleader=","
 
 " Set paths {{{
 
-set rtp+=$HOME/dotfiles/vim/bundle/vundle
-call vundle#rc('$HOME/dotfiles/vim/bundle/')
+set rtp+=$HOME/.vim/bundle/vundle
+call vundle#rc('$HOME/.vim/bundle/')
 
 " }}}
 
@@ -289,13 +289,13 @@ inoremap <Right> <NOP>
 " Open config files {{{
 
 " Open vimrc
-nnoremap <Leader>vv :edit $HOME/dotfiles/vim/vimrc<CR>
+nnoremap <Leader>vv :edit $HOME/.vim/vimrc<CR>
 
 " Open vimperatorrc
-nnoremap <Leader>vp :edit $HOME/dotfiles/vimperator/vimperatorrc<CR>
+nnoremap <Leader>vp :edit $HOME/.vimperator/vimperatorrc<CR>
 
 " Open customized colorscheme
-nnoremap <Leader>vt :edit $HOME/dotfiles/vim/colors/customized.vim<CR>
+nnoremap <Leader>vt :edit $HOME/.vim/colors/customized.vim<CR>
 
 " }}}
 " End semicolon {{{

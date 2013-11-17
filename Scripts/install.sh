@@ -116,18 +116,17 @@ Symlink() {
   ret='0'
 
   if [ "$1" = "vim" ]; then
-    lnif "$repoDir/vim" "$HOME/.vim"
+    lnif "$repoDir/Apps/vim" "$HOME/.vim"
   elif [ "$1" = "vimperator" ]; then
-    lnif "$repoDir/vimperator" "$HOME/.vimperator"
-    lnif "$repoDir/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
+    lnif "$repoDir/Apps/vimperator" "$HOME/.vimperator"
+    lnif "$repoDir/Apps/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
   elif [ "$1" = "bspwm" ]; then
-    lnif "$repoDir/bspwm/bspwmrc" "$HOME/.config/bspwm/bspwmrc"
-    lnif "$repoDir/bspwm/sxhkdrc" "$HOME/.config/sxhkd/sxhkdrc"
-  elif [ "$1" = "xorg" ]; then
-    lnif "$repoDir/xorg/xinitrc" "$HOME/.xinitrc"
-    lnif "$repoDir/xorg/Xresources" "$HOME/.Xresources"
-  elif [ "$1" = "profile" ]; then
-    lnif "$repoDir/profile" "$HOME/.profile"
+    lnif "$repoDir/WM/bspwm/bspwmrc" "$HOME/.config/bspwm/bspwmrc"
+    lnif "$repoDir/WM/bspwm/sxhkdrc" "$HOME/.config/sxhkd/sxhkdrc"
+  elif [ "$1" = "system" ]; then
+    lnif "$repoDir/System/xinitrc" "$HOME/.xinitrc"
+    lnif "$repoDir/System/Xresources" "$HOME/.Xresources"
+    lnif "$repoDir/System/profile" "$HOME/.profile"
   fi
 
   result "$ret" "Successfully symlinked $1 files" "Failed to symlink $1 files"
@@ -140,7 +139,7 @@ Symlink() {
 
 SetupPlugins() {
   title "Updating plugins for vim..."
-  vim -u "$HOME/dotfiles/vim/vimrc" +BundleInstall! +BundleClean +qall
+  vim -u "$repoDir/Apps/vim/vimrc" +BundleInstall! +BundleClean +qall
 
   result "0" "Plugins updated"
 }
@@ -161,18 +160,17 @@ CloneRepo "$repoName" 'Tunous/dotfiles' "$repoDir"
 
 # Create symlinks
 Symlink "bspwm"
-Symlink "profile"
+Symlink "system"
 Symlink "vim"
 Symlink "vimperator"
-Symlink "xorg"
 
 # Clone/update vundle
-CloneRepo "vundle" 'gmarik/vundle' "$repoDir/vim/bundle/vundle"
+CloneRepo "vundle" 'gmarik/vundle' "$repoDir/Apps/vim/bundle/vundle"
 
 # Install and update vim plugins
 SetupPlugins
 
-cd ~/dotfiles
+cd "$repoDir"
 
 # Print end message
 title "Done. Thanks for installing $repoName"
