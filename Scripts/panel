@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # Init {{{
 
@@ -9,7 +9,18 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-flavor=${1:-dzen2}
+# Variables {{{
+
+FIELDIFS=':'
+PANEL_FIFO=/tmp/panel-fifo
+NORMIFS=$IFS
+
+PANEL_HEIGHT=15
+FONT='DejaVu Sans'
+FONT_SIZE=11
+FG='#9e9e9e'
+BG='#262626'
+EVENTS='"button3=;"'
 
 # }}}
 # Fifo {{{
@@ -20,24 +31,82 @@ mkfifo "$PANEL_FIFO"
 bspc control --subscribe > "$PANEL_FIFO" &
 
 # }}}
-# Variables {{{
-
-PANEL_HEIGHT=15
-# FONT='-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-1'
-FONT='DejaVu Sans'
-FONT_SIZE=11
-FG='#9e9e9e'
-BG='#262626'
-EVENTS='"button3=;"'
-
-# }}}
 
 bspc config top_padding $PANEL_HEIGHT
 
-# Run selected panel
-case "$flavor" in
-  bar) cat "$PANEL_FIFO" | panel_bar | bar & ;;
-  dzen2) cat "$PANEL_FIFO" | panel_dzen2 | dzen2 -h "$PANEL_HEIGHT" -fg "$FG" -bg "$BG" -fn "${FONT}:pixelsize=$FONT_SIZE" -ta 'l' -e "$EVENTS" & ;;
-esac
+# }}}
+# Functions {{{
+
+Icon() { #{{{
+  printf "^fg(#505050) ^i(%s) ^fg()" "$HOME/dotfiles/WM/icons/${1}.xbm"
+} #}}}
+
+Time() { #{{{
+  printf "^p(_RIGHT)^p(-80)%s" "$(Icon clock) $(date +%H:%M:%S)"
+} #}}}
+
+Title() { #{{{
+  printf "^p(_LEFT)%s ^p()" "$(xtitle)"
+} #}}}
+
+Desks() { #{{{
+  read -r -t .1 line < "$PANEL_FIFO"
+
+  case "$line" in
+    W*)
+      # bspwm internal state
+      DESK="  "
+      IFS=$FIELDIFS
+      set -- ${line#?}
+
+      while [ $# -gt 0 ] ; do
+        item=$1
+        name=${item#?}
+        icon=" • "
+
+        case $item in
+          [OoFfUu]*)
+            case $item in
+              [OFU]*) # Focused desktop
+                FG='#ffffff'
+                BG='#262626'
+                ;;
+
+              o*) # Occupied desktop
+                FG='#5e6c70'
+                BG='#262626'
+                ;;
+
+              f*) # Free desktop
+                FG='#000000'
+                BG='#262626'
+                ;;
+
+              u*) # Urgent desktop
+                FG='#000000'
+                BG='#262626'
+                ;;
+            esac
+
+            DESK="${DESK}^fg($FG)^bg($BG)^ca(1, bspc desktop -f ${name})^ca(2, bspc window -d ${name}) ${icon} ^ca()^ca()^fg()^bg()"
+            ;;
+        esac
+        shift
+      done
+      IFS=$NORMIFS
+      ;;
+  esac
+
+  printf "^p(_CENTER)^p(-130)$DESK^p()"
+} #}}}
+
+# }}}
+
+while :; do
+  Title
+  Desks
+  Time
+  echo
+done | dzen2 -h "$PANEL_HEIGHT" -fg "$FG" -bg "$BG" -fn "${FONT}:pixelsize=$FONT_SIZE" -ta 'l' -e "$EVENTS" &
 
 wait
