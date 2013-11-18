@@ -28,8 +28,7 @@ let s:C.base01  = ['#425054', '238']
 
 " Normal text | Dark ▾ Light /\
 let s:C.base00  = ['#5E6C70', '241']
-let s:C.base0   = ['#829496', '245']
-  let s:C.base0  = ['#c4c8c6', '247']
+let s:C.base0   = ['#9e9e9e', '247']
 
 " Light folds
 let s:C.base1   = ['#93A1A1', '250']
