@@ -34,4 +34,3 @@ bspc config top_padding $PANEL_HEIGHT
 cat "$PANEL_FIFO" | panel_dzen2 | dzen2 -h "$PANEL_HEIGHT" -fg "$FG" -bg "$BG" -fn "${FONT}:pixelsize=$FONT_SIZE" -ta 'l' -e "$EVENTS" &
 
 wait
-wait
