@@ -8,8 +8,12 @@ FIELDIFS=':'
 # }}}
 # Functions {{{
 
+Icon() { #{{{
+  printf "^fg(#505050) ^i(%s) ^fg()" "$HOME/dotfiles/WM/icons/${1}.xbm"
+} #}}}
+
 Time() { #{{{
-  printf "^p(_RIGHT)^p(-80)%s" "^i(/home/luke/dotfiles/WM/icons/clock.xbm) $(date +%H:%M:%S)"
+  printf "^p(_RIGHT)^p(-80)%s" "$(Icon clock) $(date +%H:%M:%S)"
 } #}}}
 
 Title() { #{{{
