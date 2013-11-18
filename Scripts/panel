@@ -9,8 +9,6 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-flavor=${1:-dzen2}
-
 # }}}
 # Fifo {{{
 
@@ -23,7 +21,6 @@ bspc control --subscribe > "$PANEL_FIFO" &
 # Variables {{{
 
 PANEL_HEIGHT=15
-# FONT='-*-terminus-medium-r-normal-*-12-*-*-*-c-*-*-1'
 FONT='DejaVu Sans'
 FONT_SIZE=11
 FG='#9e9e9e'
@@ -34,10 +31,6 @@ EVENTS='"button3=;"'
 
 bspc config top_padding $PANEL_HEIGHT
 
-# Run selected panel
-case "$flavor" in
-  bar) cat "$PANEL_FIFO" | panel_bar | bar & ;;
-  dzen2) cat "$PANEL_FIFO" | panel_dzen2 | dzen2 -h "$PANEL_HEIGHT" -fg "$FG" -bg "$BG" -fn "${FONT}:pixelsize=$FONT_SIZE" -ta 'l' -e "$EVENTS" & ;;
-esac
+cat "$PANEL_FIFO" | panel_dzen2 | dzen2 -h "$PANEL_HEIGHT" -fg "$FG" -bg "$BG" -fn "${FONT}:pixelsize=$FONT_SIZE" -ta 'l' -e "$EVENTS" &
 
 wait
