@@ -60,8 +60,8 @@ super + {comma,period}
     bspc desktop -C {backward,forward}
 
 # Change desktop
-super + bracket{left,right}
-    bspc desktop -f {prev,next}
+super + {_,shift + } bracket{left,right}
+    bspc {desktop -f,window -d} {prev,next}
 
 # Preselect splitting area
 super + ctrl + {h,j,k,l}
@@ -134,7 +134,7 @@ alt + r
 
 # Restart panel
 alt + z
-    pkill panel; pkill dzen2; panel
+    pkill -x panel; pkill -x dzen2; panel
 
 # Start dmenu
 super + space
