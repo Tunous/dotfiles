@@ -12,3 +12,5 @@ fi
 if [ -d "$HOME/dotfiles/Scripts" ]; then
   PATH="$HOME/dotfiles/Scripts:$PATH"
 fi
+
+export PANEL_FIFO=/tmp/panel-fifo
