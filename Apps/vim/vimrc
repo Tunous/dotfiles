@@ -176,8 +176,8 @@ set smartcase                     " unless I use uppercase characters
 " }}}
 " Size {{{
 
-if !exists("s:fullscreen")
-  let s:fullscreen = 0
+if !exists("s:sizeChanged")
+  let s:sizeChanged = 0
 
   set lines=50
   set columns=175
@@ -262,12 +262,6 @@ nnoremap <Leader>b :ls<CR>:b<Space>
 nnoremap <Leader>d :bd<CR>
 
 " }}}
-" 'jk' to leave insert mode {{{
-
-inoremap jk <Esc>
-inoremap <Esc> Ooops, use jk instead...
-
-" }}}
 " Nvigation {{{
 
 " Better navigation with wrapped lines
@@ -303,18 +297,14 @@ nnoremap <Leader>vp :edit $HOME/.vimperator/vimperatorrc<CR>
 nnoremap <Leader>vt :edit $HOME/.vim/colors/customized.vim<CR>
 
 " }}}
-" End semicolon {{{
-
-inoremap <Leader>; <C-o>A;
-
-" }}}
 " Other {{{
 
 " Capitalize word next to cursor
 inoremap <C-u> <Esc>:call Preserve("normal gUiw")<CR>a
 
 " Indend whole file and remove trailing whitespaces
-nnoremap <F2> :call Preserve("normal gg=G")<CR> :call Preserve("%s/\\s\\+$//e")<CR>
+nnoremap <F2> :call Preserve("normal gg=G")<CR>
+nnoremap <F3> :call Preserve("%s/\\s\\+$//e")<CR>
 
 " Save file
 nnoremap <Enter> :w<CR>
@@ -377,23 +367,6 @@ function! Preserve(command)
   let @/=_s
   call cursor(l, c)
 endfunction
-
-" }}}
-" Toggle fullscreen {{{
-
-function! ToggleFullScreen()
-  if s:fullscreen == 1
-    let s:fullscreen = 0
-    simalt ~P
-  else
-    let s:fullscreen = 1
-    simalt ~s
-  endif
-endfunction
-
-if has("gui_running")
-  nnoremap <F11> :call ToggleFullScreen()<CR>
-endif
 
 " }}}
 " Toggle number column {{{
