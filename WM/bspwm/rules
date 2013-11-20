@@ -12,4 +12,5 @@ rules=$(rulc -l)
 if [ -z "$rules" ] ; then
   rulc -a 'class=="Gimp"'         'floating=on'
   rulc -a 'class=="BSPWM_FRAME"'  'frame=on'
+  rulc -a 'class=="Keepassx"'     'floating=on'
 fi
