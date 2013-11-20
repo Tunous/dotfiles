@@ -110,24 +110,34 @@ lnif () {
   fi
 }
 
+# TODO It should provide more information
 Symlink() {
   title "Trying to link $1 files..."
 
   ret='0'
 
-  if [ "$1" = "vim" ]; then
-    lnif "$repoDir/Apps/vim" "$HOME/.vim"
-  elif [ "$1" = "vimperator" ]; then
-    lnif "$repoDir/Apps/vimperator" "$HOME/.vimperator"
-    lnif "$repoDir/Apps/vimperator/vimperatorrc" "$HOME/.vimperatorrc"
-  elif [ "$1" = "bspwm" ]; then
-    lnif "$repoDir/WM/bspwm/bspwmrc" "$HOME/.config/bspwm/bspwmrc"
-    lnif "$repoDir/WM/bspwm/sxhkdrc" "$HOME/.config/sxhkd/sxhkdrc"
+  if [ "$1" = "bspwm" ]; then
+    lnif "$repoDir/WM/bspwm/bspwmrc"              "$HOME/.config/bspwm/bspwmrc"
+    lnif "$repoDir/WM/bspwm/sxhkdrc"              "$HOME/.config/sxhkd/sxhkdrc"
+    lnif "$repoDir/WM/bspwm/rules"                "$HOME/bin/bspwm_rules"
+
+  elif [ "$1" = "mutt" ]; then
+    lnif "$repoDir/Apps/mutt"                     "$HOME/.mutt"
+
   elif [ "$1" = "system" ]; then
-    lnif "$repoDir/System/compton.conf" "$HOME/.config/compton.conf"
-    lnif "$repoDir/System/profile" "$HOME/.profile"
-    lnif "$repoDir/System/xinitrc" "$HOME/.xinitrc"
-    lnif "$repoDir/System/Xresources" "$HOME/.Xresources"
+    lnif "$repoDir/System/compton.conf"           "$HOME/.config/compton.conf"
+    lnif "$repoDir/System/profile"                "$HOME/.profile"
+    lnif "$repoDir/System/tmux.conf"              "$HOME/.tmux.conf"
+    lnif "$repoDir/System/xinitrc"                "$HOME/.xinitrc"
+    lnif "$repoDir/System/Xresources"             "$HOME/.Xresources"
+
+  elif [ "$1" = "vim" ]; then
+    lnif "$repoDir/Apps/vim"                      "$HOME/.vim"
+
+  elif [ "$1" = "vimperator" ]; then
+    lnif "$repoDir/Apps/vimperator"               "$HOME/.vimperator"
+    lnif "$repoDir/Apps/vimperator/vimperatorrc"  "$HOME/.vimperatorrc"
+
   fi
 
   result "$ret" "Successfully symlinked $1 files" "Failed to symlink $1 files"
@@ -161,6 +171,7 @@ CloneRepo "$repoName" 'Tunous/dotfiles' "$repoDir"
 
 # Create symlinks
 Symlink "bspwm"
+Symlink "mutt"
 Symlink "system"
 Symlink "vim"
 Symlink "vimperator"
