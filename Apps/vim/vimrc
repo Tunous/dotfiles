@@ -214,6 +214,11 @@ set undofile
 " }}}
 " Other {{{
 
+" Add short timeout
+set timeout
+set timeoutlen=1000
+set ttimeoutlen=100
+
 set wildmenu                      " Use wildmenu for commandline autocompletion
 
 set autoread                      " Read file if it was modified outside of vim
