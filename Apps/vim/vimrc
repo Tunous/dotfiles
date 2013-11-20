@@ -102,6 +102,8 @@ augroup END
 
 Bundle 'gregsexton/gitv'
 
+let g:Gitv_DoNotMapCtrlKey = 1
+
 " }}}
 " NERDTree {{{
 
@@ -371,7 +373,7 @@ endfunction
 " }}}
 " Toggle number column {{{
 
-let s:NumberExclude = [ '', 'nerdtree', 'help' ]
+let s:NumberExclude = [ '', 'nerdtree', 'help', 'gitv' ]
 
 function! NumberToggle(what)
   if index(s:NumberExclude, &ft) >= 0
