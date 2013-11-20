@@ -102,18 +102,11 @@ CloneRepo() {
 # Create symlinks
 
 lnif () {
-  if [ -e "$2" ]; then
-    ret=1
-  else
-    ln -s "$1" "$2"
-    ret="$?"
-  fi
+  ln -sf "$1" "$2"
+  ret="$?"
 }
 
-# TODO It should provide more information
 Symlink() {
-  title "Trying to link $1 files..."
-
   ret='0'
 
   if [ "$1" = "bspwm" ]; then
@@ -137,10 +130,9 @@ Symlink() {
   elif [ "$1" = "vimperator" ]; then
     lnif "$repoDir/Apps/vimperator"               "$HOME/.vimperator"
     lnif "$repoDir/Apps/vimperator/vimperatorrc"  "$HOME/.vimperatorrc"
-
   fi
 
-  result "$ret" "Successfully symlinked $1 files" "Failed to symlink $1 files"
+  result "$ret" "[Success] $1" "[Fail] $1"
 }
 
 # }}}
@@ -170,6 +162,7 @@ ProgramExists "git"
 CloneRepo "$repoName" 'Tunous/dotfiles' "$repoDir"
 
 # Create symlinks
+title "Trying to link files..."
 Symlink "bspwm"
 Symlink "mutt"
 Symlink "system"
