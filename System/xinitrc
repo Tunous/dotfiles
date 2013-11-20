@@ -1,11 +1,23 @@
-# Load resources
+# Xresources
 xrdb -merge ~/.Xresources
 
-# Add terminus font
-# xset +fp /usr/local/share/fonts/terminus
-xset +fp ~/.fonts/terminus
-xset fp rehash
+# # terminus font
+# xset +fp ~/.fonts/terminus
+# xset fp rehash
 
-# Run bspwm
+# Key configurations
+xmodmap ~/.Xmodmap
+xcape
+
+# Wallpaper
+hsetroot -fill ~/Dropbox/Wallpapers/a.png
+
+# Mouse pointer
+xsetroot -cursor_name left_ptr
+unclutter -idle 2 &
+
+compton &
+
+# BSPWM
 sxhkd &
 exec bspwm
