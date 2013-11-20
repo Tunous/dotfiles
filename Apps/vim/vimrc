@@ -202,7 +202,7 @@ set copyindent                    " Copy the previous indentation on autoindenti
 " }}}
 " Undo files {{{
 
-let s:undofilesDir = '~/.vim/undofiles'
+let s:undofilesDir = "$HOME/.vim/undofiles"
 
 if !isdirectory(s:undofilesDir)
   silent execute '!mkdir "' . s:undofilesDir . '" >/dev/null 2>&1'
