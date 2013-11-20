@@ -122,6 +122,7 @@ Symlink() {
     lnif "$repoDir/System/profile"                "$HOME/.profile"
     lnif "$repoDir/System/tmux.conf"              "$HOME/.tmux.conf"
     lnif "$repoDir/System/xinitrc"                "$HOME/.xinitrc"
+    lnif "$repoDir/System/Xmodmap"                "$HOME/.Xmodmap"
     lnif "$repoDir/System/Xresources"             "$HOME/.Xresources"
 
   elif [ "$1" = "vim" ]; then
