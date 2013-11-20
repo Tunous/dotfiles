@@ -1,24 +1,57 @@
-# ::: BSPWM hotkeys ::: #
+# Bspwm -----------------------------------------------------------------------
+# ::: Closing/reloading {{{
 
-# Close bspwm
+
+# Close BSPWM
 super + alt + Escape
-    bspc quit && pkill panel
+    pkill -x panel; pkill -x dzen2; bspc quit
 
-# Close window
-super + w
-    bspc window -c
+# Close/kill focused window
+super + {w,W}
+    bspc window -{c,k}
 
-# Chanege layout of desktop
-super + t
-    bspc desktop -l next
+# Reload sxhkd config
+super + Escape
+    pkill -USR1 -x sxhkd
 
-# Balance windows size
-super + b
-    bspc desktop -B
+# Restart panel
+alt + z
+    pkill -x panel; pkill -x dzen2; panel
 
-# Toggle state of window
-super + {s,f}
-    bspc window -t {floating,fullscreen}
+
+# }}}
+# ::: Navigation {{{
+
+# ::: Basic {{{
+
+
+# Focus window/Move between desktops
+super + {h,j,k,l}
+    w={left,down,up,right}; \
+    [ $w = left ] && d=prev; [ $w = right ] && d=next; \
+    bspc window -f $w || bspc desktop -f $d
+
+# Move window
+super + shift + {h,j,k,l}
+    w={left,down,up,right}; \
+    [ $w = left ] && d=prev; [ $w = right ] && d=next; \
+    bspc window $w -w focused.manual || bspc window -w $w.manual || bspc window -s $w || bspc window -d $d -f
+
+# Cycle windows
+super + {_,shift + }c
+    bspc window -f {next,prev}
+
+# Change desktop/Move window to desktop
+super + {_,shift + } bracket{left,right}
+    bspc {desktop -f,window -d} {prev,next}
+
+super + {_,shift + }{1-9,0}
+    bspc {desktop -f,window -d} ^{1-9,10}
+
+
+# }}}
+# ::: History based {{{
+
 
 # Focus last window, desktop
 super + {grave,Tab}
@@ -28,40 +61,71 @@ super + {grave,Tab}
 super + apostrophe
     bspc window -s last
 
-# Switch windows basing on history of selection
+# Select older/newer window
 super + {o,i}
     bspc control --record-history off; \
     bspc window {older,newer} -f; \
     bspc control --record-history on
 
+
+# }}}
+
+# }}}
+# ::: Mouse {{{
+
+
+super + button{1-3}
+    bspc pointer -g {move,resize_side,resize_corner}
+
+super + !button{1-3}
+    bspc pointer -t %i %i
+
+super + @button{1-3}
+    bspc pointer -u
+
+
+# }}}
+# ::: Layout {{{
+
+
+# Toggle layout of desktop
+super + t
+    bspc desktop -l next
+
+# Toggle state of window
+# [a] Floating   - Can overlap
+# [s] Sticky     - Always visible
+# [d] Locked     - Can't be closed
+# [f] Fullscreen - Takes whole screen
+# [g] Private    - Always in same place
+super + {a,s,d,f,g}
+    bspc window -t {floating,sticky,locked,fullscreen,private}
+
+
+# }}}
+
+# ::: Unorganized {{{
+
+
+# Resize gaps
+super+ {minus,equal}
+    bspc config -d focused window_gap $(( `bspc config -d focused window_gap` {+,-} 5 ))
+
+# Balance windows size
+super + b
+    bspc desktop -B
+
 # Swap with biggest window
 super + m
     bspc window -s biggest
-
-# Select window
-super + {h,j,k,l}
-    bspc window -f {left,down,up,right}
-
-# Move window
-super + shift + {h,j,k,l}
-    d={left,down,up,right}; \
-    bspc window $d -w focused.manual || bspc window -w $d.manual || bspc window -s $d || bspc window -m $d -f
 
 # Move window to preselection
 super + y
     bspc window -w last.manual
 
-# Go to next, previous window
-super + {_,shift + }c
-    bspc window -f {next,prev}
-
 # Swap all windows
 super + {comma,period}
     bspc desktop -C {backward,forward}
-
-# Change desktop
-super + {_,shift + } bracket{left,right}
-    bspc {desktop -f,window -d} {prev,next}
 
 # Preselect splitting area
 super + ctrl + {h,j,k,l}
@@ -87,59 +151,22 @@ super + alt + shift + {h,j,k,l}
 super + ctrl + {1-9}
     bspc window -r 0.{1-9}
 
-# Select desktop, move window to desktop
-super + {_,shift + }{1-9,0}
-    bspc {desktop -f,window -d} ^{1-9,10}
+# }}}
 
-# Resize gaps
-alt + minus
-    bspc config -d focused window_gap $((`bspc config -d focused window_gap` + 5 ))
-
-alt + equal
-    bspc config -d focused window_gap $((`bspc config -d focused window_gap` - 5 ))
-
-
-# ::: Mouse settings ::: #
-
-
-# Select window
-~button1
-    bspc pointer -g focus
-
-# Move, resize window
-super + button{1-3}
-    bspc pointer -g {move,resize_side,resize_corner}
-
-super + !button{1-3}
-    bspc pointer -t %i %i
-
-super + @button{1-3}
-    bspc pointer -u
-
-
-# ::: WM independent hotkeys ::: #
-
-
-# Start urxvt
+# Programs --------------------------------------------------------------------
+# Urxvt
 super + Return
     urxvt -e tmux
 
-# Start firefox
-alt + f
-    firefox
-
-# Start ranger
-alt + r
-    urxvt -e ranger
-
-# Restart panel
-alt + z
-    pkill -x panel; pkill -x dzen2; panel
-
-# Start dmenu
+# Dmenu - programs
 super + space
     dmenu_run -nb "#262626" -nf "#7d7d7d" -sb "#87af00" -sf "#262626" -p "Exec:" -fn "DejaVu Sans"
 
-# Reload sxhkd config
-super + Escape
-    pkill -USR1 -x sxhkd
+alt + r
+    urxvt -e ranger
+
+alt + f
+    firefox
+
+alt + a
+    create_frame
