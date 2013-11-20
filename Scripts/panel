@@ -21,16 +21,12 @@ bspc control --subscribe > "$PANEL_FIFO" &
 # Variables {{{
 
 PANEL_HEIGHT=15
-FONT='DejaVu Sans'
-FONT_SIZE=11
-FG='#9e9e9e'
-BG='#262626'
 EVENTS='"button3=;"'
 
 # }}}
 
 bspc config top_padding $PANEL_HEIGHT
 
-cat "$PANEL_FIFO" | panel_dzen2 | dzen2 -h "$PANEL_HEIGHT" -fg "$FG" -bg "$BG" -fn "${FONT}:pixelsize=$FONT_SIZE" -ta 'l' -e "$EVENTS" &
+cat "$PANEL_FIFO" | panel_dzen2 | dzen2 -h "$PANEL_HEIGHT" -ta 'l' -e "$EVENTS" &
 
 wait

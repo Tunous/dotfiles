@@ -2,49 +2,66 @@
 URxvt*scrollBar: false
 
 ! Colors {{{
-
 ! TODO Not finished
-#define t_background   #262626
-#define t_current_line #303030
-#define t_selection    #425054
-#define t_foreground   #9E9E9E
-#define t_comment      #5E6C70
-#define t_red          #AF0000
-#define t_orange       #D75F00
-#define t_yellow       #AF8700
-#define t_green        #87AF00
-#define t_cyan         #2AA198
-#define t_blue         #0087AF
-#define t_purple       #6C81C4
 
-*background: t_background
-*foreground: t_foreground
-! black
-*color0: t_current_line
-*color8: t_selection
-! red
-*color1: #A54242
-*color9: t_red
-! green
-*color2: #8C9440
-*color10: t_green
-! yellow
-*color3: t_orange
-*color11: t_yellow
-! blue
-*color4: #5F819D
-*color12: t_green
-! magenta
-*color5: #85678F
-*color13: t_purple
-! cyan
-*color6: #5E8D87
-*color14: t_cyan
-! white
-*color7: t_comment
-*color15: t_foreground
+! Definitions {{{
+
+#define C_Background   #262626
+#define C_CurrenColline #303030
+#define C_Selection    #425054
+#define C_Foreground   #9E9E9E
+#define C_Comment      #5E6C70
+#define C_Red          #AF0000
+#define C_Orange       #D75F00
+#define C_Yellow       #AF8700
+#define C_Green        #87AF00
+#define C_Cyan         #2AA198
+#define C_Blue         #0087AF
+#define C_Purple       #6C81C4
 
 ! }}}
+
+! Basic
+*background: C_Background
+*foreground: C_Foreground
+
+! black
+*color0: C_CurrenColline
+*color8: C_Selection
+
+! red
+*color1: #A54242
+*color9: C_Red
+
+! green
+*color2: #8C9440
+*color10: C_Green
+
+! yellow
+*color3: C_Orange
+*color11: C_Yellow
+
+! blue
+*color4: #5F819D
+*color12: C_Green
+
+! magenta
+*color5: #85678F
+*color13: C_Purple
+
+! cyan
+*color6: #5E8D87
+*color14: C_Cyan
+
+! white
+*color7: C_Comment
+*color15: C_Foreground
+
+
+! }}}
+
+! Dzen2 font
+dzen2.font: DejaVu Sans:size=8
 
 ! End {{{
 ! vim: ft=xdefaults
