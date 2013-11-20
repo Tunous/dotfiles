@@ -109,29 +109,31 @@ lnif () {
 Symlink() {
   ret='0'
 
-  if [ "$1" = "bspwm" ]; then
-    lnif "$repoDir/WM/bspwm/bspwmrc"              "$HOME/.config/bspwm/bspwmrc"
-    lnif "$repoDir/WM/bspwm/sxhkdrc"              "$HOME/.config/sxhkd/sxhkdrc"
-    lnif "$repoDir/WM/bspwm/rules"                "$HOME/bin/bspwm_rules"
-
-  elif [ "$1" = "mutt" ]; then
-    lnif "$repoDir/Apps/mutt"                     "$HOME/.mutt"
-
-  elif [ "$1" = "system" ]; then
-    lnif "$repoDir/System/compton.conf"           "$HOME/.config/compton.conf"
-    lnif "$repoDir/System/profile"                "$HOME/.profile"
-    lnif "$repoDir/System/tmux.conf"              "$HOME/.tmux.conf"
-    lnif "$repoDir/System/xinitrc"                "$HOME/.xinitrc"
-    lnif "$repoDir/System/Xmodmap"                "$HOME/.Xmodmap"
-    lnif "$repoDir/System/Xresources"             "$HOME/.Xresources"
-
-  elif [ "$1" = "vim" ]; then
-    lnif "$repoDir/Apps/vim"                      "$HOME/.vim"
-
-  elif [ "$1" = "vimperator" ]; then
-    lnif "$repoDir/Apps/vimperator"               "$HOME/.vimperator"
-    lnif "$repoDir/Apps/vimperator/vimperatorrc"  "$HOME/.vimperatorrc"
-  fi
+  case $1 in
+    bspwm)
+      lnif "$repoDir/WM/bspwm/bspwmrc"              "$HOME/.config/bspwm/bspwmrc"
+      lnif "$repoDir/WM/bspwm/sxhkdrc"              "$HOME/.config/sxhkd/sxhkdrc"
+      lnif "$repoDir/WM/bspwm/rules"                "$HOME/bin/bspwm_rules"
+      ;;
+    mutt)
+      lnif "$repoDir/Apps/mutt"                     "$HOME/.mutt"
+      ;;
+    system)
+      lnif "$repoDir/System/compton.conf"           "$HOME/.config/compton.conf"
+      lnif "$repoDir/System/profile"                "$HOME/.profile"
+      lnif "$repoDir/System/tmux.conf"              "$HOME/.tmux.conf"
+      lnif "$repoDir/System/xinitrc"                "$HOME/.xinitrc"
+      lnif "$repoDir/System/Xmodmap"                "$HOME/.Xmodmap"
+      lnif "$repoDir/System/Xresources"             "$HOME/.Xresources"
+      ;;
+    vim)
+      lnif "$repoDir/Apps/vim"                      "$HOME/.vim"
+      ;;
+    vimperator)
+      lnif "$repoDir/Apps/vimperator"               "$HOME/.vimperator"
+      lnif "$repoDir/Apps/vimperator/vimperatorrc"  "$HOME/.vimperatorrc"
+      ;;
+  esac
 
   result "$ret" "[Success] $1" "[Fail] $1"
 }
