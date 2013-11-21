@@ -172,4 +172,4 @@ alt + f
 alt + a
     create_frame
 
-# vim: ft=sxhkdrc
+# vim: ft=sxhkdrc commentstring=#\ %s

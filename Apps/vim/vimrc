@@ -132,7 +132,7 @@ Bundle 'tpope/vim-surround'
 
 Bundle 'baskerville/vim-sxhkdrc'
 
-autocmd FileType sxhkdrc set commentstring=#\ %s
+" autocmd FileType sxhkdrc set commentstring=#\ %s
 
 " }}}
 " Tabular {{{
