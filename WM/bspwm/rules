@@ -1,12 +1,7 @@
 #! /bin/sh
 
-window=$(xwinfo -c "$1")
-result=""
-
-case $window in
-  Gimp)         result="floating=on"  ;;
-  BSPWM_FRAME)  result="frame=on"     ;;
-  Keepassx)     result="floating=on"  ;;
+case "$(xwinfo -c "$1")" in
+  Gimp)         echo "floating=on"          ;;
+  BSPWM_FRAME)  echo "frame=on private=on"  ;;
+  Keepassx)     echo "floating=on"          ;;
 esac
-
-echo "$result"
