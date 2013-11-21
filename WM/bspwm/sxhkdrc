@@ -118,17 +118,17 @@ super + m
 # ::: Preselection {{{
 
 
-# Move window to preselection
-super + y
-    bspc window -w last.manual
-
 # Preselect splitting area
 super + ctrl + {h,j,k,l}
-    bspc window -p {left,down,up,right} || bspc window -p cancel
+    bspc window -p {left,down,up,right}
+
+# Move window to preselection
+super + ctrl + space
+    bspc window -w last.manual
 
 # Cancel preselection
-super + ctrl + {_,shift + }space
-    bspc {window -p cancel,desktop -c}
+super + ctrl + shift + space
+    bspc desktop -c
 
 # Change window ratio (preselection size)
 super + ctrl + {1-9}
