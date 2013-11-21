@@ -1,16 +1,12 @@
 #! /bin/sh
 
-if ! rulc -l > /dev/null ; then
-  (setsid ruld &)
-  while ! rulc -l > /dev/null ; do
-    sleep 0.1
-  done
-fi
+window=$(xwinfo -c "$1")
+result=""
 
-rules=$(rulc -l)
+case $window in
+  Gimp)         result="floating=on"  ;;
+  BSPWM_FRAME)  result="frame=on"     ;;
+  Keepassx)     result="floating=on"  ;;
+esac
 
-if [ -z "$rules" ] ; then
-  rulc -a 'class=="Gimp"'         'floating=on'
-  rulc -a 'class=="BSPWM_FRAME"'  'frame=on'
-  rulc -a 'class=="Keepassx"'     'floating=on'
-fi
+echo "$result"
