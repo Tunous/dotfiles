@@ -27,14 +27,12 @@ alt + z
 
 # Focus window/Move between desktops
 super + {h,j,k,l}
-    w={left,down,up,right}; \
-    [ $w = left ] && d=prev; [ $w = right ] && d=next; \
+    w={left; d=prev,down,up,right; d=next}; \
     bspc window -f $w || bspc desktop -f $d
 
 # Move window
 super + shift + {h,j,k,l}
-    w={left,down,up,right}; \
-    [ $w = left ] && d=prev; [ $w = right ] && d=next; \
+    w={left; d=prev,down,up,right; d=next}; \
     bspc window $w -w focused.manual || bspc window -w $w.manual || bspc window -s $w || bspc window -d $d -f
 
 # Cycle windows
@@ -85,7 +83,7 @@ super + @button{1-3}
 
 
 # }}}
-# ::: Layout {{{
+# ::: Windows {{{
 
 
 # Toggle layout of desktop
@@ -101,6 +99,41 @@ super + t
 super + {a,s,d,f,g}
     bspc window -t {floating,sticky,locked,fullscreen,private}
 
+# Resize widnow
+super + alt + {h,j,k,l} + {_,shift}
+    {d1=left;d2=right, d1=down;d2=up, d1=up;d2=down, d1=right;d2=left}; \
+    { bspc window -e $d1 push || bspc window -e $d2 pull, \
+      bspc window -e $d2 pull || bspc window -e $d1 push}
+
+# Balance windows size
+super + b
+    bspc desktop -B
+
+# Swap with biggest window
+super + m
+    bspc window -s biggest
+
+
+# }}}
+# ::: Preselection {{{
+
+
+# Move window to preselection
+super + y
+    bspc window -w last.manual
+
+# Preselect splitting area
+super + ctrl + {h,j,k,l}
+    bspc window -p {left,down,up,right} || bspc window -p cancel
+
+# Cancel preselection
+super + ctrl + {_,shift + }space
+    bspc {window -p cancel,desktop -c}
+
+# Change window ratio (preselection size)
+super + ctrl + {1-9}
+    bspc window -r 0.{1-9}
+
 
 # }}}
 
@@ -111,45 +144,13 @@ super + {a,s,d,f,g}
 super+ {minus,equal}
     bspc config -d focused window_gap $(( `bspc config -d focused window_gap` {+,-} 5 ))
 
-# Balance windows size
-super + b
-    bspc desktop -B
-
-# Swap with biggest window
-super + m
-    bspc window -s biggest
-
-# Move window to preselection
-super + y
-    bspc window -w last.manual
-
-# Swap all windows
+# Cycle desktop
 super + {comma,period}
     bspc desktop -C {backward,forward}
-
-# Preselect splitting area
-super + ctrl + {h,j,k,l}
-    bspc window -p {left,down,up,right}
-
-# Cancel preselection
-super + ctrl + {_,shift + }space
-    bspc {window -p cancel,desktop -c}
-
-# Push size of window
-super + alt + {h,j,k,l}
-    bspc window -e {left,down,up,right} push
 
 # Rotate desktop
 super + {r,R}
     bspc desktop -R {90,270}
-
-# Pull size of window
-super + alt + shift + {h,j,k,l}
-    bspc window -e {right,up,down,left} pull
-
-# Change window ratio (preselection size)
-super + ctrl + {1-9}
-    bspc window -r 0.{1-9}
 
 # }}}
 
@@ -170,3 +171,5 @@ alt + f
 
 alt + a
     create_frame
+
+# vim: ft=sxhkdrc
