@@ -17,7 +17,7 @@ Time() { #{{{
 } #}}}
 
 Title() { #{{{
-  printf "^p(_LEFT)%s ^p()" "$(xtitle)"
+  printf "^p(_LEFT) %s ^p()" "$(xtitle)"
 } #}}}
 
 Desks() { #{{{

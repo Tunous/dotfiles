@@ -27,8 +27,8 @@ alt + z
 
 # Focus window/Move between desktops
 super + {h,j,k,l}
-    w={left; d=prev,down,up,right; d=next}; \
-    bspc window -f $w || bspc desktop -f $d
+    w={left;d=prev ,down;d=last ,up;d=last ,right;d=next}; \
+    bspc window $w -f || bspc desktop $d -f
 
 # Move window
 super + shift + {h,j,k,l}

@@ -115,4 +115,4 @@ command! toggleNavBar javascript toggleElement('nav-bar')
 " }}}
 
 " End {{{
-" vim:ts=2:sw=2:sts=2:fdm=marker:fdl=0:ft=vimperator
+" vim: ft=vimperator commentstring="\ %s
