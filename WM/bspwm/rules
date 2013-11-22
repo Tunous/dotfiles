@@ -1,7 +1,21 @@
 #! /bin/sh
 
-case "$(xwinfo -c "$1")" in
-  Gimp)         echo "floating=on"          ;;
-  BSPWM_FRAME)  echo "frame=on private=on"  ;;
-  Keepassx)     echo "floating=on"          ;;
+ID="$1"
+c="$(xwinfo -c "$ID")"
+i="$(xwinfo -i "$ID")"
+
+float() { echo "floating=on"; }
+
+case "$c" in
+  # Floating
+  Gimp)         float ;;
+  Keepassx)     float ;;
+  Nautilus)     float ;;
+  File-roller)  float ;;
+
+  # Frame
+  BSPWM_FRAME)  echo "frame=on private=on" ;;
+
+  # Firefox dialog windows
+  Firefox)      [ "$i" = "Places" ] && float ;;
 esac
