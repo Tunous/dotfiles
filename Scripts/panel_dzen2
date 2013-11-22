@@ -13,11 +13,11 @@ Icon() { #{{{
 } #}}}
 
 Time() { #{{{
-  printf "^p(_RIGHT)^p(-80)%s" "$(Icon clock) $(date +%H:%M:%S)"
+  printf "%s" "$(Icon clock) $(date +%H:%M:%S)"
 } #}}}
 
 Title() { #{{{
-  printf "^p(_LEFT) %s ^p()" "$(xtitle)"
+  printf " %s " "$(xtitle)"
 } #}}}
 
 Desks() { #{{{
@@ -68,7 +68,7 @@ Desks() { #{{{
       ;;
   esac
 
-  printf "^p(_CENTER)^p(-130)$DESK^p()"
+  printf "$DESK"
 } #}}}
 
 Volume() { #{{{
@@ -108,9 +108,16 @@ Align() { #{{{
 # }}}
 
 while :; do
+  Align left
   Title
+
+  Align center -130
   Desks
+
+  Align right -240
   Volume
+
+  Separate
   Time
   echo
 done
