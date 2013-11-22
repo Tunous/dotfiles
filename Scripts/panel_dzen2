@@ -71,11 +71,46 @@ Desks() { #{{{
   printf "^p(_CENTER)^p(-130)$DESK^p()"
 } #}}}
 
+Volume() { #{{{
+  vol=$(amixer get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*")
+
+  if [ $vol -eq 0 ]; then
+    ico="$(Icon volume0)"
+  elif [ $vol -eq 100 ]; then
+    ico="$(Icon volume100)"
+  elif [ $vol -lt 100 ] && [ $vol -gt 60 ]; then
+    ico="$(Icon volume75)"
+  elif [ $vol -le 60 ] && [ $vol -gt 30 ]; then
+    ico="$(Icon volume50)"
+  elif [ $vol -le 30 ] && [ $vol -gt 0 ]; then
+    ico="$(Icon volume25)"
+  fi
+
+  echo "$vol" | dzen2-gdbar -nonl -h 5 -fg '#505050' -bg '#000000' -l " $ico "
+  printf "^fg(#505050)^ca(1,amixer set Master 1dB-) %s ^ca()" " ◂ "
+  printf "^fg(#505050)^ca(1,amixer set Master 1dB+) %s ^ca()" " ▸ "
+} # }}}
+
+Separate() { #{{{
+  printf "     "
+} # }}}
+
+Align() { #{{{
+  case $1 in
+    left)   printf "^p(_LEFT)"    ;;
+    center) printf "^p(_CENTER)"  ;;
+    right)  printf "^p(_RIGHT)"   ;;
+  esac
+
+  [ -n $2 ] && printf "^p($2)"
+} # }}}
+
 # }}}
 
 while :; do
   Title
   Desks
+  Volume
   Time
   echo
 done
