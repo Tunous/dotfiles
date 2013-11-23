@@ -1,9 +1,9 @@
 # Xresources
 xrdb -merge ~/.Xresources
 
-# # terminus font
-# xset +fp ~/.fonts/terminus
-# xset fp rehash
+# terminus font
+xset +fp /usr/local/share/fonts/terminus
+xset fp rehash
 
 # Key configurations
 xmodmap ~/.Xmodmap

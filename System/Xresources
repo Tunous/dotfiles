@@ -61,7 +61,8 @@ URxvt*scrollBar: false
 ! }}}
 
 ! Dzen2 font
-dzen2.font: DejaVu Sans:size=8
+*font:     -*-terminus-medium-*-*-*-12-120-*-*-*-*-iso8859-1
+URxvt*boldFont: -*-terminus-bold-*-*-*-*-120-*-*-*-*-iso8859-1
 
 ! End {{{
 ! vim: ft=xdefaults
