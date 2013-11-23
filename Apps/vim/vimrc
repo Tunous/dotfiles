@@ -20,18 +20,9 @@ syntax on
 " }}}
 " Theme settings {{{
 
-" Font
-if has('win32') || has('win64')
-  set guifont=Meslo_LG_S_for_Powerline:h8:cANSI
-elseif has('unix')
-  set guifont=Ubuntu\ Mono\ for\ Powerline\ 11
-endif
-
-" Use 256 colors
-set t_Co=256
-
-set background=dark                                     " Set dark background
-colorscheme customized                                  " Use my own theme
+set t_Co=256                  " Use 256 colors
+set background=dark           " Set dark background
+colorscheme customized        " Use my own theme
 
 " }}}
 " Leader {{{
@@ -132,8 +123,6 @@ Bundle 'tpope/vim-surround'
 
 Bundle 'baskerville/vim-sxhkdrc'
 
-" autocmd FileType sxhkdrc set commentstring=#\ %s
-
 " }}}
 " Tabular {{{
 
@@ -145,7 +134,6 @@ Bundle 'godlygeek/tabular'
 
 " Comment selected text
 Bundle 'tomtom/tcomment_vim'
-" Bundle 'tpope/vim-commentary'
 
 " }}}
 
@@ -158,14 +146,6 @@ Bundle 'tomtom/tcomment_vim'
 set nobackup
 set nowritebackup
 set noswapfile
-
-" }}}
-" Gui options {{{
-
-" Don't use any gui options
-if has("gui_running")
-  set guioptions=
-endif
 
 " }}}
 " Mouse {{{
@@ -182,16 +162,6 @@ set hlsearch                      " Highlight search terms
 set incsearch                     " Show search matches as I type
 set ignorecase                    " Ignore case when searching...
 set smartcase                     " unless I use uppercase characters
-
-" }}}
-" Size {{{
-
-if !exists("s:sizeChanged")
-  let s:sizeChanged = 0
-
-  set lines=50
-  set columns=175
-endif
 
 " }}}
 " Smart scrolling {{{
@@ -430,9 +400,6 @@ augroup other
   autocmd!
   " Add header file preprocessor getes
   autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()
-
-  " Stop insert mode after inactivity
-  autocmd CursorHoldI * stopinsert
 
   " Spell check when writing commit logs
   autocmd filetype svn,*commit* setlocal spell
