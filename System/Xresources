@@ -6,18 +6,18 @@ URxvt*scrollBar: false
 
 ! Definitions {{{
 
-#define C_Background   #262626
-#define C_CurrenColline #303030
-#define C_Selection    #425054
-#define C_Foreground   #9E9E9E
-#define C_Comment      #5E6C70
-#define C_Red          #AF0000
-#define C_Orange       #D75F00
-#define C_Yellow       #AF8700
-#define C_Green        #87AF00
-#define C_Cyan         #2AA198
-#define C_Blue         #0087AF
-#define C_Purple       #6C81C4
+#define C_Background    #262626
+#define C_Currentline   #303030
+#define C_Selection     #425054
+#define C_Foreground    #9e9e9e
+#define C_Comment       #5e6c70
+#define C_Red           #af0000
+#define C_Orange        #d75f00
+#define C_Yellow        #af8700
+#define C_Green         #87af00
+#define C_Cyan          #2aa198
+#define C_Blue          #0087af
+#define C_Purple        #6c81c4
 
 ! }}}
 
@@ -26,15 +26,15 @@ URxvt*scrollBar: false
 *foreground: C_Foreground
 
 ! black
-*color0: C_CurrenColline
+*color0: C_Currentline
 *color8: C_Selection
 
 ! red
-*color1: #A54242
+*color1: #a54242
 *color9: C_Red
 
 ! green
-*color2: #8C9440
+*color2: #8c9440
 *color10: C_Green
 
 ! yellow
@@ -42,15 +42,15 @@ URxvt*scrollBar: false
 *color11: C_Yellow
 
 ! blue
-*color4: #5F819D
-*color12: C_Green
+*color4: #5f819d
+*color12: C_Blue
 
 ! magenta
-*color5: #85678F
+*color5: #85678f
 *color13: C_Purple
 
 ! cyan
-*color6: #5E8D87
+*color6: #5e8d87
 *color14: C_Cyan
 
 ! white
@@ -62,7 +62,7 @@ URxvt*scrollBar: false
 
 ! Dzen2 font
 *font:     -*-terminus-medium-*-*-*-12-120-*-*-*-*-iso8859-1
-URxvt*boldFont: -*-terminus-bold-*-*-*-*-120-*-*-*-*-iso8859-1
+*boldFont: -*-terminus-bold-*-*-*-*-120-*-*-*-*-iso8859-1
 
 ! End {{{
 ! vim: ft=xdefaults

@@ -409,14 +409,6 @@ augroup other
 augroup END
 
 " }}}
-" Temporary {{{
-
-augroup temp
-  autocmd!
-  autocmd BufWritePost customized.vim colorscheme customized
-augroup END
-
-" }}}
 
 " }}}
 
