@@ -73,6 +73,7 @@ Desks() { #{{{
 
 Volume() { #{{{
   vol=$(amixer get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*")
+  mut=$(amixer get Master | egrep 'Playback.*?\[o' | egrep -o '\[o.+\]')
 
   if [ $vol -eq 0 ]; then
     ico="$(Icon volume0)"
@@ -86,9 +87,11 @@ Volume() { #{{{
     ico="$(Icon volume25)"
   fi
 
-  echo "$vol" | dzen2-gdbar -nonl -h 5 -fg '#505050' -bg '#000000' -l " $ico "
-  printf "^fg(#505050)^ca(1,amixer set Master 1dB-) %s ^ca()" " ◂ "
-  printf "^fg(#505050)^ca(1,amixer set Master 1dB+) %s ^ca()" " ▸ "
+  [ "$mut" = "[off]" ] && ico="$(Icon volume0)"
+
+  echo "$vol" | dzen2-gdbar -nonl -h 5 -fg '#505050' -bg '#000000' -l "^ca(1,amixer -D pulse set Master toggle) $ico ^ca()"
+  printf "^fg(#505050)^ca(1,amixer set Master 1-) %s ^ca()" " ◂ "
+  printf "^fg(#505050)^ca(1,amixer set Master 1+) %s ^ca()" " ▸ "
 } # }}}
 
 Separate() { #{{{
