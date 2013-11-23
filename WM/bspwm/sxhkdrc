@@ -4,7 +4,7 @@
 
 # Close BSPWM
 super + alt + Escape
-    pkill -x panel; pkill -x dzen2; bspc quit
+    pkill panel; pkill dzen2; bspc quit
 
 # Close/kill focused window
 super + {w,W}
@@ -16,7 +16,11 @@ super + Escape
 
 # Restart panel
 alt + z
-    pkill -x panel; pkill -x dzen2; panel
+    pkill panel; pkill dzen2; panel
+
+# Reload compton
+alt + c
+    pkill compton; compton
 
 
 # }}}
@@ -81,6 +85,9 @@ super + !button{1-3}
 super + @button{1-3}
     bspc pointer -u
 
+super + alt + button{1,2}
+    bspc window {-t fullscreen,-c}
+
 
 # }}}
 # ::: Windows {{{
@@ -99,6 +106,13 @@ super + t
 super + {a,s,d,f,g}
     bspc window -t {floating,sticky,locked,fullscreen,private}
 
+# Swap with biggest window
+super + m
+    bspc window -s biggest
+
+# ::: Size {{{
+
+
 # Resize widnow
 super + alt + {h,j,k,l} + {_,shift}
     {d1=left;d2=right, d1=down;d2=up, d1=up;d2=down, d1=right;d2=left}; \
@@ -109,10 +123,12 @@ super + alt + {h,j,k,l} + {_,shift}
 super + b
     bspc desktop -B
 
-# Swap with biggest window
-super + m
-    bspc window -s biggest
+# Resize gaps
+super + alt + {minus,equal}
+    bspc config -d focused window_gap $(( `bspc config -d focused window_gap` {+,-} 5 ))
 
+
+# }}}
 
 # }}}
 # ::: Preselection {{{
@@ -140,10 +156,6 @@ super + ctrl + {1-9}
 # ::: Unorganized {{{
 
 
-# Resize gaps
-super+ {minus,equal}
-    bspc config -d focused window_gap $(( `bspc config -d focused window_gap` {+,-} 5 ))
-
 # Cycle desktop
 super + {comma,period}
     bspc desktop -C {backward,forward}
@@ -159,17 +171,21 @@ super + {r,R}
 super + Return
     urxvt -e tmux
 
-# Dmenu - programs
+# Dmenu
 super + space
     dmenu_run -nb "#262626" -nf "#7d7d7d" -sb "#87af00" -sf "#262626" -p "Exec:" -fn "DejaVu Sans"
 
-alt + r
-    urxvt -e ranger
-
+# Firefox
 alt + f
     firefox
 
+# Frame
 alt + a
     create_frame
 
+# Ranger
+alt + r
+    urxvt -e ranger
+
+# End {{{
 # vim: ft=sxhkdrc commentstring=#\ %s
