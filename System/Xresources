@@ -61,8 +61,8 @@ URxvt*scrollBar: false
 ! }}}
 
 ! Dzen2 font
-*font:     -*-terminus-medium-*-*-*-12-120-*-*-*-*-iso8859-1
-*boldFont: -*-terminus-bold-*-*-*-*-120-*-*-*-*-iso8859-1
+*font:     -*-terminus-medium-*-normal-*-12-120-*-*-*-*-iso10646-*
+*boldFont: -*-terminus-bold-*-normal-*-12-120-*-*-*-*-iso10646-*
 
 ! End {{{
 ! vim: ft=xdefaults

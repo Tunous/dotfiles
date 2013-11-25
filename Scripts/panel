@@ -21,7 +21,7 @@ bspc control --subscribe > "$PANEL_FIFO" &
 # Variables {{{
 
 PANEL_HEIGHT=15
-EVENTS='"button3=;"'
+EVENTS=''
 
 # }}}
 

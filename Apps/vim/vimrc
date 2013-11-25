@@ -51,14 +51,9 @@ Bundle 'gmarik/vundle'
 " Nice looking statusline
 Bundle 'bling/vim-airline'
 
-" Symbols {{{
-
-let g:airline_left_sep = ''           " Left separator
-let g:airline_right_sep = ''          " Right separator
-let g:airline_left_alt_sep = ''       " Alternative left separator
-let g:airline_right_alt_sep = ''      " Alternative right separator
-
-" }}}
+" Use powerline symbols
+let g:airline_powerline_fonts=1
+let g:airline_detect_iminsert=0
 
 " Show buffers line when there is only one tab open
 let g:airline#extensions#tabline#enabled = 1

@@ -2,7 +2,7 @@
 xrdb -merge ~/.Xresources
 
 # terminus font
-xset +fp /usr/local/share/fonts/terminus
+xset +fp /usr/share/fonts/local
 xset fp rehash
 
 # Key configurations
