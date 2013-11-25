@@ -17,5 +17,5 @@ case "$c" in
   BSPWM_FRAME)  echo "frame=on private=on" ;;
 
   # Firefox dialog windows
-  Firefox)      [ "$i" = "Places" ] && float ;;
+  Firefox)      [ "$i" != "Navigator" ] && float ;;
 esac
