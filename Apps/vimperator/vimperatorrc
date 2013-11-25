@@ -59,11 +59,6 @@ let mapleader = ','
 
 " }}}
 
-" Bookmarks {{{
-
-noremap B :bmarks<CR>
-
-" }}}
 " Faster scrolling {{{
 
 noremap j <Down>
@@ -88,13 +83,12 @@ noremap K gT
 silent qmark t http://translate.google.com/?hl=pl&sl=en&tl=pl
 silent qmark T http://translate.google.com/?hl=pl&sl=pl&tl=en
 silent qmark g http://gmail.com
+silent qmark f http://cloud.feedly.com
 
 " }}}
 
 " Functions --------------------------------------------------------------
 " Toggle css elements {{{
-
-" Code {{{
 
 javascript <<EOF
 
@@ -104,13 +98,8 @@ toggleElement = function (name) {
 
 EOF
 
-" }}}
-" Mappings {{{
-
 " Toggle navigation bar
 command! toggleNavBar javascript toggleElement('nav-bar')
-
-" }}}
 
 " }}}
 
