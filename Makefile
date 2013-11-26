@@ -62,4 +62,4 @@ vundle:
 plugins:
 	vim -u ${APPSDIR}/vim/vimrc +BundleInstall! +BundleClean +qall
 
-.PHONY: help install uninstall bspwm mutt system vim vimperator vundle plugins
+.PHONY: help install update bspwm mutt system vim vimperator vundle plugins
