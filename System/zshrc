@@ -1,0 +1,25 @@
+# Remove dalay
+KEYTIMEOUT=1
+
+# Vi-Mode
+bindkey -v
+
+# Current mode
+RPROMPT=""
+function zle-line-init zle-keymap-select {
+  VIMODE="${${KEYMAP/vicmd/Command}/(main|viins)/Insert}"
+  RPROMPT="$VIMODE"
+  zle reset-prompt
+  zle -R
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+# Prompt
+PROMPT="
+%n@%m: %~
+> "
+
+source ~/GitRepos/opp.zsh/opp.zsh
+source ~/GitRepos/opp.zsh/opp/*.zsh

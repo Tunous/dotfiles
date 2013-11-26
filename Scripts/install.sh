@@ -122,9 +122,11 @@ Symlink() {
       lnif "$repoDir/System/compton.conf"           "$HOME/.config/compton.conf"
       lnif "$repoDir/System/profile"                "$HOME/.profile"
       lnif "$repoDir/System/tmux.conf"              "$HOME/.tmux.conf"
+      lnif "$repoDir/System/Gtk/gtkrc-2.0"          "$HOME/.gtkrc-2.0"
       lnif "$repoDir/System/xinitrc"                "$HOME/.xinitrc"
       lnif "$repoDir/System/Xmodmap"                "$HOME/.Xmodmap"
       lnif "$repoDir/System/Xresources"             "$HOME/.Xresources"
+      lnif "$repoDir/System/zshrc"                  "$HOME/.zshrc"
       ;;
     vim)
       lnif "$repoDir/Apps/vim"                      "$HOME/.vim"

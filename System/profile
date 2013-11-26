@@ -10,3 +10,4 @@ fi
 [ -d "$HOME/dotfiles/Scripts" ] && PATH="$HOME/dotfiles/Scripts:$PATH"
 
 export PANEL_FIFO=/tmp/panel-fifo
+export EDITOR=vim
