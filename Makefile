@@ -5,15 +5,18 @@ WMDIR           = ${DOTFILES}/WM
 XDG_CONFIG_HOME = ${HOME}/.config
 
 help:
-	@echo "Installation:"
-	@echo " make install    # Symlink all configs\n"
-	@echo " make vim        # Symlink vim config"
-	@echo " make vimperator # Symlink vimperator config"
-	@echo " make bspwm      # Symlink bspwm config"
-	@echo " make mutt       # Symlink mutt config"
-	@echo " make system     # Symlink system config"
+	@echo "Available options:"
+	@echo " make install     - Symlink all configs"
+	@echo " make update      - Update repository\n"
+	@echo " make bspwm       - Symlink bspwm config"
+	@echo " make mutt        - Symlink mutt config"
+	@echo " make system      - Symlink system config"
+	@echo " make vim         - Symlink vim config"
+	@echo " make vimperator  - Symlink vimperator config"
+	@echo " make vundle      - Clone vundle repo - if doesn't exist"
+	@echo " make plugins     - Update vim plugins"
 
-install: update bspwm mutt system vim vimperator vundle
+install: update bspwm mutt system vim vimperator vundle plugins
 
 update:
 	git pull origin master
