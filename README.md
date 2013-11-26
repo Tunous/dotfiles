@@ -9,6 +9,6 @@ Installation
 git clone https://github.com/Tunous/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
-# 2. Run automated script
-./Scripts/install.sh
+# Use Makefile to symlink configs
+make install
 ```
