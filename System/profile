@@ -1,4 +1,4 @@
-# Add bin and dotfiles/bin in to path
+# Path
 [ -d "$HOME/bin" ]              && PATH="$HOME/bin:$PATH"
 [ -d "$HOME/dotfiles/Scripts" ] && PATH="$HOME/dotfiles/Scripts:$PATH"
 
