@@ -1,42 +1,35 @@
-DOTFILES        = ${shell pwd}
-SYSDIR          = ${DOTFILES}/System
-APPSDIR         = ${DOTFILES}/Apps
-WMDIR           = ${DOTFILES}/WM
-XDG_CONFIG_HOME = ${HOME}/.config
+DOTFILES = ${shell pwd}
+SYSDIR   = ${DOTFILES}/System
+APPSDIR  = ${DOTFILES}/Apps
+WMDIR    = ${DOTFILES}/WM
 
 help:
 	@echo "Available options:"
-	@echo " make install     - Symlink all configs"
-	@echo " make update      - Update repository\n"
-	@echo " make bspwm       - Symlink bspwm config"
-	@echo " make mutt        - Symlink mutt config"
-	@echo " make ranger      - Symlink ranger config"
-	@echo " make system      - Symlink system config"
-	@echo " make vim         - Symlink vim config"
-	@echo " make vimperator  - Symlink vimperator config"
-	@echo " make vundle      - Clone vundle repo - if doesn't exist"
-	@echo " make plugins     - Update vim plugins"
+	@echo
+	@echo "Main:"
+	@echo "  make install       - Symlink all configs"
+	@echo "  make update        - Update repository"
+	@echo
+	@echo "  make bspwm         - Symlink bspwm config"
+	@echo "  make system        - Symlink system config"
+	@echo
+	@echo "Apps: "
+	@echo "  make mutt          - Symlink mutt config"
+	@echo "  make ranger        - Symlink ranger config"
+	@echo "  make vimperator    - Symlink vimperator config"
+	@echo "  make vim           - Install vim:"
+	@echo "    make vim-main    - Symlink vim config"
+	@echo "    make vim-vundle  - Clone vundle repo"
+	@echo "    make vim-plugins - Update vim plugins"
 
-install: update bspwm mutt ranger system vim vimperator vundle plugins
+
+# Main {{{
+
+
+install: update system bspwm apps
 
 update:
 	git pull origin master
-
-bspwm:
-	@echo "Bspwm:"
-	ln -sfn ${WMDIR}/bspwm                     ${XDG_CONFIG_HOME}/bspwm
-	ln -sfn ${WMDIR}/sxhkd                     ${XDG_CONFIG_HOME}/sxhkd
-	@echo
-
-mutt:
-	@echo "Mutt:"
-	ln -sfn ${APPSDIR}/mutt                    ${HOME}/.mutt
-	@echo
-
-ranger:
-	@echo "Ranger:"
-	ln -sfn ${APPSDIR}/ranger                  ${XDG_CONFIG_HOME}/ranger
-	@echo
 
 system:
 	@echo "System:"
@@ -50,9 +43,27 @@ system:
 	ln -sf  ${SYSDIR}/zshrc                 ${HOME}/.zshrc
 	@echo
 
-vim:
-	@echo "Vim:"
-	ln -sfn ${APPSDIR}/vim                     ${HOME}/.vim
+bspwm:
+	@echo "Bspwm:"
+	ln -sfn ${WMDIR}/bspwm                     ${XDG_CONFIG_HOME}/bspwm
+	ln -sfn ${WMDIR}/sxhkd                     ${XDG_CONFIG_HOME}/sxhkd
+	@echo
+
+
+# }}}
+# Apps {{{
+
+
+apps: mutt ranger vimperator vim
+
+mutt:
+	@echo "Mutt:"
+	ln -sfn ${APPSDIR}/mutt                    ${HOME}/.mutt
+	@echo
+
+ranger:
+	@echo "Ranger:"
+	ln -sfn ${APPSDIR}/ranger                  ${XDG_CONFIG_HOME}/ranger
 	@echo
 
 vimperator:
@@ -61,11 +72,25 @@ vimperator:
 	ln -sf  ${APPSDIR}/vimperator/vimperatorrc ${HOME}/.vimperatorrc
 	@echo
 
-vundle:
+vim: vim-main vim-vundle vim-plugins
+
+vim-main:
+	@echo "Vim:"
+	ln -sfn ${APPSDIR}/vim                     ${HOME}/.vim
+	@echo
+
+vim-vundle:
 	@[ -d ${APPSDIR}/vim/bundle/vundle ] || \
 	  git clone https://github.com/gmarik/vundle.git ${APPSDIR}/vim/bundle/vundle
 
-plugins:
+vim-plugins:
 	vim -u ${APPSDIR}/vim/vimrc +BundleInstall! +BundleClean +qall
 
-.PHONY: help install update bspwm mutt ranger system vim vimperator vundle plugins
+
+# }}}
+
+
+.PHONY: help install update apps system \
+  bspwm \
+  mutt ranger vimperator \
+  vim vim-main vim-vundle vim-plugins
