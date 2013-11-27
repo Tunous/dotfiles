@@ -10,13 +10,14 @@ help:
 	@echo " make update      - Update repository\n"
 	@echo " make bspwm       - Symlink bspwm config"
 	@echo " make mutt        - Symlink mutt config"
+	@echo " make ranger      - Symlink ranger config"
 	@echo " make system      - Symlink system config"
 	@echo " make vim         - Symlink vim config"
 	@echo " make vimperator  - Symlink vimperator config"
 	@echo " make vundle      - Clone vundle repo - if doesn't exist"
 	@echo " make plugins     - Update vim plugins"
 
-install: update bspwm mutt system vim vimperator vundle plugins
+install: update bspwm mutt ranger system vim vimperator vundle plugins
 
 update:
 	git pull origin master
@@ -30,6 +31,11 @@ bspwm:
 mutt:
 	@echo "Mutt:"
 	ln -sfn ${APPSDIR}/mutt                    ${HOME}/.mutt
+	@echo
+
+ranger:
+	@echo "Ranger:"
+	ln -sfn ${APPSDIR}/ranger                  ${XDG_CONFIG_HOME}/ranger
 	@echo
 
 system:
@@ -62,4 +68,4 @@ vundle:
 plugins:
 	vim -u ${APPSDIR}/vim/vimrc +BundleInstall! +BundleClean +qall
 
-.PHONY: help install update bspwm mutt system vim vimperator vundle plugins
+.PHONY: help install update bspwm mutt ranger system vim vimperator vundle plugins
