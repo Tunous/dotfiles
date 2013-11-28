@@ -11,28 +11,33 @@ endif
 
 let colors_name = "customized"
 
+let s:Xcol = 1
+if exists('g:customized_use_xresources') && g:customized_use_xresources == 1
+  let s:Xcol = 2
+endif
+
 " }}}
 " Palette {{{
 
 let s:C = {}
 
-let s:C.none    = ['NONE', 'NONE']
+let s:C.none        = ['NONE', 'NONE', 'NONE']
 
-let s:C.background  = ['#262626', '235']
-let s:C.currentline = ['#303030', '236']
+let s:C.background  = ['#262626', '235', 'none']
+let s:C.line        = ['#303030', '236', '0']
 
-let s:C.foreground  = ['#9e9e9e', '247']
-let s:C.comment     = ['#5e6c70', '241']
-let s:C.selection   = ['#425054', '238']
+let s:C.foreground  = ['#9e9e9e', '247', '15']
+let s:C.comment     = ['#606060', '241', '7']
+let s:C.selection   = ['#444444', '238', '8']
 
-let s:C.Yellow      = ['#af8700', '136']
-let s:C.Orange      = ['#d75f00', '166']
-let s:C.Red         = ['#af0000', '124']
-let s:C.Purple      = ['#6c81c4', '125']
-let s:C.Violet      = ['#6c71c4', '61']
-let s:C.Blue        = ['#0087af', '31']
-let s:C.Cyan        = ['#2aa198', '37']
-let s:C.Green       = ['#87af00', '106']
+let s:C.Yellow      = ['#af8700', '136', '11']
+let s:C.Orange      = ['#d75f00', '166', '3']
+let s:C.Red         = ['#af0000', '124', '9']
+let s:C.Purple      = ['#af005f', '125', '13']
+let s:C.Violet      = ['#5f5faf', '61',  '5']
+let s:C.Blue        = ['#0087af', '31',  '12']
+let s:C.Cyan        = ['#00afaf', '37',  '14']
+let s:C.Green       = ['#87af00', '106', '10']
 
 " }}}
 " Highlighting function {{{
@@ -43,16 +48,16 @@ function! s:HL(group, ...)
 
   if a:0 >=1 && strlen(a:1)
     let color = get(s:C, a:1)
-    let histring .= 'guifg=' . color[0] . ' ctermfg=' . color[1] . ' '
+    let histring .= 'guifg=' . color[0] . ' ctermfg=' . color[s:Xcol] . ' '
   endif
 
   if a:0 >=2 && strlen(a:2)
     let color = get(s:C, a:2)
-    let histring .= 'guibg=' . color[0] . ' ctermbg=' . color[1] . ' '
+    let histring .= 'guibg=' . color[0] . ' ctermbg=' . color[s:Xcol] . ' '
   endif
 
   if a:0 >=3 && strlen(a:3)
-    let histring .= 'gui=' . a:3 . ' cterm=' . a:3 . ' '
+    let histring .= 'gui=' . a:3 . ' cterm=' . a:3 . ' term=' . a:3 . ' '
   endif
 
   if a:0 >=4 && strlen(a:4)
@@ -68,42 +73,41 @@ endfunction
 " Actual colorscheme ----------------------------------------------------------
 " General/UI {{{
 
-call s:HL('Normal'       , 'foreground'  , 'background'  , 'none')
+call s:HL('Normal'       , 'foreground' , 'background' , 'none')
 
-call s:HL('Folded'       , 'selection'   , 'none'        , 'none')
+call s:HL('Folded'       , 'selection'  , 'none'       , 'none')
 
-call s:HL('VertSplit'    , 'comment'     , 'currentline' , 'none')
+call s:HL('VertSplit'    , 'comment'    , 'line'       , 'none')
 
-call s:HL('CursorLine'   , 'none'        , 'currentline' , 'none')
-call s:HL('CursorColumn' , 'none'        , 'currentline' , 'none')
-call s:HL('ColorColumn'  , 'none'        , 'currentline' , 'none')
+call s:HL('CursorLine'   , 'none'       , 'line'       , 'none')
+call s:HL('CursorColumn' , 'none'       , 'line'       , 'none')
+call s:HL('ColorColumn'  , 'none'       , 'line'       , 'none')
 
-call s:HL('TabLine'      , 'comment'     , 'background'  , 'underline')
-call s:HL('TabLineFill'  , 'comment'     , 'background'  , 'underline')
-call s:HL('TabLineSel'   , 'foreground'  , 'none'        , 'none')
+call s:HL('TabLine'      , 'comment'    , 'none'       , 'none')
+call s:HL('TabLineFill'  , 'comment'    , 'none'       , 'none')
+call s:HL('TabLineSel'   , 'foreground' , 'none'       , 'none')
 
-call s:HL('MatchParen'   , 'Blue'        , 'currentline' , 'bold')
+call s:HL('MatchParen'   , 'Blue'       , 'line'       , 'bold')
 
-call s:HL('NonText'      , 'selection'   , 'none'        , 'none')
-call s:HL('SpecialKey'   , 'selection'   , 'none'        , 'none')
+call s:HL('NonText'      , 'selection'  , 'none'       , 'none')
+call s:HL('SpecialKey'   , 'selection'  , 'none'       , 'none')
 
-call s:HL('Visual'       , 'foreground'  , 'selection'   , 'none')
-call s:HL('VisualNOS'    , 'foreground'  , 'selection'   , 'none')
+call s:HL('Visual'       , 'foreground' , 'selection'  , 'none')
+call s:HL('VisualNOS'    , 'foreground' , 'selection'  , 'none')
 
-call s:HL('Search'       , 'Yellow'      , 'none'        , 'reverse')
-call s:HL('IncSearch'    , 'Orange'      , 'none'        , 'none')
+call s:HL('Search'       , 'Yellow'     , 'none'       , 'reverse')
+call s:HL('IncSearch'    , 'Orange'     , 'none'       , 'none')
 
-call s:HL('StatusLine'   , 'selection'   , 'background'  , 'reverse')
-call s:HL('StatusLineNC' , 'currentline' , 'foreground'  , 'reverse')
+call s:HL('StatusLine'   , 'selection'  , 'none'       , 'reverse')
+call s:HL('StatusLineNC' , 'line'       , 'foreground' , 'reverse')
 
-call s:HL('WildMenu'     , 'Green'       , 'background'  , 'underline')
+call s:HL('WildMenu'     , 'Green'      , 'none'       , 'underline')
 
-call s:HL('Directory'    , 'Blue'        , 'none'        , 'none')
-hi! link Directory Identifier
+call s:HL('Directory'    , 'Blue'       , 'none'       , 'none')
 
-call s:HL('Title'        , 'Green'       , 'none'        , 'none')
+call s:HL('Title'        , 'Green'      , 'none'       , 'none')
 
-"call s:HL('ErrorMsg', 'Red', 'none', 'reverse')
+call s:HL('ErrorMsg', 'Red', 'none', 'none')
 "call s:HL('MoreMsg', 'st Bold')
 "call s:HL('MoreMsg')
 "call s:HL("ModeMsg")
@@ -115,101 +119,58 @@ call s:HL('Title'        , 'Green'       , 'none'        , 'none')
 "}}}
 " Gutter {{{
 
-call s:HL('LineNr'      , 'comment' , 'none')
-call s:HL('CursorLineNr', 'comment' , 'currentline', 'none')
-call s:HL('SignColumn'  , 'comment' , 'currentline')
-call s:HL('FoldColumn'  , 'comment' , 'currentline')
+call s:HL('LineNr'       , 'comment' , 'none')
+call s:HL('CursorLineNr' , 'comment' , 'line'  , 'none')
+call s:HL('SignColumn'   , 'comment' , 'line')
+call s:HL('FoldColumn'   , 'comment' , 'line')
 
 " }}}
 " Cursor {{{
 
-call s:HL('Cursor', 'foreground', 'background', 'reverse')
+call s:HL('Cursor' , 'foreground' , 'none' , 'reverse')
 
 " }}}
 " Syntax highlighting {{{
+" :help group-name
 
-call s:HL('Comment',      'comment')
-"       *Comment          any comment
-
-call s:HL('Constant',     'Green')
-"       *Constant         any constant
-"        String           a string constant "this is a string"
-"        Character        a character constant: 'c', '\n'
-"        Number           a number constant: 234, 0xff
-"        Boolean          a boolean constant: TRUE, false
-"        Float            a floating point constant: 2.3e10
-
-call s:HL('Identifier',   'Blue', 'none', 'none')
-"       *Identifier       any variable name
-"        Function         function name (also: methods for classes)
-
-call s:HL('Statement',    'Yellow', 'none' ,'none')
-"       *Statement        any statement
-"        Conditional      if, then, else, endif, switch, etc.
-"        Repeat           for, do, while, etc.
-"        Label            case, default, etc.
-"        Operator         "sizeof", "+", "*", etc.
-"        Keyword          any other keyword
-"        Exception        try, catch, throw
-
-call s:HL('PreProc',      'Orange')
-"       *PreProc          generic Preprocessor
-"        Include          preprocessor #include
-"        Define           preprocessor #define
-"        Macro            same as Define
-"        PreCondit        preprocessor #if, #else, #endif, etc.
-
-call s:HL('Type',         'Yellow', 'none', 'none', 'none')
-"        StorageClass     static, register, volatile, etc.
-"        Structure        struct, union, enum, etc.
-"        Typedef          A typedef
-
-call s:HL('Special',      'Red')
-"       *Special          any special symbol
-"        SpecialChar      special character in a constant
-"        Tag              you can use CTRL-] on this
-"        Delimiter        character that needs attention
-"        SpecialComment   special things inside a comment
-"        Debug            debugging statements
-
-call s:HL('Underlined',   'Violet', 'none', 'underline')
-"       *Underlined       text that stands out, HTML links
-
-call s:HL('Ignore',       'none', 'none', 'none')
-"       *Ignore           left blank, hidden  |hl-Ignore|
-
-call s:HL('Error',        'Red', 'none')
-"       *Error            any erroneous construct
-
-call s:HL('Todo',         'Green'  , 'none', 'bold')
-"       *Todo             anything that needs extra attention; mostly the
-"                         keywords TODO FIXME and XXX
+call s:HL('Comment'    , 'comment')
+call s:HL('Constant'   , 'Green')
+call s:HL('Identifier' , 'Blue'     , 'none'  , 'none')
+call s:HL('Statement'  , 'Yellow'   , 'none'  , 'none')
+call s:HL('PreProc'    , 'Orange')
+call s:HL('Type'       , 'Yellow'   , 'none'  , 'none'       , 'none')
+call s:HL('Special'    , 'Red')
+call s:HL('Underlined' , 'Violet'   , 'none'  , 'underline')
+call s:HL('Ignore'     , 'none'     , 'none'  , 'none')
+call s:HL('Error'      , 'Red'      , 'none')
+call s:HL('Todo'       , 'Green'    , 'none'  , 'bold')
 
 " }}}
 " Completion Menu {{{
 
-call s:HL('Pmenu'      , 'foreground' , 'currentline'  , 'none')
-call s:HL('PmenuSel'   , 'background' , 'Green'        , 'bold')
-call s:HL('PmenuSbar'  , 'none'       , 'background')
-call s:HL('PmenuThumb' , 'none'       , 'currentline')
+call s:HL('Pmenu'      , 'foreground' , 'line'  , 'none')
+call s:HL('PmenuSel'   , 'Green'      , 'none'  , 'reverse,bold')
+call s:HL('PmenuSbar'  , 'none'       , 'none')
+call s:HL('PmenuThumb' , 'none'       , 'line')
 " }}}
 " Diffs {{{
 
-call s:HL('DiffDelete' , 'Red'    , 'currentline'    , 'none')
-call s:HL('DiffAdd'    , 'Green'  , 'currentline'  , 'none')
-call s:HL('DiffChange' , 'Yellow' , 'currentline' , 'none')
-call s:HL('DiffText'   , 'Blue'   , 'currentline'   , 'none')
+call s:HL('DiffDelete' , 'Red'    , 'line' , 'none')
+call s:HL('DiffAdd'    , 'Green'  , 'line' , 'none')
+call s:HL('DiffChange' , 'Yellow' , 'line' , 'none')
+call s:HL('DiffText'   , 'Blue'   , 'line' , 'none')
 
 " }}}
 " Spelling {{{
 
 if has("spell")
-  call s:HL('SpellCap'   , 'none' , 'none' , 'undercurl', 'Blue')
-  call s:HL('SpellBad'   , 'none' , 'none' , 'undercurl', 'Red')
-  call s:HL('SpellLocal' , 'none' , 'none' , 'undercurl', 'Cyan')
-  call s:HL('SpellRare'  , 'none' , 'none' , 'undercurl', 'Purple')
+  call s:HL('SpellCap'   , 'none' , 'none' , 'undercurl' , 'Blue')
+  call s:HL('SpellBad'   , 'none' , 'none' , 'undercurl' , 'Red')
+  call s:HL('SpellLocal' , 'none' , 'none' , 'undercurl' , 'Cyan')
+  call s:HL('SpellRare'  , 'none' , 'none' , 'undercurl' , 'Purple')
 endif
 
 " }}}
 
+" End {{{
 " vim:foldmethod=marker: foldlevel=0
