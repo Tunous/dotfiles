@@ -2,49 +2,55 @@ DOTFILES = ${shell pwd}
 SYSDIR   = ${DOTFILES}/System
 APPSDIR  = ${DOTFILES}/Apps
 WMDIR    = ${DOTFILES}/WM
+XDIR     = ${SYSDIR}/X
+
+# Help {{{
+
 
 help:
-	@echo "Available options:"
-	@echo
-	@echo "Main:"
-	@echo "  make install       - Symlink all configs"
-	@echo "  make update        - Update repository"
-	@echo
-	@echo "  make bspwm         - Symlink bspwm config"
-	@echo "  make system        - Symlink system config"
-	@echo
-	@echo "Apps: "
-	@echo "  make mutt          - Symlink mutt config"
-	@echo "  make ranger        - Symlink ranger config"
-	@echo "  make vimperator    - Symlink vimperator config"
-	@echo "  make vim           - Install vim:"
-	@echo "    make vim-main    - Symlink vim config"
-	@echo "    make vim-vundle  - Clone vundle repo"
-	@echo "    make vim-plugins - Update vim plugins"
+	@echo "Options:"
+	@echo "  install          Symlink all configs"
+	@echo "  update           Update repository"
+	@echo "  wm               Symlink window manager configs"
+	@echo "  system           Symlink system configs"
+	@echo "    xorg           Symlink xorg configs"
+	@echo "  apps             Symlink apps configs"
+	@echo "    mutt           Symlink mutt configs"
+	@echo "    ranger         Symlink ranger configs"
+	@echo "    vimperator     Symlink vimperator configs"
+	@echo "    vim            Install vim:"
+	@echo "      vim-main     Symlink vim configs"
+	@echo "      vim-vundle   Clone vundle repo"
+	@echo "      vim-plugins  Update vim plugins"
 
 
+# }}}
 # Main {{{
 
 
-install: update system bspwm apps
+install: update system wm apps
 
 update:
 	git pull origin master
 
-system:
+system: xorg
 	@echo "System:"
-	ln -sf  ${SYSDIR}/compton.conf          ${XDG_CONFIG_HOME}/compton.conf
-	ln -sf  ${SYSDIR}/profile               ${HOME}/.profile
-	ln -sf  ${SYSDIR}/tmux.conf             ${HOME}/.tmux.conf
-	ln -sf  ${SYSDIR}/Gtk/gtkrc-2.0         ${HOME}/.gtkrc-2.0
-	ln -sf  ${SYSDIR}/xinitrc               ${HOME}/.xinitrc
-	ln -sf  ${SYSDIR}/Xmodmap               ${HOME}/.Xmodmap
-	ln -sf  ${SYSDIR}/Xresources            ${HOME}/.Xresources
-	ln -sf  ${SYSDIR}/zshrc                 ${HOME}/.zshrc
+	ln -sf  ${SYSDIR}/compton.conf             ${XDG_CONFIG_HOME}/compton.conf
+	ln -sf  ${SYSDIR}/profile                  ${HOME}/.profile
+	ln -sf  ${SYSDIR}/tmux.conf                ${HOME}/.tmux.conf
+	ln -sf  ${SYSDIR}/Gtk/gtkrc-2.0            ${HOME}/.gtkrc-2.0
+	ln -sf  ${SYSDIR}/zshrc                    ${HOME}/.zshrc
 	@echo
 
-bspwm:
-	@echo "Bspwm:"
+xorg:
+	@echo "Xorg:"
+	ln -sf  ${XDIR}/xinitrc                    ${HOME}/.xinitrc
+	ln -sf  ${XDIR}/Xmodmap                    ${HOME}/.Xmodmap
+	ln -sf  ${XDIR}/Xresources                 ${HOME}/.Xresources
+	@echo
+
+wm:
+	@echo "Window manager:"
 	ln -sfn ${WMDIR}/bspwm                     ${XDG_CONFIG_HOME}/bspwm
 	ln -sfn ${WMDIR}/sxhkd                     ${XDG_CONFIG_HOME}/sxhkd
 	@echo
@@ -90,7 +96,8 @@ vim-plugins:
 # }}}
 
 
-.PHONY: help install update apps system \
-  bspwm \
+.PHONY: help install update apps\
+  system xorg \
+  wm \
   mutt ranger vimperator \
   vim vim-main vim-vundle vim-plugins
