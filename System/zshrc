@@ -19,7 +19,7 @@ zle -N zle-keymap-select
 # Prompt
 PROMPT="
 %n@%m: %~
-> "
+: "
 
 source ~/GitRepos/opp.zsh/opp.zsh
 source ~/GitRepos/opp.zsh/opp/*.zsh
