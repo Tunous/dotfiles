@@ -1,7 +1,3 @@
-! Disable scrollbar
-URxvt*scrollBar: false
-URxvt*geometry: 120x30
-
 ! Colors {{{
 ! TODO Not finished
 
@@ -68,6 +64,19 @@ URxvt*geometry: 120x30
 *color7:      B_Comment
 *color15:     B_Foreground
 
+
+! }}}
+
+! Urxvt settings {{{
+
+URxvt*scrollBar:        false
+URxvt*geometry:         120x30
+
+! Clickable links
+URxvt*colorUL:          C_Blue
+URxvt*perl-ext-common:  default,matcher
+URxvt*matcher.button:   1
+URxct*urlLauncher:      firefox
 
 ! }}}
 
