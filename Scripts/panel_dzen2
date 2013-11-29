@@ -89,9 +89,7 @@ Volume() { #{{{
 
   [ "$mut" = "[off]" ] && ico="$(Icon volume0)"
 
-  echo "$vol" | dzen2-gdbar -nonl -h 5 -fg '#505050' -bg '#000000' -l "^ca(1,amixer -D pulse set Master toggle) $ico ^ca()"
-  printf "^fg(#505050)^ca(1,amixer set Master 1-) %s ^ca()" " ◂ "
-  printf "^fg(#505050)^ca(1,amixer set Master 1+) %s ^ca()" " ▸ "
+  printf "^ca(1,pkill volume.sh || volume.sh) $ico ^ca()"
 } # }}}
 
 Separate() { #{{{
@@ -117,7 +115,7 @@ while :; do
   Align center -130
   Desks
 
-  Align right -265
+  Align right -150
   Volume
 
   Separate
