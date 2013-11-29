@@ -2,7 +2,7 @@
 
 screen=$(xdpyinfo | grep 'dimensions:' | egrep -o "[0-9]+x[0-9]+ pixels" | egrep -o "[0-9]+x[0-9]+")
 scrx=$(echo $screen | egrep -o "[0-9]+x" | egrep -o "[0-9]+")
-posx=$(($scrx - 210))
+posx=$(($scrx - 200))
 
 stat() {
   if [ "$mut" == "[on]" ]; then
