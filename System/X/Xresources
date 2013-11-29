@@ -1,5 +1,6 @@
 ! Disable scrollbar
 URxvt*scrollBar: false
+URxvt*geometry: 120x30
 
 ! Colors {{{
 ! TODO Not finished

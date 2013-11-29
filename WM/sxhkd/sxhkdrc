@@ -170,6 +170,8 @@ super + {r,R}
 # Urxvt
 super + Return
     urxvt -e tmux
+super + shift + Return
+    urxvt -name 'Floating' -e tmux
 
 # Dmenu
 super + space
