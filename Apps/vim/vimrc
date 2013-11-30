@@ -103,10 +103,13 @@ Bundle 'tpope/vim-surround'
 Bundle 'baskerville/vim-sxhkdrc'
 
 " }}}
-" Tabular {{{
+" Easy align {{{
 
-" Line up text
-Bundle 'godlygeek/tabular'
+Bundle 'junegunn/vim-easy-align'
+
+vnoremap <CR> :EasyAlign<CR>
+vnoremap <Leader><CR> :LiveEasyAlign<CR>
+
 
 " }}}
 " Tcomment {{{
