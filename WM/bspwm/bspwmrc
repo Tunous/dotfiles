@@ -23,4 +23,4 @@ bspc config normal_frame_opacity    0
 bspc config rule_command "$XDG_CONFIG_HOME/bspwm/rules"
 
 # Panel
-panel &
+$HOME/dotfiles/WM/dzen/panel &

@@ -16,7 +16,7 @@ super + Escape
 
 # Restart panel
 alt + z
-    pkill panel; pkill dzen2; panel
+    pkill panel; pkill dzen2; $HOME/dotfiles/WM/dzen/panel
 
 # Reload compton
 alt + c

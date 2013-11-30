@@ -27,6 +27,6 @@ EVENTS=''
 
 bspc config top_padding $PANEL_HEIGHT
 
-cat "$PANEL_FIFO" | panel_dzen2 | dzen2 -h "$PANEL_HEIGHT" -ta 'l' -e "$EVENTS" &
+cat "$PANEL_FIFO" | $HOME/dotfiles/WM/dzen/panel_dzen2 | dzen2 -h "$PANEL_HEIGHT" -ta 'l' -e "$EVENTS" &
 
 wait
