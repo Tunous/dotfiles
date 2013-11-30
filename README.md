@@ -5,7 +5,7 @@ Installation
 ------------
 
 ```sh
-# 1. Clone repository
+# Clone repository
 git clone https://github.com/Tunous/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
@@ -17,12 +17,13 @@ Used software
 -------------
 
 * Bspwm      - Window manager
-* Sxhkd      - Hotkey daemon
 * Compton    - Compositor
+* Dmenu      - Dynamic menu
 * Dzen2      - Bar/popups
+* Mutt       - Mail User Agent
+* Ranger     - File manager
+* Sxhkd      - Hotkey daemon
+* Tmux       - Terminal multiplexer
 * Vim        - Text editor
 * Vimperator - Vim key bindings for Firefox
-* Ranger     - File manager
-* Mutt       - Mail User Agent
 * Zsh        - Shell
-* Tmux       - Terminal multiplexer
