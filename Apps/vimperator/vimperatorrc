@@ -84,6 +84,7 @@ silent qmark t http://translate.google.com/?hl=pl&sl=en&tl=pl
 silent qmark T http://translate.google.com/?hl=pl&sl=pl&tl=en
 silent qmark g http://gmail.com
 silent qmark f http://cloud.feedly.com
+silent qmark r http://reddit.com
 
 " }}}
 
