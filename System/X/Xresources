@@ -81,8 +81,7 @@ URxct*urlLauncher:      firefox
 ! }}}
 
 ! Fonts
-*font:     -*-terminus-medium-*-normal-*-12-120-*-*-*-*-iso10646-*
-*boldFont: -*-terminus-bold-*-normal-*-12-120-*-*-*-*-iso10646-*
+*font:     -*-terminus-medium-*-normal-*-12-*-*-*-*-*-iso10646-*
 
 ! End {{{
 ! vim: ft=xdefaults
