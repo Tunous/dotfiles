@@ -13,6 +13,7 @@ case "$c" in
   Keepassx)     float  ;;
   Nautilus)     floatC ;;
   File-roller)  floatC ;;
+  Steam)        float  ;;
   URxvt)        [ "$i" = "Floating" ] && floatC ;;
 
   # Frame
