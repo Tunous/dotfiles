@@ -64,6 +64,10 @@
 *color7:      B_Comment
 *color15:     B_Foreground
 
+! Underline
+URxvt*colorUL:          C_Blue
+URxvt*colorBD:          C_Yellow
+URxvt*colorIT:          C_Comment
 
 ! }}}
 
@@ -73,7 +77,6 @@ URxvt*scrollBar:        false
 URxvt*geometry:         120x30
 
 ! Clickable links
-URxvt*colorUL:          C_Blue
 URxvt*perl-ext-common:  default,matcher
 URxvt*matcher.button:   1
 URxct*urlLauncher:      firefox
