@@ -8,17 +8,32 @@ FIELDIFS=':'
 # }}}
 # Functions {{{
 
+Align() { #{{{
+  case $1 in
+    left)   printf "^p(_LEFT)"    ;;
+    center) printf "^p(_CENTER)"  ;;
+    right)  printf "^p(_RIGHT)"   ;;
+  esac
+
+  [ -n $2 ] && printf "^p($2)"
+}
+
+# }}}
+Separate() { #{{{
+  printf "     "
+}
+
+# }}}
 Icon() { #{{{
   printf "^fg(#505050) ^i(%s) ^fg()" "$HOME/dotfiles/WM/dzen/icons/${1}.xbm"
-} #}}}
+}
 
-Time() { #{{{
-  printf "%s" "$(Icon clock) $(date +%H:%M:%S)"
-} #}}}
+# }}}
+Script() { # {{{
+  printf "pkill $1 || $HOME/dotfiles/WM/dzen/$1"
+}
 
-Title() { #{{{
-  printf " %s " "$(xtitle)"
-} #}}}
+# }}}
 
 Desks() { #{{{
   read -r -t .1 line
@@ -69,8 +84,19 @@ Desks() { #{{{
   esac
 
   printf "$DESK"
-} #}}}
+}
 
+# }}}
+Time() { #{{{
+  printf "%s" "$(Icon clock) $(date +%H:%M:%S)"
+}
+
+# }}}
+Title() { #{{{
+  printf " %s " "$(xtitle)"
+}
+
+# }}}
 Volume() { #{{{
   vol=$(amixer get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*")
   mut=$(amixer get Master | egrep 'Playback.*?\[o' | egrep -o '\[o.+\]')
@@ -89,27 +115,22 @@ Volume() { #{{{
 
   [ "$mut" = "[off]" ] && ico="$(Icon volume0)"
 
-  printf "^ca(1,pkill $HOME/dotfiles/WM/dzen/volume.sh || $HOME/dotfiles/WM/dzen/volume.sh) $ico ^ca()"
-} # }}}
+  printf "^ca(1,$(Script volume.sh)) $ico ^ca()"
+}
 
-Separate() { #{{{
-  printf "     "
-} # }}}
+# }}}
 
-Align() { #{{{
-  case $1 in
-    left)   printf "^p(_LEFT)"    ;;
-    center) printf "^p(_CENTER)"  ;;
-    right)  printf "^p(_RIGHT)"   ;;
-  esac
+Menu() { # {{{
+  printf "^ca(1,$(Script menu.sh)) M  ^ca()"
+}
 
-  [ -n $2 ] && printf "^p($2)"
-} # }}}
+# }}}
 
 # }}}
 
 while :; do
   Align left
+  Menu
   Title
 
   Align center -130
