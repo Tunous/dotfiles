@@ -169,9 +169,9 @@ super + {r,R}
 # Programs --------------------------------------------------------------------
 # Urxvt
 super + Return
-    urxvt -e tmux
+    urxvt
 super + shift + Return
-    urxvt -name 'Floating' -e tmux
+    urxvt -name 'URxvtFloating'
 
 # Dmenu
 super + space

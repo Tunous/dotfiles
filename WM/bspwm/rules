@@ -14,7 +14,7 @@ case "$c" in
   Nautilus)     floatC ;;
   File-roller)  floatC ;;
   Steam)        float  ;;
-  URxvt)        [ "$i" = "Floating" ] && floatC ;;
+  URxvt)        [ "$i" = "URxvtFloating" ] && floatC ;;
 
   # Frame
   BSPWM_FRAME)  echo "frame=on private=on" ;;
