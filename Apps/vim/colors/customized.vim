@@ -73,41 +73,41 @@ endfunction
 " Actual colorscheme ----------------------------------------------------------
 " General/UI {{{
 
-call s:HL('Normal'       , 'foreground' , 'background' , 'none')
+call s:HL('Normal',       'foreground', 'background', 'none')
 
-call s:HL('Folded'       , 'selection'  , 'none'       , 'none')
+call s:HL('Folded',       'selection',  'none',       'none')
 
-call s:HL('VertSplit'    , 'comment'    , 'line'       , 'none')
+call s:HL('VertSplit',    'comment',    'line',       'none')
 
-call s:HL('CursorLine'   , 'none'       , 'line'       , 'none')
-call s:HL('CursorColumn' , 'none'       , 'line'       , 'none')
-call s:HL('ColorColumn'  , 'none'       , 'line'       , 'none')
+call s:HL('CursorLine',   'none',       'line',       'none')
+call s:HL('CursorColumn', 'none',       'line',       'none')
+call s:HL('ColorColumn',  'none',       'line',       'none')
 
-call s:HL('TabLine'      , 'comment'    , 'none'       , 'none')
-call s:HL('TabLineFill'  , 'comment'    , 'none'       , 'none')
-call s:HL('TabLineSel'   , 'foreground' , 'none'       , 'none')
+call s:HL('TabLine',      'comment',    'none',       'none')
+call s:HL('TabLineFill',  'comment',    'none',       'none')
+call s:HL('TabLineSel',   'foreground', 'none',       'none')
 
-call s:HL('MatchParen'   , 'Blue'       , 'line'       , 'bold')
+call s:HL('MatchParen',   'Blue',       'line',       'bold')
 
-call s:HL('NonText'      , 'selection'  , 'none'       , 'none')
-call s:HL('SpecialKey'   , 'selection'  , 'none'       , 'none')
+call s:HL('NonText',      'selection',  'none',       'none')
+call s:HL('SpecialKey',   'selection',  'none',       'none')
 
-call s:HL('Visual'       , 'foreground' , 'selection'  , 'none')
-call s:HL('VisualNOS'    , 'foreground' , 'selection'  , 'none')
+call s:HL('Visual',       'foreground', 'none',       'reverse')
+call s:HL('VisualNOS',    'foreground', 'none',       'reverse')
 
-call s:HL('Search'       , 'Yellow'     , 'none'       , 'reverse')
-call s:HL('IncSearch'    , 'Orange'     , 'none'       , 'none')
+call s:HL('Search',       'Yellow',     'none',       'reverse')
+call s:HL('IncSearch',    'Orange',     'none',       'none')
 
-call s:HL('StatusLine'   , 'selection'  , 'none'       , 'reverse')
-call s:HL('StatusLineNC' , 'line'       , 'foreground' , 'reverse')
+call s:HL('StatusLine',   'comment',    'selection',  'reverse')
+call s:HL('StatusLineNC', 'line',       'foreground', 'reverse')
 
-call s:HL('WildMenu'     , 'Green'      , 'none'       , 'underline')
+call s:HL('WildMenu',     'Green',      'none',       'underline')
 
-call s:HL('Directory'    , 'Blue'       , 'none'       , 'none')
+call s:HL('Directory',    'Blue',       'none',       'none')
 
-call s:HL('Title'        , 'Green'      , 'none'       , 'none')
+call s:HL('Title',        'Green',      'none',       'none')
 
-call s:HL('ErrorMsg', 'Red', 'none', 'none')
+call s:HL('ErrorMsg',     'Red',        'none',       'none')
 "call s:HL('MoreMsg', 'st Bold')
 "call s:HL('MoreMsg')
 "call s:HL("ModeMsg")

@@ -4,11 +4,11 @@
 ! Definitions {{{
 
 ! Base colors
-#define B_Background  #262626
-#define B_Foreground  #9e9e9e
-#define B_Comment     #606060
-#define B_Selection   #444444
-#define B_Line        #303030
+#define C_Background  #262626
+#define C_Foreground  #9e9e9e
+#define C_Comment     #606060
+#define C_Selection   #444444
+#define C_Line        #303030
 
 ! Light colors
 #define C_Red         #af0000
@@ -21,7 +21,7 @@
 ! Dark colors
 #define D_Red         #a54242
 #define D_Green       #8c9400
-#define D_Orange      #d75f00
+#define D_Yellow      #d75f00
 #define D_Blue        #5f819d
 #define D_Magenta     #85678f
 #define D_Cyan        #5e8d87
@@ -29,45 +29,45 @@
 ! }}}
 
 ! Basic
-*background:  B_Background
-*foreground:  B_Foreground
+*background:   C_Background
+*foreground:   C_Foreground
 
 ! Black
-*color0:      B_Line
-*color8:      B_Selection
+*color0:       C_Line
+*color8:       C_Selection
 
 ! Red
-*color1:      D_Red
-*color9:      C_Red
+*color1:       D_Red
+*color9:       C_Red
 
 ! Green
-*color2:      D_Green
-*color10:     C_Green
+*color2:       D_Green
+*color10:      C_Green
 
 ! Yellow
-*color3:      D_Orange
-*color11:     C_Yellow
+*color3:       D_Yellow
+*color11:      C_Yellow
 
 ! Blue
-*color4:      D_Blue
-*color12:     C_Blue
+*color4:       D_Blue
+*color12:      C_Blue
 
 ! Magenta
-*color5:      D_Magenta
-*color13:     C_Magenta
+*color5:       D_Magenta
+*color13:      C_Magenta
 
 ! Cyan
-*color6:      D_Cyan
-*color14:     C_Cyan
+*color6:       D_Cyan
+*color14:      C_Cyan
 
 ! White
-*color7:      B_Comment
-*color15:     B_Foreground
+*color7:       C_Comment
+*color15:      C_Foreground
 
 ! Underline
-URxvt*colorUL:          C_Blue
-URxvt*colorBD:          C_Yellow
-URxvt*colorIT:          C_Comment
+URxvt*colorUL: C_Blue
+URxvt*colorBD: C_Yellow
+URxvt*colorIT: C_Comment
 
 ! }}}
 
