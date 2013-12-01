@@ -27,3 +27,9 @@ Used software
 * Vim        - Text editor
 * Vimperator - Vim key bindings for Firefox
 * Zsh        - Shell
+
+Thanks to
+---------
+
+* [Bill Indelicato](http://www.windelicato.com/) for his [dotfiles repository](https://github.com/windelicato/dotfiles)
+* [Lumolk](https://github.com/lumolk) for his [config repository](https://github.com/lumolk/config)
