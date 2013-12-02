@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -n "$1" ]; then
+  CMD="$1"
+else
+  CMD=$(echo "
+  logout
+  shutdown
+  reboot" | dmenu -p 'Select action:' -nb "#262626" -nf "#7d7d7d" -sb "#87af00" -sf "#262626")
+fi
+
+case $CMD in
+  reboot)
+    exec urxvt -name 'URxvtFloating' -geometry '50x2' -e sh -c 'echo "Enter your password to reboot computer:" && sudo shutdown -r now'
+    ;;
+  shutdown)
+    exec urxvt -name 'URxvtFloating' -geometry '50x2' -e sh -c 'echo "Enter your password to shutdown computer:" && sudo shutdown -h now'
+    ;;
+  logout)
+    exec urxvt -name 'URxvtFloating' -geometry '50x2' -e sh -c 'echo "Are you sure you want to logout (Y/n)" && read answer && [ $answer = Y ] && (pkill panel; pkill dzen2; bspc quit)'
+    ;;
+esac
