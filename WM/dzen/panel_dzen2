@@ -1,4 +1,5 @@
 #! /bin/bash
+. $HOME/dotfiles/WM/dzen/common.sh
 
 # Variables {{{
 
@@ -7,33 +8,6 @@ FIELDIFS=':'
 
 # }}}
 # Functions {{{
-
-Align() { #{{{
-  case $1 in
-    left)   printf "^p(_LEFT)"    ;;
-    center) printf "^p(_CENTER)"  ;;
-    right)  printf "^p(_RIGHT)"   ;;
-  esac
-
-  [ -n $2 ] && printf "^p($2)"
-}
-
-# }}}
-Separate() { #{{{
-  printf "     "
-}
-
-# }}}
-Icon() { #{{{
-  printf "^fg(#505050) ^i(%s) ^fg()" "$HOME/dotfiles/WM/dzen/icons/${1}.xbm"
-}
-
-# }}}
-Script() { # {{{
-  printf "pkill $1 || $HOME/dotfiles/WM/dzen/$1"
-}
-
-# }}}
 
 Desks() { #{{{
   read -r -t .1 line
@@ -93,7 +67,7 @@ Time() { #{{{
 
 # }}}
 Title() { #{{{
-  printf " %s " "$(xtitle)"
+  printf "^ca(1,$(Script action.sh)) %s ^ca()" "$(xtitle)"
 }
 
 # }}}
