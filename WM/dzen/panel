@@ -1,6 +1,7 @@
-#! /bin/sh
+#! /bin/bash
 
 # Init {{{
+
 
 if [ $(pgrep -cx panel) -gt 1 ] ; then
   printf "%s\n" "The panel is already running." >&2
@@ -9,24 +10,139 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
+. $HOME/dotfiles/WM/dzen/common.sh
+
+
 # }}}
 # Fifo {{{
 
-[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
-mkfifo "$PANEL_FIFO"
 
-bspc control --subscribe > "$PANEL_FIFO" &
+FIFO=/tmp/panel-fifo
+[ -e "$FIFO" ] && rm "$FIFO"
+mkfifo "$FIFO"
+exec 3<> "$FIFO"
+
+bspc control --subscribe >&3 &
+
 
 # }}}
 # Variables {{{
 
-PANEL_HEIGHT=18
-EVENTS=''
 
-# }}}
+NORMIFS=$IFS
+FIELDIFS=':'
+
+PANEL_HEIGHT=15
+EVENTS=''
 
 bspc config top_padding $PANEL_HEIGHT
 
-cat "$PANEL_FIFO" | $HOME/dotfiles/WM/dzen/panel_dzen2 | dzen2 -h "$PANEL_HEIGHT" -ta 'l' -e "$EVENTS" &
+
+# }}}
+# Functions {{{
+
+Desks() { #{{{
+  if read -r -t .1 line <&3; then
+    case "$line" in
+      W*)
+        # bspwm internal state
+        DESK="  "
+        IFS=$FIELDIFS
+        set -- ${line#?}
+
+        while [ $# -gt 0 ] ; do
+          item=$1
+          name=${item#?}
+          icon=" • "
+
+          case $item in
+            [OoFfUu]*)
+              case $item in
+                [OFU]*) # Focused desktop
+                  FG='#ffffff'
+                  ;;
+
+                o*) # Occupied desktop
+                  FG='#5e6c70'
+                  ;;
+
+                f*) # Free desktop
+                  FG='#000000'
+                  ;;
+
+                u*) # Urgent desktop
+                  FG='#000000'
+                  ;;
+              esac
+
+              DESK="${DESK}^fg($FG)^bg(#262626)^ca(1, bspc desktop -f ${name})^ca(2, bspc window -d ${name}) ${icon} ^ca()^ca()^fg()^bg()"
+              ;;
+          esac
+          shift
+        done
+        IFS=$NORMIFS
+        ;;
+    esac
+  fi
+
+  printf "$DESK"
+}
+
+# }}}
+Time() { #{{{
+  printf "%s" "$(Icon clock) $(date +%H:%M:%S)"
+}
+
+# }}}
+Title() { #{{{
+  printf "%s" "$(xtitle)"
+}
+
+# }}}
+Volume() { #{{{
+  vol=$(amixer get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*")
+  mut=$(amixer get Master | egrep 'Playback.*?\[o' | egrep -o '\[o.+\]')
+
+  if [ $vol -eq 0 ]; then
+    ico="$(Icon volume0)"
+  elif [ $vol -eq 100 ]; then
+    ico="$(Icon volume100)"
+  elif [ $vol -lt 100 ] && [ $vol -gt 60 ]; then
+    ico="$(Icon volume75)"
+  elif [ $vol -le 60 ] && [ $vol -gt 30 ]; then
+    ico="$(Icon volume50)"
+  elif [ $vol -le 30 ] && [ $vol -gt 0 ]; then
+    ico="$(Icon volume25)"
+  fi
+
+  [ "$mut" = "[off]" ] && ico="$(Icon volume0)"
+
+  printf "^ca(1,$(Script volume.sh)) $ico ^ca()"
+}
+
+# }}}
+Menu() { # {{{
+  printf "^ca(1,$(Script menu.sh)) M  ^ca()"
+}
+
+# }}}
+
+# }}}
+
+while :; do
+  Align left
+  Menu
+  Title
+
+  Align center -130
+  Desks
+
+  Align right -140
+  Volume
+
+  Separate
+  Time
+  echo
+done | dzen2 -h "$PANEL_HEIGHT" -ta l -e "$EVENTS" &
 
 wait
