@@ -189,35 +189,37 @@ set timeout
 set timeoutlen=1000
 set ttimeoutlen=100
 
-set wildmenu                      " Use wildmenu for commandline autocompletion
+set wildmenu                        " Use wildmenu for commandline autocompletion
 
-set autoread                      " Read file if it was modified outside of vim
-set autochdir                     " Automatically change working directory to directory of current file
+set autoread                        " Read file if it was modified outside of vim
+set autochdir                       " Automatically change working directory to directory of current file
 
-set hidden                        " Allow hidden buffers
+set hidden                          " Allow hidden buffers
 
-set showcmd                       " Show executed command in commands line
+set showcmd                         " Show executed command in commands line
 
-set cursorcolumn                  " Highlight cursor column...
-set cursorline                    " ... and line
+set cursorcolumn                    " Highlight cursor column...
+set cursorline                      " ... and line
 
-set backspace=indent,eol,start    " Make backspace delete everything in insert mode
+set backspace=indent,eol,start      " Make backspace delete everything in insert mode
 
-set laststatus=2                  " Always show statusline
+set laststatus=2                    " Always show statusline
 
 " Don't beep and don't flash screen
 set visualbell
 set t_vb=
 
-set nowrap                        " Don't wrap lines
+set nowrap                          " Don't wrap lines
 
 " Show list chars
 set list
 set listchars=tab:▸\ ,trail:·
 
-set foldmethod=marker             " Use marker foldmethod
+set foldmethod=marker               " Use marker foldmethod
 
-set synmaxcol=300                 " Limit syntax highlight of long lines
+set synmaxcol=300                   " Limit syntax highlight of long lines
+
+set clipboard^=unnamed,unnamedplus  " Use system clipboard
 
 " }}}
 
