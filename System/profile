@@ -2,7 +2,6 @@
 [ -d "$HOME/bin" ]              && PATH="$HOME/bin:$PATH"
 [ -d "$HOME/dotfiles/Scripts" ] && PATH="$HOME/dotfiles/Scripts:$PATH"
 
-export PANEL_FIFO=/tmp/panel-fifo
 export EDITOR=vim
 
 export XDG_CONFIG_HOME="$HOME/.config"
