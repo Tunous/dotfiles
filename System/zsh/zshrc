@@ -21,8 +21,9 @@ zle -N zle-keymap-select
 PROMPT="
 %{$fg[white]%} » %{$reset_color%}"
 
-source ~/GitRepos/opp.zsh/opp.zsh
-source ~/GitRepos/opp.zsh/opp/*.zsh
+# More motions for vi-mode
+source ~/dotfiles/System/zsh/opp/opp.zsh
+source ~/dotfiles/System/zsh/opp/opp/*.zsh
 
 # Window title
 precmd() {
