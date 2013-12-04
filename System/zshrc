@@ -18,8 +18,7 @@ zle -N zle-keymap-select
 
 # Prompt
 PROMPT="
-%n@%m: %~
-: "
+%{$fg[white]%} » %{$reset_color%}"
 
 source ~/GitRepos/opp.zsh/opp.zsh
 source ~/GitRepos/opp.zsh/opp/*.zsh
