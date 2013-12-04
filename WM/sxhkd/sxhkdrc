@@ -76,6 +76,9 @@ super + {o,i}
 # ::: Mouse {{{
 
 
+~button1
+    bspc pointer -g focus
+
 super + button{1-3}
     bspc pointer -g {move,resize_side,resize_corner}
 

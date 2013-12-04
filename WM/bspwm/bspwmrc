@@ -2,6 +2,7 @@
 
 # Desktop names
 bspc monitor -d 1 2 3 4 5 Float 6 7 8 9 0
+bspc dektop Float -t floating
 
 # Config
 bspc config border_width            2
