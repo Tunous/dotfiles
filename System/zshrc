@@ -22,3 +22,8 @@ PROMPT="
 
 source ~/GitRepos/opp.zsh/opp.zsh
 source ~/GitRepos/opp.zsh/opp/*.zsh
+
+# Window title
+precmd() {
+  print -Pn "\e]2;%100<...<%~%<<\a"
+}
