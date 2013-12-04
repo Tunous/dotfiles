@@ -54,6 +54,7 @@ Desks() { #{{{
           item=$1
           name=${item#?}
           icon=" • "
+          [ "$name" = Float ] && icon="$name"
 
           case $item in
             [OoFfUu]*)
@@ -134,7 +135,7 @@ while :; do
   Menu
   Title
 
-  Align center -130
+  Align center -147
   Desks
 
   Align right -140

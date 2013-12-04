@@ -47,8 +47,8 @@ super + {_,shift + }c
 super + {_,shift + } bracket{left,right}
     bspc {desktop -f,window -d} {prev,next}
 
-super + {_,shift + }{1-9,0}
-    bspc {desktop -f,window -d} ^{1-9,10}
+super + {_,shift + } {0-9,alt + f}
+    bspc {desktop -f, window -d} {0-9,Float}
 
 
 # }}}
