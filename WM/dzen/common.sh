@@ -17,5 +17,5 @@ Icon() {
 }
 
 Script() {
-  printf "pkill $1 || $HOME/dotfiles/WM/dzen/$1"
+  printf "$HOME/dotfiles/WM/dzen/$1"
 }
