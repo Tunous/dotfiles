@@ -1,3 +1,5 @@
+autoload -U colors && colors
+
 # Remove dalay
 KEYTIMEOUT=1
 
@@ -7,8 +9,7 @@ bindkey -v
 # Current mode
 RPROMPT=""
 function zle-line-init zle-keymap-select {
-  VIMODE="${${KEYMAP/vicmd/Command}/(main|viins)/Insert}"
-  RPROMPT="$VIMODE"
+  RPROMPT="%{$fg[white]%} ${${KEYMAP/vicmd/«}/(main|viins)/} %{$reset_color%}"
   zle reset-prompt
   zle -R
 }
@@ -36,3 +37,6 @@ setopt hist_ignore_all_dups
 export HISTFILE="$HOME/.zsh-history"
 export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
+
+setopt AUTO_CD
+setopt CORRECT
