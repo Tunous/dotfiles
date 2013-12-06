@@ -180,9 +180,6 @@ super + shift + Return
 super + space
     dmenu_run -nb "#262626" -nf "#7d7d7d" -sb "#87af00" -sf "#262626" -p "Exec:"
 
-super + alt + space
-    terminalPrompt
-
 # Firefox
 alt + f
     firefox
