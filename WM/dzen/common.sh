@@ -9,7 +9,7 @@ Align() {
 }
 
 Separate() {
-  printf "     "
+  printf "  ^fg(#505050)|^fg()  "
 }
 
 Icon() {
@@ -17,5 +17,5 @@ Icon() {
 }
 
 Script() {
-  printf "$HOME/dotfiles/WM/dzen/$1"
+  printf "pkill "$1"; $HOME/dotfiles/WM/dzen/$1"
 }

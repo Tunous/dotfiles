@@ -22,8 +22,6 @@ FIFO=/tmp/panel-fifo
 mkfifo "$FIFO"
 exec 3<> "$FIFO"
 
-bspc control --subscribe >&3 &
-
 
 # }}}
 # Variables {{{
@@ -41,62 +39,8 @@ bspc config top_padding $PANEL_HEIGHT
 # }}}
 # Functions {{{
 
-Desks() { #{{{
-  if read -r -t .1 line <&3; then
-    case "$line" in
-      W*)
-        # bspwm internal state
-        DESK="  "
-        IFS=$FIELDIFS
-        set -- ${line#?}
-
-        while [ $# -gt 0 ] ; do
-          item=$1
-          name=${item#?}
-          icon=" • "
-          [ "$name" = Float ] && icon="$name"
-
-          case $item in
-            [OoFfUu]*)
-              case $item in
-                [OFU]*) # Focused desktop
-                  FG='#ffffff'
-                  ;;
-
-                o*) # Occupied desktop
-                  FG='#5e6c70'
-                  ;;
-
-                f*) # Free desktop
-                  FG='#000000'
-                  ;;
-
-                u*) # Urgent desktop
-                  FG='#000000'
-                  ;;
-              esac
-
-              DESK="${DESK}^fg($FG)^bg(#262626)^ca(1, bspc desktop -f ${name})^ca(2, bspc window -d ${name}) ${icon} ^ca()^ca()^fg()^bg()"
-              ;;
-          esac
-          shift
-        done
-        IFS=$NORMIFS
-        ;;
-    esac
-  fi
-
-  printf "$DESK"
-}
-
-# }}}
 Time() { #{{{
   printf "%s" "$(Icon clock) $(date +%H:%M:%S)"
-}
-
-# }}}
-Title() { #{{{
-  printf "%s" "$(xtitle)"
 }
 
 # }}}
@@ -130,20 +74,73 @@ Menu() { # {{{
 
 # }}}
 
+# Updating {{{
+
+
+bspc control --subscribe >&3 &
+xtitle -sf 'T%s' >&3 &
 while :; do
-  Align left
-  Menu
-  Title
+  echo "S$(Time)" >&3
+  sleep 3
+done &
 
-  Align center -147
-  Desks
 
-  Align right -140
-  Volume
+# }}}
+# Printing {{{
 
-  Separate
-  Time
-  echo
+
+while read -r line <&3; do
+  case $line in
+    S*)
+      TIME="$(Align right -140; Volume; Separate) ${line#?}"
+      ;;
+    T*)
+      TITLE="$(Align left; Menu) ${line#?}"
+      ;;
+    W*)
+      # bspwm internal state
+      DESK=" $(Align center -147) "
+      IFS=$FIELDIFS
+      set -- ${line#?}
+
+      while [ $# -gt 0 ] ; do
+        item=$1
+        name=${item#?}
+        icon=" • "
+        [ "$name" = Float ] && icon="$name"
+
+        case $item in
+          [OoFfUu]*)
+            case $item in
+              [OFU]*) # Focused desktop
+                FG='#ffffff'
+                ;;
+
+              o*) # Occupied desktop
+                FG='#5e6c70'
+                ;;
+
+              f*) # Free desktop
+                FG='#000000'
+                ;;
+
+              u*) # Urgent desktop
+                FG='#000000'
+                ;;
+            esac
+
+            DESK="${DESK}^fg($FG)^bg(#262626)^ca(1, bspc desktop -f ${name})^ca(2, bspc window -d ${name}) ${icon} ^ca()^ca()^fg()^bg()"
+            ;;
+        esac
+        shift
+      done
+      IFS=$NORMIFS
+      ;;
+  esac
+
+  echo "$TITLE $DESK $TIME"
 done | dzen2 -h "$PANEL_HEIGHT" -ta l -e "$EVENTS" &
+
+# }}}
 
 wait
