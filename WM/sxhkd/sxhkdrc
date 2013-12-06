@@ -15,11 +15,11 @@ super + Escape
     pkill -USR1 -x sxhkd
 
 # Restart panel
-alt + z
+super + alt + z
     pkill panel; pkill dzen2; $HOME/dotfiles/WM/dzen/panel
 
 # Reload compton
-alt + c
+super + alt + c
     pkill compton; compton
 
 
@@ -47,7 +47,7 @@ super + {_,shift + }c
 super + {_,shift + } bracket{left,right}
     bspc {desktop -f,window -d} {prev,next}
 
-super + {_,shift + } {0-9,alt + f}
+super + {_,shift + } {0-9,ctrl + f}
     bspc {desktop -f, window -d} {0-9,Float}
 
 
@@ -181,15 +181,15 @@ super + space
     dmenu_run -nb "#262626" -nf "#7d7d7d" -sb "#87af00" -sf "#262626" -p "Exec:"
 
 # Firefox
-alt + f
+super + alt + f
     firefox
 
 # Frame
-alt + a
+super + alt + a
     create_frame
 
 # Ranger
-alt + r
+super + alt + r
     urxvt -e ranger
 
 # End {{{
