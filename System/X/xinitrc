@@ -9,8 +9,8 @@ xset fp rehash
 xmodmap ~/.Xmodmap
 xcape
 
-# Wallpaper
-hsetroot -fill ~/Dropbox/Wallpapers/a.png
+# Wallpaper: http://wallpapers.cc/wallpapers/10671
+hsetroot -fill ~/Dropbox/Wallpapers/10671.jpg
 
 # Mouse pointer
 xsetroot -cursor_name left_ptr

@@ -129,7 +129,7 @@ while read -r line <&3; do
                 ;;
             esac
 
-            DESK="${DESK}^fg($FG)^bg(#262626)^ca(1, bspc desktop -f ${name})^ca(2, bspc window -d ${name}) ${icon} ^ca()^ca()^fg()^bg()"
+            DESK="${DESK}^fg($FG)^ca(1, bspc desktop -f ${name})^ca(2, bspc window -d ${name}) ${icon} ^ca()^ca()^fg()"
             ;;
         esac
         shift
@@ -139,7 +139,7 @@ while read -r line <&3; do
   esac
 
   echo "$TITLE $DESK $TIME"
-done | dzen2 -h "$PANEL_HEIGHT" -ta l -e "$EVENTS" &
+done | dzen2 -h "$PANEL_HEIGHT" -ta l -bg "#000000" -e "$EVENTS" &
 
 # }}}
 

@@ -24,4 +24,4 @@ echo '   Run'
 echo 'X Logout'
 echo 'X Reboot'
 echo 'X Shutdown'
-) | dzen2 -m -p -l 8 -tw 1 -w 100 -sa l -e 'onstart=uncollapse;button2=exit;button1=menuprint;button3=exit' | Exec
+) | dzen2 -m -p -l 8 -tw 1 -w 100 -sa l -e 'onstart=uncollapse;button2=exit;button1=menuprint,exit;button3=exit' | Exec

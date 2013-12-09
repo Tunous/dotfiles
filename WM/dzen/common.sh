@@ -9,7 +9,7 @@ Align() {
 }
 
 Separate() {
-  printf "  ^fg(#505050)|^fg()  "
+  printf "     "
 }
 
 Icon() {
