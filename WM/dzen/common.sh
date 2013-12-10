@@ -13,9 +13,9 @@ Separate() {
 }
 
 Icon() {
-  printf "^fg(#505050) ^i(%s) ^fg()" "$HOME/dotfiles/WM/dzen/icons/${1}.xbm"
+  printf "^fg(#444444) ^i(%s) ^fg()" "$HOME/dotfiles/WM/dzen/icons/${1}.xbm"
 }
 
 Script() {
-  printf "pkill "$1"; $HOME/dotfiles/WM/dzen/$1"
+  printf "pkill '$1'; $HOME/dotfiles/WM/dzen/$1"
 }

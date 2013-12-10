@@ -121,11 +121,11 @@ while read -r line <&3; do
                 ;;
 
               f*) # Free desktop
-                FG='#000000'
+                FG='#444444'
                 ;;
 
               u*) # Urgent desktop
-                FG='#000000'
+                FG='#af8700'
                 ;;
             esac
 
