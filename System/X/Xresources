@@ -1,5 +1,4 @@
 ! Colors {{{
-! TODO Not finished
 
 ! Definitions {{{
 
@@ -73,19 +72,25 @@ URxvt*colorIT: C_Comment
 
 ! Urxvt settings {{{
 
-URxvt*scrollBar:        false
-URxvt*geometry:         120x30
+URxvt*scrollBar:       false
+URxvt*geometry:        120x30
 
 ! Clickable links
-URxvt*perl-ext-common:  default,matcher
-URxvt*matcher.button:   1
-URxct*urlLauncher:      firefox
+URxvt*perl-ext-common: default,matcher
+URxvt*matcher.button:  1
+URxct*urlLauncher:     firefox
+URxvt*internalBorder:  5
 
 ! }}}
 
+! Dzen2
+dzen2*background:      #000000
+dzen2*font:            -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
+
 ! Fonts
-*font:                -*-terminus-medium-*-normal-*-12-*-*-*-*-*-iso10646-*
-URxvt*internalBorder: 5
+! *font:                -*-terminus-medium-*-normal-*-12-*-*-*-*-*-iso10646-*
+*font:                 -*-tamzenforpowerline-medium-*-*-*-14-*-*-*-*-*-*-*
+*boldFont:             -*-tamzenforpowerline-bold-*-*-*-14-*-*-*-*-*-*-*
 
 ! End {{{
 ! vim: ft=xdefaults

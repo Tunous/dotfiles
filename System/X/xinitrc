@@ -1,8 +1,9 @@
 # Xresources
 xrdb -merge ~/.Xresources
 
-# terminus font
+# Fonts
 xset +fp /usr/share/fonts/local
+xset +fp ~/.fonts
 xset fp rehash
 
 # Key configurations
