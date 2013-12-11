@@ -399,10 +399,17 @@ endfunction
 
 " {{{ Relative numbers
 
-augroup relnum
+augroup NumbersColumn
   au!
-  au BufEnter    * call NumberToggle('on')
-  au BufLeave    * call NumberToggle('off')
+  au BufCreate   * call NumberToggle('on')
+  " au BufEnter    * call NumberToggle('on')
+  " au BufLeave    * call NumberToggle('off')
+
+  au BufWinEnter * call NumberToggle('on')
+  au BufWinLeave * call NumberToggle('off')
+
+  au WinEnter    * call NumberToggle('on')
+  au WinLeave    * call NumberToggle('off')
 
   au InsertEnter * call NumberToggle('norel')
   au InsertLeave * call NumberToggle('on')
