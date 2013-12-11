@@ -88,7 +88,6 @@ done &
 # }}}
 # Printing {{{
 
-
 while read -r line <&3; do
   case $line in
     S*)
