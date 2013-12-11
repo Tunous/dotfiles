@@ -7,7 +7,7 @@
 "       \__/    (__\_|_)|___|\__/|___||__|  \___) \_______)
 "
 " Main settings -----------------------------------------------------------
-" Initial settings {{{
+" {{{ Initial settings
 
 set nocompatible
 set encoding=utf-8
@@ -18,7 +18,7 @@ filetype plugin indent on
 syntax on
 
 " }}}
-" Leader {{{
+" {{{ Leader
 
 " Use ',' as leader
 let mapleader=","
@@ -26,9 +26,9 @@ let mapleader=","
 " }}}
 
 " Plugins -----------------------------------------------------------------
-" Vundle {{{
+" {{{ Vundle
 
-" Set paths {{{
+" {{{ Set paths
 
 set rtp+=$HOME/.vim/bundle/vundle
 call vundle#rc('$HOME/.vim/bundle/')
@@ -39,7 +39,7 @@ Bundle 'gmarik/vundle'
 
 " }}}
 
-" Airline {{{
+" {{{ Airline
 
 " Nice looking statusline
 Bundle 'bling/vim-airline'
@@ -52,7 +52,7 @@ let g:airline_detect_iminsert=0
 let g:airline#extensions#tabline#enabled = 1
 
 " }}}
-" DelimitMate {{{
+" {{{ DelimitMate
 
 " Automatically close quotes, brackets, etc.
 Bundle 'Raimondi/delimitMate'
@@ -62,12 +62,12 @@ let delimitMate_expand_space = 1
 let delimitMate_balance_matchpairs = 1
 
 " }}}
-" Fugitive {{{
+" {{{ Fugitive
 
 " Use git inside of vim
 Bundle 'tpope/vim-fugitive'
 
-" Auto-clean fugitive buffers {{{
+" {{{ Auto-clean fugitive buffers
 
 augroup fugitive
   autocmd!
@@ -77,14 +77,14 @@ augroup END
 " }}}
 
 " }}}
-" Gitv {{{
+" {{{ Gitv
 
 Bundle 'gregsexton/gitv'
 
 let g:Gitv_DoNotMapCtrlKey = 1
 
 " }}}
-" NERDTree {{{
+" {{{ NERDTree
 
 Bundle 'scrooloose/nerdtree'
 
@@ -93,17 +93,17 @@ let NERDTreeDirArrows=1
 nnoremap <Leader>t :NERDTreeToggle<CR>
 
 " }}}
-" Surround {{{
+" {{{ Surround
 
 Bundle 'tpope/vim-surround'
 
 " }}}
-" Sxhkdrc {{{
+" {{{ Sxhkdrc
 
 Bundle 'baskerville/vim-sxhkdrc'
 
 " }}}
-" Easy align {{{
+" {{{ Easy align
 
 Bundle 'junegunn/vim-easy-align'
 
@@ -112,7 +112,7 @@ vnoremap <Leader><CR> :LiveEasyAlign<CR>
 
 
 " }}}
-" Tcomment {{{
+" {{{ Tcomment
 
 " Comment selected text
 Bundle 'tomtom/tcomment_vim'
@@ -120,7 +120,7 @@ Bundle 'tomtom/tcomment_vim'
 " }}}
 
 " Actual settings ---------------------------------------------------------
-" Theme settings {{{
+" {{{ Theme settings
 
 set t_Co=256                  " Use 256 colors
 set background=dark           " Set dark background
@@ -128,9 +128,9 @@ let g:customized_use_xresources = 1
 colorscheme customized        " Use my own theme
 
 " }}}
-" Settting options {{{
+" {{{ Settting options
 
-" Bakcup and swap files {{{
+" {{{ Bakcup and swap files
 
 " Don't create swap and backup files
 set nobackup
@@ -138,7 +138,7 @@ set nowritebackup
 set noswapfile
 
 " }}}
-" Mouse {{{
+" {{{ Mouse
 
 " Can use mouse in all modes
 if has("mouse")
@@ -146,7 +146,7 @@ if has("mouse")
 endif
 
 " }}}
-" Search options {{{
+" {{{ Search options
 
 set hlsearch                      " Highlight search terms
 set incsearch                     " Show search matches as I type
@@ -154,13 +154,13 @@ set ignorecase                    " Ignore case when searching...
 set smartcase                     " unless I use uppercase characters
 
 " }}}
-" Smart scrolling {{{
+" {{{ Smart scrolling
 
 set scrolloff=10
 set sidescrolloff=15
 
 " }}}
-" Tabs and spaces {{{
+" {{{ Tabs and spaces
 
 set tabstop=4                     " Number of spaces for tab
 set shiftwidth=2                  " Number of spaces to use for indenting
@@ -170,7 +170,7 @@ set autoindent                    " Always set autoindenting on
 set copyindent                    " Copy the previous indentation on autoindenting
 
 " }}}
-" Undo files {{{
+" {{{ Undo files
 
 let s:undofilesDir = "$HOME/.vim/undofiles"
 
@@ -182,7 +182,7 @@ execute 'set undodir=' . s:undofilesDir
 set undofile
 
 " }}}
-" Other {{{
+" {{{ Other
 
 " Add short timeout
 set timeout
@@ -224,9 +224,9 @@ set clipboard^=unnamed,unnamedplus  " Use system clipboard
 " }}}
 
 " }}}
-" Key mappings {{{
+" {{{ Key mappings
 
-" Buffers navigation {{{
+" {{{ Buffers navigation
 
 nnoremap <Leader>N :bp<CR>
 nnoremap <Leader>n :bn<CR>
@@ -234,7 +234,7 @@ nnoremap <Leader>b :ls<CR>:b<Space>
 nnoremap <Leader>d :bd<CR>
 
 " }}}
-" Nvigation {{{
+" {{{ Nvigation
 
 " Better navigation with wrapped lines
 nnoremap j gj
@@ -257,7 +257,7 @@ inoremap <Left> <NOP>
 inoremap <Right> <NOP>
 
 " }}}
-" Open config files {{{
+" {{{ Open config files
 
 " Open vimrc
 nnoremap <Leader>vv :edit $HOME/.vim/vimrc<CR>
@@ -269,7 +269,7 @@ nnoremap <Leader>vp :edit $HOME/.vimperator/vimperatorrc<CR>
 nnoremap <Leader>vt :edit $HOME/.vim/colors/customized.vim<CR>
 
 " }}}
-" Other {{{
+" {{{ Other
 
 " Capitalize word next to cursor
 inoremap <C-u> <Esc>:call Preserve("normal gUiw")<CR>a
@@ -299,9 +299,9 @@ nnoremap Y y$
 " }}}
 
 " }}}
-" Functions {{{
+" {{{ Functions
 
-" Insert header preprocessor gates {{{
+" {{{ Insert header preprocessor gates
 
 function! s:InsertCppGates()
   let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
@@ -309,61 +309,6 @@ function! s:InsertCppGates()
   execute "normal! o#define " .gatename
   execute "normal! Go#endif"
   normal! kk
-endfunction
-
-" }}}
-" Return to last cursor position {{{
-
-function! s:SetCursorPosition()
-  if &filetype !~ 'svn\|commit\c'
-    if line("'\"") > 0 && line("'\"") <= line("$")
-      exe "normal! g`\""
-      normal! zz
-    endif
-  end
-endfunction
-
-" }}}
-" Save current position and execute command {{{
-
-function! Preserve(command)
-  " Save last search, and cursor position.
-  let _s=@/
-  let l = line(".")
-  let c = col(".")
-
-  " Execute command
-  execute a:command
-
-  " Restore previous search history, and cursor position
-  let @/=_s
-  call cursor(l, c)
-endfunction
-
-" }}}
-" Toggle number column {{{
-
-let s:NumberExclude = [ '', 'nerdtree', 'help', 'gitv' ]
-
-function! NumberToggle(what)
-  if index(s:NumberExclude, &ft) >= 0
-    " Do nothing
-
-  elseif a:what == 'on'
-    " Turn on relative numbers
-    setlocal number
-    setlocal relativenumber
-
-  elseif a:what == 'off'
-    " Turn off numbers
-    setlocal nonumber
-    setlocal norelativenumber
-
-  elseif a:what == 'norel'
-    " Turn on normal numbers
-    setlocal number
-    setlocal norelativenumber
-  endif
 endfunction
 
 " }}}
@@ -396,11 +341,66 @@ command! -bar RangerChooser call RangeChooser()
 nnoremap <Leader>r :<C-U>RangerChooser<CR>
 
 " }}}
+" {{{ Return to last cursor position
+
+function! s:SetCursorPosition()
+  if &filetype !~ 'svn\|commit\c'
+    if line("'\"") > 0 && line("'\"") <= line("$")
+      exe "normal! g`\""
+      normal! zz
+    endif
+  end
+endfunction
 
 " }}}
-" Autocommands {{{
+" {{{ Save current position and execute command
 
-" Relative numbers {{{
+function! Preserve(command)
+  " Save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+
+  " Execute command
+  execute a:command
+
+  " Restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction
+
+" }}}
+" {{{ Toggle number column
+
+let s:NumberExclude = [ '', 'nerdtree', 'help', 'gitv' ]
+
+function! NumberToggle(what)
+  if index(s:NumberExclude, &ft) >= 0
+    " Do nothing
+
+  elseif a:what == 'on'
+    " Turn on relative numbers
+    setlocal number
+    setlocal relativenumber
+
+  elseif a:what == 'off'
+    " Turn off numbers
+    setlocal nonumber
+    setlocal norelativenumber
+
+  elseif a:what == 'norel'
+    " Turn on normal numbers
+    setlocal number
+    setlocal norelativenumber
+  endif
+endfunction
+
+" }}}
+
+" }}}
+" {{{ Autocommands
+
+" {{{ Relative numbers
 
 augroup relnum
   au!
@@ -415,7 +415,7 @@ augroup relnum
 augroup END
 
 " }}}
-" Other {{{
+" {{{ Other
 
 augroup other
   autocmd!
@@ -435,5 +435,5 @@ augroup END
 
 " }}}
 
-" End {{{
+" {{{ End
 " vim: foldmethod=marker: foldlevel=0:
