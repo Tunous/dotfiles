@@ -67,7 +67,7 @@ noremap k <Up>
 " }}}
 " Sourcing {{{
 
-noremap <silent> <Leader>v :source ~/.vimperatorrc<CR>
+noremap <Leader>s :source ~/.vimperatorrc<CR>
 
 " }}}
 " Tabs navigation {{{
@@ -87,6 +87,9 @@ silent qmark f http://cloud.feedly.com
 silent qmark r http://reddit.com
 
 " }}}
+
+" autocmd LocationChange .* :set editor="urxvt -e vim"
+set editor="urxvt -name 'URxvtFloating' -e vim"
 
 " Functions --------------------------------------------------------------
 " Toggle css elements {{{
