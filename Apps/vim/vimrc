@@ -309,7 +309,7 @@ function! s:InsertCppGates()
 endfunction
 
 " }}}
-" {{{ Ranger as a file chooser
+" {{{ Open files with ranger
 
 function! RangeChooser()
   let temp = tempname()
@@ -367,7 +367,22 @@ function! Preserve(command)
 endfunction
 
 " }}}
-" {{{ Toggle number column
+" {{{ Change cursor highlights state
+
+function! CursorHighlight(action)
+  if a:action == 'on'
+    " Turn on cursor highlights
+    setlocal cursorcolumn
+    setlocal cursorline
+
+  elseif a:action == 'off'
+    " Turn off cursor highlights
+    setlocal nocursorcolumn
+    setlocal nocursorline
+  endif
+endfunction
+
+" }}}
 " {{{ Change number column state
 
 let s:NumberExclude = [ '', 'help', 'gitv' ]
@@ -414,6 +429,25 @@ augroup NumberColumn
 
   au FocusLost   * call NumberColumn('norel')
   au FocusGained * call NumberColumn('on')
+augroup END
+
+" }}}
+" {{{ Current line highlighting
+
+augroup CursorHighlight
+  au!
+  au BufCreate   * call CursorHighlight('on')
+  au BufWinEnter * call CursorHighlight('on')
+  au BufWinLeave * call CursorHighlight('off')
+
+  au WinEnter    * call CursorHighlight('on')
+  au WinLeave    * call CursorHighlight('off')
+
+  au InsertEnter * call CursorHighlight('off')
+  au InsertLeave * call CursorHighlight('on')
+
+  au FocusLost   * call CursorHighlight('off')
+  au FocusGained * call CursorHighlight('on')
 augroup END
 
 " }}}
