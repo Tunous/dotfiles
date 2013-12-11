@@ -84,15 +84,6 @@ Bundle 'gregsexton/gitv'
 let g:Gitv_DoNotMapCtrlKey = 1
 
 " }}}
-" {{{ NERDTree
-
-Bundle 'scrooloose/nerdtree'
-
-let NERDTreeDirArrows=1
-
-nnoremap <Leader>t :NERDTreeToggle<CR>
-
-" }}}
 " {{{ Surround
 
 Bundle 'tpope/vim-surround'
@@ -372,7 +363,7 @@ endfunction
 " }}}
 " {{{ Toggle number column
 
-let s:NumberExclude = [ '', 'nerdtree', 'help', 'gitv' ]
+let s:NumberExclude = [ '', 'help', 'gitv' ]
 
 function! NumberToggle(what)
   if index(s:NumberExclude, &ft) >= 0
