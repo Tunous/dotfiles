@@ -367,6 +367,35 @@ function! NumberToggle(what)
 endfunction
 
 " }}}
+" {{{ Ranger as a file chooser
+
+function! RangeChooser()
+  let temp = tempname()
+
+  exec 'silent !ranger --choosefiles=' . shellescape(temp)
+
+  if filereadable(temp)
+    let names = readfile(temp)
+    call delete(temp)
+
+    if empty(names)
+      return
+    endif
+
+    exec 'edit ' . fnameescape(names[0])
+
+    for name in names[1:]
+      exec 'argadd ' . fnameescape(name)
+    endfor
+  endif
+
+  redraw!
+endfunction
+
+command! -bar RangerChooser call RangeChooser()
+nnoremap <Leader>r :<C-U>RangerChooser<CR>
+
+" }}}
 
 " }}}
 " Autocommands {{{
