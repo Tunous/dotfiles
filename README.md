@@ -20,10 +20,12 @@ Used software
 * Compton    - Compositor
 * Dmenu      - Dynamic menu
 * Dzen2      - Bar/popups
+* Hsetroot   - Wallpaper
 * Mutt       - Mail User Agent
 * Ranger     - File manager
 * Sxhkd      - Hotkey daemon
 * Tmux       - Terminal multiplexer
+* Unclutter  - Hiding cursor
 * Vim        - Text editor
 * Vimperator - Vim key bindings for Firefox
 * Zsh        - Shell
