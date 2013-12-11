@@ -236,10 +236,12 @@ noremap <C-h> <C-W>h
 noremap <C-j> <C-W>j
 noremap <C-k> <C-W>k
 noremap <C-l> <C-W>l
-noremap <C-S-h> <C-W><
-noremap <C-S-j> <C-W>+
-noremap <C-S-k> <C-W>-
-noremap <C-S-l> <C-W>>
+
+" Resize splits
+noremap <Esc>h <C-W><
+noremap <Esc>j <C-W>+
+noremap <Esc>k <C-W>-
+noremap <Esc>l <C-W>>
 
 " Don't use arrow keys
 noremap <Up> <NOP>
