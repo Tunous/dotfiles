@@ -95,6 +95,11 @@ Bundle 'gregsexton/gitv'
 let g:Gitv_DoNotMapCtrlKey = 1
 
 " }}}
+" {{{ Repeat
+
+Bundle 'tpope/vim-repeat'
+
+" }}}
 " {{{ Surround
 
 Bundle 'tpope/vim-surround'
