@@ -62,6 +62,17 @@ let delimitMate_expand_space = 1
 let delimitMate_balance_matchpairs = 1
 
 " }}}
+" {{{ Easy align
+
+Bundle 'junegunn/vim-easy-align'
+
+vmap <CR>         <Plug>(EasyAlign)
+vmap <Leader><CR> <Plug>(LiveEasyAlign)
+nmap <Leader>a    <Plug>(EasyAlign)
+nmap <Leader>A    <Plug>(LiveEasyAlign)
+
+
+" }}}
 " {{{ Fugitive
 
 " Use git inside of vim
@@ -92,15 +103,6 @@ Bundle 'tpope/vim-surround'
 " {{{ Sxhkdrc
 
 Bundle 'baskerville/vim-sxhkdrc'
-
-" }}}
-" {{{ Easy align
-
-Bundle 'junegunn/vim-easy-align'
-
-vnoremap <CR> :EasyAlign<CR>
-vnoremap <Leader><CR> :LiveEasyAlign<CR>
-
 
 " }}}
 " {{{ Tcomment
@@ -175,7 +177,7 @@ set undofile
 " }}}
 " {{{ Other
 
-" Add short timeout
+" Short timeout
 set timeout
 set timeoutlen=1000
 set ttimeoutlen=100
