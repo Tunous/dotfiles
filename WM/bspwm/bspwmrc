@@ -4,7 +4,7 @@
 bspc monitor -d 1 2 3 4 5 Float 6 7 8 9 0
 bspc desktop Float -t floating=on
 
-# {{{ Misc
+# {{{ Settings
 
 bspc config border_width                2
 bspc config window_gap                  12
@@ -37,9 +37,17 @@ bspc config active_frame_opacity        0
 bspc config normal_frame_opacity        0
 
 # }}}
+# {{{ Rules
 
-# Rules
-bspc config rule_command "$XDG_CONFIG_HOME/bspwm/rules"
+bspc rule -a BSPWM_FRAME frame=true
+bspc rule -a File-roller floating=true center=true
+bspc rule -a Gimp floating=true
+bspc rule -a Keepassx floating=true
+bspc rule -a Nautilus floating=true center=true
+bspc rule -a Steam floating=true
+bspc rule -a URxvtFloating floating=true center=true
+
+# }}}
 
 # Panel
 $HOME/dotfiles/WM/dzen/panel &
