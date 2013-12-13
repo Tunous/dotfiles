@@ -10,8 +10,8 @@ xset fp rehash
 xmodmap ~/.Xmodmap
 xcape
 
-# Wallpaper: http://wallpapers.cc/wallpapers/10671
-hsetroot -fill ~/Dropbox/Wallpapers/10671.jpg
+# Random wallpaper form directory: https://www.dropbox.com/sh/o6k8wkzhj72eqgd/-CmK07wIhw
+hsetroot -fill $(wallpaper.sh ~/Dropbox/Wallpapers)
 
 # Mouse pointer
 xsetroot -cursor_name left_ptr
