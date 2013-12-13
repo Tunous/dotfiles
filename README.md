@@ -16,19 +16,20 @@ make install
 Used software
 -------------
 
-* Bspwm      - Window manager
-* Compton    - Compositor
-* Dmenu      - Dynamic menu
-* Dzen2      - Bar/popups
-* Hsetroot   - Wallpaper
-* Mutt       - Mail User Agent
-* Ranger     - File manager
-* Sxhkd      - Hotkey daemon
-* Tmux       - Terminal multiplexer
-* Unclutter  - Hiding cursor
-* Vim        - Text editor
-* Vimperator - Vim key bindings for Firefox
-* Zsh        - Shell
+* [Bspwm](https://github.com/baskerville/bspwm)           - Window manager
+* [Compton](https://github.com/chjj/compton)              - Compositor
+* [Dmenu](http://tools.suckless.org/dmenu/)               - Dynamic menu
+* [Dzen2](https://github.com/robm/dzen)                   - Bar/popups
+* Hsetroot                                                - Wallpaper
+* [Mutt](http://www.mutt.org/)                            - Mail User Agent
+* [Ranger](http://ranger.nongnu.org/)                     - File manager
+* [Sxhkd](https://github.com/baskerville/sxhkd)           - Hotkey daemon
+* [Tmux](http://tmux.sourceforge.net/)                    - Terminal multiplexer
+* [Trash-cli](https://github.com/andreafrancia/trash-cli) - Trash management
+* Unclutter                                               - Hiding cursor
+* [Vim](http://www.vim.org/)                              - Text editor
+* [Vimperator](http://www.vimperator.org/)                - Vim key bindings for Firefox
+* [Zsh](http://www.zsh.org/)                              - Shell
 
 Thanks to
 ---------
