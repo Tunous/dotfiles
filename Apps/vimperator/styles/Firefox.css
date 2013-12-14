@@ -74,7 +74,7 @@
   border-radius: 0 4px 4px 0 !important;
 
   padding: 0 5px 0 5px !important;
-  margin: -7px 0 0 5px !important;
+  margin: -6px 0 0 5px !important;
 
   display: table-cell !important;
   opacity: .8 !important;
@@ -111,9 +111,7 @@
   display: none !important;
 }
 
-/* Fixes
 
-/* Reomver splitter and theme stuff */
 .tab-content { border: none !important; }
 #verticaltabs-splitter { display: none !important; }
 .tabbrowser-tab .tab-icon-image { margin: 3px 0 7px 4px !important; }
@@ -166,6 +164,11 @@
 /* Hide back/forward button if it's disabled */
 #back-button[disabled],
 #forward-button[disabled] { visibility: collapse !important; }
+
+/* Menu button */
+#appmenu-toolbar-button {
+  background-color: #eee !important;
+}
 
 
 
