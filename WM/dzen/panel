@@ -112,19 +112,19 @@ while read -r line <&3; do
           [OoFfUu]*)
             case $item in
               [OFU]*) # Focused desktop
-                FG='#ffffff'
+                FG=$(Color White)
                 ;;
 
               o*) # Occupied desktop
-                FG='#5e6c70'
+                FG=$(Color Foreground)
                 ;;
 
               f*) # Free desktop
-                FG='#444444'
+                FG=$(Color Selection)
                 ;;
 
               u*) # Urgent desktop
-                FG='#af8700'
+                FG=$(Color Yellow)
                 ;;
             esac
 
@@ -138,7 +138,7 @@ while read -r line <&3; do
   esac
 
   echo "$TITLE $DESK $TIME"
-done | dzen2 -h "$PANEL_HEIGHT" -ta l -bg "#000000" -e "$EVENTS" &
+done | dzen2 -h "$PANEL_HEIGHT" -ta l -bg "$(Color black)" -e "$EVENTS" &
 
 # }}}
 
