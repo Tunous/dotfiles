@@ -11,7 +11,7 @@ xmodmap ~/.Xmodmap
 xcape
 
 # Random wallpaper form directory: https://www.dropbox.com/sh/o6k8wkzhj72eqgd/-CmK07wIhw
-hsetroot -fill $(wallpaper.sh ~/Dropbox/Wallpapers)
+wallpaper.sh ~/Dropbox/Wallpapers
 
 # Mouse pointer
 xsetroot -cursor_name left_ptr
