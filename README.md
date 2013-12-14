@@ -20,7 +20,7 @@ Used software
 * [Compton](https://github.com/chjj/compton)              - Compositor
 * [Dmenu](http://tools.suckless.org/dmenu/)               - Dynamic menu
 * [Dzen2](https://github.com/robm/dzen)                   - Bar/popups
-* Hsetroot                                                - Wallpaper
+* [Feh](http://feh.finalrewind.org/)                      - Wallpaper
 * [Mutt](http://www.mutt.org/)                            - Mail User Agent
 * [Ranger](http://ranger.nongnu.org/)                     - File manager
 * [Sxhkd](https://github.com/baskerville/sxhkd)           - Hotkey daemon
