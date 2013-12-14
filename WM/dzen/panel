@@ -67,7 +67,7 @@ Volume() { #{{{
 
 # }}}
 Menu() { # {{{
-  printf "^ca(1,$(Script menu.sh)) M  ^ca()"
+  printf "^ca(1,$(Script menu.sh)) $(Icon arch blue)  ^ca()"
 }
 
 # }}}
