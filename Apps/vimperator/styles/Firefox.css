@@ -161,10 +161,6 @@
 .urlbar-history-dropmarker,
 #go-button { display: none !important; }
 
-/* Hide back/forward button if it's disabled */
-#back-button[disabled],
-#forward-button[disabled] { visibility: collapse !important; }
-
 /* Menu button */
 #appmenu-toolbar-button {
   background-color: #eee !important;
