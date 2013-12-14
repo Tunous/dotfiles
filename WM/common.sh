@@ -37,7 +37,7 @@ Color() {
     [Dd][Cc]yan)      printf "#5e8d87" ;;
 
     # Unknown
-    *)          printf "#9e9e9e" ;;
+    *)          printf "#444444" ;;
   esac
 }
 

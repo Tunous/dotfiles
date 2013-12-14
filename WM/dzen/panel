@@ -10,7 +10,7 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-. $HOME/dotfiles/WM/dzen/common.sh
+. $HOME/dotfiles/WM/common.sh
 
 
 # }}}

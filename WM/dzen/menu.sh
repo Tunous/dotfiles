@@ -1,5 +1,5 @@
 #!/bin/bash
-. $HOME/dotfiles/WM/dzen/common.sh
+. $HOME/dotfiles/WM/common.sh
 
 Exec() {
   read prog
