@@ -3,14 +3,14 @@ autoload -U colors && colors
 # Remove dalay
 KEYTIMEOUT=1
 
-# {{{ Vi-Mode
+# {{{ Vi-Mode / Prompt
 
 bindkey -v
 
-# Current mode
-RPROMPT=""
 function zle-line-init zle-keymap-select {
-  RPROMPT="%{$fg[white]%} ${${KEYMAP/vicmd/«}/(main|viins)/} %{$reset_color%}"
+  PROMPT="
+%{$fg[${${KEYMAP/(vicmd|opp)/blue}/(main|viins)/white}]%} » %{$reset_color%}"
+
   zle reset-prompt
   zle -R
 }
@@ -34,10 +34,6 @@ export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
 
 # }}}
-
-# Prompt
-PROMPT="
-%{$fg[white]%} » %{$reset_color%}"
 
 # Window title
 precmd() {
