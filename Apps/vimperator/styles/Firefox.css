@@ -1,11 +1,44 @@
 @namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
 
+/* ::: Colors ::: */
+
+/* Background */
+#tabbrowser-tabs                              { background:       #262626 /*#eeeeee*/ !important; }
+.tabbrowser-tab[selected]:hover               { background-color: #262626 !important; }
+#nav-bar, #PersonalToolbar                    { background:       #262626 /*#eeeeee*/ !important; }
+#appmenu-toolbar-button                       { background-color: #262626 /*#eeeeee*/ !important; }
+
+/* Selected tab */
+.tabbrowser-tab[selected],
+.tabbrowser-tab[multiselect]                  { background:       #ffffff !important; }
+
+/* Pinned tab */
+.tabbrowser-tab[pinned]                       { background:       #dddddd !important; }
+.tabbrowser-tab[pinned][selected]             { background:       #ffffff !important; }
+
+/* Tab popup */
+.tabbrowser-tab:hover .tab-text               { color:            #ffffff !important;
+                                                background-color: #262626 !important;
+                                                border: 3px solid #262626 !important; }
+
+/* Tooltip */
+tooltip {                                       background:       #000000 !important;
+                                                color:            #ffffff !important; 
+                                                border: 1px solid #000000 !important; }
+tooltip label {                                 color:            #ffffff !important;
+                                                border: 1px solid #000000 !important; }
+
+/* Urgent tab */
+.tabbrowser-tab[titlechanged]:not([selected]) { background:       #f0c864 !important; }
+
+
+
 /* ::: Vertical Tabs ::: */
+
+
 
 /* Tabs panel */
 #tabbrowser-tabs {
-  background: #eee !important;
-
   border: none !important;
   border-radius: 0 !important;
 
@@ -13,6 +46,7 @@
   min-width: 325px !important;
   max-width: 325px !important;
   margin-right: -300px !important;
+  margin-top: 0px !important;
 }
 
 /* Tabs */
@@ -40,16 +74,11 @@
 /* Selected tab */
 .tabbrowser-tab[selected],
 .tabbrowser-tab[multiselect] {
-  background: white !important;
   box-shadow: -2px 0 5px rgba(0,0,0,.2) !important;
-}
-.tabbrowser-tab[selected]:hover {
-  background-color: rgba(0,0,0,.8) !important;
 }
 
 /* Pinned tab */
 .tabbrowser-tab[pinned] {
-  background: #ddd !important;
   border-radius: 10px 0 0 10px !important;
 }
 
@@ -67,17 +96,12 @@
   min-width: -moz-fit-content !important;
   width: -moz-fit-content !important;
 
-  color: white !important;
-  background-color: black !important;
-
-  border: 3px solid black !important;
   border-radius: 0 4px 4px 0 !important;
 
   padding: 0 5px 0 5px !important;
   margin: -6px 0 0 5px !important;
 
   display: table-cell !important;
-  opacity: .8 !important;
 
   -moz-transition: max-width .5s !important;
 }
@@ -88,7 +112,9 @@
   position: relative;
 }
 
+
 /* Close button
+
 
 /* Swap text & close button */
 .tabbrowser-tab .tab       { -moz-box-ordinal-group: 3 !important; }
@@ -112,14 +138,13 @@
 }
 
 
-.tab-content { border: none !important; }
-#verticaltabs-splitter { display: none !important; }
-.tabbrowser-tab .tab-icon-image { margin: 3px 0 7px 4px !important; }
-.tabbrowser-tab .tab-throbber { margin-left: 5px !important; }
-.tabbrowser-tab:not([pinned]) .tab-icon-image:not([src]) { visibility: visible !important; }
-.tabbrowser-tab:first-child { margin-top: 5px !important; }
-.tabbrowser-tab[busy]:hover:not([selected]) .tab-text { margin-left: 0px !important; }
-.tabbrowser-tab[titlechanged]:not([selected]) { background: rgb(240,200,100) !important; }
+.tab-content                                             { border:      none          !important; }
+#verticaltabs-splitter                                   { display:     none          !important; }
+.tabbrowser-tab .tab-icon-image                          { margin:      3px 0 7px 4px !important; }
+.tabbrowser-tab .tab-throbber                            { margin-left: 5px           !important; }
+.tabbrowser-tab:not([pinned]) .tab-icon-image:not([src]) { visibility:  visible       !important; }
+.tabbrowser-tab:first-child                              { margin-top:  5px           !important; }
+.tabbrowser-tab[busy]:hover:not([selected]) .tab-text    { margin-left: 0px           !important; }
 
 
 /* Fix padding caused by tab arrows */
@@ -144,7 +169,6 @@
 /* Bookmarks and navigation bar */
 #nav-bar,
 #PersonalToolbar {
-  background: #eee !important;
   padding: 0 3px 0 25px !important;
   margin: 0 !important;
 
@@ -161,11 +185,6 @@
 .urlbar-history-dropmarker,
 #go-button { display: none !important; }
 
-/* Menu button */
-#appmenu-toolbar-button {
-  background-color: #eee !important;
-}
-
 
 
 /* ::: Tooltips ::: */
@@ -175,14 +194,8 @@
 tooltip {
   -moz-appearance: none !important;
   opacity: 0.8 !important;
-  background: black !important;
-  color: white !important;
-  border: 1px solid black !important;
   border-radius: 4px !important;
-
 }
 tooltip label {
-  color: white !important;
-  border: 1px solid black !important;
   border-radius: 4px !important;
 }
