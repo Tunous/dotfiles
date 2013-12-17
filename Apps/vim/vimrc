@@ -48,8 +48,12 @@ Bundle 'bling/vim-airline'
 let g:airline_powerline_fonts=1
 let g:airline_detect_iminsert=0
 
-" Show buffers line when there is only one tab open
-let g:airline#extensions#tabline#enabled = 1
+" }}}
+" {{{ Bufferline
+
+Bundle 'bling/vim-bufferline'
+
+let g:bufferline_echo = 0
 
 " }}}
 " {{{ DelimitMate
