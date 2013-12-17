@@ -88,9 +88,7 @@ dzen2*background:      #000000
 dzen2*font:            -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
 
 ! Fonts
-! *font:                -*-terminus-medium-*-normal-*-12-*-*-*-*-*-iso10646-*
-*font:                 -*-tamzenforpowerline-medium-*-*-*-14-*-*-*-*-*-*-*
-*boldFont:             -*-tamzenforpowerline-bold-*-*-*-14-*-*-*-*-*-*-*
+*font:                 -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
 
 ! End {{{
 ! vim: ft=xdefaults
