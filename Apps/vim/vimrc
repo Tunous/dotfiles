@@ -122,12 +122,14 @@ Bundle 'tomtom/tcomment_vim'
 " }}}
 
 " Actual settings ---------------------------------------------------------
-" {{{ Theme settings
+" {{{ Theme settings - Customized colorscheme
 
-set t_Co=256                  " Use 256 colors
-set background=dark           " Set dark background
+Bundle 'Tunous/vim-colors-customized'
+
+set t_Co=256
+set background=dark
 let g:customized_use_xresources = 1
-colorscheme customized        " Use my own theme
+colorscheme customized
 
 " }}}
 " {{{ Settting options
