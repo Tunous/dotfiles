@@ -14,15 +14,15 @@
 #define C_Green       #87af00
 #define C_Yellow      #af8700
 #define C_Blue        #0087af
-#define C_Magenta     #6c81c4
-#define C_Cyan        #2aa198
+#define C_Magenta     #af0057
+#define C_Cyan        #00afaf
 
 ! Dark colors
 #define D_Red         #a54242
 #define D_Green       #8c9400
 #define D_Yellow      #d75f00
 #define D_Blue        #5f819d
-#define D_Magenta     #85678f
+#define D_Magenta     #5f5faf
 #define D_Cyan        #5e8d87
 
 ! }}}
