@@ -46,14 +46,14 @@ Bundle 'bling/vim-airline'
 
 " Use powerline symbols
 let g:airline_powerline_fonts=1
-let g:airline_detect_iminsert=0
 
-" }}}
 " {{{ Bufferline
 
 Bundle 'bling/vim-bufferline'
 
 let g:bufferline_echo = 0
+
+" }}}
 
 " }}}
 " {{{ DelimitMate
@@ -75,6 +75,21 @@ vmap <Leader><CR> <Plug>(LiveEasyAlign)
 nmap <Leader>a    <Plug>(EasyAlign)
 nmap <Leader>A    <Plug>(LiveEasyAlign)
 
+" }}}
+" {{{ Easyclip
+
+Bundle 'svermeulen/vim-easyclip'
+
+let g:EasyClipUseCutDefaults = 0
+let g:EasyClipUseSubstituteDefaults = 1
+
+nmap x     <Plug>MoveMotionPlug
+nmap X     <Plug>MoveMotionEndOfLinePlug
+nmap xX    <Plug>MoveMotionReplaceLinePlug
+nmap xx    <Plug>MoveMotionLinePlug
+
+xmap x     <Plug>MoveMotionXPlug
+imap <c-i> <Plug>EasyClipInsertModePaste
 
 " }}}
 " {{{ Fugitive
@@ -275,9 +290,6 @@ nnoremap <Leader>vv :edit $HOME/.vim/vimrc<CR>
 " Open vimperatorrc
 nnoremap <Leader>vp :edit $HOME/.vimperator/vimperatorrc<CR>
 
-" Open customized colorscheme
-nnoremap <Leader>vt :edit $HOME/.vim/colors/customized.vim<CR>
-
 " }}}
 " {{{ Other
 
@@ -301,10 +313,7 @@ nnoremap <Space> za
 nmap <Leader>l :set list!<CR>
 
 " Turn off highlighting for current search
-nnoremap <C-n> :nohlsearch<CR>
-
-" Yank to end of line
-nnoremap Y y$
+nnoremap <Leader>h :nohlsearch<CR>
 
 " }}}
 
@@ -481,8 +490,3 @@ augroup other
 augroup END
 
 " }}}
-
-" }}}
-
-" {{{ End
-" vim: foldmethod=marker: foldlevel=0:
