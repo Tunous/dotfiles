@@ -114,6 +114,11 @@ Bundle 'gregsexton/gitv'
 let g:Gitv_DoNotMapCtrlKey = 1
 
 " }}}
+" {{{ Relativity
+
+Bundle 'Tunous/vim-relativity'
+
+" }}}
 " {{{ Repeat
 
 Bundle 'tpope/vim-repeat'
@@ -301,10 +306,10 @@ nnoremap <F2> :call Preserve("normal gg=G")<CR>
 nnoremap <F3> :call Preserve("%s/\\s\\+$//e")<CR>
 
 " Save file
-nnoremap <Enter> :w<CR>
+nnoremap <CR> :w<CR>
 
 " Source vimrc
-nnoremap <Leader>s :source $MYVIMRC<CR>zv
+nnoremap <Leader>s :source $MYVIMRC<CR>
 
 " Toggle fold
 nnoremap <Space> za
@@ -389,104 +394,22 @@ function! Preserve(command)
 endfunction
 
 " }}}
-" {{{ Change cursor highlights state
-
-function! CursorHighlight(action)
-  if a:action == 'on'
-    " Turn on cursor highlights
-    setlocal cursorcolumn
-    setlocal cursorline
-
-  elseif a:action == 'off'
-    " Turn off cursor highlights
-    setlocal nocursorcolumn
-    setlocal nocursorline
-  endif
-endfunction
-
-" }}}
-" {{{ Change number column state
-
-let s:NumberExclude = [ '', 'help', 'gitv' ]
-
-function! NumberColumn(action)
-  if index(s:NumberExclude, &ft) >= 0
-    " Do nothing
-
-  elseif a:action == 'on'
-    " Turn on relative numbers
-    setlocal number
-    setlocal relativenumber
-
-  elseif a:action == 'off'
-    " Turn off numbers
-    setlocal nonumber
-    setlocal norelativenumber
-
-  elseif a:action == 'norel'
-    " Turn on normal numbers
-    setlocal number
-    setlocal norelativenumber
-  endif
-endfunction
-
-" }}}
 
 " }}}
 " {{{ Autocommands
 
-" {{{ Relative numbers
-
-augroup NumberColumn
-  au!
-  au BufCreate   * call NumberColumn('on')
-  au BufWinEnter * call NumberColumn('on')
-  au BufWinLeave * call NumberColumn('off')
-
-  au WinEnter    * call NumberColumn('on')
-  au WinLeave    * call NumberColumn('off')
-
-  au InsertEnter * call NumberColumn('norel')
-  au InsertLeave * call NumberColumn('on')
-
-  au FocusLost   * call NumberColumn('norel')
-  au FocusGained * call NumberColumn('on')
-augroup END
-
-" }}}
-" {{{ Current line highlighting
-
-augroup CursorHighlight
-  au!
-  au BufCreate   * call CursorHighlight('on')
-  au BufWinEnter * call CursorHighlight('on')
-  au BufWinLeave * call CursorHighlight('off')
-
-  au WinEnter    * call CursorHighlight('on')
-  au WinLeave    * call CursorHighlight('off')
-
-  au InsertEnter * call CursorHighlight('off')
-  au InsertLeave * call CursorHighlight('on')
-
-  au FocusLost   * call CursorHighlight('off')
-  au FocusGained * call CursorHighlight('on')
-augroup END
-
-" }}}
-" {{{ Other
-
-augroup other
+augroup Autocommands
   autocmd!
   " Add header file preprocessor getes
   autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()
 
   " Spell check when writing commit logs
-  autocmd filetype svn,*commit* setlocal spell
+  autocmd filetype           svn,*commit* setlocal spell
 
   " Return to last cursor position
-  autocmd BufReadPost * call <SID>SetCursorPosition()
+  autocmd BufReadPost        * call <SID>SetCursorPosition()
 
-  autocmd FileType    markdown setlocal wrap nolist linebreak
+  autocmd FileType           markdown setlocal wrap nolist linebreak
 augroup END
 
 " }}}
