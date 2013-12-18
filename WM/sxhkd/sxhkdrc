@@ -101,11 +101,6 @@ super + t
     bspc desktop -l next
 
 # Toggle state of window
-# [a] Floating   - Can overlap
-# [s] Sticky     - Always visible
-# [d] Locked     - Can't be closed
-# [f] Fullscreen - Takes whole screen
-# [g] Private    - Always in same place
 super + {a,s,d,f,g}
     bspc window -t {floating,sticky,locked,fullscreen,private}
 
