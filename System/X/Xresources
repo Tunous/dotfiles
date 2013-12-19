@@ -1,6 +1,6 @@
-! Colors {{{
+! {{{ Colors
 
-! Definitions {{{
+! {{{ Definitions
 
 ! Base colors
 #define C_Background  #262626
@@ -70,25 +70,33 @@ URxvt*colorIT: C_Comment
 
 ! }}}
 
-! Urxvt settings {{{
+! {{{ Urxvt settings
 
-URxvt*scrollBar:       false
-URxvt*geometry:        120x30
+URxvt*scrollBar:          false
+URxvt*geometry:           120x30
+
+! Perl extensions
+URxvt*perl-ext-common:    default,matcher,clipboard
 
 ! Clickable links
-URxvt*perl-ext-common: default,matcher
-URxvt*matcher.button:  1
-URxct*urlLauncher:     firefox
-URxvt*internalBorder:  5
+URxvt*matcher.button:     1
+URxct*urlLauncher:        firefox
+URxvt*internalBorder:     5
+
+! Clipboard https://github.com/muennich/urxvt-perls/blob/master/clipboard
+URxvt*keysym.M-c:         perl:clipboard:copy
+URxvt*keysym.M-v:         perl:clipboard:paste
+URxvt*keysym.M-C-v:       perl:clipboard:paste_escaped
+URxvt*clipboard.copycmd:  xclip -i -selection clipboard
+URxvt*clipboard.pastecmd: xclip -o -selection clipboard
 
 ! }}}
 
 ! Dzen2
-dzen2*background:      #000000
-dzen2*font:            -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
+dzen2*background:         #000000
 
 ! Fonts
-*font:                 -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
+*font:                    -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
 
-! End {{{
+! {{{ End
 ! vim: ft=xdefaults
