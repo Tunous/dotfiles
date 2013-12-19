@@ -45,6 +45,7 @@ system: xorg
 	ln -sf  ${SYSDIR}/tmux.conf ${HOME}/.tmux.conf
 	ln -sf  ${SYSDIR}/Gtk/gtkrc-2.0 ${HOME}/.gtkrc-2.0
 	ln -sf  ${SYSDIR}/zsh/zshrc ${HOME}/.zshrc
+	ln -sfn ${SYSDIR}/zsh ${HOME}/.zsh
 	@echo
 
 xorg:

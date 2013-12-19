@@ -30,3 +30,9 @@ setopt CORRECT
 
 # Aliases
 alias ls='ls --color=auto'
+
+# Completion
+fpath=(~/.zsh/completion $fpath)
+
+autoload -U compinit
+compinit
