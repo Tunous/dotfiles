@@ -1,8 +1,9 @@
-DOTFILES = ${shell pwd}
-SYSDIR   = ${DOTFILES}/System
-APPSDIR  = ${DOTFILES}/Apps
-WMDIR    = ${DOTFILES}/WM
-XDIR     = ${SYSDIR}/X
+DOTFILES        = ${shell pwd}
+SYSDIR          = ${DOTFILES}/System
+APPSDIR         = ${DOTFILES}/Apps
+WMDIR           = ${DOTFILES}/WM
+XDIR            = ${SYSDIR}/X
+XDG_CONFIG_HOME = ${HOME}/.config
 
 # Help {{{
 
@@ -40,10 +41,11 @@ update:
 
 system: xorg
 	@echo "System:"
+	@mkdir -p ~/.config
 	ln -sf  ${SYSDIR}/compton.conf ${XDG_CONFIG_HOME}/compton.conf
-	ln -sf  ${SYSDIR}/profile ${HOME}/.profile
 	ln -sf  ${SYSDIR}/tmux.conf ${HOME}/.tmux.conf
 	ln -sf  ${SYSDIR}/Gtk/gtkrc-2.0 ${HOME}/.gtkrc-2.0
+	ln -sf  ${SYSDIR}/zsh/zprofile ${HOME}/.zprofile
 	ln -sf  ${SYSDIR}/zsh/zshrc ${HOME}/.zshrc
 	ln -sfn ${SYSDIR}/zsh ${HOME}/.zsh
 	@echo

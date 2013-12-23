@@ -16,7 +16,7 @@ while :; do
   vol=$(amixer get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*")
   mut=$(amixer get Master | egrep 'Playback.*?\[o' | egrep -o '\[o.+\]')
 
-  echo "$vol" | dzen2-gdbar -nonl -h 5 -fg '#505050' -bg '#000000' -l " $(stat)  "
+  echo "$vol" | gdbar -nonl -h 5 -fg '#505050' -bg '#000000' -l " $(stat)  "
   printf "^fg(#505050)^ca(1,amixer set Master 1-) %s ^ca()" " ◂ "
   printf "^fg(#505050)^ca(1,amixer set Master 1+) %s ^ca()" " ▸ "
   echo

@@ -29,7 +29,8 @@ setopt AUTO_CD
 setopt CORRECT
 
 # Aliases
-alias ls='ls --color=auto'
+alias ls="ls --color=auto"
+alias pacman="sudo pacman"
 
 # Completion
 fpath=(~/.zsh/completion $fpath)
