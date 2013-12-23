@@ -25,7 +25,7 @@ Used software
 * [Ranger](http://ranger.nongnu.org/)                     - File manager
 * [Sxhkd](https://github.com/baskerville/sxhkd)           - Hotkey daemon
 * [Tmux](http://tmux.sourceforge.net/)                    - Terminal multiplexer
-* [Trash-cli](https://github.com/andreafrancia/trash-cli) - Trash management
+* [Trashman](https://github.com/Kwpolska/trashman)        - Trash management
 * Unclutter                                               - Hiding cursor
 * [Vim](http://www.vim.org/)                              - Text editor
 * [Vimperator](http://www.vimperator.org/)                - Vim key bindings for Firefox
