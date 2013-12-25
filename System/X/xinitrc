@@ -3,8 +3,10 @@
 
 # Fonts
 xset +fp /usr/share/fonts/local
-xset +fp ~/.fonts
 xset fp rehash
+
+# Disable beep
+xset b off
 
 # Key configurations
 [[ -f $XDG_CONFIG_HOME/X/Xmodmap ]] && xmodmap $XDG_CONFIG_HOME/X/Xmodmap
