@@ -1,5 +1,5 @@
 # Xresources
-xrdb -merge ~/.Xresources
+[[ -f $XDG_CONFIG_HOME/X/Xresources ]] && xrdb -merge $XDG_CONFIG_HOME/X/Xresources
 
 # Fonts
 xset +fp /usr/share/fonts/local
@@ -7,7 +7,7 @@ xset +fp ~/.fonts
 xset fp rehash
 
 # Key configurations
-xmodmap ~/.Xmodmap
+[[ -f $XDG_CONFIG_HOME/X/Xmodmap ]] && xmodmap $XDG_CONFIG_HOME/X/Xmodmap
 xcape
 
 # Random wallpaper form directory: https://www.dropbox.com/sh/o6k8wkzhj72eqgd/-CmK07wIhw
