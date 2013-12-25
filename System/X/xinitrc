@@ -11,7 +11,7 @@ xset fp rehash
 xcape
 
 # Random wallpaper form directory: https://www.dropbox.com/sh/o6k8wkzhj72eqgd/-CmK07wIhw
-wallpaper.sh ~/Dropbox/Wallpapers
+wallpaper ~/Dropbox/Wallpapers
 
 # Mouse pointer
 xsetroot -cursor_name left_ptr
