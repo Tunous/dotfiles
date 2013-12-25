@@ -10,8 +10,8 @@ Exec() {
 
     Run)          dmenu_run -nb "#262626" -nf "#9e9e9e" -sb "#0087af" -sf "#262626" -p "Exec:" ;;
     Logout)       bspc quit; pkill panel; pkill dzen2;;
-    Reboot)       exec urxvt -geometry 50x1 -name 'URxvtFloating' -e sudo shutdown -r now & ;;
-    Shutdown)     exec urxvt -geometry 50x1 -name 'URxvtFloating' -e sudo shutdown -h now & ;;
+    Reboot)       systemctl reboot ;;
+    Shutdown)     systemctl poweroff ;;
   esac
 }
 

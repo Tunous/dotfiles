@@ -48,15 +48,15 @@ Volume() { #{{{
   vol=$(amixer get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*")
   mut=$(amixer get Master | egrep 'Playback.*?\[o' | egrep -o '\[o.+\]')
 
-  if [ $vol -eq 0 ]; then
+  if [[ $vol -eq 0 ]]; then
     ico="$(Icon volume0)"
-  elif [ $vol -eq 100 ]; then
+  elif [[ $vol -eq 100 ]]; then
     ico="$(Icon volume100)"
-  elif [ $vol -lt 100 ] && [ $vol -gt 60 ]; then
+  elif [[ $vol -lt 100 && $vol -gt 60 ]]; then
     ico="$(Icon volume75)"
-  elif [ $vol -le 60 ] && [ $vol -gt 30 ]; then
+  elif [[ $vol -le 60 && $vol -gt 30 ]]; then
     ico="$(Icon volume50)"
-  elif [ $vol -le 30 ] && [ $vol -gt 0 ]; then
+  elif [[ $vol -le 30 && $vol -gt 0 ]]; then
     ico="$(Icon volume25)"
   fi
 
@@ -91,10 +91,10 @@ done &
 while read -r line <&3; do
   case $line in
     S*)
-      TIME="$(Align right -140; Volume; Separate) ${line#?}"
+      TIME="$(Align right -130; Volume;) ${line#?}"
       ;;
     T*)
-      TITLE="$(Align left; Menu) ${line#?}"
+      TITLE="${line#?}"
       ;;
     W*)
       # bspwm internal state
@@ -105,8 +105,8 @@ while read -r line <&3; do
       while [ $# -gt 0 ] ; do
         item=$1
         name=${item#?}
-        icon=" • "
-        [ "$name" = Float ] && icon="$name"
+        icon=$name
+        [[ "$name" = [0-9] ]] && icon=" •"
 
         case $item in
           [OoFfUu]*)
@@ -137,7 +137,7 @@ while read -r line <&3; do
       ;;
   esac
 
-  echo "$TITLE $DESK $TIME"
+  echo "$(Align left; Menu) $TITLE $DESK $TIME"
 done | dzen2 -h "$PANEL_HEIGHT" -ta l -bg "$(Color black)" -e "$EVENTS" &
 
 # }}}
