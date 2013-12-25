@@ -24,5 +24,5 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 # More motions
-source ~/dotfiles/System/zsh/opp/opp.zsh
-source ~/dotfiles/System/zsh/opp/opp/*.zsh
+source $ZDOTDIR/opp/opp.zsh
+source $ZDOTDIR/opp/opp/*.zsh

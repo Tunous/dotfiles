@@ -4,8 +4,8 @@ autoload -U colors && colors
 KEYTIMEOUT=1
 
 # Prompt/vi-mode
-bindkey -v
-. ~/dotfiles/System/zsh/prompt.zsh
+# bindkey -v
+. $ZDOTDIR/prompt.zsh
 
 # {{{ Hitory
 
@@ -13,7 +13,7 @@ setopt append_history
 setopt share_history
 setopt hist_verify
 setopt hist_ignore_all_dups
-export HISTFILE="$HOME/.zsh-history"
+export HISTFILE="$ZDOTDIR/.zsh-history"
 export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
 
@@ -33,6 +33,7 @@ alias ls="ls --color=auto"
 alias pacman="sudo pacman"
 
 # Completion
+typeset -U fpath
 fpath=(~/.zsh/completion $fpath)
 
 autoload -U compinit
