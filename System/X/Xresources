@@ -100,7 +100,8 @@ URxvt*clipboard.pastecmd: xclip -o -selection clipboard
 dzen2*background:         #000000
 
 ! Fonts
-*font:                    -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-*-*-*
+*font:                    -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-60-*-*
+dzen2*font:               -*-tewi-medium-*-*-*-11-*-*-*-*-*-*-*
 
 ! {{{ End
 ! vim: ft=xdefaults
