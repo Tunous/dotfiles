@@ -114,8 +114,8 @@ super + m
 # Resize widnow
 super + alt + {h,j,k,l} + {_,shift}
     {d1=left;d2=right, d1=down;d2=up, d1=up;d2=down, d1=right;d2=left}; \
-    { bspc window -e $d1 push || bspc window -e $d2 pull, \
-      bspc window -e $d2 pull || bspc window -e $d1 push}
+    { bspc window -e $d1 +20 || bspc window -e $d2 -20, \
+      bspc window -e $d2 -20 || bspc window -e $d1 +20}
 
 # Balance windows size
 super + b
