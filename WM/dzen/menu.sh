@@ -1,5 +1,4 @@
 #!/bin/bash
-. $HOME/dotfiles/WM/common.sh
 
 Exec() {
   read prog

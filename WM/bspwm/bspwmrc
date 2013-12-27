@@ -1,5 +1,4 @@
 #! /bin/sh
-. $HOME/dotfiles/WM/common.sh
 
 # Desktops
 bspc monitor -d 1 2 3 4 5 Float 6 7 8 9 0
@@ -21,14 +20,14 @@ bspc config auto_cancel                 true
 # {{{ Borders
 
 # Focused
-bspc config focused_border_color        "$(Color Comment)"
-bspc config active_border_color         "$(Color Comment)"
+bspc config focused_border_color        "#606060"
+bspc config active_border_color         "#606060"
 
 # Default
-bspc config normal_border_color         "$(Color Background)"
-bspc config normal_locked_border_color  "$(Color Background)"
-bspc config normal_sticky_border_color  "$(Color Background)"
-bspc config normal_private_border_color "$(Color Background)"
+bspc config normal_border_color         "#262626"
+bspc config normal_locked_border_color  "#262626"
+bspc config normal_sticky_border_color  "#262626"
+bspc config normal_private_border_color "#262626"
 
 # }}}
 # {{{ Frames
@@ -41,10 +40,7 @@ bspc config normal_frame_opacity        0
 # {{{ Rules
 
 bspc rule -a BSPWM_FRAME frame=true
-bspc rule -a File-roller floating=true center=true
 bspc rule -a Gimp floating=true
-bspc rule -a Keepassx floating=true
-bspc rule -a Nautilus floating=true center=true
 bspc rule -a Steam floating=true
 bspc rule -a URxvtFloating floating=true center=true
 
