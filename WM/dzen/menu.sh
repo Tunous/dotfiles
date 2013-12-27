@@ -7,8 +7,8 @@ Exec() {
     Float*Term)   exec urxvt -name 'URxvtFloating' & ;;
     Web)          exec firefox & ;;
 
-    Run)          dmenu_run -nb "#262626" -nf "#9e9e9e" -sb "#0087af" -sf "#262626" -p "Exec:" ;;
-    Logout)       bspc quit; pkill panel; pkill dzen2;;
+    Run)          dmenu_path ;;
+    Logout)       bspc quit; pkill panel; pkill dzen2 ;;
     Reboot)       systemctl reboot ;;
     Shutdown)     systemctl poweroff ;;
   esac
@@ -18,7 +18,7 @@ Exec() {
 echo '   Term'
 echo '   Float Term'
 echo '   Web'
-echo ──────────────────────────
+echo '  ------------------------'
 echo '   Run'
 echo '   Logout'
 echo '   Reboot'
