@@ -18,7 +18,3 @@ Script() {
   printf "pkill '$1'; $HOME/dotfiles/WM/dzen/$1"
   [[ -n $2 ]] && printf " $2"
 }
-
-Separate() {
-  printf "     "
-}
