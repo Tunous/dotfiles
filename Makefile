@@ -20,7 +20,7 @@ update:
 # {{{ System
 
 
-System: compton.conf Gtk tmux.conf X zsh
+System: compton.conf Gtk X zsh
 	@echo
 
 compton.conf:
@@ -30,10 +30,6 @@ compton.conf:
 Gtk:
 	@echo ":: Gtk"
 	ln -sf ${SYSDIR}/Gtk/gtkrc-2.0 ${HOME}/.gtkrc-2.0
-
-tmux.conf:
-	@echo ":: Tmux"
-	ln -sf ${SYSDIR}/tmux.conf ${HOME}/.tmux.conf
 
 X:
 	@echo ":: X"
