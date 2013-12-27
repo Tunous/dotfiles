@@ -19,12 +19,6 @@ export SAVEHIST=$HISTSIZE
 
 # }}}
 
-# Window title
-precmd() {
-  print -Pn "\e]2;%100<...<%~%<<\a"
-}
-
-
 setopt AUTO_CD
 setopt CORRECT
 
@@ -38,3 +32,8 @@ fpath=(~/.zsh/completion $fpath)
 
 autoload -U compinit
 compinit
+
+# Window title
+precmd() {
+  print -Pn "\e]2;%100<...<%~%<<\a"
+}
