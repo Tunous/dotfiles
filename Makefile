@@ -52,12 +52,8 @@ zsh:
 # {{{ Apps
 
 
-Apps: mutt ranger vim vimperator
+Apps: ranger vim vimperator
 	@echo
-
-mutt:
-	@echo ":: Mutt"
-	ln -sfn ${APPSDIR}/mutt ${HOME}/.mutt
 
 ranger:
 	@echo ":: Ranger"
