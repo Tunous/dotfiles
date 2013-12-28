@@ -25,6 +25,7 @@ setopt CORRECT
 # Aliases
 alias ls="ls --color=auto"
 alias pacman="sudo pacman"
+alias startX="startx $DOTFILES/System/X/xinitrc"
 
 # Completion
 typeset -U fpath

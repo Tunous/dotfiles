@@ -21,7 +21,7 @@ update:
 # {{{ System
 
 
-System: compton.conf Gtk X zsh
+System: compton.conf Gtk zsh
 	@echo
 
 compton.conf:
@@ -31,13 +31,6 @@ compton.conf:
 Gtk:
 	@echo ":: Gtk"
 	ln -sf ${SYSDIR}/Gtk/gtkrc-2.0 ${HOME}/.gtkrc-2.0
-
-X:
-	@echo ":: X"
-	@mkdir -p ${XDG_CONFIG_HOME}/X
-	ln -sf ${XDIR}/xinitrc ${HOME}/.xinitrc
-	ln -sf ${XDIR}/Xmodmap ${XDG_CONFIG_HOME}/X/Xmodmap
-	ln -sf ${XDIR}/Xresources ${XDG_CONFIG_HOME}/X/Xresources
 
 zsh:
 	@echo ":: Zsh"
