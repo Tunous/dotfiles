@@ -19,4 +19,4 @@ while [[ $i -gt 0 ]]; do
   echo
   sleep 1
   i=$(( $i - 1 ))
-done | dzen2 -x -200 -y 26 -w 175 -h 20 -ta r -e 'button1=exec:amixer -D pulse set Master toggle;button2=exit;button3=exit'
+done | dzen2 -x -200 -y 26 -w 175 -h 20 -ta r -e 'button1=exec:amixer set Master toggle;button2=exit;button3=exit'
