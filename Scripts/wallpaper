@@ -24,7 +24,7 @@ fi
 
 # Set wallpaper
 if [[ -e $result ]]; then
-  feh --bg-scale "$result"
+  feh --bg-fill --no-fehbg "$result"
 else
   echo "Can't set wallpaper"
 fi

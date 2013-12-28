@@ -23,7 +23,7 @@ setopt AUTO_CD
 setopt CORRECT
 
 # Aliases
-alias ls="ls --color=auto"
+alias ls="ls --color=auto --group-directories-first"
 alias pacman="sudo pacman"
 alias startX="startx $DOTFILES/System/X/xinitrc"
 

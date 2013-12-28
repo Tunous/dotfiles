@@ -70,10 +70,12 @@ noremap k <Up>
 noremap <Leader>s :source ~/.vimperatorrc<CR>
 
 " }}}
-" Tabs navigation {{{
+" Navigation {{{
 
 noremap J gt
 noremap K gT
+noremap > ]]
+noremap < [[
 
 " }}}
 
