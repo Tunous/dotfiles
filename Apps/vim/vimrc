@@ -24,14 +24,21 @@ syntax on
 let mapleader=","
 
 " }}}
+" {{{ XDG Base Directory
+
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+set runtimepath=$DOTFILES/Apps/vim,$VIM,$VIMRUNTIME
+let $MYVIMRC="$DOTFILES/Apps/vim/vimrc"
+
+" }}}
 
 " Plugins -----------------------------------------------------------------
 " {{{ Vundle
 
 " {{{ Set paths
 
-set rtp+=$HOME/.vim/bundle/vundle
-call vundle#rc('$HOME/.vim/bundle/')
+set rtp+=$DOTFILES/Apps/vim/bundle/vundle
+call vundle#rc('$DOTFILES/Apps/vim/bundle/')
 
 " }}}
 
@@ -196,13 +203,7 @@ set copyindent                    " Copy the previous indentation on autoindenti
 " }}}
 " {{{ Undo files
 
-let s:undofilesDir = "$HOME/.vim/undofiles"
-
-if !isdirectory(s:undofilesDir)
-  silent execute '!mkdir "' . s:undofilesDir . '" >/dev/null 2>&1'
-endif
-
-execute 'set undodir=' . s:undofilesDir
+set undodir="$XDG_CACHE_HOME/vim/undofiles"
 set undofile
 
 " }}}
@@ -290,7 +291,7 @@ inoremap <Right> <NOP>
 " {{{ Open config files
 
 " Open vimrc
-nnoremap <Leader>vv :edit $HOME/.vim/vimrc<CR>
+nnoremap <Leader>vv :edit $MYVIMRC<CR>
 
 " Open vimperatorrc
 nnoremap <Leader>vp :edit $HOME/.vimperator/vimperatorrc<CR>

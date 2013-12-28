@@ -4,6 +4,7 @@ APPSDIR         = ${DOTFILES}/Apps
 WMDIR           = ${DOTFILES}/WM
 XDIR            = ${SYSDIR}/X
 XDG_CONFIG_HOME = ${HOME}/.config
+XDG_CACHE_HOME  = ${HOME}/.cache
 
 # {{{ Main
 
@@ -57,7 +58,7 @@ ranger:
 
 vim:
 	@echo ":: Vim"
-	ln -sfn ${APPSDIR}/vim ${HOME}/.vim
+	mkdir -p ${XDG_CACHE_HOME}/vim/undofiles
 	@[[ -d ${APPSDIR}/vim/bundle/vundle/.git ]] || \
 	  git clone https://github.com/gmarik/vundle.git ${APPSDIR}/vim/bundle/vundle
 	vim -u ${APPSDIR}/vim/vimrc +BundleInstall! +BundleClean +qall
