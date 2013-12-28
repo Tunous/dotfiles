@@ -41,8 +41,7 @@ X:
 
 zsh:
 	@echo ":: Zsh"
-	ln -sf  ${SYSDIR}/zsh/zshenv ${HOME}/.zshenv
-	ln -sfn ${SYSDIR}/zsh ${XDG_CONFIG_HOME}/zsh
+	ln -sf ${SYSDIR}/zsh/zshenv ${HOME}/.zshenv
 
 
 # }}}
