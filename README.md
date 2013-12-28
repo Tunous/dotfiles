@@ -4,14 +4,11 @@ Tunous's dotfiles
 Installation
 ------------
 
-```sh
-# Clone repository
-git clone https://github.com/Tunous/dotfiles.git ~/dotfiles
-cd ~/dotfiles
-
-# Use Makefile to symlink configs
-make install
-```
+1. Clone repository `git clone https://github.com/Tunous/dotfiles.git ~/dotfiles`
+2. Go to cloned repository `cd ~/dotfiles`
+3. Use Makefile to symlink confguration files `make`
+4. Restart system or logout and login to make sure that environment variables are set correctly.
+5. Update vim plugins `cd ~/dotfiles && make vim-plugins`
 
 Used software
 -------------
