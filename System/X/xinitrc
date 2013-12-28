@@ -8,6 +8,10 @@ xset fp rehash
 # Disable beep
 xset b off
 
+# Disable screensaver
+xset s noblank
+xset s off
+
 # Key configurations
 [[ -f $DOTFILES/System/X/Xmodmap ]] && xmodmap $DOTFILES/System/X/Xmodmap
 xcape
