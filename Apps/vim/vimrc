@@ -203,7 +203,7 @@ set copyindent                    " Copy the previous indentation on autoindenti
 " }}}
 " {{{ Undo files
 
-set undodir="$XDG_CACHE_HOME/vim/undofiles"
+set undodir=$XDG_CACHE_HOME/vim/undofiles
 set undofile
 
 " }}}
