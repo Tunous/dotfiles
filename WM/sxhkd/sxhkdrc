@@ -80,6 +80,7 @@ super + {o,i}
     bspc pointer -g focus
 
 super + button{1-3}
+    bspc pointer -g focus; \
     bspc pointer -g {move,resize_side,resize_corner}
 
 super + !button{1-3}
@@ -108,12 +109,16 @@ super + {a,s,d,f,g,q}
 super + m
     bspc window -s biggest
 
-# Resize
-super + alt + {h,j,k,l}
-    bspc window -e {left -10,down +10,up -10,right +10}
+# Resize window
+super + alt + {h,j,k,l} + {_,shift}
+    { d1=left  d2=right s=-10, \
+      d1=down  d2=up    s=+10, \
+      d1=up    d2=down  s=-10, \
+      d1=right d2=left  s=+10  }; \
+    { bspc window -e $d1 $s || bspc window -e $d2 $s }
 
-super + alt + shift + {h,j,k,l}
-    bspc window -e {right -10,up +10,down -10,left +10}
+super + alt + {H,J,K,L}
+    bspc window -e {left +10,down -10,up +10,right -10}
 
 # Balance size
 super + b
