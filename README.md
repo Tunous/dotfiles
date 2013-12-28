@@ -13,20 +13,18 @@ Installation
 Used software
 -------------
 
-* [Bspwm](https://github.com/baskerville/bspwm)           - Window manager
-* [Compton](https://github.com/chjj/compton)              - Compositor
-* [Dmenu](http://tools.suckless.org/dmenu/)               - Dynamic menu
-* [Dzen2](https://github.com/robm/dzen)                   - Bar/popups
-* [Feh](http://feh.finalrewind.org/)                      - Wallpaper
-* [Mutt](http://www.mutt.org/)                            - Mail User Agent
-* [Ranger](http://ranger.nongnu.org/)                     - File manager
-* [Sxhkd](https://github.com/baskerville/sxhkd)           - Hotkey daemon
-* [Tmux](http://tmux.sourceforge.net/)                    - Terminal multiplexer
-* [Trashman](https://github.com/Kwpolska/trashman)        - Trash management
-* Unclutter                                               - Hiding cursor
-* [Vim](http://www.vim.org/)                              - Text editor
-* [Vimperator](http://www.vimperator.org/)                - Vim key bindings for Firefox
-* [Zsh](http://www.zsh.org/)                              - Shell
+* [Bspwm](https://github.com/baskerville/bspwm) - Window manager
+* [Sxhkd](https://github.com/baskerville/sxhkd) - Hotkey daemon
+* [Compton](https://github.com/chjj/compton) - Windows shadows, fading
+* [Dmenu](http://tools.suckless.org/dmenu/) - Running programs
+* [Dzen2](https://github.com/robm/dzen) - Bar/popups
+* [Feh](http://feh.finalrewind.org/) - Setting wallpaper, viewing images
+* [Ranger](http://ranger.nongnu.org/) - File manager
+* [Trash-cli](https://github.com/andreafrancia/trash-cli) - Trash management
+* [Unclutter](https://www.archlinux.org/packages/?name=unclutter) - Hiding cursor
+* [Vim](http://www.vim.org/) - Text editor
+* [Vimperator](http://www.vimperator.org/) - Vim key bindings for Firefox
+* [Zsh](http://www.zsh.org/) - Shell
 
 Thanks to
 ---------
