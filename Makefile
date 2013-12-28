@@ -45,7 +45,8 @@ compton.conf:
 
 Gtk:
 	$(call cecho, "Gtk")
-	ln -sf ${SYSDIR}/Gtk/gtkrc-2.0 ${HOME}/.gtkrc-2.0
+	mkdir -p ${XDG_CONFIG_HOME}/gtk-2.0
+	ln -sf ${SYSDIR}/Gtk/gtkrc-2.0 ${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0
 
 zsh:
 	$(call cecho, "Zsh")

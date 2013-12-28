@@ -10,3 +10,5 @@ export ZDOTDIR="$DOTFILES/System/zsh"
 export GNUPGHOME="$XDG_DATA_HOME/GnuPG"
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME/password-store"
 export VIMINIT='let $MYVIMRC="$DOTFILES/Apps/vim/vimrc" | source $MYVIMRC'
+export GTK2_RC_FILES="$XDG_CONFIG_HOME/gtk-2.0/gtkrc-2.0"
+export LESSHISTFILE="/dev/null"
