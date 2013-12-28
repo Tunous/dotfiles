@@ -106,25 +106,29 @@ while read -r line <&3; do
         item=$1
         name=${item#?}
         icon=$name
-        [[ "$name" = [0-9] ]] && icon=" •"
 
         case $item in
           [OoFfUu]*)
             case $item in
-              [OFU]*) # Focused desktop
-                FG='#ffffff'
-                ;;
-
-              o*) # Occupied desktop
+              O*) # Focused ocupied desktop
                 FG='#9e9e9e'
+                [[ "$name" = [0-9] ]] && icon=" •"
                 ;;
-
+              F*) # Focused free desktop
+                FG='#9e9e9e'
+                [[ "$name" = [0-9] ]] && icon=" ○"
+                ;;
+              o*) # Occupied desktop
+                FG='#444444'
+                [[ "$name" = [0-9] ]] && icon=" •"
+                ;;
               f*) # Free desktop
                 FG='#444444'
+                [[ "$name" = [0-9] ]] && icon=" ○"
                 ;;
-
-              u*) # Urgent desktop
+              [uU]*) # Urgent desktop
                 FG='#af8700'
+                [[ "$name" = [0-9] ]] && icon=" •"
                 ;;
             esac
 
