@@ -1,0 +1,9 @@
+#!/bin/bash
+
+screen=$(xdpyinfo | grep 'dimensions:' | egrep -o "[0-9]+x[0-9]+ pixels" | awk '{ print $1 }')
+screenx=$(echo "$screen" | egrep -o "^[0-9]+")
+
+w=200
+x=$(($screenx/2 - $w/2))
+
+echo "$1" | dzen2 -x $x -y 26 -w $w -h 25 -p 5 -l 5 -e "button1=exec:$2,exit;button2=exit;button3=exit"
