@@ -82,12 +82,13 @@ noremap < [[
 " }}}
 " Quickmarks {{{
 
-silent qmark t http://translate.google.com/?hl=pl&sl=en&tl=pl
+silent qmark t https://twitter.com/
 silent qmark T http://translate.google.com/?hl=pl&sl=pl&tl=en
 silent qmark g https://gmail.com
 silent qmark G https://github.com
 silent qmark f https://cloud.feedly.com
 silent qmark r http://reddit.com
+silent qmark a https://bbs.archlinux.org/
 
 " }}}
 
