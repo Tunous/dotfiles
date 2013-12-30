@@ -90,13 +90,13 @@ Bundle 'svermeulen/vim-easyclip'
 let g:EasyClipUseCutDefaults = 0
 let g:EasyClipUseSubstituteDefaults = 1
 
-nmap x     <Plug>MoveMotionPlug
-nmap X     <Plug>MoveMotionEndOfLinePlug
-nmap xX    <Plug>MoveMotionReplaceLinePlug
-nmap xx    <Plug>MoveMotionLinePlug
+nmap x          <Plug>MoveMotionPlug
+nmap X          <Plug>MoveMotionEndOfLinePlug
+nmap xX         <Plug>MoveMotionReplaceLinePlug
+nmap xx         <Plug>MoveMotionLinePlug
 
-xmap x     <Plug>MoveMotionXPlug
-imap <c-i> <Plug>EasyClipInsertModePaste
+xmap x          <Plug>MoveMotionXPlug
+imap <C-v><C-v> <Plug>EasyClipInsertModePaste
 
 " }}}
 " {{{ Fugitive
