@@ -47,6 +47,7 @@ Gtk:
 	$(call cecho, "Gtk")
 	mkdir -p ${XDG_CONFIG_HOME}/gtk-2.0
 	ln -sf ${SYSDIR}/Gtk/gtkrc-2.0 ${XDG_CONFIG_HOME}/gtk-2.0/gtkrc-2.0
+	ln -sfn ${SYSDIR}/Gtk/gtk-3.0 ${XDG_CONFIG_HOME}/gtk-3.0
 
 zsh:
 	$(call cecho, "Zsh")
