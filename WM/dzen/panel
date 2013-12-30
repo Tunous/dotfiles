@@ -119,7 +119,7 @@ while read -r line <&3; do
                 [[ "$name" = [0-9] ]] && icon=" ○"
                 ;;
               o*) # Occupied desktop
-                FG='#444444'
+                FG='#0087af'
                 [[ "$name" = [0-9] ]] && icon=" •"
                 ;;
               f*) # Free desktop
