@@ -71,6 +71,17 @@ Menu() { # {{{
 }
 
 # }}}
+Pacman() {
+  updates=$(pacman -Qu | wc -l)
+
+  if [[ $updates -gt 99 ]]; then
+    updates="99+" # That shouldn't happen but...
+  elif [[ $updates -eq 0 ]]; then
+    return
+  fi
+  
+  printf "^ca(1,$(Script pacman.sh)) $(Icon pacman '#444444') $updates ^ca()"
+}
 
 # }}}
 
@@ -91,7 +102,7 @@ done &
 while read -r line <&3; do
   case $line in
     S*)
-      TIME="$(Align right -130; Volume;) ${line#?}"
+      TIME="$(Align right -190; Pacman; Align right -140; Volume) ${line#?}"
       ;;
     T*)
       TITLE="${line#?}"
