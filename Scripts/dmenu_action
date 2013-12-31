@@ -17,12 +17,13 @@ section"
 
   opt=$(DGet "Take screenshot" "$options")
 
-  cd $HOME
+  dir="$HOME/Dropbox"
+  cd $dir
 
   case $opt in
-    fullscreen)          scrot -d 1 && dzen_notify 'Taken fullscreen screenshot' ;;
-    delayed_fullscreen)  scrot -d 5 && dzen_notify 'Taken fullscreen screenshot' ;;
-    section)             scrot -s   && dzen_notify 'Taken screenshot of selected secion' ;;
+    fullscreen)          scrot -d 1 && dzen_notify -a "urxvt -e ranger $dir" 'Taken fullscreen screenshot' ;;
+    delayed_fullscreen)  scrot -d 5 && dzen_notify -a "urxvt -e ranger $dir" 'Taken fullscreen screenshot' ;;
+    section)             scrot -s   && dzen_notify -a "urxvt -e ranger $dir" 'Taken screenshot of selected secion' ;;
   esac
 }
 
