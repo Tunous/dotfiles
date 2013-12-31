@@ -1,9 +1,65 @@
 #!/bin/bash
 
+# Default values
+font="-*-tewi-medium-*-*-*-11-*-*-*-*-*-*-*" 
+length=5
+action=""
+output=""
+
+Help() {
+  echo "Usage: dzen_notify [OPTIONS]... [NOTIFICATION]"
+  echo
+  echo "OPTIONS:"
+  echo " -a, --action <string>    Action to be preformed when user clicks on notification popup"
+  echo " -l, --length <seconds>   Time in seconds after which notification disappears if user"
+  echo "                          doesn't ineract with it (Default 5 seconds)"
+  echo "                          Use 0 for notification which disappers only on user action"
+  echo " -h, --help               Displays this information"
+  echo
+  echo "NOTIFICATION:"
+  echo " Text to be displayed in popup window."
+  echo
+  echo "ADDITIONAL INFO:"
+  echo " If action was specified right clicking on popup will display its content."
+  exit
+}
+
+# Options
+while [[ -n "$1" ]]; do
+  case "$1" in
+    -h|--help)
+      Help
+      ;;
+    -a|--action)
+      shift
+      action="$1"
+      ;;
+    -l|--length)
+      shift
+      length="$1"
+      ;;
+    *)
+      [[ -z $output ]] && output="$1" || output="$output $1"
+      ;;
+  esac
+  shift
+done
+
+[[ -n "$output" ]] || exit
+
+# Size / position
 screen=$(xdpyinfo | grep 'dimensions:' | egrep -o "[0-9]+x[0-9]+ pixels" | awk '{ print $1 }')
 screenx=$(echo "$screen" | egrep -o "^[0-9]+")
+h=25
+tw=$(( $(textwidth "$font" "$output") + 20 ))
+x=$(($screenx/2 - $tw/2))
+y=26
 
-w=200
-x=$(($screenx/2 - $w/2))
-
-echo "$1" | dzen2 -x $x -y 26 -w $w -h 25 -p 5 -l 5 -e "button1=exec:$2,exit;button2=exit;button3=exit"
+if [[ -n "$action" ]]; then
+  # Popup with specified action
+  w=$(( $(textwidth "$font" "Action: $action") + 20 ))
+  (echo "$output"; echo "Action: $action") | dzen2 -x $x -y $y -tw $tw -w $w -sa c -h $h -p $length -fn $font -l 1 -e "leavetitle=collapse;button1=exec:$action,exit;button2=exit;button3=uncollapse"
+else
+  # Popup without action
+  echo "$output" | dzen2 -x $x -y $y -w $tw -h $h -p $length -fn $font -e "button1=exit;button2=exit;button3=exit"
+fi
