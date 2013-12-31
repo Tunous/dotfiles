@@ -1,0 +1,55 @@
+#!/bin/bash
+
+# {{{ Functions
+
+DGet() {
+  if [[ -z "$2" ]]; then
+    echo $(dmenu -nb "#000000" -nf "#9e9e9e" -sb "#0087af" -sf "#000000" -p "$1")
+  else
+    echo $(dmenu -nb "#000000" -nf "#9e9e9e" -sb "#0087af" -sf "#000000" -p "$1" <<< "$2")
+  fi
+}
+
+Screen() {
+  options="fullscreen
+delayed_fullscreen
+section"
+
+  opt=$(DGet "Take screenshot" "$options")
+
+  cd $HOME
+
+  case $opt in
+    fullscreen)          scrot -d 1 && dzen_notify 'Taken fullscreen screenshot' ;;
+    delayed_fullscreen)  scrot -d 5 && dzen_notify 'Taken fullscreen screenshot' ;;
+    section)             scrot -s   && dzen_notify 'Taken screenshot of selected secion' ;;
+  esac
+}
+
+Google() {
+  opt=$(DGet "Search in google")
+
+  [[ -n "$opt" ]] && firefox 'http://www.google.com/search?q='"$opt"
+}
+
+Web() {
+  opt=$(DGet "Open url")
+
+  [[ -n "$opt" ]] && firefox "$opt"
+}
+
+# }}}
+
+options="run program
+search in google
+open url
+take screenshot"
+
+cmd=$(DGet "Choose action" "$options")
+
+case $cmd in
+  r*) dmenu_run -nb "#000000" -nf "#9e9e9e" -sb "#0087af" -sf "#000000" -p "Run program" ;;
+  s*) Google ;;
+  o*) Web    ;;
+  t*) Screen ;;
+esac

@@ -1,4 +1,0 @@
-#!/bin/bash
-
-dmenu_run -nb "#000000" -nf "#9e9e9e" -sb "#0087af" -sf "#000000" -p "Exec:"
-
