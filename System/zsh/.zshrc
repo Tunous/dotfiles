@@ -32,8 +32,6 @@ alias pacman="sudo pacman"
 alias startX="startx $DOTFILES/System/X/xinitrc"
 
 # Completion
-typeset -U fpath
-fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
 compinit
 
