@@ -3,8 +3,12 @@ autoload -U colors && colors
 # Remove dalay
 KEYTIMEOUT=1
 
-# Prompt/vi-mode
-# bindkey -v
+# Vi-mode
+bindkey -v
+# Allow backspace to delete behind cursor
+bindkey "^?" backward-delete-char
+
+# Prompt
 . $ZDOTDIR/prompt.zsh
 
 # {{{ Hitory
@@ -30,7 +34,6 @@ alias startX="startx $DOTFILES/System/X/xinitrc"
 # Completion
 typeset -U fpath
 fpath=(~/.zsh/completion $fpath)
-
 autoload -U compinit
 compinit
 
