@@ -24,6 +24,11 @@ Help() {
   exit
 }
 
+MiniHelp() {
+  echo "Usage: dzen_notify [-h] [-a <string>] [-l <seconds>] [NOTIFICATION]"
+  exit
+}
+
 # Options
 while [[ -n "$1" ]]; do
   case "$1" in
@@ -37,6 +42,7 @@ while [[ -n "$1" ]]; do
     -l|--length)
       shift
       length="$1"
+      [[ $length =~ ^[0-9]+$ ]] || MiniHelp
       ;;
     *)
       [[ -z $output ]] && output="$1" || output="$output $1"
@@ -45,7 +51,7 @@ while [[ -n "$1" ]]; do
   shift
 done
 
-[[ -n "$output" ]] || exit
+[[ -n "$output" ]] || MiniHelp
 
 # Size / position
 screen=$(xdpyinfo | grep 'dimensions:' | egrep -o "[0-9]+x[0-9]+ pixels" | awk '{ print $1 }')
