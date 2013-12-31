@@ -200,7 +200,7 @@ super + shift + Return
 
 # Dmenu
 super + space
-    dmenu_path
+    dmenu_action
 
 # Firefox
 super + alt + f
