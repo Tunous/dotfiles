@@ -39,12 +39,38 @@ Web() {
   [[ -n "$opt" ]] && firefox "$opt"
 }
 
+Calc() {
+  opt=$(bc -l <<< "scale=3; $(DGet 'Calc')")
+
+  while [[ -n "$opt" ]]; do
+    opt=$(DGet "Calc" $(bc -l <<< "scale=3; $opt"))
+  done
+}
+
+Run() {
+  options="firefox
+ranger
+vim
+steam"
+
+  opt=$(DGet "Run program" "$options")
+
+  case $opt in
+    firefox) firefox ;;
+    ranger) urxvt -e ranger ;;
+    vim) urxvt -e vim ;;
+    steam) steam ;;
+  esac
+}
+
 # }}}
 
-options="run program
+options="most used
+run program
 search in google
 open url
-take screenshot"
+take screenshot
+calculator"
 
 cmd=$(DGet "Choose action" "$options")
 
@@ -53,4 +79,6 @@ case $cmd in
   s*) Google ;;
   o*) Web    ;;
   t*) Screen ;;
+  c*) Calc   ;;
+  m*) Run    ;;
 esac
