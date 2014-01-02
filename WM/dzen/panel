@@ -39,6 +39,40 @@ bspc config top_padding $PANEL_HEIGHT
 # }}}
 # Functions {{{
 
+Mail() { # {{{
+  # $PASSWORD_STORE_DIR/Gmail/Dzen contains login:password
+  email=$(curl -u $(cat $PASSWORD_STORE_DIR/Gmail/Dzen) --silent 'https://mail.google.com/mail/feed/atom' | grep fullcount | egrep -o '[0-9]+')
+
+  if [[ $email -ne 0 ]]; then
+    if [[ $email -eq 1 ]]; then
+      printf "^ca(1,firefox 'https://mail.google.com/')$email message^ca()"
+      dzen_notify "$email New Message"
+    else
+      printf "M^ca(1,firefox 'https://mail.google.com/')$email messages^ca()"
+      dzen_notify "$email New Messages"
+    fi
+  fi
+}
+
+# }}}
+Menu() { # {{{
+  printf "^ca(1,$(Script menu.sh)) $(Icon arch '#0087af')  ^ca()"
+}
+
+# }}}
+Pacman() { # {{{
+  updates=$(pacman -Qu | wc -l)
+
+  if [[ $updates -gt 99 ]]; then
+    updates="99+" # That shouldn't happen but...
+  elif [[ $updates -eq 0 ]]; then
+    return
+  fi
+
+  printf "^ca(1,$(Script pacman.sh)) $(Icon pacman '#444444') $updates ^ca()"
+}
+
+# }}}
 Time() { #{{{
   printf "^ca(1,$(Script date.sh))%s^ca()" "$(Icon clock '#444444') $(date +%H:%M:%S)"
 }
@@ -66,22 +100,6 @@ Volume() { #{{{
 }
 
 # }}}
-Menu() { # {{{
-  printf "^ca(1,$(Script menu.sh)) $(Icon arch '#0087af')  ^ca()"
-}
-
-# }}}
-Pacman() {
-  updates=$(pacman -Qu | wc -l)
-
-  if [[ $updates -gt 99 ]]; then
-    updates="99+" # That shouldn't happen but...
-  elif [[ $updates -eq 0 ]]; then
-    return
-  fi
-  
-  printf "^ca(1,$(Script pacman.sh)) $(Icon pacman '#444444') $updates ^ca()"
-}
 
 # }}}
 
@@ -94,6 +112,10 @@ while :; do
   echo "S$(Time)" >&3
   sleep 3
 done &
+while :; do
+  echo "O$(Align right -250; Mail)$(Align right -190; Pacman)" >&3
+  sleep 300
+done &
 
 
 # }}}
@@ -101,8 +123,11 @@ done &
 
 while read -r line <&3; do
   case $line in
+    O*)
+      OTHER="${line#?}"
+      ;;
     S*)
-      TIME="$(Align right -190; Pacman; Align right -140; Volume) ${line#?}"
+      TIME="$(Align right -140; Volume) ${line#?}"
       ;;
     T*)
       TITLE="${line#?}"
@@ -152,7 +177,7 @@ while read -r line <&3; do
       ;;
   esac
 
-  echo "$(Align left; Menu) $TITLE $DESK $TIME"
+  echo "$(Align left; Menu) $TITLE $DESK $OTHER $TIME"
 done | dzen2 -h "$PANEL_HEIGHT" -ta l -e "$EVENTS" &
 
 # }}}
