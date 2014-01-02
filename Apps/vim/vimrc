@@ -249,7 +249,7 @@ set clipboard^=unnamed,unnamedplus  " Use system clipboard
 " }}}
 
 " }}}
-" {{{ Key mappings
+" {{{ Mappings
 
 " {{{ Buffers navigation
 
@@ -321,6 +321,9 @@ nmap <Leader>l :set list!<CR>
 " Turn off highlighting for current search
 nnoremap <Leader>h :nohlsearch<CR>
 
+" Save with sudo
+cmap w!! w !sudo tee > /dev/null %
+
 " }}}
 
 " }}}
@@ -339,7 +342,7 @@ endfunction
 " }}}
 " {{{ Open files with ranger
 
-function! RangeChooser()
+function! RangerChooser()
   let temp = tempname()
 
   exec 'silent !ranger --choosefiles=' . shellescape(temp)
@@ -362,7 +365,7 @@ function! RangeChooser()
   redraw!
 endfunction
 
-command! -bar RangerChooser call RangeChooser()
+command! -bar RangerChooser call RangerChooser()
 nnoremap <Leader>r :<C-U>RangerChooser<CR>
 
 " }}}
