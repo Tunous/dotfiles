@@ -47,26 +47,9 @@ Calc() {
   done
 }
 
-Run() {
-  options="firefox
-ranger
-vim
-steam"
-
-  opt=$(DGet "Run program" "$options")
-
-  case $opt in
-    firefox) firefox ;;
-    ranger) urxvt -e ranger ;;
-    vim) urxvt -e vim ;;
-    steam) steam ;;
-  esac
-}
-
 # }}}
 
-options="most used
-run program
+options="run program
 search in google
 open url
 take screenshot
@@ -80,5 +63,4 @@ case $cmd in
   o*) Web    ;;
   t*) Screen ;;
   c*) Calc   ;;
-  m*) Run    ;;
 esac
