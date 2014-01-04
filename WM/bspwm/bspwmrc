@@ -41,7 +41,7 @@ bspc config normal_frame_opacity        0
 
 bspc rule -a BSPWM_FRAME frame=true
 bspc rule -a Gimp floating=true
-bspc rule -a Steam floating=true
+bspc rule -a Steam floating=true desktop=Float
 bspc rule -a URxvtFloating floating=true center=true
 bspc rule -a feh floating=true center=true pseudo_tiled=true
 
