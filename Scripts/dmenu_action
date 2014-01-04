@@ -6,7 +6,7 @@ DGet() {
   if [[ -z "$2" ]]; then
     echo $(dmenu -nb "#000000" -nf "#9e9e9e" -sb "#0087af" -sf "#000000" -p "$1")
   else
-    echo $(dmenu -nb "#000000" -nf "#9e9e9e" -sb "#0087af" -sf "#000000" -p "$1" <<< "$2")
+    echo $(printf "$2" | dmenu -nb "#000000" -nf "#9e9e9e" -sb "#0087af" -sf "#000000" -p "$1")
   fi
 }
 
@@ -39,21 +39,27 @@ Web() {
   [[ -n "$opt" ]] && firefox "$opt"
 }
 
-Calc() {
-  opt=$(bc -l <<< "scale=3; $(DGet 'Calc')")
+Translate() {
+  languages="auto\naf\nsq\nar\naz\neu\nbn\nbe\nbg\nca\nzh-CN\nzh-TW\nhr\ncs\nda\nnl\nen\neo\net\ntl\nfi\nfr\ngl\nka\nde\nel\ngu\nht\niw\nhi\nhu\nis\nid\nga\nit\nja\nkn\nko\nla\nlv\nlt\nmk\nms\nmt\nno\nfa\npl\npt\nro\nru\nsr\nsk\nsl\nes\nsw\nsv\nta\nte\nth\ntr\nuk\nur\nvi\ncy\nyi"
+  languages="afrikaans\nalbanian\narabic\nazerbaijani\nbasque\nbengali\nbelarusian\nbulgarian\ncatalan\nchinese simplified\nchinese traditional\ncroatian\nczech\ndanish\ndutch\nenglish\nesperanto\nestonian\nfilipino\nfinnish\nfrench\ngalician\ngeorgian\ngerman\ngreek\ngujarati\nhaitian creole\nhebrew\nhindi\nhungarian\nicelandic\nindonesian\nirish\nitalian\njapanese\nkannada\nkorean\nlatin\nlatvian\nlithuanian\nmacedonian\nmalay\nmaltese\nnorwegian\npersian\npolish\nportuguese\nromanian\nrussian\nserbian\nslovak\nslovenian\nspanish\nswahili\nswedish\ntamil\ntelugu\nthai\nturkish\nukrainian\nurdu\nvietnamese\nwelsh\nyiddish"
+  languages="af afrikaans\nsq albanian\nar arabic\naz azerbaijani\neu basque\nbn bengali\nbe belarusian\nbg bulgarian\nca catalan\nzh-cn chinese simplified\nzh-tw chinese traditional\nhr croatian\ncs czech\nda danish\nnl dutch\nen english\neo esperanto\net estonian\ntl filipino\nfi finnish\nfr french\ngl galician\nka georgian\nde german\nel greek\ngu gujarati\nht haitian creole\niw hebrew\nhi hindi\nhu hungarian\nis icelandic\nid indonesian\nga irish\nit italian\nja japanese\nkn kannada\nko korean\nla latin\nlv latvian\nlt lithuanian\nmk macedonian\nms malay\nmt maltese\nno norwegian\nfa persian\npl polish\npt portuguese\nro romanian\nru russian\nsr serbian\nsk slovak\nsl slovenian\nes spanish\nsw swahili\nsv swedish\nta tamil\nte telugu\nth thai\ntr turkish\nuk ukrainian\nur urdu\nvi vietnamese\ncy welsh\nyi yiddish"
 
-  while [[ -n "$opt" ]]; do
-    opt=$(DGet "Calc" $(bc -l <<< "scale=3; $opt"))
-  done
+  sl=$(DGet "Source language" "$languages")
+  sl=${sl%% *}
+  [[ -z $sl ]] && return
+
+  tl=$(DGet "$sl" "$languages")
+  tl=${tl%% *}
+  [[ -z $tl ]] && return
+
+  opt=$(DGet "$tl")
+
+  [[ -n "$opt" ]] && firefox 'http://www.translate.google.com/?'"&sl=$sl&tl=$tl&text=$opt"
 }
 
 # }}}
 
-options="run program
-search in google
-open url
-take screenshot
-calculator"
+options="run program\ntranslate\nsearch in google\nopen url\ntake screenshot"
 
 cmd=$(DGet "Choose action" "$options")
 
@@ -61,6 +67,6 @@ case $cmd in
   r*) dmenu_run -nb "#000000" -nf "#9e9e9e" -sb "#0087af" -sf "#000000" -p "Run program" ;;
   s*) Google ;;
   o*) Web    ;;
+  tr*) Translate ;;
   t*) Screen ;;
-  c*) Calc   ;;
 esac
