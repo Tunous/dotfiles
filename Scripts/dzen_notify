@@ -7,11 +7,11 @@ action=""
 output=""
 
 Help() {
-  echo "Usage: dzen_notify [OPTIONS]... [NOTIFICATION]"
+  echo "Usage: dzen_notify [OPTIONS]... NOTIFICATION"
   echo
   echo "OPTIONS:"
   echo " -a, --action <string>    Action to be preformed when user clicks on notification popup"
-  echo " -l, --length <seconds>   Time in seconds after which notification disappears if user"
+  echo " -t, --timeout <seconds>  Time in seconds after which notification disappears if user"
   echo "                          doesn't ineract with it (Default 5 seconds)"
   echo "                          Use 0 for notification which disappers only on user action"
   echo " -h, --help               Displays this information"
@@ -25,7 +25,7 @@ Help() {
 }
 
 MiniHelp() {
-  echo "Usage: dzen_notify [-h] [-a <string>] [-l <seconds>] [NOTIFICATION]"
+  echo "Usage: dzen_notify [-h] [-a <string>] [-t <seconds>] NOTIFICATION"
   exit
 }
 
@@ -38,19 +38,21 @@ while [[ -n "$1" ]]; do
     -a|--action)
       shift
       action="$1"
+      shift
       ;;
-    -l|--length)
+    -t|--timeout)
       shift
       length="$1"
       [[ $length =~ ^[0-9]+$ ]] || MiniHelp
+      shift
       ;;
     *)
-      [[ -z $output ]] && output="$1" || output="$output $1"
+      break
       ;;
   esac
-  shift
 done
 
+output="$@"
 [[ -n "$output" ]] || MiniHelp
 
 # Size / position
