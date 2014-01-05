@@ -44,11 +44,7 @@ Mail() { # {{{
   email=$(curl -u $(cat $PASSWORD_STORE_DIR/Gmail/Dzen) --silent 'https://mail.google.com/mail/feed/atom' | grep fullcount | egrep -o '[0-9]+')
 
   if [[ $email -ne 0 ]]; then
-    if [[ $email -eq 1 ]]; then
-      printf "^ca(1,firefox 'https://mail.google.com/')$email message^ca()"
-    else
-      printf "^ca(1,firefox 'https://mail.google.com/')$email messages^ca()"
-    fi
+    printf "^ca(1,firefox 'https://mail.google.com/')$(Icon mail '#444444')$email ^ca()"
   fi
 }
 
@@ -61,14 +57,14 @@ Menu() { # {{{
 Pacman() { # {{{
   updates=$(checkupdates | wc -l)
 
-  [[ $updates -eq 0 ]] && return
-
-  printf "^ca(1,$(Script pacman.sh)) $(Icon pacman '#444444') $updates ^ca()"
+  if [[ $updates -ne 0 ]]; then
+    printf "^ca(1,$(Script pacman.sh))%s^ca()" "$(Icon pacman '#444444')$updates"
+  fi
 }
 
 # }}}
 Time() { #{{{
-  printf "^ca(1,$(Script date.sh))%s^ca()" "$(Icon clock '#444444') $(date +%H:%M:%S)"
+  printf "^ca(1,$(Script date.sh))%s^ca()" "$(Icon clock '#444444')$(date +%H:%M:%S)"
 }
 
 # }}}
@@ -76,21 +72,32 @@ Volume() { #{{{
   vol=$(amixer get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*")
   mut=$(amixer get Master | egrep 'Playback.*?\[o' | egrep -o '\[o.+\]')
 
-  if [[ $vol -eq 0 ]]; then
-    ico="$(Icon volume0 '#444444')"
-  elif [[ $vol -eq 100 ]]; then
-    ico="$(Icon volume100 '#444444')"
-  elif [[ $vol -lt 100 && $vol -gt 60 ]]; then
-    ico="$(Icon volume75 '#444444')"
-  elif [[ $vol -le 60 && $vol -gt 30 ]]; then
-    ico="$(Icon volume50 '#444444')"
+  # TODO: Add colors
+  c1='#444444'
+  c2='#303030'
+  if [[ $vol -eq 0 || "$mut" = "[off]" ]]; then
+    c1='#af0000'
+    ico="volume0"
   elif [[ $vol -le 30 && $vol -gt 0 ]]; then
-    ico="$(Icon volume25 '#444444')"
+    ico="volume25"
+  elif [[ $vol -le 65 && $vol -gt 30 ]]; then
+    ico="volume50"
+  elif [[ $vol -lt 100 && $vol -gt 65 ]]; then
+    ico="volume75"
+  elif [[ $vol -eq 100 ]]; then
+    ico="volume100"
   fi
 
-  [ "$mut" = "[off]" ] && ico="$(Icon volume0 '#444444')"
+  printf "^ca(1,amixer set Master toggle; dzen_notify -t 1 'Changed mute state of volume')$(Icon $ico $c1)^ca()"
 
-  printf "^ca(1,$(Script volume.sh)) $ico ^ca()"
+  for i in {0..10}; do
+    percent="$(( $i * 10 ))"
+    if [[ $vol -ge $percent ]]; then
+      printf "^ca(1,amixer set Master %s)^fg(%s)^r(8x3)^fg()^ca()" "$percent%; dzen_notify -t 1 'Volume changed to $percent%'" "$c1"
+    else
+      printf "^ca(1,amixer set Master %s)^fg(%s)^r(8x3)^fg()^ca()" "$percent%; dzen_notify -t 1 'Volume changed to $percent%'" "$c2"
+    fi
+  done
 }
 
 # }}}
@@ -102,14 +109,8 @@ Volume() { #{{{
 
 bspc control --subscribe >&3 &
 xtitle -sf 'T%s' >&3 &
-while :; do
-  echo "S$(Time)" >&3
-  sleep 3
-done &
-while :; do
-  echo "O$(Align right -255; Mail)$(Align right -190; Pacman)" >&3
-  sleep 300
-done &
+while :; do echo "S$(Align right -210; Volume) $(Align right -85;  Time)" >&3; sleep 3;   done &
+while :; do echo "L$(Align right -310; Pacman) $(Align right -260; Mail)" >&3; sleep 300; done &
 
 
 # }}}
@@ -117,18 +118,12 @@ done &
 
 while read -r line <&3; do
   case $line in
-    O*)
-      OTHER="${line#?}"
-      ;;
-    S*)
-      TIME="$(Align right -140; Volume) ${line#?}"
-      ;;
-    T*)
-      TITLE="${line#?}"
-      ;;
+    L*) LONG="${line#?}"  ;;
+    S*) SHORT="${line#?}" ;;
+    T*) TITLE="${line#?}" ;;
     W*)
       # bspwm internal state
-      DESK=" $(Align center -147) "
+      DESK="$(Align center -115)"
       IFS=$FIELDIFS
       set -- ${line#?}
 
@@ -142,23 +137,23 @@ while read -r line <&3; do
             case $item in
               O*) # Focused ocupied desktop
                 FG='#9e9e9e'
-                [[ "$name" = [0-9] ]] && icon=" •"
+                [[ "$name" = [0-9] ]] && icon="•"
                 ;;
               F*) # Focused free desktop
                 FG='#9e9e9e'
-                [[ "$name" = [0-9] ]] && icon=" ○"
+                [[ "$name" = [0-9] ]] && icon="○"
                 ;;
               o*) # Occupied desktop
                 FG='#0087af'
-                [[ "$name" = [0-9] ]] && icon=" •"
+                [[ "$name" = [0-9] ]] && icon="•"
                 ;;
               f*) # Free desktop
                 FG='#444444'
-                [[ "$name" = [0-9] ]] && icon=" ○"
+                [[ "$name" = [0-9] ]] && icon="○"
                 ;;
               [uU]*) # Urgent desktop
                 FG='#af8700'
-                [[ "$name" = [0-9] ]] && icon=" •"
+                [[ "$name" = [0-9] ]] && icon="•"
                 ;;
             esac
 
@@ -171,7 +166,7 @@ while read -r line <&3; do
       ;;
   esac
 
-  echo "$(Align left; Menu) $TITLE $DESK $OTHER $TIME"
+  echo "$(Align left; Menu) $TITLE $DESK $LONG $SHORT"
 done | dzen2 -h "$PANEL_HEIGHT" -ta l -e "$EVENTS" &
 
 # }}}
