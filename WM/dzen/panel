@@ -46,10 +46,8 @@ Mail() { # {{{
   if [[ $email -ne 0 ]]; then
     if [[ $email -eq 1 ]]; then
       printf "^ca(1,firefox 'https://mail.google.com/')$email message^ca()"
-      dzen_notify "$email New Message"
     else
-      printf "M^ca(1,firefox 'https://mail.google.com/')$email messages^ca()"
-      dzen_notify "$email New Messages"
+      printf "^ca(1,firefox 'https://mail.google.com/')$email messages^ca()"
     fi
   fi
 }
@@ -61,13 +59,9 @@ Menu() { # {{{
 
 # }}}
 Pacman() { # {{{
-  updates=$(pacman -Qu | wc -l)
+  updates=$(checkupdates | wc -l)
 
-  if [[ $updates -gt 99 ]]; then
-    updates="99+" # That shouldn't happen but...
-  elif [[ $updates -eq 0 ]]; then
-    return
-  fi
+  [[ $updates -eq 0 ]] && return
 
   printf "^ca(1,$(Script pacman.sh)) $(Icon pacman '#444444') $updates ^ca()"
 }
@@ -113,7 +107,7 @@ while :; do
   sleep 3
 done &
 while :; do
-  echo "O$(Align right -250; Mail)$(Align right -190; Pacman)" >&3
+  echo "O$(Align right -255; Mail)$(Align right -190; Pacman)" >&3
   sleep 300
 done &
 

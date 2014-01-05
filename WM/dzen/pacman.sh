@@ -1,8 +1,8 @@
 #!/bin/bash
 
-pacmanlines=$(pacman -Qu | wc -l)
-updates=$(pacman -Quq)
-lines=$(( $pacmanlines + 2 ))
+updates=$(checkupdates)
+lines=$(( $($updates | wc -l) + 3 ))
+[[ $lines -eq 3 ]] && updates="No updates"
 
 (
 echo Updates:
