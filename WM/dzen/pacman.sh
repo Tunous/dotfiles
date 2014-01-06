@@ -1,8 +1,8 @@
 #!/bin/bash
 
 updates=$(checkupdates)
-lines=$(( $($updates | wc -l) + 3 ))
-[[ $lines -eq 3 ]] && updates="No updates"
+lines=$(( $(echo "$updates" | wc -l) + 2 ))
+[[ $lines -eq 2 ]] && updates="No updates"
 
 (
 echo Updates:
