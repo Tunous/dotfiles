@@ -123,6 +123,8 @@ super + alt + {H,J,K,L}
 # Balance size
 super + b
     bspc desktop -B
+super + e
+    bspc desktop -E
 
 # {{{ Floating
 
