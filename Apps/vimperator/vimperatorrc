@@ -1,46 +1,29 @@
-"{{{
-"   ___      ___  __     ___      ___    _______    _______   _______        __  ___________  ______     _______    _______    ______
-"  |"  \    /"  ||" \   |"  \    /"  |  |   __ "\  /"     "| /"      \      /""\("     _   ")/    " \   /"      \  /"      \  /" _  "\
-"   \   \  //  / ||  |   \   \  //   |  (. |__) :)(: ______)|:        |    /    \)__/  \\__/// ____  \ |:        ||:        |(: ( \___)
-"    \\  \/. ./  |:  |   /\\  \/.    |  |:  ____/  \/    |  |_____/   )   /' /\  \  \\_ /  /  /    ) :)|_____/   )|_____/   ) \/ \
-"     \.    //   |.  |  |: \.        |  (|  /      // ___)_  //      /   //  __'  \ |.  | (: (____/ //  //      /  //      /  //  \ _
-"      \\   /    /\  |\ |.  \    /:  | /|__/ \    (:      "||:  __   \  /   /  \\  \\:  |  \        /  |:  __   \ |:  __   \ (:   _) \
-"       \__/    (__\_|_)|___|\__/|___|(_______)    \_______)|__|  \___)(___/    \___)\__|   \"_____/   |__|  \___)|__|  \___) \_______)
 "
-" }}}
+" VIMPERATORRC
+"
 
 colorscheme custom
 
-" Vimperatorrc -----------------------------------------------------------
-" Setting options {{{
-
-" Change page patterns {{{
-
+" Settings ---------------------------------------------------------------
+" Page patterns
 set nextpattern=\\bnastępn,\\bdalej,\\bnext,^>$,^(>>|»)$,^(>|»),(>|»)$,\\bmore\\b
 set previouspattern=\\bpoprzedni,\\bwstecz,\\bprev|previous\\b,^<$,^(<<|«)$,^(<|«),(<|«)$
 
-" }}}
-" Gui elements {{{
+" External editor
+set editor="urxvt -name 'URxvtFloating' -e vim"
 
-set gui=noaddons,nobookmarks,nomenu,nonavigation,tabs
-set status=input,location,history,bookmark
+" Gui elements
+set gui=none,navigation,tabs
+set status=location,input,bookmark,position
 
-" }}}
-" Hintchars {{{
-
+" Hintchars
 set hintchars=HJKLASDFGYUIOPQWERTNMZXCVB
 
-" }}}
-" Other {{{
+" List of completions
+set complete=Ssl
 
 " Try to always stay in normal mode
 set focuscontent
-
-" List of completions when using :[tab]open
-set complete=Ssl
-
-" Suggestion engine when using :[tab]open
-set suggestengines=google
 
 " Turn on animations
 set animations
@@ -48,40 +31,28 @@ set animations
 " Visual bell instead of system beep
 set visualbell
 
-" }}}
-
-" }}}
-" Key mappings {{{
-
-" Leader {{{
-
+" Key mappings -----------------------------------------------------------
+" Leader
 let mapleader = ','
 
-" }}}
-
-" Faster scrolling {{{
-
+" Faster scrolling
 noremap j <Down>
 noremap k <Up>
 
-" }}}
-" Sourcing {{{
-
-noremap <Leader>s :source ~/.vimperatorrc<CR>
-
-" }}}
-" Navigation {{{
-
+" Navigation
 noremap J gt
 noremap K gT
 noremap > ]]
 noremap < [[
 
-" }}}
+" Tabs reorganizing
+noremap <C-K> :tabm -1<CR>
+noremap <C-J> :tabm +1<CR>
 
-" }}}
-" Quickmarks {{{
+noremap <Leader>h :nohl<CR>
+noremap <Leader>s :source ~/.vimperatorrc<CR>
 
+" Quickmarks -------------------------------------------------------------
 silent qmark t https://twitter.com/
 silent qmark T http://translate.google.com/?hl=pl&sl=pl&tl=en
 silent qmark g https://gmail.com
@@ -90,25 +61,20 @@ silent qmark f https://cloud.feedly.com
 silent qmark r http://reddit.com
 silent qmark a https://bbs.archlinux.org/
 
-" }}}
-
-set editor="urxvt -name 'URxvtFloating' -e vim"
-
-" Functions --------------------------------------------------------------
-" Toggle css elements {{{
-
-javascript <<EOF
-
-toggleElement = function (name) {
-  document.getElementById(name).collapsed ^= 1;
+" Stylesheets ------------------------------------------------------------
+style -name removeScrollbars chrome://* <<EOF
+#content browser {
+  margin-right: -14px !important;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
-
 EOF
 
-" Toggle navigation bar
-command! toggleNavBar javascript toggleElement('nav-bar')
+style -name hideNavBar chrome://* <<EOF
+#nav-bar {
+  visibility: collapse !important;
+}
+EOF
 
-" }}}
-
-" End {{{
+" {{{ End
 " vim: ft=vimperator commentstring="\ %s
