@@ -306,9 +306,6 @@ inoremap <C-u> <Esc>:call Preserve("normal gUiw")<CR>a
 nnoremap <F2> :call Preserve("normal gg=G")<CR>
 nnoremap <F3> :call Preserve("%s/\\s\\+$//e")<CR>
 
-" Save file
-nnoremap <CR> :w<CR>
-
 " Source vimrc
 nnoremap <Leader>s :source $MYVIMRC<CR>
 
