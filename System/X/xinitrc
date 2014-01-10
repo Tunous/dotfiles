@@ -13,6 +13,7 @@ xset b off
 # Disable screensaver
 xset s noblank
 xset s off
+xset -dpms
 
 # Key configurations
 [[ -f $DOTFILES/System/X/Xmodmap ]] && xmodmap $DOTFILES/System/X/Xmodmap
@@ -32,7 +33,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 compton &
-devmon --exec-on-drive "dzen_notify -a 'urxvt -e ranger %d' 'Device connected'" --exec-on-remove "dzen_notify 'Device disconnected'" &
+devmon --exec-on-drive "notify-send 'Device connected' '%d'" --exec-on-remove "notify-send 'Device disconnected'" &
 
 sxhkd &
 exec bspwm

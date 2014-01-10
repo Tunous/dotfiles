@@ -58,8 +58,12 @@ zsh:
 # {{{ Apps
 
 
-Apps: ranger vim vimperator
+Apps: dunst ranger vim vimperator
 	@echo
+
+dunst:
+	$(call cecho, "Dunst")
+	ln -sfn ${APPSDIR}/dunst ${XDG_CONFIG_HOME}/dunst
 
 ranger:
 	$(call cecho, "Ranger")

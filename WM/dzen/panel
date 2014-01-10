@@ -88,14 +88,14 @@ Volume() { #{{{
     ico="volume100"
   fi
 
-  printf "^ca(1,amixer set Master toggle; dzen_notify -t 1 'Changed mute state of volume')$(Icon $ico $c1)^ca()"
+  printf "^ca(1,amixer set Master toggle; notify-send -u low -t 1 'Toggled mute state of volume')$(Icon $ico $c1)^ca()"
 
   for i in {0..10}; do
     percent="$(( $i * 10 ))"
     if [[ $vol -ge $percent ]]; then
-      printf "^ca(1,amixer set Master %s)^fg(%s)^r(8x3)^fg()^ca()" "$percent%; dzen_notify -t 1 'Volume changed to $percent%'" "$c1"
+      printf "^ca(1,amixer set Master %s)^fg(%s)^r(8x3)^fg()^ca()" "$percent%; notify-send -u low -t 1 'Volume changed' 'to $percent%'" "$c1"
     else
-      printf "^ca(1,amixer set Master %s)^fg(%s)^r(8x3)^fg()^ca()" "$percent%; dzen_notify -t 1 'Volume changed to $percent%'" "$c2"
+      printf "^ca(1,amixer set Master %s)^fg(%s)^r(8x3)^fg()^ca()" "$percent%; notify-send -u low -t 1 'Volume changed' 'to $percent%'" "$c2"
     fi
   done
 }
