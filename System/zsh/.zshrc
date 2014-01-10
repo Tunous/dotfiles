@@ -31,6 +31,8 @@ alias ls="ls --color=auto --group-directories-first"
 alias pacman="sudo pacman"
 alias startX="startx $DOTFILES/System/X/xinitrc"
 
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # Completion
 autoload -U compinit
 compinit
