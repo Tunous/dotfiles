@@ -4,7 +4,7 @@ Tunous's dotfiles
 Installation
 ------------
 
-Before starting install [packages](https://github.com/Tunous/dotfiles/edit/master/README.md#packages).
+Before starting install [packages](https://github.com/Tunous/dotfiles#packages).
 
 1. Clone repository `git clone https://github.com/Tunous/dotfiles.git ~/dotfiles`
 2. Go to cloned repository `cd ~/dotfiles`
