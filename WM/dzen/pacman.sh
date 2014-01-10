@@ -2,7 +2,7 @@
 
 updates=$(checkupdates)
 lines=$(( $(echo "$updates" | wc -l) + 2 ))
-[[ $lines -eq 2 ]] && updates="No updates"
+(( $lines == 2 )) && updates="No updates"
 
 (
 echo Updates:

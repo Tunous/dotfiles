@@ -43,7 +43,7 @@ Mail() { # {{{
   # $PASSWORD_STORE_DIR/Gmail/Dzen contains login:password
   email=$(curl -u $(cat $PASSWORD_STORE_DIR/Gmail/Dzen) --silent 'https://mail.google.com/mail/feed/atom' | grep fullcount | egrep -o '[0-9]+')
 
-  if [[ $email -ne 0 ]]; then
+  if (( email != 0 )); then
     printf "^ca(1,firefox 'https://mail.google.com/')$(Icon mail '#444444')$email ^ca()"
   fi
 }
@@ -57,7 +57,7 @@ Menu() { # {{{
 Pacman() { # {{{
   updates=$(checkupdates | wc -l)
 
-  if [[ $updates -ne 0 ]]; then
+  if (( updates != 0 )); then
     printf "^ca(1,$(Script pacman.sh))%s^ca()" "$(Icon pacman '#444444')$updates"
   fi
 }
@@ -75,24 +75,24 @@ Volume() { #{{{
   # TODO: Add colors
   c1='#444444'
   c2='#303030'
-  if [[ $vol -eq 0 || "$mut" = "[off]" ]]; then
+  if (( vol == 0 )) || [[ "$mut" = "[off]" ]]; then
     c1='#af0000'
     ico="volume0"
-  elif [[ $vol -le 30 && $vol -gt 0 ]]; then
+  elif (( vol <= 30 && vol > 0 )); then
     ico="volume25"
-  elif [[ $vol -le 65 && $vol -gt 30 ]]; then
+  elif (( vol <= 65 && vol > 30 )); then
     ico="volume50"
-  elif [[ $vol -lt 100 && $vol -gt 65 ]]; then
+  elif (( vol < 100 && vol > 65 )); then
     ico="volume75"
-  elif [[ $vol -eq 100 ]]; then
+  elif (( vol == 100 )); then
     ico="volume100"
   fi
 
   printf "^ca(1,amixer set Master toggle; notify-send -u low -t 1 'Toggled mute state of volume')$(Icon $ico $c1)^ca()"
 
   for i in {0..10}; do
-    percent="$(( $i * 10 ))"
-    if [[ $vol -ge $percent ]]; then
+    percent="$(( i * 10 ))"
+    if (( vol >= percent )); then
       printf "^ca(1,amixer set Master %s)^fg(%s)^r(8x3)^fg()^ca()" "$percent%; notify-send -u low -t 1 'Volume changed' 'to $percent%'" "$c1"
     else
       printf "^ca(1,amixer set Master %s)^fg(%s)^r(8x3)^fg()^ca()" "$percent%; notify-send -u low -t 1 'Volume changed' 'to $percent%'" "$c2"
