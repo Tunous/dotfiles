@@ -38,7 +38,7 @@ Main:
 ```sh
 pacman -S atool dmenu dunst dzen2 feh firefox git gvim highlight      \
           pass ranger rxvt-unicode scrot udevil unclutter urxvt-perls \
-          w3m zsh
+          w3m xdotool zsh
 ```
 
 Programs:
