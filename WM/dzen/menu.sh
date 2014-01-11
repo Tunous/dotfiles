@@ -7,7 +7,7 @@ Exec() {
     Float*Term)   exec urxvt -name 'URxvtFloating' & ;;
     Web)          exec firefox & ;;
 
-    Run)          dmenu_action ;;
+    Run)          dmenu-action ;;
     Logout)       bspc quit; pkill panel; pkill dzen2 ;;
     Reboot)       systemctl reboot ;;
     Shutdown)     systemctl poweroff ;;
