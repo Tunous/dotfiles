@@ -56,8 +56,9 @@ pacaur -S bdf-tewi-git bspwm-git compton-git mediterraneannight-theme \
 Thanks to
 ---------
 
-* [Bill Indelicato] for his [dotfiles repository](https://github.com/windelicato/dotfiles)
-* [Lumolk] for his [config repository](https://github.com/lumolk/config)
+* [**Bill Indelicato**](http://windelicato.com/) for [dotfiles repository](https://github.com/windelicato/dotfiles)
+* [**devlinzed**](https://devlinzed.com/) for [dotfiles repository](https://github.com/devlinzed/dotfiles)
+* [**Lumolk**](https://github.com/lumolk) for [config repository](https://github.com/lumolk/config)
 
 [bspwm]: https://github.com/baskerville/bspwm
 [compton]: https://github.com/chjj/compton
@@ -77,6 +78,3 @@ Thanks to
 [vim]: http://vim.org/
 [vimperator]: http://www.vimperator.org/
 [zsh]: http://zsh.org/
-
-[Bill Indelicato]: http://windelicato.com/
-[Lumolk]: https://github.com/lumolk
