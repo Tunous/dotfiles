@@ -13,7 +13,7 @@ set previouspattern=\\bpoprzedni,\\bwstecz,\\bprev|previous\\b,^<$,^(<<|«)$,^(<
 set editor="urxvt -name 'URxvtFloating' -e vim"
 
 " Gui elements
-set gui=none,navigation,tabs
+set gui=none,tabs
 set status=location,input,bookmark,position
 
 " Hintchars
@@ -30,6 +30,9 @@ set animations
 
 " Visual bell instead of system beep
 set visualbell
+
+" Hide scrollbars
+set noscrollbars
 
 " Key mappings -----------------------------------------------------------
 " Leader
@@ -59,22 +62,7 @@ silent qmark g https://gmail.com
 silent qmark G https://github.com
 silent qmark f https://cloud.feedly.com
 silent qmark r http://reddit.com
-silent qmark a https://bbs.archlinux.org/
-
-" Stylesheets ------------------------------------------------------------
-style -name removeScrollbars chrome://* <<EOF
-#content browser {
-  margin-right: -14px !important;
-  overflow-y: scroll;
-  overflow-x: hidden;
-}
-EOF
-
-style -name hideNavBar chrome://* <<EOF
-#nav-bar {
-  visibility: collapse !important;
-}
-EOF
+silent qmark a https://archlinux.org/
 
 " {{{ End
 " vim: ft=vimperator commentstring="\ %s
