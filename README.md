@@ -16,7 +16,7 @@ Software
 --------
 
 * Automounting: **[udevil]**
-* Applications launcher: **[dmenu]**
+* Applications launcher: **[dmenu2]**
 * Bar and info popups: **[dzen2]**
 * File explorer: **[ranger]**
 * Hiding mouse: **[unclutter]**
@@ -36,9 +36,9 @@ Packages
 
 Main:
 ```sh
-pacman -S atool dmenu dunst dzen2 feh firefox git gvim highlight      \
-          pass ranger rxvt-unicode scrot udevil unclutter urxvt-perls \
-          w3m xdotool zsh
+pacman -S atool dunst dzen2 feh firefox git gvim highlight \
+          pass ranger rxvt-unicode scrot udevil unclutter  \
+          urxvt-perls w3m xdotool zsh
 ```
 
 Programs:
@@ -48,9 +48,10 @@ pacman -S evince gimp htop libreoffice-writer steam
 
 AUR:
 ```sh
-pacaur -S bdf-tewi-git bspwm-git compton-git mediterraneannight-theme \
-          sxhkd-git tamzen-font-git trash-cli-git xcape-git xdo-git   \
-          xtitle-git xwinfo-git zsh-syntax-highlighting-git
+pacaur -S bdf-tewi-git bspwm-git compton-git dmenu2 sxhkd-git \
+          tamzen-font-git trash-cli-git xcape-git xdo-git     \
+          xtitle-git xwinfo-git zsh-syntax-highlighting-git   \
+          zukitwo-themes
 ```
 
 Thanks to
@@ -63,6 +64,7 @@ Thanks to
 [bspwm]: https://github.com/baskerville/bspwm
 [compton]: https://github.com/chjj/compton
 [dmenu]: http://tools.suckless.org/dmenu/
+[dmenu2]: https://bitbucket.org/melek/dmenu2
 [dunst]: http://knopwob.org/dunst/index.html
 [dzen2]: https://github.com/robm/dzen
 [feh]: http://feh.finalrewind.org/
