@@ -4,7 +4,7 @@
 Get() { # {{{
   actions="Run program\nSearch in google\nOpen url\nTranslate\nTake screenshot\nAutotype password"
 
-  choice=$(DGet -p "Select action" -o "$options")
+  choice=$(DGet -p "Select action" -o "$actions")
 
   case $choice in
     Autotype*)  Password  ;;
