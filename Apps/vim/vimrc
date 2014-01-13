@@ -88,7 +88,10 @@ nmap <Leader>A    <Plug>(LiveEasyAlign)
 Bundle 'svermeulen/vim-easyclip'
 
 let g:EasyClipUseCutDefaults = 0
-let g:EasyClipUseSubstituteDefaults = 1
+
+nmap gs         <Plug>SubstituteOverMotionMap
+nmap gss        <Plug>SubstituteLine
+xmap gs         <Plug>XEasyClipPaste
 
 nmap x          <Plug>MoveMotionPlug
 nmap X          <Plug>MoveMotionEndOfLinePlug
@@ -159,91 +162,72 @@ let g:customized_use_xresources = 1
 colorscheme customized
 
 " }}}
-" {{{ Settting options
+" {{{ Setttings
 
-" {{{ Bakcup and swap files
+" {{{ Bakcup, swap and undo files
 
-" Don't create swap and backup files
 set nobackup
 set nowritebackup
 set noswapfile
-
-" }}}
-" {{{ Mouse
-
-" Can use mouse in all modes
-if has("mouse")
-  set mouse=a
-endif
-
-" }}}
-" {{{ Search options
-
-set hlsearch                      " Highlight search terms
-set incsearch                     " Show search matches as I type
-set ignorecase                    " Ignore case when searching...
-set smartcase                     " unless I use uppercase characters
-
-" }}}
-" {{{ Smart scrolling
-
-set scrolloff=10
-set sidescrolloff=15
-
-" }}}
-" {{{ Tabs and spaces
-
-set tabstop=4                     " Number of spaces for tab
-set shiftwidth=2                  " Number of spaces to use for indenting
-set softtabstop=2                 " Number of spaces that tab counts for
-set expandtab                     " Use spaces instead of tabs
-set autoindent                    " Always set autoindenting on
-set copyindent                    " Copy the previous indentation on autoindenting
-
-" }}}
-" {{{ Undo files
-
 set undodir=$XDG_CACHE_HOME/vim/undofiles
 set undofile
 
 " }}}
-" {{{ Other
+" {{{ Search options
 
-" Short timeout
-set timeout
-set timeoutlen=1000
-set ttimeoutlen=100
+set hlsearch                        " Highlight search terms
+set incsearch                       " Show search matches as I type
+set ignorecase                      " Ignore case when searching...
+set smartcase                       " unless I use uppercase characters
 
-set wildmenu                        " Use wildmenu for commandline autocompletion
+" }}}
+" {{{ Cursor
 
-set autoread                        " Read file if it was modified outside of vim
-set autochdir                       " Automatically change working directory to directory of current file
-
-set hidden                          " Allow hidden buffers
-
-set showcmd                         " Show executed command in commands line
-
+set scrolloff=10
+set sidescrolloff=15
 set cursorcolumn                    " Highlight cursor column...
 set cursorline                      " ... and line
 
-set backspace=indent,eol,start      " Make backspace delete everything in insert mode
+" }}}
+" {{{ Command, status line
 
+set wildmenu                        " Use wildmenu for autocompletion
+set noshowmode                      " Don't show current mode
+set showcmd                         " Show last executed command
 set laststatus=2                    " Always show statusline
 
-" Don't beep and don't flash screen
-set visualbell
+" }}}
+" {{{ Tabs and indenting
+
+set tabstop=4                       " Number of spaces for tab
+set shiftwidth=2                    " Number of spaces to use for indenting
+set softtabstop=2                   " Number of spaces that tab counts for
+set expandtab                       " Use spaces instead of tabs
+set autoindent                      " Always set autoindenting on
+set copyindent                      " Copy the previous indentation on autoindenting
+
+" }}}
+" {{{ Timeout
+
+set timeout timeoutlen=1000
+set ttimeout ttimeoutlen=100
+
+" }}}
+" {{{ Other
+
+set mouse=a
+set nostartofline                   " Keep cursor in the save column when moving
+set autoread                        " Read file if it was modified outside of vim
+set autochdir                       " Automatically change working directory to directory of current file
+set hidden                          " Allow hidden buffers
+set backspace=indent,eol,start      " Make backspace delete everything in insert mode
+set visualbell                      " Don't beep and don't flash screen
 set t_vb=
-
 set nowrap                          " Don't wrap lines
-
-" Show list chars
-set list
+set list                            " Show list chars
 set listchars=tab:▸\ ,trail:·
-
 set foldmethod=marker               " Use marker foldmethod
-
 set synmaxcol=300                   " Limit syntax highlight of long lines
-
 set clipboard^=unnamed,unnamedplus  " Use system clipboard
 
 " }}}
@@ -251,14 +235,6 @@ set clipboard^=unnamed,unnamedplus  " Use system clipboard
 " }}}
 " {{{ Mappings
 
-" {{{ Buffers navigation
-
-nnoremap <Leader>N :bp<CR>
-nnoremap <Leader>n :bn<CR>
-nnoremap <Leader>b :ls<CR>:b<Space>
-nnoremap <Leader>d :bd<CR>
-
-" }}}
 " {{{ Nvigation/Resizing
 
 " Better navigation with wrapped lines
@@ -278,23 +254,20 @@ nnoremap <Esc>k <C-W>+
 nnoremap <Esc>l <C-W>>
 
 " Don't use arrow keys
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <Left> <NOP>
+noremap  <Up>    <NOP>
+noremap  <Down>  <NOP>
+noremap  <Left>  <NOP>
+noremap  <Right> <NOP>
+inoremap <Up>    <NOP>
+inoremap <Down>  <NOP>
+inoremap <Left>  <NOP>
 inoremap <Right> <NOP>
 
-" }}}
-" {{{ Open config files
-
-" Open vimrc
-nnoremap <Leader>vv :edit $MYVIMRC<CR>
-
-" Open vimperatorrc
-nnoremap <Leader>vp :edit $HOME/.vimperator/vimperatorrc<CR>
+" Buffers
+nnoremap <Leader>N :bp<CR>
+nnoremap <Leader>n :bn<CR>
+nnoremap <Leader>b :ls<CR>:b<Space>
+nnoremap <Leader>d :bd<CR>
 
 " }}}
 " {{{ Other
@@ -302,9 +275,12 @@ nnoremap <Leader>vp :edit $HOME/.vimperator/vimperatorrc<CR>
 " Capitalize word next to cursor
 inoremap <C-u> <Esc>:call Preserve("normal gUiw")<CR>a
 
-" Indend whole file and remove trailing whitespaces
+" Indend whole file, remove trailing whitespaces
 nnoremap <F2> :call Preserve("normal gg=G")<CR>
 nnoremap <F3> :call Preserve("%s/\\s\\+$//e")<CR>
+
+" Open vimrc
+nnoremap <Leader>v :edit $MYVIMRC<CR>
 
 " Source vimrc
 nnoremap <Leader>s :source $MYVIMRC<CR>
@@ -326,17 +302,6 @@ cmap w!! w !sudo tee > /dev/null %
 " }}}
 " {{{ Functions
 
-" {{{ Insert header preprocessor gates
-
-function! s:InsertCppGates()
-  let gatename = substitute(toupper(expand("%:t")), "\\.", "_", "g")
-  execute "normal! i#ifndef " .gatename
-  execute "normal! o#define " .gatename
-  execute "normal! Go#endif"
-  normal! kk
-endfunction
-
-" }}}
 " {{{ Open files with ranger
 
 function! RangerChooser()
@@ -401,9 +366,6 @@ endfunction
 
 augroup Autocommands
   autocmd!
-  " Add header file preprocessor getes
-  autocmd BufNewFile,BufRead *.{h,hpp} call <SID>InsertCppGates()
-
   " Spell check when writing commit logs
   autocmd filetype           svn,*commit* setlocal spell
 
