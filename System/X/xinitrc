@@ -2,6 +2,7 @@
 
 # Xresources
 [[ -f $DOTFILES/System/X/Xresources ]] && xrdb -merge $DOTFILES/System/X/Xresources
+[[ -d $DOTFILES/System/X/colors ]] && xrdb -merge $DOTFILES/System/X/colors/default
 
 # Fonts
 xset +fp /usr/share/fonts/local
