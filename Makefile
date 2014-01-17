@@ -24,6 +24,8 @@ install: update System Apps WM
 update:
 	$(call cecho, "Updating dotfiles repository...")
 	git pull origin master
+	@mkdir -p ${XDG_CONFIG_HOME}
+	@mkdir -p ${XDG_CACHE_HOME}
 
 vim-plugins: update
 	$(call cecho, "Updating vim plugins...")

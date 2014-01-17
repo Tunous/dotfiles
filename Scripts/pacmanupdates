@@ -1,0 +1,14 @@
+#!/bin/bash
+updates="$(checkupdates)"
+count=$(printf "$updates" | wc -l)
+
+action="${1:-count}"
+
+case $action in
+  count)
+    echo "$count"
+    ;;
+  list)
+    echo "$list"
+    ;;
+esac
