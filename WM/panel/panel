@@ -40,12 +40,11 @@ Menu() { # {{{
 
 # }}}
 Pacman() { # {{{
-  updates="$(checkupdates)"
-  updatesnum=$(printf "$updates" | wc -l)
+  updates="$(pacmanupdates count)"
 
-  (( updatesnum == 0 )) && return
+  (( updates == 0 )) && return
 
-  printf "%s" "\\ab  $updatesnum \\ac toggle-conky updates \\ae"
+  printf "%s" "\\ab  $updates \\ac toggle-conky updates \\ae"
 }
 
 # }}}

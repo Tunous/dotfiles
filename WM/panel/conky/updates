@@ -23,6 +23,6 @@ draw_shades no
 update_interval 60
 
 TEXT
-Pacman updates: ${execi 300 ~/conkyup count}
+Pacman updates: ${execi 300 pacmanupdates count}
 
-${execi 300 ~/conkyup list}
+${execi 300 pacmanupdates list}
