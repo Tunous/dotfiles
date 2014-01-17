@@ -111,7 +111,7 @@ Translate() { # {{{
     firefox 'http://www.translate.google.com/?'"&sl=${sl%% *}&tl=${tl%% *}&text=$opt"
   else
     translation="$(translate "{$sshort=$tshort}" "$text")"
-    notify-send "Translated from $slong to $tlong" "\n$text\n$translation"
+    notify-send "Translated from $slong to $tlong" "\n<b>Original text:</b>\n$text\n\n<b>Translation:</b>\n$translation"
   fi
 }
 # }}}
