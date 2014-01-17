@@ -9,7 +9,7 @@ XDG_CACHE_HOME  = ${HOME}/.cache
 define cecho
 	@tput setaf 12
 	@printf ":: "
-	@tput setaf 11
+	@tput setaf 3
 	@echo $1
 	@tput sgr0
 endef

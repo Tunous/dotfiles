@@ -4,15 +4,19 @@
 Get() { # {{{
   actions="Run program\nSearch in google\nOpen url\nTranslate\nTake screenshot\nAutotype password"
 
-  choice=$(DGet -p "Select action" -o "$actions")
+  if [[ -n "$1" ]]; then
+    choice="$1"
+  else
+    choice="$(DGet -p "Select action" -o "$actions")"
+  fi
 
   case $choice in
-    Autotype*)  Password  ;;
-    Run*)       DGet -mrp "Run program" ;;
-    Search*)    Google    ;;
-    Open*)      Web       ;;
-    Translate*) Translate ;;
-    Take*)      Screen    ;;
+    *pass*)        Password  ;;
+    [Rr]un*)       DGet -mrp "Run program" ;;
+    [Ss]earch*)    Google    ;;
+    [Oo]pen*|*url) Web       ;;
+    [Tt]rans*)     Translate ;;
+    *screen*)      Screen    ;;
   esac
 }
 # }}}
@@ -57,7 +61,7 @@ Screen() { # {{{
   choice=$(DGet -p "Take screenshot" -o "$options")
 
   dir="$HOME/Dropbox"
-  cd $dir
+  mkdir -p "$dir" && cd "$dir"
 
   case $choice in
     Fullscreen)          scrot -d 1 && notify-send 'Taken fullscreen screenshot' ;;
@@ -85,6 +89,7 @@ Web() { # {{{
 
 # Translate - Translate specified text from and to selected languages
 Translate() { # {{{
+  # Languages
   languages="auto\naf afrikaans\nsq albanian\nar arabic\naz azerbaijani\neu basque\nbn bengali\nbe belarusian\nbg bulgarian\nca catalan\nzh-cn chinese simplified\nzh-tw chinese traditional\nhr croatian\ncs czech\nda danish\nnl dutch\nen english\neo esperanto\net estonian\ntl filipino\nfi finnish\nfr french\ngl galician\nka georgian\nde german\nel greek\ngu gujarati\nht haitian creole\niw hebrew\nhi hindi\nhu hungarian\nis icelandic\nid indonesian\nga irish\nit italian\nja japanese\nkn kannada\nko korean\nla latin\nlv latvian\nlt lithuanian\nmk macedonian\nms malay\nmt maltese\nno norwegian\nfa persian\npl polish\npt portuguese\nro romanian\nru russian\nsr serbian\nsk slovak\nsl slovenian\nes spanish\nsw swahili\nsv swedish\nta tamil\nte telugu\nth thai\ntr turkish\nuk ukrainian\nur urdu\nvi vietnamese\ncy welsh\nyi yiddish"
 
   sl=$(DGet -mp "Source language" -o "$languages")
@@ -93,15 +98,27 @@ Translate() { # {{{
   tl=$(DGet -mp "Target language" -o "$languages")
   [[ -z "$tl" ]] && return
 
-  opt=$(DGet -p "Translate ${sl##* } to ${tl##* }")
+  slong="${sl##* }"; sshort="${sl%% *}"
+  tlong="${tl##* }"; tshort="${tl%% *}"
 
-  [[ -n "$opt" ]] && firefox 'http://www.translate.google.com/?'"&sl=${sl%% *}&tl=${tl%% *}&text=$opt"
+  # Text to translate
+  text=$(DGet -p "Translate $slong to $tlong")
+
+  [[ -z "$text" ]] && return
+
+  # Translation
+  if ! hash translate 2>/dev/null; then
+    firefox 'http://www.translate.google.com/?'"&sl=${sl%% *}&tl=${tl%% *}&text=$opt"
+  else
+    translation="$(translate "{$sshort=$tshort}" "$text")"
+    notify-send "Translated from $slong to $tlong" "\n$text\n$translation"
+  fi
 }
 # }}}
 
 # Password - Autotype selected password into focused window
 Password() { # {{{
-  # Get autotyping method
+  # Autotyping method
   option="$(DGet -p "Select autotype method" -o "Tab after username\nReturn after username\nNo username")"
   [[ ! "$option" =~ ^(Tab .*|Return .*|No username)$ ]] && return
 
@@ -114,6 +131,7 @@ Password() { # {{{
   exit_code="$?"
   (( exit_code  > 0 )) && return
 
+  # Set variables
   password="$(printf "%s" "$output" | head -n 1)"
   username="$(printf "%s" "$output" | grep '^username: ' | cut -c 11-)"
 
@@ -132,4 +150,4 @@ Password() { # {{{
 
 # -------------------------------------------------------------------------
 
-Get
+Get "$1"
