@@ -17,7 +17,7 @@ Software
 
 * Automounting: **[udevil]**
 * Applications launcher: **[dmenu2]**
-* Bar and info popups: **[dzen2]**
+* Bar and info popups: **[bar]** *(version with clickable areas)* + **[conky]**
 * File explorer: **[ranger]**
 * Hiding mouse: **[unclutter]**
 * Image viewer: **[feh]**
@@ -36,22 +36,23 @@ Packages
 
 Main:
 ```sh
-pacman -S atool dunst dzen2 feh firefox git gvim highlight \
-          pass ranger rxvt-unicode scrot udevil unclutter  \
+pacman -S atool dunst feh firefox git gvim highlight pass \ 
+          ranger rxvt-unicode scrot udevil unclutter \
           urxvt-perls w3m xdotool zsh
+```
+
+AUR:
+```sh
+pacaur -S bdf-tewi-git bspwm-git compton-git dmenu2 \
+          google-translate-cli-git sxhkd-git tamzen-font-git \
+          trash-cli-git xcape-git xdo-git xtitle-git \
+          xwinfo-git zsh-syntax-highlighting-git zukitwo-themes
 ```
 
 Programs:
 ```sh
 pacman -S evince gimp htop libreoffice-writer steam
-```
-
-AUR:
-```sh
-pacaur -S bdf-tewi-git bspwm-git compton-git dmenu2 sxhkd-git \
-          tamzen-font-git trash-cli-git xcape-git xdo-git     \
-          xtitle-git xwinfo-git zsh-syntax-highlighting-git   \
-          zukitwo-themes
+pacaur -S dropbox
 ```
 
 Thanks to
@@ -59,10 +60,13 @@ Thanks to
 
 * [**Bill Indelicato**](http://windelicato.com/) for [dotfiles repository](https://github.com/windelicato/dotfiles)
 * [**devlinzed**](https://devlinzed.com/) for [dotfiles repository](https://github.com/devlinzed/dotfiles)
+* [**Jurica Vukadin**](https://github.com/u-ra) for [dotfiles repository](https://github.com/u-ra/dotfiles)
 * [**Lumolk**](https://github.com/lumolk) for [config repository](https://github.com/lumolk/config)
 
+[bar]: https://github.com/u-ra/bar/tree/for-lemonboy
 [bspwm]: https://github.com/baskerville/bspwm
 [compton]: https://github.com/chjj/compton
+[conky]: http://conky.sourceforge.net/
 [dmenu]: http://tools.suckless.org/dmenu/
 [dmenu2]: https://bitbucket.org/melek/dmenu2
 [dunst]: http://knopwob.org/dunst/index.html
