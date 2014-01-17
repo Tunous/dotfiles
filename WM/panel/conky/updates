@@ -1,0 +1,28 @@
+out_to_x yes
+out_to_console no
+background yes
+
+own_window yes
+own_window_class conky-updates
+own_window_type panel
+own_window_argb_visual yes
+own_window_argb_value 240
+double_buffer yes
+
+minimum_size 90 20
+alignment top_right
+gap_y 23
+
+own_window_colour black
+default_color 9e9e9e
+
+use_xft yes
+xftfont Tewi:size=7
+draw_shades no
+
+update_interval 60
+
+TEXT
+Pacman updates: ${execi 300 ~/conkyup count}
+
+${execi 300 ~/conkyup list}

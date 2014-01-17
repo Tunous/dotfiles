@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [[ -n "$(xdotool search --class conky-$1)" ]]; then
+  xdotool search --class conky windowkill %@
+else
+  xdotool search --class conky windowkill %@
+  conky -c $DOTFILES/WM/panel/conky/$1
+fi

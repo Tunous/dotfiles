@@ -48,4 +48,4 @@ bspc rule -a feh floating=true center=true pseudo_tiled=true
 # }}}
 
 # Panel
-$HOME/dotfiles/WM/dzen/panel &
+$DOTFILES/WM/panel/panel &

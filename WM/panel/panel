@@ -1,0 +1,163 @@
+#!/bin/bash
+
+# Init {{{
+
+
+if [ $(pgrep -cx panel) -gt 1 ] ; then
+  printf "%s\n" "The panel is already running." >&2
+  exit 1
+fi
+
+trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
+
+
+# }}}
+# Fifo {{{
+
+
+FIFO=/tmp/panel-fifo
+[ -e "$FIFO" ] && rm "$FIFO"
+mkfifo "$FIFO"
+exec 3<> "$FIFO"
+
+
+# }}}
+# Functions {{{
+
+Mail() { # {{{
+  # $PASSWORD_STORE_DIR/Gmail/Dzen contains login:password
+  email=$(curl -u $(cat $PASSWORD_STORE_DIR/Gmail/Dzen) --silent 'https://mail.google.com/mail/feed/atom' | grep fullcount | egrep -o '[0-9]+')
+
+  (( email == 0 )) && return
+
+  printf "%s" "\\f8\\fr $email"
+}
+
+# }}}
+Menu() { # {{{
+  printf "%s" "   \\f4\\fr    "
+}
+
+# }}}
+Pacman() { # {{{
+  updates="$(checkupdates)"
+  updatesnum=$(printf "$updates" | wc -l)
+
+  (( updatesnum == 0 )) && return
+
+  printf "%s" "\\ab  $updatesnum \\ac toggle-conky updates \\ae"
+}
+
+# }}}
+Time() { #{{{
+  printf "%s" "\\ab \\f8 \\fr$(date +%H:%M:%S) \\ac toggle-conky cal \\ae"
+}
+
+# }}}
+Volume() { #{{{
+  vol=$(amixer get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*")
+  mut=$(amixer get Master | egrep 'Playback.*?\[o' | egrep -o '\[o.+\]')
+
+  color="\\f7"
+  icon=""
+
+  if [[ "$mut" = "[off]" ]]; then
+    icon=""
+    color="\\f1"
+  elif (( vol < 25 )); then
+    icon=""
+  elif (( vol < 70 )); then
+    icon=""
+  fi
+
+  printf "%s" "\\ab $color$icon \\fr$vol% \\ac amixer set Master toggle \\ae"
+
+  for i in {0..10}; do
+    percent="$(( i * 10 ))"
+    if (( vol >= percent && vol != 0 )); then
+      printf "%s" "\\ab$color—\\fr\\ac amixer set Master $percent%\\ae"
+    else
+      printf "%s" "\\ab\\f0—\\fr\\ac amixer set Master $percent%\\ae"
+    fi
+  done
+}
+
+# }}}
+
+# }}}
+
+# Updating {{{
+
+
+bspc control --subscribe >"$FIFO" &
+xtitle -sf 'T%s' >"$FIFO" &
+while :; do echo "S $(Volume) $(Time)" >"$FIFO"; sleep 3;   done &
+while :; do echo "L $(Pacman) $(Mail)" >"$FIFO"; sleep 300; done &
+
+
+# }}}
+# Printing {{{
+
+while read -r line <"$FIFO"; do
+  case $line in
+    L*) LONG="${line#?}"  ;;
+    S*) SHORT="${line#?}" ;;
+    T*) TITLE="${line#?}" ;;
+    W*)
+      # bspwm internal state
+      DESK=""
+      NORMIFS=$IFS
+      IFS=':'
+      set -- ${line#?}
+
+      while [ $# -gt 0 ] ; do
+        item=$1
+        name=${item#?}
+        icon=$name
+
+        case $item in
+          [OoFfUu]*)
+            case $item in
+              O*) # Focused ocupied desktop
+                FG="\\fr"
+                [[ "$name" = [0-9] ]] && icon="•"
+                ;;
+              F*) # Focused free desktop
+                FG="\\fr"
+                [[ "$name" = [0-9] ]] && icon="○"
+                ;;
+              o*) # Occupied desktop
+                FG="\\f4"
+                [[ "$name" = [0-9] ]] && icon="•"
+                ;;
+              f*) # Free desktop
+                FG="\\f8"
+                [[ "$name" = [0-9] ]] && icon="○"
+                ;;
+              [uU]*) # Urgent desktop
+                FG="\\f3"
+                [[ "$name" = [0-9] ]] && icon="•"
+                ;;
+            esac
+
+            DESK="${DESK}\\ab$FG ${icon} \\ac bspc desktop -f ${name}\\ae\\fr"
+            ;;
+          L*)
+            case $name in
+              t*) LAYOUT="\\f4\\fr" ;;
+              m*) LAYOUT="\\f4\\fr" ;;
+            esac
+            ;;
+        esac
+        shift
+      done
+      IFS=$NORMIFS
+      ;;
+  esac
+
+  echo "\\l$(Menu)\\ab$TITLE\\ac dmenu-action\\ae \\c $DESK \\r $LONG $SHORT"
+done | bar
+
+# }}}
+
+wait

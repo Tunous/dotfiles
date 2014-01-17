@@ -4,7 +4,7 @@
 
 # Close BSPWM
 super + alt + Escape
-    pkill panel; pkill dzen2; bspc quit
+    pkill panel; bspc quit
 
 # Close/kill focused window
 super + {w,W}
@@ -16,7 +16,7 @@ super + Escape
 
 # Restart panel
 super + alt + z
-    pkill panel; pkill dzen2; $HOME/dotfiles/WM/dzen/panel
+    pkill panel; $DOTFILES/WM/panel/panel
 
 # Reload compton
 super + alt + c
