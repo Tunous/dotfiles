@@ -1,7 +1,6 @@
 # Bspwm -----------------------------------------------------------------------
 # {{{ Closing/reloading
 
-
 # Close BSPWM
 super + alt + Escape
     pkill panel; bspc quit
@@ -22,12 +21,10 @@ super + alt + z
 super + alt + c
     pkill compton; compton
 
-
 # }}}
 # {{{ Navigation
 
 # {{{ Basic
-
 
 # Focus window/desktop
 super + {h,j,k,l}
@@ -50,10 +47,8 @@ super + {_,shift + } bracket{left,right}
 super + {_,shift + } {0-9,ctrl + f}
     bspc {desktop -f, window -d} {0-9,Float}
 
-
 # }}}
 # {{{ History based
-
 
 # Focus last window, desktop
 super + {grave,Tab}
@@ -69,12 +64,10 @@ super + {o,i}
     bspc window {older,newer} -f; \
     bspc control --record-history on
 
-
 # }}}
 
 # }}}
 # {{{ Mouse
-
 
 ~button1
     bspc pointer -g focus
@@ -92,10 +85,8 @@ super + @button{1-3}
 super + alt + button{1,2}
     bspc window {-t fullscreen,-c}
 
-
 # }}}
 # {{{ Windows
-
 
 # Toggle layout of desktop
 super + t
@@ -141,7 +132,6 @@ super + alt + {Left,Right,Up,Down}
 # }}}
 # {{{ Preselection
 
-
 # Preselect splitting area
 super + ctrl + {h,j,k,l}
     bspc window -p {left,down,up,right}
@@ -157,7 +147,6 @@ super + ctrl + shift + space
 # Change window ratio (preselection size)
 super + ctrl + {1-9}
     bspc window -r 0.{1-9}
-
 
 # }}}
 # {{{ Desktops
@@ -193,7 +182,9 @@ super + {r,R}
 
 # }}}
 
-# Programs --------------------------------------------------------------------
+# Other -----------------------------------------------------------------------
+# {{{ Programs
+
 # Urxvt
 super + Return
     urxvt
@@ -211,6 +202,35 @@ super + alt + f
 # Ranger
 super + alt + r
     urxvt -e ranger
+
+# }}}
+# {{{ Special keys
+
+# Search web
+XF86Search
+    dmenu-action search
+
+# Open url
+XF86HomePage
+    dmenu-action url
+
+# Toggle mutting
+XF86AudioMute
+    amixer set Master toggle
+
+# Lower, raise volume
+XF86Audio{Lower,Raise}Volume
+    amixer set Master 1{-,+}
+
+# Take screenshot
+Print
+    dmenu-action screen
+
+# Run program
+Menu
+    dmenu-action run
+
+# }}}
 
 # {{{
 # vim: ft=sxhkdrc commentstring=#\ %s
