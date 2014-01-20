@@ -4,11 +4,9 @@ VINormal="%{$fg_bold[black]%} » %{$reset_color%}"
 
 # Current state
 function zle-line-init zle-keymap-select {
-  VIMode="${${KEYMAP/(vicmd|opp)/$VINormal}/(main|viins)/$VIInsert}"
-
   # Actual prompt
   PROMPT="
-$VIMode"
+${${KEYMAP/(vicmd|opp)/$VINormal}/(main|viins)/$VIInsert}"
 
   zle reset-prompt
   zle -R
@@ -16,7 +14,3 @@ $VIMode"
 
 zle -N zle-line-init
 zle -N zle-keymap-select
-
-# More motions
-source $ZDOTDIR/opp/opp.zsh
-source $ZDOTDIR/opp/opp/*.zsh

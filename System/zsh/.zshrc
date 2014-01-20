@@ -1,15 +1,26 @@
 autoload -U colors && colors
+autoload -U compinit && compinit
 
 # Remove dalay
 KEYTIMEOUT=1
 
-# Vi-mode
-bindkey -v
-# Allow backspace to delete behind cursor
-bindkey "^?" backward-delete-char
-
 # Prompt
 . $ZDOTDIR/prompt.zsh
+
+setopt AUTO_CD
+setopt CORRECT
+
+# Aliases
+alias ls="ls --color=auto --group-directories-first"
+alias startX="startx $DOTFILES/System/X/xinitrc"
+
+# Syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Window title
+precmd() {
+  print -Pn "\e]2;%100<...<%~%<<\a"
+}
 
 # {{{ Hitory
 
@@ -22,22 +33,15 @@ export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
 
 # }}}
+# {{{ Vi-mode
 
-setopt AUTO_CD
-setopt CORRECT
+bindkey -v
 
-# Aliases
-alias ls="ls --color=auto --group-directories-first"
-alias pacman="sudo pacman"
-alias startX="startx $DOTFILES/System/X/xinitrc"
+# Allow backspace to delete behind cursor
+bindkey "^?" backward-delete-char
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# More motions
+source $ZDOTDIR/opp/opp.zsh
+source $ZDOTDIR/opp/opp/*.zsh
 
-# Completion
-autoload -U compinit
-compinit
-
-# Window title
-precmd() {
-  print -Pn "\e]2;%100<...<%~%<<\a"
-}
+# }}}
