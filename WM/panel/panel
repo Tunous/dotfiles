@@ -34,11 +34,6 @@ Mail() { # {{{
 }
 
 # }}}
-Menu() { # {{{
-  printf "%s" "   \\f4\\fr    "
-}
-
-# }}}
 Pacman() { # {{{
   updates="$(pacmanupdates count)"
 
@@ -87,12 +82,10 @@ Volume() { #{{{
 
 # Updating {{{
 
-
 bspc control --subscribe >"$FIFO" &
 xtitle -sf 'T%s' >"$FIFO" &
 while :; do echo "S $(Volume) $(Time)" >"$FIFO"; sleep 3;   done &
 while :; do echo "L $(Pacman) $(Mail)" >"$FIFO"; sleep 300; done &
-
 
 # }}}
 # Printing {{{
@@ -143,8 +136,8 @@ while read -r line <"$FIFO"; do
             ;;
           L*)
             case $name in
-              t*) LAYOUT="\\f4\\fr" ;;
-              m*) LAYOUT="\\f4\\fr" ;;
+              t*) LAYOUT="   \\f4\\fr    " ;;
+              m*) LAYOUT="   \\f4\\fr    " ;;
             esac
             ;;
         esac
@@ -154,7 +147,7 @@ while read -r line <"$FIFO"; do
       ;;
   esac
 
-  echo "\\l$(Menu)\\ab$TITLE\\ac dmenu-action\\ae \\c $DESK \\r $LONG $SHORT"
+  echo "\\l$LAYOUT\\ab$TITLE\\ac dmenu-action\\ae \\c $DESK \\r $LONG $SHORT"
 done | bar
 
 # }}}
