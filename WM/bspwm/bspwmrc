@@ -30,16 +30,8 @@ bspc config normal_sticky_border_color  "#262626"
 bspc config normal_private_border_color "#262626"
 
 # }}}
-# {{{ Frames
-
-bspc config focused_frame_opacity       0.2
-bspc config active_frame_opacity        0
-bspc config normal_frame_opacity        0
-
-# }}}
 # {{{ Rules
 
-bspc rule -a BSPWM_FRAME frame=true
 bspc rule -a Gimp floating=true
 bspc rule -a Steam floating=true desktop=Float
 bspc rule -a URxvtFloating floating=true center=true
