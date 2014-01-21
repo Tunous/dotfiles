@@ -24,20 +24,32 @@ Get() { # {{{
 # DGet - Run dmenu or dmenu_run with specific options
 DGet() { # {{{
   local arg prompt options multiline run settings geometry file
+  color='#0087af'
 
   # Get options
-  while getopts 'mro:p:f:' arg; do
+  while getopts 'mro:p:f:c:' arg; do
     case $arg in
       p) prompt="$OPTARG" ;;
       o) options="$OPTARG" ;;
       f) file="$OPTARG" ;;
       m) multiline=1 ;;
+      c) 
+        case $OPTARG in
+          Red)     color='#af0000' ;;
+          Green)   color='#87af00' ;;
+          Yellow)  color='#af8700' ;;
+          Orange)  color='#d75f00' ;;
+          Blue)    color='#0087af' ;;
+          Magenta) color='#af0057' ;;
+          Cyan)    color='#00afaf' ;;
+        esac
+        ;;
       *) return 1
     esac
   done
 
   # Set dmenu arguments
-  settings="-i -nb #000000 -nf #9e9e9e -sb #0087af -sf #000000"
+  settings="-i -nb #000000 -nf #9e9e9e -sb "$color" -sf #000000"
   [[ -n "$multiline" ]] && geometry="-x 45 -w 300 -l 20" || geometry="-x 45 -w 800"
 
   # Run dmenu
@@ -87,17 +99,17 @@ Translate() { # {{{
   # Languages
   languages="auto\naf afrikaans\nsq albanian\nar arabic\naz azerbaijani\neu basque\nbn bengali\nbe belarusian\nbg bulgarian\nca catalan\nzh-cn chinese simplified\nzh-tw chinese traditional\nhr croatian\ncs czech\nda danish\nnl dutch\nen english\neo esperanto\net estonian\ntl filipino\nfi finnish\nfr french\ngl galician\nka georgian\nde german\nel greek\ngu gujarati\nht haitian creole\niw hebrew\nhi hindi\nhu hungarian\nis icelandic\nid indonesian\nga irish\nit italian\nja japanese\nkn kannada\nko korean\nla latin\nlv latvian\nlt lithuanian\nmk macedonian\nms malay\nmt maltese\nno norwegian\nfa persian\npl polish\npt portuguese\nro romanian\nru russian\nsr serbian\nsk slovak\nsl slovenian\nes spanish\nsw swahili\nsv swedish\nta tamil\nte telugu\nth thai\ntr turkish\nuk ukrainian\nur urdu\nvi vietnamese\ncy welsh\nyi yiddish"
 
-  sl=$(DGet -mp "Source language" -o "$languages")
+  sl=$(DGet -mp "Source language" -o "$languages" -c Green)
   [[ -z "$sl" ]] && return
 
-  tl=$(DGet -mp "Target language" -o "$languages")
+  tl=$(DGet -mp "Target language" -o "$languages" -c Green)
   [[ -z "$tl" ]] && return
 
   slong="${sl##* }"; sshort="${sl%% *}"
   tlong="${tl##* }"; tshort="${tl%% *}"
 
   # Text to translate
-  text=$(DGet -p "Translate $slong to $tlong")
+  text=$(DGet -p "Translate $slong to $tlong" -c Green)
 
   [[ -z "$text" ]] && return
 
@@ -145,7 +157,7 @@ Password() { # {{{
 
 # [sc] Screen - Take screenshot with scrot
 Screen() { # {{{
-  choice=$(DGet -p "Take screenshot" -o "Fullscreen\nDelayed fullscreen\nSection") && [[ -n "$choice" ]] || return
+  choice=$(DGet -p "Take screenshot" -o "Fullscreen\nDelayed fullscreen\nSection" -c Orange) && [[ -n "$choice" ]] || return
 
   dir="$HOME/Dropbox"
   mkdir -p "$dir" && cd "$dir"
@@ -160,7 +172,7 @@ Screen() { # {{{
 
 # [sy] System - Preform system command
 System() { # {{{
-  choice=$(DGet -p "Select action" -o "Poweroff\nReboot\nLogout") && [[ -n "$choice" ]] || return
+  choice=$(DGet -p "Select action" -o "Poweroff\nReboot\nLogout" -c Red) && [[ -n "$choice" ]] || return
 
   case $choice in
     Poweroff) systemctl poweroff ;;
