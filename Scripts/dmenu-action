@@ -2,20 +2,19 @@
 
 # Get - Select one of available actions for dmenu from these below
 Get() { # {{{
-  actions="Run\nWeb\nTranslate\nScreenshot\nPassword"
-
   if [[ -n "$1" ]]; then
     choice="$1"
   else
-    choice="$(DGet -p "Select action" -o "$actions")"
+    choice="$(DGet -p "Select action" -o "Run\nWeb\nPassword\nTranslate\nScreenshot\nSystem")"
   fi
 
   case $choice in
     [Rr]*) Run ;;
     [Ww]*) Web ;;
-    [Tt]*) Translate ;;
-    [Ss]*) Screen ;;
     [Pp]*) Password ;;
+    [Tt]*) Translate ;;
+    [Ss]c*) Screen ;;
+    [Ss]y*) System ;;
   esac
 }
 # }}}
@@ -72,8 +71,7 @@ Run() { # {{{
 
 # [w] Web - Open specified url in firefox or search for text in google
 Web() { # {{{
-  opt=$(DGet -p "Open url/Search in web")
-  [[ -z "$opt" ]] && return
+  opt=$(DGet -p "Open url/Search in web") && [[ -n "$opt" ]] || return
 
   # If $opt looks like url try to open it. Otherwise search for it in google
   if [[ $opt  =~ ^.+\..+$ ]] && [[ ! $opt =~ \  ]]; then
@@ -113,23 +111,6 @@ Translate() { # {{{
 }
 # }}}
 
-# [s] Screen - Take screenshot with scrot
-Screen() { # {{{
-  options="Fullscreen\nDelayed fullscreen\nSection"
-  choice=$(DGet -p "Take screenshot" -o "$options")
-  [[ -z "$choice" ]] && return
-
-  dir="$HOME/Dropbox"
-  mkdir -p "$dir" && cd "$dir"
-
-  case $choice in
-    Fullscreen)          scrot -d 1 && notify-send 'Taken fullscreen screenshot' ;;
-    Delayed\ fullscreen) scrot -d 5 && notify-send 'Taken fullscreen screenshot' ;;
-    Section)             scrot -s   && notify-send 'Taken screenshot of selected secion' ;;
-  esac
-}
-# }}}
-
 # [p] Password - Autotype selected password into focused window
 Password() { # {{{
   # Autotyping method
@@ -159,6 +140,33 @@ Password() { # {{{
     xdotool type "$password"
     xdotool key "Return"
   fi
+}
+# }}}
+
+# [sc] Screen - Take screenshot with scrot
+Screen() { # {{{
+  choice=$(DGet -p "Take screenshot" -o "Fullscreen\nDelayed fullscreen\nSection") && [[ -n "$choice" ]] || return
+
+  dir="$HOME/Dropbox"
+  mkdir -p "$dir" && cd "$dir"
+
+  case $choice in
+    Fullscreen)          scrot -d 1 && notify-send 'Taken fullscreen screenshot' ;;
+    Delayed\ fullscreen) scrot -d 5 && notify-send 'Taken fullscreen screenshot' ;;
+    Section)             scrot -s   && notify-send 'Taken screenshot of selected secion' ;;
+  esac
+}
+# }}}
+
+# [sy] System - Preform system command
+System() { # {{{
+  choice=$(DGet -p "Select action" -o "Poweroff\nReboot\nLogout") && [[ -n "$choice" ]] || return
+
+  case $choice in
+    Poweroff) systemctl poweroff ;;
+    Reboot) systemctl reboot ;;
+    Logout) pkill panel; bspc quit ;;
+  esac
 }
 # }}}
 

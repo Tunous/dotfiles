@@ -21,6 +21,10 @@ super + alt + z
 super + alt + c
     pkill compton; compton
 
+# Run system command
+ctrl + alt + Delete 
+    dmenu-action system
+
 # }}}
 # {{{ Navigation
 
