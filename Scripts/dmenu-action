@@ -2,7 +2,7 @@
 
 # Get - Select one of available actions for dmenu from these below
 Get() { # {{{
-  actions="Run program\nSearch in google\nOpen url\nTranslate\nTake screenshot\nAutotype password"
+  actions="Run\nWeb\nTranslate\nScreenshot\nPassword"
 
   if [[ -n "$1" ]]; then
     choice="$1"
@@ -11,12 +11,11 @@ Get() { # {{{
   fi
 
   case $choice in
-    *pass*)        Password  ;;
-    [Rr]un*)       DGet -mrp "Run program" ;;
-    [Ss]earch*)    Google    ;;
-    [Oo]pen*|*url) Web       ;;
-    [Tt]rans*)     Translate ;;
-    *screen*)      Screen    ;;
+    [Rr]*) Run ;;
+    [Ww]*) Web ;;
+    [Tt]*) Translate ;;
+    [Ss]*) Screen ;;
+    [Pp]*) Password ;;
   esac
 }
 # }}}
@@ -25,69 +24,67 @@ Get() { # {{{
 
 # DGet - Run dmenu or dmenu_run with specific options
 DGet() { # {{{
-  local arg prompt options multiline run settings geometry
+  local arg prompt options multiline run settings geometry file
 
   # Get options
-  while getopts 'mro:p:' arg; do
+  while getopts 'mro:p:f:' arg; do
     case $arg in
       p) prompt="$OPTARG" ;;
       o) options="$OPTARG" ;;
+      f) file="$OPTARG" ;;
       m) multiline=1 ;;
-      r) run=1 ;;
       *) return 1
     esac
   done
 
   # Set dmenu arguments
   settings="-i -nb #000000 -nf #9e9e9e -sb #0087af -sf #000000"
-
-  if [[ -n "$multiline" ]]; then
-    geometry="-x 45 -w 300 -l 20"
-  else
-    geometry="-x 45 -w 800"
-  fi
+  [[ -n "$multiline" ]] && geometry="-x 45 -w 300 -l 20" || geometry="-x 45 -w 800"
 
   # Run dmenu
-  [[ -n "$run" ]] && dmenu_run -p "$prompt" $geometry $settings && return
-
-  echo $(printf "$options" | dmenu -p "$prompt" $geometry $settings)
+  if [[ -n "$file" ]]; then
+    echo $(dmenu -p "$prompt" $geometry $settings < "$file")
+  else
+    echo $(printf "$options" | dmenu -p "$prompt" $geometry $settings)
+  fi
 }
 # }}}
 
-# Screen - Take screenshot with scrot
-Screen() { # {{{
-  options="Fullscreen\nDelayed fullscreen\nSection"
+# [r] Run - Execute program from $PATH
+Run() { # {{{
+  cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
+  mkdir -p "$cachedir" && cache=$cachedir/dmenu_run
 
-  choice=$(DGet -p "Take screenshot" -o "$options")
-
-  dir="$HOME/Dropbox"
-  mkdir -p "$dir" && cd "$dir"
-
-  case $choice in
-    Fullscreen)          scrot -d 1 && notify-send 'Taken fullscreen screenshot' ;;
-    Delayed?fullscreen)  scrot -d 5 && notify-send 'Taken fullscreen screenshot' ;;
-    Section)             scrot -s   && notify-send 'Taken screenshot of selected secion' ;;
-  esac
+  (
+    NORMIFS=$IFS
+    IFS=:
+    if stest -dqr -n "$cache" $PATH; then
+      programs="$(stest -flx $PATH | sort -u | tee "$cache")"
+      IFS=$NORMIFS
+      DGet -mp "Run program" -o "$programs"
+    else
+      IFS=$NORMIFS
+      DGet -mp "Run program" -f "$cache"
+    fi
+  ) | ${SHELL:-"/bin/sh"} &
 }
 # }}}
 
-# Google - Search specified text in google with firefox
-Google() { # {{{
-  opt=$(DGet -p "Search in google")
-
-  [[ -n "$opt" ]] && firefox 'http://www.google.com/search?q='"$opt"
-}
-# }}}
-
-# Web - Open specified url in firefox
+# [w] Web - Open specified url in firefox or search for text in google
 Web() { # {{{
-  opt=$(DGet -p "Open url")
+  opt=$(DGet -p "Open url/Search in web")
+  [[ -z "$opt" ]] && return
 
-  [[ -n "$opt" ]] && firefox "$opt"
+  # If $opt looks like url try to open it. Otherwise search for it in google
+  if [[ $opt  =~ ^.+\..+$ ]] && [[ ! $opt =~ \  ]]; then
+    firefox "$opt" &
+  else
+    firefox 'http://www.google.com/search?q='"$opt" &
+  fi
 }
 # }}}
 
-# Translate - Translate specified text from and to selected languages
+# [t] Translate - Translate specified text from and to selected languages
 Translate() { # {{{
   # Languages
   languages="auto\naf afrikaans\nsq albanian\nar arabic\naz azerbaijani\neu basque\nbn bengali\nbe belarusian\nbg bulgarian\nca catalan\nzh-cn chinese simplified\nzh-tw chinese traditional\nhr croatian\ncs czech\nda danish\nnl dutch\nen english\neo esperanto\net estonian\ntl filipino\nfi finnish\nfr french\ngl galician\nka georgian\nde german\nel greek\ngu gujarati\nht haitian creole\niw hebrew\nhi hindi\nhu hungarian\nis icelandic\nid indonesian\nga irish\nit italian\nja japanese\nkn kannada\nko korean\nla latin\nlv latvian\nlt lithuanian\nmk macedonian\nms malay\nmt maltese\nno norwegian\nfa persian\npl polish\npt portuguese\nro romanian\nru russian\nsr serbian\nsk slovak\nsl slovenian\nes spanish\nsw swahili\nsv swedish\nta tamil\nte telugu\nth thai\ntr turkish\nuk ukrainian\nur urdu\nvi vietnamese\ncy welsh\nyi yiddish"
@@ -116,15 +113,32 @@ Translate() { # {{{
 }
 # }}}
 
-# Password - Autotype selected password into focused window
+# [s] Screen - Take screenshot with scrot
+Screen() { # {{{
+  options="Fullscreen\nDelayed fullscreen\nSection"
+  choice=$(DGet -p "Take screenshot" -o "$options")
+  [[ -z "$choice" ]] && return
+
+  dir="$HOME/Dropbox"
+  mkdir -p "$dir" && cd "$dir"
+
+  case $choice in
+    Fullscreen)          scrot -d 1 && notify-send 'Taken fullscreen screenshot' ;;
+    Delayed\ fullscreen) scrot -d 5 && notify-send 'Taken fullscreen screenshot' ;;
+    Section)             scrot -s   && notify-send 'Taken screenshot of selected secion' ;;
+  esac
+}
+# }}}
+
+# [p] Password - Autotype selected password into focused window
 Password() { # {{{
   # Autotyping method
   option="$(DGet -p "Select autotype method" -o "Tab after username\nReturn after username\nNo username")"
   [[ ! "$option" =~ ^(Tab .*|Return .*|No username)$ ]] && return
 
   # Select password
-  candidates="$(find "$PASSWORD_STORE_DIR" -name '*gpg' -print | sed "s,$PASSWORD_STORE_DIR/,,;s,\.gpg\$,,")"
-  choice=$(DGet -mp "Select password" -o "$(printf "$candidates" | sort)")
+  candidates="$(find "$PASSWORD_STORE_DIR" -name '*gpg' -print | sed "s,$PASSWORD_STORE_DIR/,,;s,\.gpg\$,," | sort)"
+  choice=$(DGet -mp "Select password" -o "$candidates")
   [[ -z "$choice" ]] && return
 
   output="$(pass "$choice")"
