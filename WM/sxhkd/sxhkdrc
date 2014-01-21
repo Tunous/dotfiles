@@ -13,13 +13,13 @@ super + {w,W}
 super + Escape
     pkill -USR1 -x sxhkd
 
-# Restart panel
+# Toggle panel
 super + alt + z
-    pkill panel; $DOTFILES/WM/panel/panel
+    pkill panel || $DOTFILES/WM/panel/panel
 
-# Reload compton
+# Toggle compton
 super + alt + c
-    pkill compton; compton
+    pkill compton || compton
 
 # Run system command
 ctrl + alt + Delete 
@@ -236,5 +236,5 @@ Menu
 
 # }}}
 
-# {{{
+# {{{ End
 # vim: ft=sxhkdrc commentstring=#\ %s
