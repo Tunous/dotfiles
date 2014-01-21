@@ -33,6 +33,7 @@ let $MYVIMRC="$DOTFILES/Apps/vim/vimrc"
 " }}}
 
 " Plugins -----------------------------------------------------------------
+" {{{ 14
 " {{{ Vundle
 
 " {{{ Set paths
@@ -168,8 +169,10 @@ Bundle 'tpope/vim-unimpaired'
 
 " }}}
 
+" }}}
+
 " Actual settings ---------------------------------------------------------
-" {{{ Theme settings - Customized colorscheme
+" {{{ Theme settings
 
 Bundle 'Tunous/vim-colors-customized'
 
