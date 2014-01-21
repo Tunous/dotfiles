@@ -208,11 +208,11 @@ super + alt + r
 
 # Search web
 XF86Search
-    dmenu-action search
+    dmenu-action web
 
 # Open url
 XF86HomePage
-    dmenu-action url
+    dmenu-action web
 
 # Toggle mutting
 XF86AudioMute
