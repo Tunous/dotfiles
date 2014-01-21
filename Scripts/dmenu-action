@@ -105,7 +105,7 @@ Translate() { # {{{
 
   # Translation
   if ! hash translate 2>/dev/null; then
-    firefox 'http://www.translate.google.com/?'"&sl=${sl%% *}&tl=${tl%% *}&text=$opt"
+    firefox 'http://www.translate.google.com/?'"&sl=${sl%% *}&tl=${tl%% *}&text=$opt" &
   else
     translation="$(translate "{$sshort=$tshort}" "$text")"
     notify-send "Translated from $slong to $tlong" "\n<b>Original text:</b>\n$text\n\n<b>Translation:</b>\n$translation"
