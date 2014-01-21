@@ -17,6 +17,7 @@ xset s off
 xset -dpms
 
 # Key configurations
+setxkbmap pl
 [[ -f $DOTFILES/System/X/Xmodmap ]] && xmodmap $DOTFILES/System/X/Xmodmap
 xcape
 
