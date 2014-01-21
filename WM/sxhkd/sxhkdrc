@@ -1,9 +1,9 @@
 # Bspwm -----------------------------------------------------------------------
 # {{{ Closing/reloading
 
-# Close BSPWM
+# Run system command
 super + alt + Escape
-    pkill panel; bspc quit
+    dmenu-action system
 
 # Close/kill focused window
 super + {w,W}
@@ -20,10 +20,6 @@ super + alt + z
 # Toggle compton
 super + alt + c
     pkill compton || compton
-
-# Run system command
-ctrl + alt + Delete 
-    dmenu-action system
 
 # }}}
 # {{{ Navigation
