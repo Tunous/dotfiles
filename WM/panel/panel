@@ -147,7 +147,7 @@ while read -r line <"$FIFO"; do
       ;;
   esac
 
-  echo "\\l$LAYOUT\\ab$TITLE\\ac dmenu-action\\ae \\c $DESK \\r $LONG $SHORT"
+  echo "\\l\\ab$LAYOUT\\ac dmenu-action\\ae$TITLE \\c $DESK \\r $LONG $SHORT"
 done | bar
 
 # }}}
