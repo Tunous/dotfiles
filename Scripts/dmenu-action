@@ -140,18 +140,14 @@ Password() { # {{{
       choice=$(DGet -mp "Select password" -o "[Username: $usr]\n$candidates" -c Yellow)
     fi
     [[ -z "$choice" ]] && return
-
-    if [[ "$choice" = "[Tab]" ]]; then
-      key="Return"
-    elif [[ "$choice" = "[Return]" ]]; then
-      key="Tab"
-    elif [[ "$choice" = "[Username: yes]" ]]; then
-      usr="no"
-    elif [[ "$choice" = "[Username: no]" ]]; then
-      usr="yes"
-    else
-      break
-    fi
+    
+    case $choice in
+      "[Tab]")           key="Return" ;;
+      "[Return]")        key="Tab"    ;;
+      "[Username: yes]") usr="no"     ;;
+      "[Username: no]")  usr="yes"    ;;
+      *) break ;;
+    esac
   done
 
   output="$(pass "$choice")"
