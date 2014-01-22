@@ -23,16 +23,16 @@ Get() { # {{{
 
 # DGet - Run dmenu or dmenu_run with specific options
 DGet() { # {{{
-  local arg prompt options multiline run settings geometry file
+  local arg prompt options file geometry
   color='#0087af'
 
   # Get options
-  while getopts 'mro:p:f:c:' arg; do
+  while getopts 'mo:p:f:c:' arg; do
     case $arg in
       p) prompt="$OPTARG" ;;
       o) options="$OPTARG" ;;
       f) file="$OPTARG" ;;
-      m) multiline=1 ;;
+      m) geometry="-x 45 -w 300 -l 20" ;;
       c) 
         case $OPTARG in
           Red)     color='#af0000' ;;
@@ -50,14 +50,10 @@ DGet() { # {{{
 
   # Set dmenu arguments
   settings="-i -nb #000000 -nf #9e9e9e -sb "$color" -sf #000000"
-  [[ -n "$multiline" ]] && geometry="-x 45 -w 300 -l 20" || geometry="-x 45 -w 800"
+  [[ -z "$geometry" ]] && geometry="-x 45 -w 800"
 
   # Run dmenu
-  if [[ -n "$file" ]]; then
-    echo $(dmenu -p "$prompt" $geometry $settings < "$file")
-  else
-    echo $(printf "$options" | dmenu -p "$prompt" $geometry $settings)
-  fi
+  echo $(printf "$options" | cat - $file | dmenu -p "$prompt" $geometry $settings)
 }
 # }}}
 
@@ -66,18 +62,30 @@ Run() { # {{{
   cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
   mkdir -p "$cachedir" && cache=$cachedir/dmenu_run
 
-  (
-    NORMIFS=$IFS
-    IFS=:
-    if stest -dqr -n "$cache" $PATH; then
-      programs="$(stest -flx $PATH | sort -u | tee "$cache")"
-      IFS=$NORMIFS
-      DGet -mp "Run program" -o "$programs"
-    else
-      IFS=$NORMIFS
-      DGet -mp "Run program" -f "$cache"
-    fi
-  ) | ${SHELL:-"/bin/sh"} &
+  NORMIFS=$IFS
+  IFS=:
+  if stest -dqr -n "$cache" $PATH; then
+    stest -flx $PATH | sort -u | tee "$cache"
+  fi
+  IFS=$NORMIFS
+
+  term="no"
+
+  while :; do
+    choice="$(DGet -mp "Run program" -f "$cache" -o "[Terminal: $term]\n")"
+    case $choice in
+      "[Terminal: yes]")  term="no" ;;
+      "[Terminal: no]")   term="yes" ;;
+      ranger*|htop*|vim*) term="yes"; break ;;
+      *) break ;;
+    esac
+  done
+
+  if [[ "$term" = "no" ]]; then
+    echo "$choice" | $SHELL &
+  else
+    urxvt -e $choice &
+  fi
 }
 # }}}
 
@@ -89,7 +97,7 @@ Web() { # {{{
   if [[ $opt  =~ ^.+\..+$ ]] && [[ ! $opt =~ \  ]]; then
     firefox "$opt" &
   else
-    firefox 'http://www.google.com/search?q='"$opt" &
+    firefox "http://www.google.com/search?q=$opt" &
   fi
 }
 # }}}
