@@ -9,14 +9,17 @@ hi CompIcon              margin-right: 5px;
 hi CompMsg               margin-left: 16px;
 hi ErrorMsg              background: #262626; color: #af0000; font-weight: bold;
 hi Filter                background: #9e9e9e; color: #262626; border-radius: 4px; border: 1px solid #9e9e9e;
-hi StatusLine            color: #9e9e9e; background: #262626; font-weight: normal; margin: 1px 0;
-hi Hint                  font-family: Source Sans Pro, Sans; font-size: 7pt; font-weight: bold; color: #ffffff; border: 1px solid #262626; border-radius: 2px; background-color: #262626; margin: 1px 0 0 1px; padding: 0 2px 0 2px;
+hi StatusLine            color: #9e9e9e; background: #262626;
+hi Hint                  font-size: 7pt; font-weight: bold; color: #ffffff; border: 1px solid #262626; border-radius: 2px; background-color: #262626; margin: 1px 0 0 1px; padding: 0 2px 0 2px;
 hi Hint::after           content: attr(number);
 hi HintActive            background-color: #0087af; color: #ffffff;
 hi HintElem              background-color: #262626; color: #ffffff;
 hi HintImage             opacity: .5;
 hi URL                   text-decorations: none; color: #87af00;
-hi PromptText            background: #262626; color: #0087af; font-weight: bold;
+hi PromptText            background: #0087af; color: #262626;
+hi ModeMsg               background: #87af00; color: #262626;
+hi MoreMsg               background: #262626; color: #9e9e9e;
+hi Question              background: #262626; color: #9e9e9e;
 hi InfoMsg               color: red;
 hi WarningMsg            color: red; font-weight: bold;
 hi NonText               color: #303030; min-height: 16px; padding-left: 2px;
@@ -31,4 +34,4 @@ EOF
 
 " }}}
 " {{{ End
-" vim: ft=vimperator
+" vim: ft=vimperator cms="\ %s
