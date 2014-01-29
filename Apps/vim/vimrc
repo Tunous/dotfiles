@@ -322,7 +322,7 @@ cmap w!! w !sudo tee > /dev/null %
 
 " {{{ Open files with ranger
 
-function! RangerChooser()
+function! RangerChooser(action)
   let temp = tempname()
 
   exec 'silent !ranger --choosefiles=' . shellescape(temp)
@@ -335,7 +335,13 @@ function! RangerChooser()
       return
     endif
 
-    exec 'edit ' . fnameescape(names[0])
+    if a:action ==? 'edit' || a:action ==? 'buffer'
+      exec 'edit ' . fnameescape(names[0])
+    elseif a:action ==? 'split'
+      exec 'split ' . fnameescape(names[0])
+    elseif a:action ==? 'vsplit'
+      exec 'vsplit ' fnameescape(names[0])
+    endif
 
     for name in names[1:]
       exec 'argadd ' . fnameescape(name)
@@ -345,8 +351,12 @@ function! RangerChooser()
   redraw!
 endfunction
 
-command! -bar RangerChooser call RangerChooser()
-nnoremap <Leader>r :<C-U>RangerChooser<CR>
+command! -bar RangerChooserBuffer call RangerChooser('edit')
+command! -bar RangerChooserSplit  call RangerChooser('split')
+command! -bar RangerChooserVSplit call RangerChooser('vsplit')
+nnoremap <Leader>r         :<C-U>RangerChooserBuffer<CR>
+nnoremap <Leader>R         :<C-U>RangerChooserVSplit<CR>
+nnoremap <Leader><Leader>r :<C-U>RangerChooserSplit<CR>
 
 " }}}
 " {{{ Return to last cursor position
@@ -357,7 +367,7 @@ function! s:SetCursorPosition()
       exe "normal! g`\""
       normal! zz
     endif
-  end
+  endif
 endfunction
 
 " }}}
