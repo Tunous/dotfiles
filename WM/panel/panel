@@ -2,7 +2,6 @@
 
 # Init {{{
 
-
 if [ $(pgrep -cx panel) -gt 1 ] ; then
   printf "%s\n" "The panel is already running." >&2
   exit 1
@@ -10,16 +9,13 @@ fi
 
 trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 
-
 # }}}
 # Fifo {{{
-
 
 FIFO=/tmp/panel-fifo
 [ -e "$FIFO" ] && rm "$FIFO"
 mkfifo "$FIFO"
 exec 3<> "$FIFO"
-
 
 # }}}
 # Functions {{{
@@ -94,7 +90,7 @@ while read -r line <"$FIFO"; do
   case $line in
     L*) LONG="${line#?}"  ;;
     S*) SHORT="${line#?}" ;;
-    T*) TITLE="${line#?}" ;;
+    T*) TITLE="$(echo ${line#?} | cut -c -130)" ;;
     W*)
       # bspwm internal state
       DESK=""
