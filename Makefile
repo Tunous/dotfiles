@@ -74,6 +74,7 @@ ranger:
 vim:
 	$(call cecho, "Vim")
 	mkdir -p ${XDG_CACHE_HOME}/vim/undofiles
+	ln -sfn ${APPSDIR}/vim ${HOME}/.vim
 
 vimperator:
 	$(call cecho, "Vimperator")

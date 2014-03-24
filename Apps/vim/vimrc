@@ -12,9 +12,10 @@
 set nocompatible
 set encoding=utf-8
 
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+
 language messages en_US.utf-8
 
-filetype plugin indent on
 syntax on
 
 " }}}
@@ -24,21 +25,15 @@ syntax on
 let mapleader=","
 
 " }}}
-" {{{ XDG Base Directory
-
-set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
-set runtimepath=$DOTFILES/Apps/vim,$VIM,$VIMRUNTIME
-let $MYVIMRC="$DOTFILES/Apps/vim/vimrc"
-
-" }}}
 
 " Plugins -----------------------------------------------------------------
 " {{{ Vundle
 
 " {{{ Set paths
 
-set rtp+=$DOTFILES/Apps/vim/bundle/vundle
-call vundle#rc('$DOTFILES/Apps/vim/bundle/')
+filetype off
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
 
 " }}}
 
@@ -185,6 +180,8 @@ colorscheme customized
 
 " }}}
 " {{{ Setttings
+
+filetype plugin indent on
 
 " {{{ Bakcup, swap and undo files
 
