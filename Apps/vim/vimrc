@@ -102,6 +102,11 @@ xmap x          <Plug>MoveMotionXPlug
 imap <C-v><C-v> <Plug>EasyClipInsertModePaste
 
 " }}}
+" {{{ Eclim 
+
+nnoremap <Leader>j :Java %<CR>
+
+" }}} 
 " {{{ Eunch 
 
 Plugin 'tpope/vim-eunuch'

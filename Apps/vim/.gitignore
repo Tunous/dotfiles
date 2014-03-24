@@ -1,2 +1,4 @@
 bundle/*
 spell/*
+eclim
+plugin/eclim.vim
