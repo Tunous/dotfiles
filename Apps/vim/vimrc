@@ -250,12 +250,13 @@ set laststatus=2                    " Always show statusline
 " }}}
 " {{{ Tabs and indenting
 
-set tabstop=4                       " Number of spaces for tab
-set shiftwidth=2                    " Number of spaces to use for indenting
-set softtabstop=2                   " Number of spaces that tab counts for
-set expandtab                       " Use spaces instead of tabs
-set autoindent                      " Always set autoindenting on
-set copyindent                      " Copy the previous indentation on autoindenting
+set tabstop=4                       " Number of spaces that a <Tab> in the file counts for
+set shiftwidth=4                    " Number of spaces to use for indenting
+set softtabstop=4                   " Number of spaces that a <Tab> counts for while performing editing operations
+set expandtab                       " Use the appropriate number of spaces to insert a <Tab>
+set autoindent                      " Copy indent from current line when starting a new line
+set smartindent                     " Do smart autoindenting when starting a new line
+set copyindent                      " Copy the previous indentation characters
 
 " }}}
 " {{{ Timeout
@@ -315,7 +316,6 @@ inoremap <Left>  <NOP>
 inoremap <Right> <NOP>
 
 " Buffers
-nnoremap <Leader>b :ls<CR>:b<Space>
 nnoremap <Leader>d :bd<CR>
 
 " }}}
@@ -324,8 +324,10 @@ nnoremap <Leader>d :bd<CR>
 " Capitalize word next to cursor
 inoremap <C-u> <Esc>:call Preserve("normal gUiw")<CR>a
 
-" Indend whole file, remove trailing whitespaces
-nnoremap <F2> :call Preserve("normal gg=G")<CR>
+" Indend whole file
+nnoremap <F2> :call Preserve("normal gg=Gzz")<CR>
+
+" Remove trailing whitespaces
 nnoremap <F3> :call Preserve("%s/\\s\\+$//e")<CR>
 
 " Open vimrc
