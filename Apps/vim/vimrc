@@ -33,7 +33,6 @@ let $MYVIMRC="$DOTFILES/Apps/vim/vimrc"
 " }}}
 
 " Plugins -----------------------------------------------------------------
-" {{{ 15
 " {{{ Vundle
 
 " {{{ Set paths
@@ -171,8 +170,6 @@ Bundle 'tomtom/tcomment_vim'
 " {{{ Unimpaired
 
 Bundle 'tpope/vim-unimpaired'
-
-" }}}
 
 " }}}
 
