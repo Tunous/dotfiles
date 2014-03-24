@@ -37,21 +37,21 @@ call vundle#rc()
 
 " }}}
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " }}}
 
 " {{{ Airline
 
 " Nice looking statusline
-Bundle 'bling/vim-airline'
+Plugin 'bling/vim-airline'
 
 " Use powerline symbols
 let g:airline_powerline_fonts=1
 
 " {{{ Bufferline
 
-Bundle 'bling/vim-bufferline'
+Plugin 'bling/vim-bufferline'
 
 let g:bufferline_echo = 0
 
@@ -60,13 +60,13 @@ let g:bufferline_echo = 0
 " }}}
 " {{{ Alternate files
 
-Bundle 'a.vim'
+Plugin 'a.vim'
 
 " }}}
 " {{{ DelimitMate
 
 " Automatically close quotes, brackets, etc.
-Bundle 'Raimondi/delimitMate'
+Plugin 'Raimondi/delimitMate'
 
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
@@ -75,7 +75,7 @@ let delimitMate_balance_matchpairs = 1
 " }}}
 " {{{ Easy align
 
-Bundle 'junegunn/vim-easy-align'
+Plugin 'junegunn/vim-easy-align'
 
 vmap <CR>         <Plug>(EasyAlign)
 vmap <Leader><CR> <Plug>(LiveEasyAlign)
@@ -85,7 +85,7 @@ nmap <Leader>A    <Plug>(LiveEasyAlign)
 " }}}
 " {{{ Easyclip
 
-Bundle 'svermeulen/vim-easyclip'
+Plugin 'svermeulen/vim-easyclip'
 
 let g:EasyClipUseCutDefaults = 0
 
@@ -105,7 +105,7 @@ imap <C-v><C-v> <Plug>EasyClipInsertModePaste
 " {{{ Fugitive
 
 " Use git inside of vim
-Bundle 'tpope/vim-fugitive'
+Plugin 'tpope/vim-fugitive'
 
 " {{{ Auto-clean fugitive buffers
 
@@ -119,26 +119,26 @@ augroup END
 " }}}
 " {{{ Gitv
 
-Bundle 'gregsexton/gitv'
+Plugin 'gregsexton/gitv'
 
 let g:Gitv_DoNotMapCtrlKey = 1
 
 " }}}
 " {{{ Relativity
 
-Bundle 'Tunous/vim-relativity'
+Plugin 'Tunous/vim-relativity'
 
 let g:RelativityDisableNumberColumn = 1
 
 " }}}
 " {{{ Repeat
 
-Bundle 'tpope/vim-repeat'
+Plugin 'tpope/vim-repeat'
 
 " }}}
 " {{{ Sneak
 
-Bundle 'justinmk/vim-sneak'
+Plugin 'justinmk/vim-sneak'
 let g:sneak#use_ic_scs = 1
 nmap s <Plug>SneakForward
 nmap S <Plug>SneakBackward
@@ -148,32 +148,31 @@ xmap S <Plug>VSneakBackward
 " }}}
 " {{{ Surround
 
-Bundle 'tpope/vim-surround'
+Plugin 'tpope/vim-surround'
 
 " }}}
 " {{{ Sxhkdrc
 
-Bundle 'baskerville/vim-sxhkdrc'
+Plugin 'baskerville/vim-sxhkdrc'
 
 " }}}
 " {{{ Tcomment
 
 " Comment selected text
-Bundle 'tomtom/tcomment_vim'
+Plugin 'tomtom/tcomment_vim'
 
 " }}}
 " {{{ Unimpaired
 
-Bundle 'tpope/vim-unimpaired'
+Plugin 'tpope/vim-unimpaired'
 
 " }}}
 
 " Actual settings ---------------------------------------------------------
 " {{{ Theme settings
 
-Bundle 'Tunous/vim-colors-customized'
+Plugin 'Tunous/vim-colors-customized'
 
-set t_Co=256
 set background=dark
 let g:customized_use_xresources = 1
 colorscheme customized
