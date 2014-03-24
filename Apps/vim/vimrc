@@ -129,6 +129,12 @@ Plugin 'gregsexton/gitv'
 let g:Gitv_DoNotMapCtrlKey = 1
 
 " }}}
+" {{{ NERDTree 
+
+Plugin 'scrooloose/nerdtree'
+nnoremap <Leader>t :NERDTreeToggle<CR>
+
+" }}} 
 " {{{ Relativity
 
 Plugin 'Tunous/vim-relativity'
@@ -344,7 +350,7 @@ nnoremap <Leader>h :nohlsearch<CR>
 
 " {{{ Open files with ranger
 
-function! RangerChooser(action)
+function! RangerChooser()
   let temp = tempname()
 
   exec 'silent !ranger --choosefiles=' . shellescape(temp)
@@ -357,13 +363,7 @@ function! RangerChooser(action)
       return
     endif
 
-    if a:action ==? 'edit' || a:action ==? 'buffer'
-      exec 'edit ' . fnameescape(names[0])
-    elseif a:action ==? 'split'
-      exec 'split ' . fnameescape(names[0])
-    elseif a:action ==? 'vsplit'
-      exec 'vsplit ' fnameescape(names[0])
-    endif
+    exec 'edit ' . fnameescape(names[0])
 
     for name in names[1:]
       exec 'argadd ' . fnameescape(name)
@@ -373,12 +373,8 @@ function! RangerChooser(action)
   redraw!
 endfunction
 
-command! -bar RangerChooserBuffer call RangerChooser('edit')
-command! -bar RangerChooserSplit  call RangerChooser('split')
-command! -bar RangerChooserVSplit call RangerChooser('vsplit')
-nnoremap <Leader>r         :<C-U>RangerChooserBuffer<CR>
-nnoremap <Leader>R         :<C-U>RangerChooserVSplit<CR>
-nnoremap <Leader><Leader>r :<C-U>RangerChooserSplit<CR>
+command! -bar RangerChooser call RangerChooser()
+nnoremap <Leader>r :<C-U>RangerChooser<CR>
 
 " }}}
 " {{{ Return to last cursor position
