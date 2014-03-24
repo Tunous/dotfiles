@@ -102,6 +102,11 @@ xmap x          <Plug>MoveMotionXPlug
 imap <C-v><C-v> <Plug>EasyClipInsertModePaste
 
 " }}}
+" {{{ Eunch 
+
+Plugin 'tpope/vim-eunuch'
+
+" }}} 
 " {{{ Fugitive
 
 " Use git inside of vim
@@ -309,9 +314,6 @@ nmap <Leader>l :set list!<CR>
 
 " Turn off highlighting for current search
 nnoremap <Leader>h :nohlsearch<CR>
-
-" Save with sudo
-cmap w!! w !sudo tee > /dev/null %
 
 " }}}
 
