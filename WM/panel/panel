@@ -26,7 +26,7 @@ Mail() { # {{{
 
   (( email == 0 )) && return
 
-  printf "%s" "\\f8\\fr $email"
+  printf "%s" "%{F#ff444444}%{F-} $email"
 }
 
 # }}}
@@ -35,12 +35,12 @@ Pacman() { # {{{
 
   (( updates == 0 )) && return
 
-  printf "%s" "\\ab  $updates \\ac toggle-conky updates \\ae"
+  printf "%s" "%{A:toggle-conky updates:}  $updates %{A}"
 }
 
 # }}}
 Time() { #{{{
-  printf "%s" "\\ab \\f8 \\fr$(date +%H:%M:%S) \\ac toggle-conky cal \\ae"
+  printf "%s" "%{A:toggle-conky cal:}%{F-} $(date +%H:%M) %{A}"
 }
 
 # }}}
@@ -48,26 +48,26 @@ Volume() { #{{{
   vol=$(amixer get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*")
   mut=$(amixer get Master | egrep 'Playback.*?\[o' | egrep -o '\[o.+\]')
 
-  color="\\f7"
+  color="%{F#ff606060}"
   icon=""
 
   if [[ "$mut" = "[off]" ]]; then
     icon=""
-    color="\\f1"
+    color="%{F#ffaf0000}"
   elif (( vol < 25 )); then
     icon=""
   elif (( vol < 70 )); then
     icon=""
   fi
 
-  printf "%s" "\\ab $color$icon \\fr$vol% \\ac amixer set Master toggle \\ae"
+  printf "%s" "%{A:amixer set Master toggle:} $color$icon %{A}%{F-}$vol%% "
 
   for i in {0..10}; do
     percent="$(( i * 10 ))"
     if (( vol >= percent && vol != 0 )); then
-      printf "%s" "\\ab$color—\\fr\\ac amixer set Master $percent%\\ae"
+      printf "%s" "%{A:amixer set Master $percent%%:}$color—%{A}%{F-}"
     else
-      printf "%s" "\\ab\\f0—\\fr\\ac amixer set Master $percent%\\ae"
+      printf "%s" "%{F#ff303030}%{A:amixer set Master $percent%%:}—%{A}%{F-}"
     fi
   done
 }
@@ -88,15 +88,15 @@ while :; do echo "L $(Pacman) $(Mail)" >"$FIFO"; sleep 300; done &
 
 while read -r line <"$FIFO"; do
   case $line in
-    L*) LONG="${line#?}"  ;;
+    L*) LONG="${line#?}" ;;
     S*) SHORT="${line#?}" ;;
     T*) TITLE="$(echo ${line#?} | cut -c -130)" ;;
     W*)
       # bspwm internal state
-      DESK=""
       NORMIFS=$IFS
       IFS=':'
       set -- ${line#?}
+      desktops=()
 
       while [ $# -gt 0 ] ; do
         item=$1
@@ -107,44 +107,46 @@ while read -r line <"$FIFO"; do
           [OoFfUu]*)
             case $item in
               O*) # Focused ocupied desktop
-                FG="\\fr"
-                [[ "$name" = [0-9] ]] && icon="•"
+                FG="%{F-}"
+                icon="•"
                 ;;
               F*) # Focused free desktop
-                FG="\\fr"
-                [[ "$name" = [0-9] ]] && icon="○"
+                FG="%{F-}"
+                icon="○"
                 ;;
               o*) # Occupied desktop
-                FG="\\f4"
-                [[ "$name" = [0-9] ]] && icon="•"
+                FG="%{F#ff0087af}"
+                icon="•"
                 ;;
               f*) # Free desktop
-                FG="\\f8"
-                [[ "$name" = [0-9] ]] && icon="○"
+                FG="%{F#ff444444}"
+                icon="○"
                 ;;
               [uU]*) # Urgent desktop
-                FG="\\f3"
-                [[ "$name" = [0-9] ]] && icon="•"
+                FG="%{F#ffaf8700}"
+                icon="•"
                 ;;
             esac
 
-            DESK="${DESK}\\ab$FG ${icon} \\ac bspc desktop -f ${name}\\ae\\fr"
+            desktops+=("%{A:bspc desktop -f $name:}$FG $icon%{A}%{F-}")
             ;;
           L*)
             case $name in
-              t*) LAYOUT="   \\f4\\fr    " ;;
-              m*) LAYOUT="   \\f4\\fr    " ;;
+              t*) LAYOUT="   %{F#ff0087af}%{F-}    " ;;
+              m*) LAYOUT="   %{F#ff0087af}%{F-}    " ;;
             esac
             ;;
         esac
         shift
       done
       IFS=$NORMIFS
+      DESK="${desktops[@]:0:5} $(Time) ${desktops[@]:5}"
       ;;
   esac
 
-  echo "\\l\\ab$LAYOUT\\ac dmenu-action\\ae$TITLE \\c $DESK \\r $LONG $SHORT"
-done | bar
+  echo "%{l}$LAYOUT$TITLE %{c} $DESK %{r} $LONG $SHORT"
+done | bar -f "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*","-*-tewi-medium-*-*-*-11-*-*-*-*-*-*-*" -B "#ff000000" -F "#ff9e9e9e" -u 2 -d |
+    while read line; do eval "$line" ; done # Hande clickable area commands
 
 # }}}
 
