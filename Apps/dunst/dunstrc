@@ -2,13 +2,13 @@
     font = tamzen medium 9
     allow_markup = yes
     format = "<b>%s</b>\n%b"
-    alignment = center
+    alignment = left
     word_wrap = yes
-    geometry = "300x5+810+27"
+    geometry = "700x1+42"
     idle_threshold = 120
     follow = keyboard
     separator_height = 1
-    padding = 8
+    padding = 1
     horizontal_padding = 8
     separator_color = frame
     dmenu = /usr/bin/dmenu -p dunst:
@@ -26,15 +26,15 @@
 
 [urgency_low]
     background = "#000000"
-    foreground = "#606060"
-    timeout = 5
+    foreground = "#9e9e9e"
+    timeout = 10
 
 [urgency_normal]
     background = "#000000"
     foreground = "#9e9e9e"
-    timeout = 10
+    timeout = 0
 
 [urgency_critical]
-    background = "#af0000"
-    foreground = "#ffffff"
+    background = "#000000"
+    foreground = "#af0000"
     timeout = 0
