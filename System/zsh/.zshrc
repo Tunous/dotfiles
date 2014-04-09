@@ -9,6 +9,10 @@ KEYTIMEOUT=1
 
 setopt AUTO_CD
 setopt CORRECT
+setopt COMPLETE_IN_WORD
+setopt ALWAYS_TO_END
+
+zstyle ':completion:*' menu select
 
 # Aliases
 alias ls="ls --color=auto --group-directories-first"
@@ -17,6 +21,8 @@ alias startX="startx $DOTFILES/System/X/xinitrc"
 # Syntax highlighting
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+source /usr/share/doc/pkgfile/command-not-found.zsh
+
 # Window title
 precmd() {
   print -Pn "\e]2;%100<...<%~%<<\a"
@@ -24,10 +30,11 @@ precmd() {
 
 # {{{ Hitory
 
-setopt append_history
-setopt share_history
-setopt hist_verify
-setopt hist_ignore_all_dups
+setopt APPEND_HISTORY
+setopt SHARE_HISTORY
+setopt HIST_VERIFY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_FIND_NO_DUPS
 export HISTFILE="$ZDOTDIR/.zsh-history"
 export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
