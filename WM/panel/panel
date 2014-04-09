@@ -25,8 +25,11 @@ Mail() { # {{{
   email=$(curl -u $(cat $PASSWORD_STORE_DIR/Gmail/Dzen) --silent 'https://mail.google.com/mail/feed/atom' | grep fullcount | egrep -o '[0-9]+')
 
   (( email == 0 )) && return
+  (( email == 1 )) && s='' || s='s'
 
   printf "%s" "%{F#ff444444}%{F-} $email"
+
+  notify-send "You have $email unread message$s!"
 }
 
 # }}}
@@ -36,6 +39,11 @@ Pacman() { # {{{
   (( updates == 0 )) && return
 
   printf "%s" "%{A:toggle-conky updates:}  $updates %{A}"
+
+  info="There are $updates updates available!"
+  (( updates == 1 )) && info="There is 1 update available!"
+
+  notify-send "$info" "$(pacmanupdates list | sed 's/^/ • /')"
 }
 
 # }}}
