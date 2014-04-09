@@ -7,6 +7,7 @@ function zle-line-init zle-keymap-select {
   # Actual prompt
   PROMPT="
 ${${KEYMAP/(vicmd|opp)/$VINormal}/(main|viins)/$VIInsert}"
+  RPROMPT="%{$fg[white]%}%~%{$reset_color%}"
 
   zle reset-prompt
   zle -R
