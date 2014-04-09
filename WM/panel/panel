@@ -148,11 +148,10 @@ while read -r line <"$FIFO"; do
         shift
       done
       IFS=$NORMIFS
-      DESK="${desktops[@]:0:5} $(Time) ${desktops[@]:5}"
       ;;
   esac
 
-  echo "%{l}$LAYOUT$TITLE %{c} $DESK %{r} $LONG $SHORT"
+  echo "%{l}$LAYOUT$TITLE %{c} ${desktops[@]:0:5} $(Time) ${desktops[@]:5} %{r} $LONG $SHORT"
 done | bar -f "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*","-*-tewi-medium-*-*-*-11-*-*-*-*-*-*-*" -B "#ff000000" -F "#ff9e9e9e" -u 2 -d |
     while read line; do eval "$line" ; done # Hande clickable area commands
 
