@@ -10,14 +10,14 @@ Before starting install [packages](https://github.com/Tunous/dotfiles#packages).
 2. Go to cloned repository `cd ~/dotfiles`
 3. Use Makefile to symlink confguration files `make`
 4. Restart system or logout and login to make sure that environment variables are set correctly.
-5. Update vim plugins `cd ~/dotfiles && make vim-plugins`
+5. Install vim plugins `cd ~/dotfiles && make vim-plugins`
 
 Software
 --------
 
 * Automounting: **[udevil]**
 * Applications launcher: **[dmenu2]**
-* Bar and info popups: **[bar]** *(version with clickable areas)* + **[conky]**
+* Bar and info popups: **[bar]** + **[conky]**
 * File explorer: **[ranger]**
 * Hiding mouse: **[unclutter]**
 * Image viewer: **[feh]**
@@ -52,7 +52,7 @@ pacaur -S bdf-tewi-git bspwm-git compton-git dmenu2 \
 Programs:
 ```sh
 pacman -S evince gimp htop libreoffice-writer steam
-pacaur -S dropbox
+pacaur -S dropbox dropbox-cli
 ```
 
 Thanks to
@@ -63,14 +63,12 @@ Thanks to
 * [**Jurica Vukadin**](https://github.com/u-ra) for [dotfiles repository](https://github.com/u-ra/dotfiles)
 * [**Lumolk**](https://github.com/lumolk) for [config repository](https://github.com/lumolk/config)
 
-[bar]: https://github.com/u-ra/bar/tree/for-lemonboy
+[bar]: https://github.com/LemonBoy/bar
 [bspwm]: https://github.com/baskerville/bspwm
 [compton]: https://github.com/chjj/compton
 [conky]: http://conky.sourceforge.net/
-[dmenu]: http://tools.suckless.org/dmenu/
 [dmenu2]: https://bitbucket.org/melek/dmenu2
 [dunst]: http://knopwob.org/dunst/index.html
-[dzen2]: https://github.com/robm/dzen
 [feh]: http://feh.finalrewind.org/
 [firefox]: http://mozilla.org/pl/firefox/new/
 [git]: http://git-scm.com/
