@@ -48,7 +48,7 @@ Pacman() { # {{{
 
 # }}}
 Time() { #{{{
-  printf "%s" "%{A:toggle-conky cal:}%{F-} $(date +%H:%M) %{A}"
+  printf "%s" "%{A:toggle-conky cal:}%{F-} $(date +%H:%M)%{A}"
 }
 
 # }}}
