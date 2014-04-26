@@ -21,8 +21,8 @@ setxkbmap pl
 [[ -f $DOTFILES/System/X/Xmodmap ]] && xmodmap $DOTFILES/System/X/Xmodmap
 xcape
 
-# Random wallpaper form directory: https://www.dropbox.com/sh/o6k8wkzhj72eqgd/-CmK07wIhw
-wallpaper ~/Dropbox/Wallpapers
+# Set wallpaper
+sh ~/.fehbg &
 
 # Mouse pointer
 xsetroot -cursor_name left_ptr

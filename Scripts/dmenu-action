@@ -5,11 +5,12 @@ Get() { # {{{
   if [[ -n "$1" ]]; then
     choice="$1"
   else
-    choice="$(DGet -p "Select action" -o "Run\nWeb\nPassword\nScreenshot\nSystem")"
+    choice="$(DGet -p "Select action" -o "Run\nWeb\nWallpaper\nPassword\nScreenshot\nSystem")"
   fi
 
   case $choice in
     [Rr]*) Run ;;
+    [Ww]a*) Wallpaper ;;
     [Ww]*) Web ;;
     [Pp]*) Password ;;
     [Ss]*) Screen ;;
@@ -17,6 +18,7 @@ Get() { # {{{
   esac
 }
 # }}}
+
 
 # Actions -----------------------------------------------------------------
 
@@ -98,6 +100,18 @@ Web() { # {{{
   else
     firefox "http://www.google.com/search?q=$opt" &
   fi
+}
+# }}}
+
+# [wa] Wallpaper - Set random wallpaper from web
+Wallpaper() { # {{{
+    opt=$(DGet -mp "Select source" -o "random\nreddit\nimgur") && [[ -n "$opt" ]] || return
+
+    case $opt in
+        random) wallpaper --random ;;
+        reddit) wallpaper --reddit ;;
+        imgur) wallpaper --imgur ;;
+    esac
 }
 # }}}
 
