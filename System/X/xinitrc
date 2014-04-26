@@ -31,5 +31,7 @@ unclutter -idle 2 &
 compton &
 devmon --exec-on-drive "notify-send 'Device connected' '%d'" --exec-on-remove "notify-send 'Device disconnected'" &
 
+urxvtd &
+
 sxhkd &
 exec bspwm

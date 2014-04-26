@@ -15,7 +15,7 @@ super + Escape
 
 # Refresh panel
 super + alt + z
-    pkill -f panel && $DOTFILES/WM/panel/panel
+    pkill -x panel && $DOTFILES/WM/panel/panel 
 
 # Toggle compton
 super + alt + c
@@ -44,8 +44,8 @@ super + {c,C}
 super + {_,shift + } bracket{left,right}
     bspc {desktop -f,window -d} {prev,next}
 
-super + {_,shift + } {0-9,ctrl + f}
-    bspc {desktop -f, window -d} {0-9,Float}
+super + {_,shift + } {0-9}
+    bspc {desktop -f, window -d} {0-9}
 
 # }}}
 # {{{ History based
@@ -187,9 +187,9 @@ super + {r,R}
 
 # Urxvt
 super + Return
-    urxvt
+    urxvtc
 super + shift + Return
-    urxvt -name 'URxvtFloating'
+    urxvtc -name 'URxvtFloating'
 
 # Dmenu
 super + space
@@ -201,7 +201,7 @@ super + alt + f
 
 # Ranger
 super + alt + r
-    urxvt -e ranger
+    urxvtc -e ranger
 
 # }}}
 # {{{ Special keys
