@@ -5,15 +5,14 @@ Get() { # {{{
   if [[ -n "$1" ]]; then
     choice="$1"
   else
-    choice="$(DGet -p "Select action" -o "Run\nWeb\nPassword\nTranslate\nScreenshot\nSystem")"
+    choice="$(DGet -p "Select action" -o "Run\nWeb\nPassword\nScreenshot\nSystem")"
   fi
 
   case $choice in
     [Rr]*) Run ;;
     [Ww]*) Web ;;
     [Pp]*) Password ;;
-    [Tt]*) Translate ;;
-    [Ss]c*) Screen ;;
+    [Ss]*) Screen ;;
     [Ss]y*) System ;;
   esac
 }
@@ -102,35 +101,6 @@ Web() { # {{{
 }
 # }}}
 
-# [t] Translate - Translate specified text from and to selected languages
-Translate() { # {{{
-  # Languages
-  languages="auto\naf afrikaans\nsq albanian\nar arabic\naz azerbaijani\neu basque\nbn bengali\nbe belarusian\nbg bulgarian\nca catalan\nzh-cn chinese simplified\nzh-tw chinese traditional\nhr croatian\ncs czech\nda danish\nnl dutch\nen english\neo esperanto\net estonian\ntl filipino\nfi finnish\nfr french\ngl galician\nka georgian\nde german\nel greek\ngu gujarati\nht haitian creole\niw hebrew\nhi hindi\nhu hungarian\nis icelandic\nid indonesian\nga irish\nit italian\nja japanese\nkn kannada\nko korean\nla latin\nlv latvian\nlt lithuanian\nmk macedonian\nms malay\nmt maltese\nno norwegian\nfa persian\npl polish\npt portuguese\nro romanian\nru russian\nsr serbian\nsk slovak\nsl slovenian\nes spanish\nsw swahili\nsv swedish\nta tamil\nte telugu\nth thai\ntr turkish\nuk ukrainian\nur urdu\nvi vietnamese\ncy welsh\nyi yiddish"
-
-  sl=$(DGet -mp "Source language" -o "$languages" -c Green)
-  [[ -z "$sl" ]] && return
-
-  tl=$(DGet -mp "Target language" -o "$languages" -c Green)
-  [[ -z "$tl" ]] && return
-
-  slong="${sl##* }"; sshort="${sl%% *}"
-  tlong="${tl##* }"; tshort="${tl%% *}"
-
-  # Text to translate
-  text=$(DGet -p "Translate $slong to $tlong" -c Green)
-
-  [[ -z "$text" ]] && return
-
-  # Translation
-  if ! hash translate 2>/dev/null; then
-    firefox 'http://www.translate.google.com/?'"&sl=${sl%% *}&tl=${tl%% *}&text=$opt" &
-  else
-    translation="$(translate "{$sshort=$tshort}" "$text")"
-    notify-send "Translated from $slong to $tlong" "\n<b>Original text:</b>\n$text\n\n<b>Translation:</b>\n$translation"
-  fi
-}
-# }}}
-
 # [p] Password - Autotype selected password into focused window
 # Options:
 # [Tab|Return] - Key to be pressed after typing username
@@ -179,7 +149,7 @@ Password() { # {{{
 }
 # }}}
 
-# [sc] Screen - Take screenshot with scrot
+# [s] Screen - Take screenshot with scrot
 Screen() { # {{{
   choice=$(DGet -p "Take screenshot" -o "Fullscreen\nDelayed fullscreen\nSection" -c Orange) && [[ -n "$choice" ]] || return
 
