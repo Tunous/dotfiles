@@ -16,7 +16,7 @@ endsnippet
 snippet main "main() (main)"
 int main(int argc, char *argv[]) {
 	${VISUAL}${0:${VISUAL/(.*)/(?1::\/* code *\/)/}}
-	return EXIT_SUCCESS;
+	return 0;
 }
 endsnippet
 
