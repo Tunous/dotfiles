@@ -1,0 +1,145 @@
+@namespace url(http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul);
+
+
+/* ::: Vertical Tabs ::: */
+
+
+/* Tabs panel */
+#tabbrowser-tabs {
+    border: none !important;
+    background: #262626 !important;
+
+    /* Size 25px */
+    min-width: 330px !important;
+    max-width: 330px !important;
+    margin: 0 -300px 0 0 !important;
+}
+
+/* Tabs */
+.tabbrowser-tab {
+    background: none !important;
+    border: none !important;
+
+    margin: 0 264px 0 -6px !important;
+    padding: 0 !important;
+}
+
+/* Selected tab */
+.tabbrowser-tab[selected] { margin-left: -6px !important; background: #e6e6e6 !important; }
+.tabbrowser-tab[selected]:not(:hover) { margin-right: 300px !important; }
+.tabbrowser-tab[selected]:hover { background: none !important; }
+
+/* Show only tabs from current group */
+.tabbrowser-tab:not([hidden]) {
+    display: list-item !important;
+}
+
+
+/* ::: Popup text ::: */
+
+
+.tabbrowser-tab .tab-text {
+    visibility: collapse !important;
+    max-width: 0 !important;
+}
+.tabbrowser-tab:hover .tab-text {
+    visibility: visible !important;
+    max-height: 25px !important;
+    min-height: 25px !important;
+    max-width: 300px !important;
+
+    border-radius: 0 4px 4px 0 !important;
+    
+    background: #262626 !important;
+    color: white !important;
+
+    padding: 5px !important;
+    margin: -1px 0 0 7px !important;
+
+    -moz-transition: max-width .5s !important;
+}
+
+/* Make popups appear on top of main window */
+.tabbrowser-tab > .tab-stack {
+    z-index: 1;
+    position: relative;
+}
+
+/* Urgent tab */
+.tabbrowser-tab[titlechanged]:not([selected]) { background:       #f0c864 !important; }
+
+
+/* ::: Close button ::: */
+
+
+/* Hide tab close button */
+.tabbrowser-tab .tab-close-button {
+    visibility: collapse !important;
+}
+
+/* Display tab close button on tab hover, but only on selected, not pinned tabs */
+.tabbrowser-tab[selected]:not([pinned]):hover .tab-close-button {
+    visibility: visible !important;
+    display: -moz-box !important;
+    margin: 0 -1px 4px 3px !important;
+}
+
+/* Move close tab button on left */
+.tabbrowser-tab:not([pinned]) .tab-throbber { -moz-box-ordinal-group: 3 !important;}
+.tabbrowser-tab:not([pinned]) .tab-icon-image { -moz-box-ordinal-group: 2 !important;}
+.tabbrowser-tab:not([pinned]) .tab-text { -moz-box-ordinal-group: 4 !important;}
+.tabbrowser-tab:not([pinned]) .tab-close-button { -moz-box-ordinal-group: 1 !important;}
+.tabbrowser-tab:not([pinned]) .tab-close-button[selected] { -moz-user-focus: normal !important;}
+
+/* Hide tab icon on tab hover, but only on selected tabs */
+.tabbrowser-tab[selected]:not([pinned]):hover .tab-icon-image {
+    display: none !important;
+}
+
+/* Hide tab throbber, TMP Lock and Reload icons on tab hover */
+.tabbrowser-tab[selected]:not([pinned]):hover .tab-throbber,
+.tabbrowser-tab[selected]:not([pinned]):hover .tab-lock-icon,
+.tabbrowser-tab[selected]:not([pinned]):hover .tab-reload-icon {
+    display: none !important;
+}
+
+/* TMP-Lock-Protect-Auto Reload Icons */
+.tabbrowser-tab:not([pinned]) .tab-reload-icon,
+.tabbrowser-tab:not([pinned]) .tab-protect-icon,
+.tabbrowser-tab:not([pinned]) .tab-lock-icon {
+    -moz-box-ordinal-group: 2 !important;
+}
+.tabbrowser-tab[selected]:not([pinned]):hover .tab-protect-icon {
+    margin-left: -19px !important;
+}
+
+
+#verticaltabs-splitter { display: none !important; }
+.tabbrowser-tab .tab-icon-image { margin: 3px 0 7px 4px !important; }
+.tabbrowser-tab:hover .tab-icon-image { margin: -4px 0 0 -2px !important; }
+.tabbrowser-tab .tab-throbber { margin: 5px 0 0 5px !important; }
+.tabbrowser-tab:hover .tab-throbber { margin: 0 6px 0 -1px !important; }
+
+
+/* Main window shadow */
+#main-window browser {
+    box-shadow: 0 0 10px rgba(0,0,0,.2) !important;
+}
+
+
+/* ::: Tooltips ::: */
+
+
+tooltip, tooltip label {
+    -moz-appearance: none !important;
+}
+
+tooltip {
+    background: #000000 !important;
+    color: #ffffff !important;
+    border: 1px solid #000000 !important;
+}
+tooltip label {
+    color: #ffffff !important;
+    border: 1px solid #000000 !important;
+}

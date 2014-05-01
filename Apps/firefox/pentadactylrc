@@ -1,0 +1,29 @@
+"hg7086
+
+loadplugins '\.(js|penta)$'
+group user
+highlight CompItem[selected] /* A selected row of completion list */ background: #9e9e9e; color: #262626;
+highlight CompTitle /* Completion row titles */ color: #9e9e9e; background: #303030; font-weight: bold;
+highlight CompTitleSep /* The element which separates the completion title from its results */ height: 1px; background: #606060;
+highlight NonText /* The <em>~</em> indicators which mark blank lines in the completion list */ color: #303030; background: transparent !important;
+highlight Normal /* Normal text */ color: #9e9e9e !important; background: #262626 !important; font-weight: normal !important;
+highlight Title /* The title of a listing, including <ex>:pageinfo</ex>, <ex>:jumps</ex> */ color: #9e9e9e; font-weight: bold;
+map -modes=n <A-k> :tabmove<Space>-1<Return>
+map -modes=n <A-j> :tabmove<Space>+1<Return>
+map -modes=n,i <C-c> -builtin <C-v><C-c>
+map -modes=n,i <C-v> -builtin <C-v><C-v>
+map -modes=n,i <C-x> -builtin <C-v><C-x>
+map -modes=n,i <C-a> -builtin <C-v><C-a>
+map -count -modes=n h -builtin <count>3h
+map -count -modes=n j -builtin <count>3j
+map -count -modes=n k -builtin <count>3k
+map -count -modes=n l -builtin <count>3l
+map -count -modes=n J <count>gt
+map -count -modes=n K <count>gT
+map -modes=c <CapsLock> <C-[>
+set complete=suggestion,location,file
+set guioptions=''
+set hintkeys=HJKLASDFGYUIOPQWERTNMZXCVB
+set titlestring=Firefox
+
+" vim: set ft=pentadactyl:
