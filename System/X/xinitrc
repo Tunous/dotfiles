@@ -23,6 +23,7 @@ xcape
 
 # Set wallpaper
 sh ~/.fehbg &
+wallpaper --random &
 
 # Mouse pointer
 xsetroot -cursor_name left_ptr

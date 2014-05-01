@@ -13,8 +13,8 @@ Get() { # {{{
     [Ww]a*) Wallpaper ;;
     [Ww]*) Web ;;
     [Pp]*) Password ;;
-    [Ss]*) Screen ;;
     [Ss]y*) System ;;
+    [Ss]*) Screen ;;
   esac
 }
 # }}}

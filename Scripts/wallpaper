@@ -7,26 +7,36 @@
 # Usage: wallpaper --reddit   Pick random image from reddit
 # Usage: wallpapwr --imgur    Pick random image from imgur
 
-import os, sys, argparse, random, shutil, subprocess, requests
+import sys, argparse, random, shutil, subprocess
+from requests import get
+from os.path import join, expanduser
 
 # Settings
-client_id = 'a2994972b62d932' # Imgur required client-id
-headers = {'User-Agent': 'n00b wallpaper bot v0.4',
-       'Autorization': 'Client-ID ' + client_id}
 
-links = ['http://www.reddit.com/r/wallpapers/.json',
-          'http://www.reddit.com/r/wallpaper/.json',
-          'https://imgur.com/r/wallpapers.json']
+# Imgur required client-id
+client_id = 'a2994972b62d932'
+headers = {
+        'User-Agent': 'n00b wallpaper bot v0.4',
+        'Autorization': 'Client-ID ' + client_id
+        }
 
-img_file = os.path.join(os.path.expanduser('~'), 'Dropbox', 'Images', 'wallpaper')
+links = [
+        'http://www.reddit.com/r/wallpapers/.json',
+        'http://www.reddit.com/r/wallpaper/.json',
+        'https://imgur.com/r/wallpapers.json'
+        ]
+
+img_file = join(expanduser('~'), 'Dropbox', 'Images', 'wallpaper')
 
 url_prefix = 'https://i.imgur.com/'
 temp_suffix = '_temp'
 img_exts = ['jpg','png']
 hide_over_18 = True
+set_wallpaper = True
+
 # End Settings
 
-def getimg(post):
+def get_img(post):
     return post['data']['url']
 
 def check_ext(img_url):
@@ -35,25 +45,27 @@ def check_ext(img_url):
             return True
     return False
 
+def get_ext(url):
+    for ext in img_exts:
+        if url.endswith(ext):
+            return ext
+
 def not_over_18(post):
     return not post['data']['over_18']
 
-def correct_dimensions(post):
-    title = post['data']['title']
-    if "1920x1080" not in title:
-        return False
-    return True
-
 def download_file(url, local_file):
-    r = requests.get(url, stream=True, headers=headers)
-
+    r = get(url, stream=True, headers=headers)
     with open(local_file, 'wb') as fd:
-        for chunk in r.iter_content(chunk_size = 1024):
+        for chunk in r.iter_content(chunk_size=1024):
             fd.write(chunk)
-
     r.raise_for_status() # If error downloading (404 etc) this will cause an exception
-    shutil.move(local_file, img_file)
-    subprocess.call(["feh", "--bg-fill", img_file])
+
+    i_file = img_file + '.' + get_ext(url)
+    shutil.move(local_file, i_file)
+
+    if set_wallpaper:
+        subprocess.call(["feh", "--bg-fill", i_file])
+
     return True
 
 def imgur(json_obj):
@@ -61,7 +73,7 @@ def imgur(json_obj):
     looking = True
     finding = 5 # Will try to find up to this many images that satisfy hide_over_18 requirement
 
-    while(looking and finding > 0):
+    while looking and finding > 0 :
         rand_url_pos = random.randrange(0, len(posts))
         rand_ext = posts[rand_url_pos]['ext']
         rand_url = posts[rand_url_pos]['hash']
@@ -77,24 +89,28 @@ def imgur(json_obj):
 def reddit(json_obj):
     img_urls = []
     posts = json_obj['data']['children']
-    # posts = list(filter(correct_dimensions, posts))
 
     if hide_over_18:
         posts = list(filter(not_over_18, posts))
 
-    img_urls += list(filter(check_ext, list(map(getimg, posts))))
+    img_urls += list(filter(check_ext, list(map(get_img, posts))))
     rand_url = img_urls[random.randrange(0, len(img_urls))]
 
     download_file(rand_url, img_file + temp_suffix)
     return
 
 def parse_args():
-    parser = argparse.ArgumentParser(description='Downloads random image from reddit or imgur and sets it as wallpaper.')
+    global set_wallpaper
 
+    parser = argparse.ArgumentParser(description='Downloads random image from reddit or imgur and sets it as wallpaper.')
     parser.add_argument('--imgur', help='Downloads a random image from imgur only.', action="store_true")
     parser.add_argument('--reddit', help='Downloads a random image from reddit only.', action="store_true")
     parser.add_argument('--random', help='Downloads a random image from a random source.', action="store_true")
+    parser.add_argument('--no-bg', help='Prevents script from setting downladed image as wallpaper', action="store_true")
     args = parser.parse_args()
+
+    if args.no_bg:
+        set_wallpaper = False
 
     if args.imgur:
         return 2
@@ -110,7 +126,7 @@ def parse_args():
 
 # Main
 link_id = parse_args()
-f = requests.get(links[link_id], headers=headers)
+f = get(links[link_id], headers=headers)
 json_obj = f.json()
 
 if link_id < 2:
