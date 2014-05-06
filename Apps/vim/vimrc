@@ -17,9 +17,7 @@ set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 language messages en_US.utf-8
 
 syntax on
-
-" }}}
-" {{{ Leader
+filetype off
 
 " Use ',' as leader
 let mapleader=","
@@ -27,134 +25,108 @@ let mapleader=","
 " }}}
 
 " Plugins -----------------------------------------------------------------
-" {{{ Vundle
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
-" {{{ Set paths
+Plugin 'gmarik/Vundle.vim'
+Plugin 'bling/vim-airline'
+Plugin 'bling/vim-bufferline'
+Plugin 'a.vim'
+Plugin 'Raimondi/delimitMate'
+Plugin 'junegunn/vim-easy-align'
+Plugin 'svermeulen/vim-easyclip'
+Plugin 'tpope/vim-eunuch'
+Plugin 'tpope/vim-fugitive'
+Plugin 'gregsexton/gitv'
+Plugin 'Tunous/vim-relativity'
+Plugin 'tpope/vim-repeat'
+Plugin 'justinmk/vim-sneak'
+Plugin 'tpope/vim-surround'
+Plugin 'baskerville/vim-sxhkdrc'
+Plugin 'scrooloose/syntastic'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'tpope/vim-unimpaired'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'tommcdo/vim-exchange'
+Plugin 'groenewege/vim-less'
+Plugin 'nanotech/jellybeans.vim'
 
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+call vundle#end()
+filetype plugin indent on
 
-" }}}
-
-Plugin 'gmarik/vundle'
-
-" }}}
+" {{{ Plugin configs
 
 " {{{ Airline
-
-" Nice looking statusline
-Plugin 'bling/vim-airline'
-
+" -------------------------------------------------------------------------
 " Use powerline symbols
 let g:airline_powerline_fonts=1
 
+" }}}
 " {{{ Bufferline
-
-Plugin 'bling/vim-bufferline'
-
+" -------------------------------------------------------------------------
+" Don't echo to the command bar
+" Airline is used to display open buffers
 let g:bufferline_echo = 0
 
 " }}}
-
-" }}}
-" {{{ Alternate files
-
-Plugin 'a.vim'
-
-" }}}
 " {{{ DelimitMate
-
-" Automatically close quotes, brackets, etc.
-Plugin 'Raimondi/delimitMate'
-
+" -------------------------------------------------------------------------
+" Turn on <Space> and <CR> expansion
 let delimitMate_expand_cr = 1
 let delimitMate_expand_space = 1
+
+" Try to balance the closing pairs in the current line
 let delimitMate_balance_matchpairs = 1
 
 " }}}
 " {{{ Easy align
-
-Plugin 'junegunn/vim-easy-align'
-
+" -------------------------------------------------------------------------
 vmap <CR>         <Plug>(EasyAlign)
-vmap <Leader><CR> <Plug>(LiveEasyAlign)
 nmap <Leader>a    <Plug>(EasyAlign)
-nmap <Leader>A    <Plug>(LiveEasyAlign)
 
 " }}}
 " {{{ Easyclip
-
-Plugin 'svermeulen/vim-easyclip'
-
-let g:EasyClipUseCutDefaults = 0
-
+" -------------------------------------------------------------------------
+" Use 'gs' for substitution
 nmap gs         <Plug>SubstituteOverMotionMap
 nmap gss        <Plug>SubstituteLine
 xmap gs         <Plug>XEasyClipPaste
 
+" Use 'x' as cut operator
+let g:EasyClipUseCutDefaults = 0
 nmap x          <Plug>MoveMotionPlug
 nmap X          <Plug>MoveMotionEndOfLinePlug
 nmap xX         <Plug>MoveMotionReplaceLinePlug
 nmap xx         <Plug>MoveMotionLinePlug
-
 xmap x          <Plug>MoveMotionXPlug
-imap <C-v><C-v> <Plug>EasyClipInsertModePaste
 
 " }}}
 " {{{ Eclim 
-
-nnoremap <Leader>j :Java %<CR>
-
-" }}} 
-" {{{ Eunch 
-
-Plugin 'tpope/vim-eunuch'
+" -------------------------------------------------------------------------
+" Run curent java project
+nnoremap <Leader>j :Java<CR>
 
 " }}} 
 " {{{ Fugitive
-
-" Use git inside of vim
-Plugin 'tpope/vim-fugitive'
-
-" {{{ Auto-clean fugitive buffers
-
+" -------------------------------------------------------------------------
+" Clean fugitive buffers
 augroup fugitive
   autocmd!
   autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
 
 " }}}
-
-" }}}
 " {{{ Gitv
-
-Plugin 'gregsexton/gitv'
-
+" -------------------------------------------------------------------------
+" Don't map ctrl key - it conflicts with my navigation mappings
 let g:Gitv_DoNotMapCtrlKey = 1
 
 " }}}
-" {{{ NERDTree 
-
-Plugin 'scrooloose/nerdtree'
-nnoremap <Leader>t :NERDTreeToggle<CR>
-
-" }}} 
-" {{{ Relativity
-
-Plugin 'Tunous/vim-relativity'
-
-let g:RelativityDisableNumberColumn = 1
-
-" }}}
-" {{{ Repeat
-
-Plugin 'tpope/vim-repeat'
-
-" }}}
 " {{{ Sneak
-
-Plugin 'justinmk/vim-sneak'
+" -------------------------------------------------------------------------
+" Use s as sneak operator
 let g:sneak#use_ic_scs = 1
 nmap s <Plug>SneakForward
 nmap S <Plug>SneakBackward
@@ -162,63 +134,35 @@ xmap s <Plug>VSneakForward
 xmap S <Plug>VSneakBackward
 
 " }}}
-" {{{ Surround
-
-Plugin 'tpope/vim-surround'
-
-" }}}
-" {{{ Sxhkdrc
-
-Plugin 'baskerville/vim-sxhkdrc'
-
-" }}}
-" {{{ Syntastic 
-
-Plugin 'scrooloose/syntastic'
-
-" }}} 
-" {{{ Tcomment
-
-" Comment selected text
-Plugin 'tomtom/tcomment_vim'
-
-" }}}
 " {{{ UltiSnips 
-
-Plugin 'SirVer/ultisnips'
+" -------------------------------------------------------------------------
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsEditSplit="vertical"
 
-Plugin 'honza/vim-snippets'
-
 " }}} 
-" {{{ Unimpaired
-
-Plugin 'tpope/vim-unimpaired'
-
-" }}}
 " {{{ YouCompleteMe 
-
-Plugin 'Valloric/YouCompleteMe'
+" -------------------------------------------------------------------------
 let g:EclimCompletionMethod = 'omnifunc'
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
 " }}} 
+" {{{ Less
+" -------------------------------------------------------------------------
+" Compile open file
+nnoremap <Leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
+
+" }}}
+" }}}
 
 " Actual settings ---------------------------------------------------------
 " {{{ Theme settings
 
-Plugin 'Tunous/vim-colors-customized'
-
 set background=dark
-let g:customized_use_xresources = 1
-colorscheme customized
+colorscheme Tomorrow-Night
 
 " }}}
 " {{{ Setttings
-
-filetype plugin indent on
 
 " {{{ Bakcup, swap and undo files
 
