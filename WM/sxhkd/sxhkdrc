@@ -15,7 +15,7 @@ super + Escape
 
 # Refresh panel
 super + alt + z
-    pkill -x panel && $DOTFILES/WM/panel/panel 
+    pkill -x panel && $DOTFILES/WM/panel
 
 # Toggle compton
 super + alt + c
@@ -97,7 +97,7 @@ super + {a,s,d,f,g,q}
     bspc window -t {floating,sticky,locked,fullscreen,private,pseudo_tiled}
 
 # Swap with biggest window
-super + m
+super + n
     bspc window -s biggest
 
 # Resize window
@@ -216,11 +216,13 @@ XF86HomePage
 
 # Toggle mutting
 XF86AudioMute
-    amixer set Master toggle
+    volume !; \
+    notify "$(volume bar)"
 
 # Lower, raise volume
 XF86Audio{Lower,Raise}Volume
-    amixer set Master 1{-,+}
+    volume {-,+}; \
+    notify "$(volume bar)"
 
 # Take screenshot
 Print
@@ -231,6 +233,9 @@ Menu
     dmenu-action run
 
 # }}}
+
+super + m; {h,l,j,k}
+    spotifyKeys {prev,next,play,play}
 
 # {{{ End
 # vim: ft=sxhkdrc commentstring=#\ %s

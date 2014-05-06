@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Kill other notifiers
+if [[ $(pgrep -xc notify) > 1 ]]; then
+    pkill -xo notify
+fi
+
+delay=3
+notify="$*"
+
+echo "N$notify" > $PANEL_FIFO
+
+[[ "$notify" == "" ]] && exit 0
+
+sleep $delay
+
+echo "N" > $PANEL_FIFO

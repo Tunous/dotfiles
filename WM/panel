@@ -12,10 +12,9 @@ trap 'trap - TERM; kill 0' INT TERM QUIT EXIT
 # }}}
 # Fifo {{{
 
-FIFO=/tmp/panel-fifo
-[ -e "$FIFO" ] && rm "$FIFO"
-mkfifo "$FIFO"
-exec 3<> "$FIFO"
+[ -e "$PANEL_FIFO" ] && rm "$PANEL_FIFO"
+mkfifo "$PANEL_FIFO"
+exec 3<> "$PANEL_FIFO"
 
 # }}}
 # Functions {{{
@@ -38,7 +37,7 @@ Pacman() { # {{{
 
   (( updates == 0 )) && return
 
-  printf "%s" "%{A:toggle-conky updates:}  $updates %{A}"
+  printf "%s" " $updates"
 
   info="There are $updates updates available!"
   (( updates == 1 )) && info="There is 1 update available!"
@@ -48,36 +47,7 @@ Pacman() { # {{{
 
 # }}}
 Time() { #{{{
-  printf "%s" "%{A:toggle-conky cal:}%{F-} $(date +%H:%M)%{A}"
-}
-
-# }}}
-Volume() { #{{{
-  vol=$(amixer get Master | egrep -o "[0-9]+%" | egrep -o "[0-9]*")
-  mut=$(amixer get Master | egrep 'Playback.*?\[o' | egrep -o '\[o.+\]')
-
-  color="%{F#ff606060}"
-  icon=""
-
-  if [[ "$mut" = "[off]" ]]; then
-    icon=""
-    color="%{F#ffaf0000}"
-  elif (( vol < 25 )); then
-    icon=""
-  elif (( vol < 70 )); then
-    icon=""
-  fi
-
-  printf "%s" "%{A:amixer set Master toggle:} $color$icon %{A}%{F-}$vol%% "
-
-  for i in {0..10}; do
-    percent="$(( i * 10 ))"
-    if (( vol >= percent && vol != 0 )); then
-      printf "%s" "%{A:amixer set Master $percent%%:}$color—%{A}%{F-}"
-    else
-      printf "%s" "%{F#ff303030}%{A:amixer set Master $percent%%:}—%{A}%{F-}"
-    fi
-  done
+  printf "%s" "%{F-} $(date +%H:%M)"
 }
 
 # }}}
@@ -86,18 +56,19 @@ Volume() { #{{{
 
 # Updating {{{
 
-bspc control --subscribe >"$FIFO" &
-xtitle -sf 'T%s' >"$FIFO" &
-while :; do echo "S $(Volume)" >"$FIFO"; sleep 3;   done &
-while :; do echo "L $(Pacman) $(Mail)" >"$FIFO"; sleep 300; done &
+bspc control --subscribe >"$PANEL_FIFO" &
+xtitle -sf 'T%s' >"$PANEL_FIFO" &
+while :; do echo "I $(Pacman) $(Mail)" >"$PANEL_FIFO"; sleep 300; done &
 
 # }}}
 # Printing {{{
 
-while read -r line <"$FIFO"; do
+notifyStop=-1
+
+while read -r line <"$PANEL_FIFO"; do
   case $line in
-    L*) LONG="${line#?}" ;;
-    S*) SHORT="${line#?}" ;;
+    I*) INFO="${line#?}" ;;
+    N*) NOTIFY="${line#?}" ;;
     T*) TITLE="$(echo ${line#?} | cut -c -130)" ;;
     W*)
       # bspwm internal state
@@ -151,8 +122,8 @@ while read -r line <"$FIFO"; do
       ;;
   esac
 
-  echo "%{l}$LAYOUT$TITLE %{c} ${desktops[@]:0:5} $(Time) ${desktops[@]:5} %{r} $LONG $SHORT"
-done | bar -f "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*","-*-tewi-medium-*-*-*-11-*-*-*-*-*-*-*" -B "#ff000000" -F "#ff9e9e9e" -u 2 -d |
+  echo "%{l}$LAYOUT$TITLE %{c} ${desktops[@]:0:5} $(Time) ${desktops[@]:5} %{r} $INFO $NOTIFY"
+done | bar -f "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*","-*-tewi-medium-*-*-*-11-*-*-*-*-*-*-*" -B "#88000000" -F "#ff9e9e9e" -u 2 -d |
     while read line; do eval "$line" ; done # Hande clickable area commands
 
 # }}}

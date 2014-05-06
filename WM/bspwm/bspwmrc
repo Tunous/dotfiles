@@ -31,12 +31,13 @@ bspc config normal_private_border_color "#262626"
 # }}}
 # {{{ Rules
 
-bspc rule -a Gimp floating=true
-bspc rule -a Steam floating=true desktop=Float
+bspc rule -a Steam floating=true desktop=6
+bspc rule -a spotify desktop=7
+bspc rule -a Gimp floating=true desktop=8
 bspc rule -a URxvtFloating floating=true center=true
 bspc rule -a feh floating=true center=true pseudo_tiled=true
 
 # }}}
 
 # Panel
-$DOTFILES/WM/panel/panel &
+$DOTFILES/WM/panel &

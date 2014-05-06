@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# Set wallpaper
+sh ~/.fehbg &
+wallpaper --random &
+
 # Xresources
 [[ -f $DOTFILES/System/X/Xresources ]] && xrdb -merge $DOTFILES/System/X/Xresources
 [[ -f $DOTFILES/System/X/Xcolors ]]    && xrdb -merge $DOTFILES/System/X/Xcolors
@@ -20,10 +24,6 @@ xset -dpms
 setxkbmap pl
 [[ -f $DOTFILES/System/X/Xmodmap ]] && xmodmap $DOTFILES/System/X/Xmodmap
 xcape
-
-# Set wallpaper
-sh ~/.fehbg &
-wallpaper --random &
 
 # Mouse pointer
 xsetroot -cursor_name left_ptr
