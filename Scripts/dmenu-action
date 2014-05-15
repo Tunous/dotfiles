@@ -171,9 +171,9 @@ Screen() { # {{{
   mkdir -p "$dir" && cd "$dir"
 
   case $choice in
-    Fullscreen)          scrot -d 1 && notify-send 'Taken fullscreen screenshot' ;;
-    Delayed\ fullscreen) scrot -d 5 && notify-send 'Taken fullscreen screenshot' ;;
-    Section)             scrot -s   && notify-send 'Taken screenshot of selected secion' ;;
+    Fullscreen)          scrot -d 1 && notify 'Taken a fullscreen screenshot' ;;
+    Delayed\ fullscreen) scrot -d 5 && notify 'Taken a fullscreen screenshot' ;;
+    Section)             scrot -s   && notify 'Taken a screenshot of selected section' ;;
   esac
 }
 # }}}
