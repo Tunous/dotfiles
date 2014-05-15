@@ -1,38 +1,48 @@
 #!/bin/sh
+#
+# xinitrc
+#
 
 # Set wallpaper
-sh ~/.fehbg &
-wallpaper --random &
+hsetroot -tile ~/Dropbox/Images/wallpaper.png
 
-# Xresources
-[[ -f $DOTFILES/System/X/Xresources ]] && xrdb -merge $DOTFILES/System/X/Xresources
-[[ -f $DOTFILES/System/X/Xcolors ]]    && xrdb -merge $DOTFILES/System/X/Xcolors
+# Set bindings
+sxhkd &
 
-# Fonts
-xset +fp /usr/share/fonts/local
-xset fp rehash
+# Configure keys
+setxkbmap pl
+xmodmap $DOTFILES/System/X/Xmodmap
+xcape
 
 # Disable beep
 xset b off
 
 # Disable screensaver
 xset s noblank
-xset s off
-xset -dpms
+# xset s off
+# xset -dpms
 
-# Key configurations
-setxkbmap pl
-[[ -f $DOTFILES/System/X/Xmodmap ]] && xmodmap $DOTFILES/System/X/Xmodmap
-xcape
-
-# Mouse pointer
+# Default cursor
 xsetroot -cursor_name left_ptr
 unclutter -idle 2 &
 
-compton &
-devmon --exec-on-drive "notify-send 'Device connected' '%d'" --exec-on-remove "notify-send 'Device disconnected'" &
+wm() {
+    # Load X resources
+    xrdb -load $DOTFILES/System/X/Xresources
 
-urxvtd &
+    # Compositing
+    compton &
 
-sxhkd &
-exec bspwm
+    # Fonts
+    xset +fp /usr/share/fonts/local
+    xset fp rehash
+
+    # Background apps
+    urxvtd &
+    dropboxd &
+
+    exec $1
+}
+
+[[ -z $1 ]] && wm bspwm
+wm $1
