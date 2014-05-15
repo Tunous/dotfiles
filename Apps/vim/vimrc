@@ -6,25 +6,21 @@
 "      \\   /    /\  |\ |.  \    /:  ||:  __   \ (:   _) \
 "       \__/    (__\_|_)|___|\__/|___||__|  \___) \_______)
 "
-" Main settings -----------------------------------------------------------
-" {{{ Initial settings
+
+" {{{ General
 
 set nocompatible
-set encoding=utf-8
+set encoding=utf-8 " Use UTF-8 for encoding
 
 set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
-
-language messages en_US.utf-8
 
 syntax on
 filetype off
 
-" Use ',' as leader
-let mapleader=","
+let mapleader = "," " Define <Leader> key
 
 " }}}
-
-" Plugins -----------------------------------------------------------------
+" {{{ Plugins
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
@@ -38,7 +34,6 @@ Plugin 'svermeulen/vim-easyclip'
 Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'gregsexton/gitv'
-Plugin 'Tunous/vim-relativity'
 Plugin 'tpope/vim-repeat'
 Plugin 'justinmk/vim-sneak'
 Plugin 'tpope/vim-surround'
@@ -51,7 +46,7 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'groenewege/vim-less'
-Plugin 'nanotech/jellybeans.vim'
+Plugin 'Tunous/vim-colors-customized'
 
 call vundle#end()
 filetype plugin indent on
@@ -103,12 +98,6 @@ nmap xx         <Plug>MoveMotionLinePlug
 xmap x          <Plug>MoveMotionXPlug
 
 " }}}
-" {{{ Eclim 
-" -------------------------------------------------------------------------
-" Run curent java project
-nnoremap <Leader>j :Java<CR>
-
-" }}} 
 " {{{ Fugitive
 " -------------------------------------------------------------------------
 " Clean fugitive buffers
@@ -144,7 +133,7 @@ let g:UltiSnipsEditSplit="vertical"
 " -------------------------------------------------------------------------
 let g:EclimCompletionMethod = 'omnifunc'
 let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
+" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
 " }}} 
 " {{{ Less
@@ -153,13 +142,14 @@ let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extr
 nnoremap <Leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
 
 " }}}
-" }}}
 
-" Actual settings ---------------------------------------------------------
-" {{{ Theme settings
+" }}}
+" }}}
+" {{{ Theme
 
 set background=dark
-colorscheme Tomorrow-Night
+let g:customized_use_xresources = 1
+colorscheme customized
 
 " }}}
 " {{{ Setttings
@@ -181,30 +171,19 @@ set ignorecase                      " Ignore case when searching...
 set smartcase                       " unless I use uppercase characters
 
 " }}}
-" {{{ Cursor
-
-set scrolloff=10
-set sidescrolloff=15
-set cursorcolumn                    " Highlight cursor column...
-set cursorline                      " ... and line
-
-" }}}
 " {{{ Command, status line
 
 set wildmenu                        " Use wildmenu for autocompletion
 set noshowmode                      " Don't show current mode
-set showcmd                         " Show last executed command
 set laststatus=2                    " Always show statusline
 
 " }}}
 " {{{ Tabs and indenting
 
-set tabstop=4                       " Number of spaces that a <Tab> in the file counts for
 set shiftwidth=4                    " Number of spaces to use for indenting
-set softtabstop=4                   " Number of spaces that a <Tab> counts for while performing editing operations
-set expandtab                       " Use the appropriate number of spaces to insert a <Tab>
-set autoindent                      " Copy indent from current line when starting a new line
-set smartindent                     " Do smart autoindenting when starting a new line
+set softtabstop=4                   " Number of spaces that a <Tab> counts for
+set expandtab                       " Convert tabs into spaces
+set smartindent                     " Do smart autoindenting
 set copyindent                      " Copy the previous indentation characters
 
 " }}}
@@ -216,20 +195,21 @@ set ttimeout ttimeoutlen=100
 " }}}
 " {{{ Other
 
-set mouse=a
-set nostartofline                   " Keep cursor in the save column when moving
-set autoread                        " Read file if it was modified outside of vim
-set autochdir                       " Automatically change working directory to directory of current file
+set autoread                        " Read file if it was modified outside
+set autochdir                       " Automatically change working directory
 set hidden                          " Allow hidden buffers
-set backspace=indent,eol,start      " Make backspace delete everything in insert mode
+set backspace=2                     " Make <Backspace> work correctly
 set visualbell                      " Don't beep and don't flash screen
 set t_vb=
 set nowrap                          " Don't wrap lines
 set list                            " Show list chars
-set listchars=tab:▸\ ,trail:·
-set foldmethod=marker               " Use marker foldmethod
+set listchars=tab:▸\ ,trail:⋅
+set foldmethod=syntax               " Use syntax foldmethod
 set synmaxcol=300                   " Limit syntax highlight of long lines
-set clipboard^=unnamed,unnamedplus  " Use system clipboard
+set scrolloff=10                    " Offset with the cursor when moving vertically
+set sidescrolloff=15
+
+call matchadd('ColorColumn', '\%81v', 100) " Show column 80 ONLY when necessary
 
 " }}}
 
@@ -254,17 +234,7 @@ nnoremap <Esc>j <C-W>-
 nnoremap <Esc>k <C-W>+
 nnoremap <Esc>l <C-W>>
 
-" Don't use arrow keys
-noremap  <Up>    <NOP>
-noremap  <Down>  <NOP>
-noremap  <Left>  <NOP>
-noremap  <Right> <NOP>
-inoremap <Up>    <NOP>
-inoremap <Down>  <NOP>
-inoremap <Left>  <NOP>
-inoremap <Right> <NOP>
-
-" Buffers
+" Delete focused buffer
 nnoremap <Leader>d :bd<CR>
 
 " }}}
@@ -373,3 +343,5 @@ augroup Autocommands
 augroup END
 
 " }}}
+
+" vim: fdm=marker
