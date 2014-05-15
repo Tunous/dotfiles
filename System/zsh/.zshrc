@@ -16,6 +16,7 @@ zstyle ':completion:*' menu select
 
 # Aliases
 alias ls="ls --color=auto --group-directories-first"
+alias grep="grep --color=auto"
 alias startX="startx $DOTFILES/System/X/xinitrc"
 
 # Syntax highlighting
@@ -26,6 +27,10 @@ source /usr/share/doc/pkgfile/command-not-found.zsh
 # Window title
 precmd() {
   print -Pn "\e]2;%100<...<%~%<<\a"
+}
+
+cd() {
+    builtin cd $@ && ls
 }
 
 # {{{ Hitory
