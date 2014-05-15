@@ -20,7 +20,7 @@ exec 3<> "$PANEL_FIFO"
 # Functions {{{
 
 Pacman() { # {{{
-  updates="$(pacmanupdates count)"
+  updates="$(checkupdates | wc -l)"
 
   (( updates == 0 )) && return
 
