@@ -72,15 +72,10 @@ Run() { # {{{
 
   term="no"
 
-  while :; do
-    choice="$(DGet -mp "Run program" -f "$cache" -o "[Terminal: $term]\n")"
-    case $choice in
-      "[Terminal: yes]")  term="no" ;;
-      "[Terminal: no]")   term="yes" ;;
-      ranger*|htop*|vim*) term="yes"; break ;;
-      *) break ;;
-    esac
-  done
+  choice="$(DGet -mp "Run program" -f "$cache")"
+  case $choice in
+    ranger*|htop*|vim*) term="yes" ;;
+  esac
 
   if [[ "$term" = "no" ]]; then
     echo "$choice" | $SHELL &
@@ -193,3 +188,5 @@ System() { # {{{
 # -------------------------------------------------------------------------
 
 Get "$1"
+
+# vim: fdm=marker
