@@ -24,12 +24,11 @@ Pacman() { # {{{
 
   (( updates == 0 )) && return
 
-  printf "%s" " $updates"
-}
-
-# }}}
-Time() { #{{{
-  printf "%s" "%{F-} $(date +%H:%M)"
+  if (( updates == 1 )); then
+    printf "%s" " $(checkupdates)"
+  else
+    printf "%s" " $updates"
+  fi
 }
 
 # }}}
@@ -41,16 +40,16 @@ Time() { #{{{
 bspc control --subscribe >"$PANEL_FIFO" &
 xtitle -sf 'T%s' >"$PANEL_FIFO" &
 while :; do echo "I $(Pacman)" >"$PANEL_FIFO"; sleep 300; done &
+while :; do echo "Time" >"$PANEL_FIFO"; sleep 3; done &
 
 # }}}
 # Printing {{{
-
-notifyStop=-1
 
 while read -r line <"$PANEL_FIFO"; do
   case $line in
     I*) INFO="${line#?}" ;;
     N*) NOTIFY="${line#?}" ;;
+    Time) TIME="%{F-} $(date +%H:%M)" ;;
     T*) TITLE="$(echo ${line#?} | cut -c -130)" ;;
     W*)
       # bspwm internal state
@@ -62,30 +61,34 @@ while read -r line <"$PANEL_FIFO"; do
       while [ $# -gt 0 ] ; do
         item=$1
         name=${item#?}
-        icon=$name
+
+        [[ $name == "Games" ]] && icon=""
+        [[ $name == "Music" ]] && icon=""
+        [[ $name == "Graphics" ]] && icon=""
+        [[ $name == "Web" ]] && icon=""
 
         case $item in
           [OoFfUu]*)
             case $item in
               O*) # Focused ocupied desktop
                 FG="%{F-}"
-                icon="•"
+                [[ $name =~ [0-9]+ ]] && icon="•"
                 ;;
               F*) # Focused free desktop
                 FG="%{F-}"
-                icon="○"
+                [[ $name =~ [0-9]+ ]] && icon="○"
                 ;;
               o*) # Occupied desktop
                 FG="%{F#ff0087af}"
-                icon="•"
+                [[ $name =~ [0-9]+ ]] && icon="•"
                 ;;
               f*) # Free desktop
                 FG="%{F#ff444444}"
-                icon="○"
+                [[ $name =~ [0-9]+ ]] && icon="○"
                 ;;
               [uU]*) # Urgent desktop
                 FG="%{F#ffaf8700}"
-                icon="•"
+                [[ $name =~ [0-9]+ ]] && icon="•"
                 ;;
             esac
 
@@ -98,7 +101,7 @@ while read -r line <"$PANEL_FIFO"; do
       ;;
   esac
 
-  echo "%{l}$TITLE %{c} ${desktops[@]:0:5} $(Time) ${desktops[@]:5} %{r} $INFO $NOTIFY"
+  echo "%{l}$TITLE %{c} ${desktops[@]:0:5} $TIME ${desktops[@]:5} %{r} $INFO $NOTIFY"
 done | bar -f "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*","-*-tewi-medium-*-*-*-11-*-*-*-*-*-*-*" -B "#00000000" -F "#ff9e9e9e" -u 2 -d -g 1880x16+20+5 |
     while read line; do eval "$line" ; done # Hande clickable area commands
 
