@@ -236,9 +236,6 @@ nnoremap <Leader>d :bd<CR>
 " Capitalize word next to cursor
 inoremap <C-u> <Esc>:call Preserve("normal gUiw")<CR>a
 
-" Indend whole file
-nnoremap <F2> :call Preserve("normal gg=Gzz")<CR>
-
 " Remove trailing whitespaces
 nnoremap <F3> :call Preserve("%s/\\s\\+$//e")<CR>
 
