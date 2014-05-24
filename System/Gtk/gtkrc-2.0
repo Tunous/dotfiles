@@ -1,4 +1,4 @@
-gtk-theme-name="Zukitwo"
+gtk-theme-name="FlatStudioGray"
 gtk-icon-theme-name="Faenza"
 gtk-font-name="Sans 10"
 gtk-cursor-theme-name="PolarCursorTheme-Blue"
@@ -12,3 +12,4 @@ gtk-enable-input-feedback-sounds=1
 gtk-xft-antialias=1
 gtk-xft-hinting=1
 gtk-xft-hintstyle="hintfull"
+gtk-xft-rgba="rgb"
