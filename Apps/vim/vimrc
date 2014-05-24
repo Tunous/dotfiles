@@ -131,17 +131,9 @@ let g:UltiSnipsEditSplit="vertical"
 " }}} 
 " {{{ YouCompleteMe 
 " -------------------------------------------------------------------------
-let g:EclimCompletionMethod = 'omnifunc'
 let g:ycm_autoclose_preview_window_after_completion = 1
-" let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/cpp/ycm/.ycm_extra_conf.py'
 
 " }}} 
-" {{{ Less
-" -------------------------------------------------------------------------
-" Compile open file
-nnoremap <Leader>m :w <BAR> !lessc % > %:t:r.css<CR><space>
-
-" }}}
 
 " }}}
 " }}}
@@ -176,6 +168,7 @@ set smartcase                       " unless I use uppercase characters
 set wildmenu                        " Use wildmenu for autocompletion
 set noshowmode                      " Don't show current mode
 set laststatus=2                    " Always show statusline
+set showcmd                         " See keystrokes
 
 " }}}
 " {{{ Tabs and indenting
@@ -334,12 +327,12 @@ endfunction
 augroup Autocommands
   autocmd!
   " Spell check when writing commit logs
-  autocmd filetype           svn,*commit* setlocal spell
+  autocmd filetype    svn,*commit* setlocal spell
 
   " Return to last cursor position
-  autocmd BufReadPost        * call <SID>SetCursorPosition()
+  autocmd BufReadPost * call <SID>SetCursorPosition()
 
-  autocmd FileType           markdown setlocal wrap nolist linebreak
+  autocmd FileType    markdown setlocal wrap nolist linebreak
 augroup END
 
 " }}}
