@@ -1,40 +1,46 @@
-autoload -U colors && colors
+# Enable completion menu
 autoload -U compinit && compinit
 
-# Remove dalay
-KEYTIMEOUT=1
+# Enable coloring
+autoload -U colors && colors
 
-# Prompt
-. $ZDOTDIR/prompt.zsh
+## ALISES {{{
 
-setopt AUTO_CD
-setopt CORRECT
-setopt COMPLETE_IN_WORD
-setopt ALWAYS_TO_END
+alias rm='rm -I'
+alias cp='cp -rvi'
+alias mv='mv -i'
 
-zstyle ':completion:*' menu select
-
-# Aliases
 alias ls="ls --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias startX="startx $DOTFILES/System/X/xinitrc"
 
-# Syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+## }}}
 
-source /usr/share/doc/pkgfile/command-not-found.zsh
+## FUNCTIONS {{{
+
+# Auto ls
+cd() {
+    builtin cd "$@" && ls
+}
 
 # Window title
 precmd() {
   print -Pn "\e]2;%100<...<%~%<<\a"
 }
 
-cd() {
-    builtin cd $@ && ls
-}
+## }}}
 
-# {{{ Hitory
+## OPTIONS {{{
 
+# Completion
+setopt ALWAYS_TO_END
+setopt NO_LIST_AMBIGUOUS
+zstyle ':completion:*' menu select
+
+# Input/Output
+setopt CORRECT
+
+# History
 setopt APPEND_HISTORY
 setopt SHARE_HISTORY
 setopt HIST_VERIFY
@@ -44,8 +50,9 @@ export HISTFILE="$ZDOTDIR/.zsh-history"
 export HISTSIZE=1000000
 export SAVEHIST=$HISTSIZE
 
-# }}}
-# {{{ Vi-mode
+## }}}
+
+## VI-MODE {{{
 
 bindkey -v
 
@@ -56,4 +63,52 @@ bindkey "^?" backward-delete-char
 source $ZDOTDIR/opp/opp.zsh
 source $ZDOTDIR/opp/opp/*.zsh
 
-# }}}
+## }}}
+
+## PROMPT {{{
+
+# Current git branch
+setopt prompt_subst
+autoload -Uz vcs_info
+
+zstyle ':vcs_info:*' actionformats '[%b|%a]'
+zstyle ':vcs_info:*' formats       '[%b]'
+zstyle ':vcs_info:*' enable git
+
+vcs_info_wrapper() {
+  vcs_info
+  if [ -n "$vcs_info_msg_0_" ]; then
+    echo "${vcs_info_msg_0_}$del"
+  fi
+}
+
+# Possible states
+VIInsert="%{$fg[white]%} » %{$reset_color%}"
+VINormal="%{$fg_bold[black]%} » %{$reset_color%}"
+
+function zle-line-init zle-keymap-select {
+  # Actual prompt
+  PROMPT="
+${${KEYMAP/(vicmd|opp)/$VINormal}/(main|viins)/$VIInsert}"
+RPROMPT="%{$fg[white]%}%~ $(vcs_info_wrapper)%{$reset_color%}"
+
+  zle reset-prompt
+  zle -R
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+
+## }}}
+
+## MISC {{{
+
+# Remove dalay
+KEYTIMEOUT=1
+
+# Syntax highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+## }}}
+
+# vim: fdm=marker:
