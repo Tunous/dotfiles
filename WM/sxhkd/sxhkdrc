@@ -153,9 +153,9 @@ super + {r,R}
 
 # Urxvt
 super + Return
-    urxvtc -e sh -c "tmux attach -t $(hostname) || tmux new-session -s $(hostname)"
+    urxvtc
 super + shift + Return
-    urxvtc -name 'URxvtFloating'
+    urxvtc -e sh -c "tmux new -As $(hostname)"
 
 # Dmenu
 super + space
@@ -197,6 +197,11 @@ Print
 # Run program
 Menu
     dmenu-action run
+
+# Control spotify
+super + m; {h,j,k,l}
+    key={"XF86AudioPrev","XF86AudioPlay","XF86AudioPlay","XF86AudioNext"}; \
+    xdotool key --window $(xdotool search --name "Spotify - Linux Preview" | head -n1) $key
 
 # }}}
 
