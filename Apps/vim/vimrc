@@ -47,6 +47,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'groenewege/vim-less'
 Plugin 'Tunous/vim-colors-customized'
+Plugin 'Yggdroot/indentLIne'
 
 call vundle#end()
 filetype plugin indent on
@@ -55,8 +56,8 @@ filetype plugin indent on
 
 " {{{ Airline
 " -------------------------------------------------------------------------
-" Use powerline symbols
-let g:airline_powerline_fonts=1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 
 " }}}
 " {{{ Bufferline
@@ -123,17 +124,17 @@ xmap s <Plug>VSneakForward
 xmap S <Plug>VSneakBackward
 
 " }}}
-" {{{ UltiSnips 
+" {{{ UltiSnips
 " -------------------------------------------------------------------------
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsEditSplit="vertical"
 
-" }}} 
-" {{{ YouCompleteMe 
+" }}}
+" {{{ YouCompleteMe
 " -------------------------------------------------------------------------
 let g:ycm_autoclose_preview_window_after_completion = 1
 
-" }}} 
+" }}}
 
 " }}}
 " }}}
