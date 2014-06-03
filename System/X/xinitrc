@@ -4,7 +4,7 @@
 #
 
 # Set wallpaper
-hsetroot -tile ~/Dropbox/Images/wallpaper.png
+hsetroot -tile ~/usr/Dropbox/Images/wallpaper.png
 
 # Set bindings
 sxhkd &
