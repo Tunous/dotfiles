@@ -4,6 +4,9 @@ autoload -U compinit && compinit
 # Enable coloring
 autoload -U colors && colors
 
+# Mass renaming
+autoload -Uz zmv
+
 ## ALISES {{{
 
 alias rm='rm -I'
@@ -13,6 +16,7 @@ alias mv='mv -i'
 alias ls="ls --color=auto --group-directories-first"
 alias grep="grep --color=auto"
 alias startX="startx $DOTFILES/System/X/xinitrc"
+alias zmv="noglob zmv -W"
 
 ## }}}
 
@@ -20,7 +24,7 @@ alias startX="startx $DOTFILES/System/X/xinitrc"
 
 # Auto ls
 cd() {
-    builtin cd "$@" && ls
+  builtin cd "$@" && ls
 }
 
 # Window title
@@ -39,6 +43,7 @@ zstyle ':completion:*' menu select
 
 # Input/Output
 setopt CORRECT
+setopt NOCLOBBER
 
 # History
 setopt APPEND_HISTORY
@@ -56,8 +61,16 @@ export SAVEHIST=$HISTSIZE
 
 bindkey -v
 
-# Allow backspace to delete behind cursor
-bindkey "^?" backward-delete-char
+# History navigation
+bindkey '^p' up-history
+bindkey '^n' down-history
+
+# Allow backspace and ^h to delete behind cursor
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+
+# Backward histroy search
+bindkey '^r' history-incremental-search-backward
 
 # More motions
 source $ZDOTDIR/opp/opp.zsh
@@ -67,8 +80,10 @@ source $ZDOTDIR/opp/opp/*.zsh
 
 ## PROMPT {{{
 
+# Enable later substitution in prompt
+setopt PROMPT_SUBST
+
 # Current git branch
-setopt prompt_subst
 autoload -Uz vcs_info
 
 zstyle ':vcs_info:*' actionformats '[%b|%a]'
@@ -96,8 +111,8 @@ RPROMPT="%{$fg[white]%}%~ $(vcs_info_wrapper)%{$reset_color%}"
   zle -R
 }
 
-zle -N zle-line-init
 zle -N zle-keymap-select
+zle -N zle-line-init
 
 ## }}}
 
