@@ -60,7 +60,7 @@ zsh:
 # {{{ Apps
 
 
-Apps: dunst ranger vim vimperator
+Apps: dunst ranger tmux vim vimperator
 	@echo
 
 dunst:
@@ -70,6 +70,10 @@ dunst:
 ranger:
 	$(call cecho, "Ranger")
 	ln -sfn ${APPSDIR}/ranger ${XDG_CONFIG_HOME}/ranger
+
+tmux:
+	$(call cecho, "Tmux")
+	ln -sf ${APPSDIR}/tmux/tmux.conf ${HOME}/.tmux.conf
 
 vim:
 	$(call cecho, "Vim")
