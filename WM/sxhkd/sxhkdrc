@@ -6,7 +6,7 @@ super + alt + Escape
     dmenu-action system
 
 # Close/kill focused window
-super + {w,W}
+super + {q,Q}
     bspc window -{c,k}
 
 # Reload sxhkd config
@@ -15,7 +15,7 @@ super + Escape
 
 # Refresh panel
 super + alt + z
-    pkill -x panel && $DOTFILES/WM/panel
+    toggle-panel
 
 # Toggle compton
 super + alt + c
@@ -35,7 +35,7 @@ super + shift + {h,j,k,l}
     bspc window $w -w focused.manual || bspc window -w $w.manual || bspc window -s $w || bspc window -d $d -f
 
 # Cycle windows
-super + {c,C}
+alt + {Tab,grave}
     bspc window -f {next,prev}
 
 # Change desktop/Move window to desktop
@@ -73,27 +73,25 @@ super + t
     bspc desktop -l next
 
 # Toggle state of window
-super + {a,f,q}
-    bspc window -t {floating,fullscreen,pseudo_tiled}
+super + {a,f}
+    bspc window -t {floating,fullscreen}
 
 # Rarely used states
-super + s; {a,s,d}
-    bspc window -t {sticky,locked,private}
+super + s; {a,s,d,f}
+    bspc window -t {sticky,locked,private,pseudo_tiled}
 
-# Swap with biggest window
-super + n
-    bspc window -s biggest
+# States help
+super + s; h
+    notify "[A] Sticky [S] Locked [D] Private [F] Pseudo tiled"
+
 
 # Resize window
-super + alt + {h,j,k,l} + {_,shift}
+super + alt + {h,j,k,l}
     { d1=left  d2=right s=-10, \
       d1=down  d2=up    s=+10, \
       d1=up    d2=down  s=-10, \
       d1=right d2=left  s=+10  }; \
-    { bspc window -e $d1 $s || bspc window -e $d2 $s }
-
-super + alt + {H,J,K,L}
-    bspc window -e {left +10,down -10,up +10,right -10}
+    bspc window -e $d1 $s || bspc window -e $d2 $s
 
 # Balance size
 super + b
@@ -131,13 +129,6 @@ super + ctrl + shift + space
 # }}}
 # {{{ Desktops
 
-# Resize gaps
-super + alt + {minus,equal}
-    bspc config -d focused window_gap $(( `bspc config -d focused window_gap` {+,-} 5 ))
-
-super + alt + plus
-    bspc config -d focused window_gap 40
-
 # Cycle
 super + {comma,period}
     bspc desktop -C {backward,forward}
@@ -172,15 +163,11 @@ super + alt + r
 # }}}
 # {{{ Special keys
 
-# Search web
-XF86Search
+# Open url / search web
+{XF86Search,XF86HomePage,super + w}
     dmenu-action web
 
-# Open url
-XF86HomePage
-    dmenu-action web
-
-# Toggle mutting
+# Toggle muting
 XF86AudioMute
     volume !; \
     notify "$(volume bar)"
@@ -197,11 +184,6 @@ Print
 # Run program
 Menu
     dmenu-action run
-
-# Control spotify
-super + m; {h,j,k,l}
-    key={"XF86AudioPrev","XF86AudioPlay","XF86AudioPlay","XF86AudioNext"}; \
-    xdotool key --window $(xdotool search --name "Spotify - Linux Preview" | head -n1) $key
 
 # }}}
 
