@@ -1,37 +1,92 @@
-! {{{ Colors
+! Xft
+Xft.antialias:  1
+Xft.autohint:   0
+Xft.dpi:        96
+Xft.hinting:    1
+Xft.hintstyle:  hintfull
+Xft.lcdfilter:  lcddefault
+Xft.rgba:       rgb
 
-*background:   #1d1d1d
-*foreground:   #9e9e9e
-*color0:       #303030
-*color8:       #444444
-*color1:       #af0000
-*color9:       #a54242
-*color2:       #87af00
-*color10:      #8c9400
-*color3:       #af8700
-*color11:      #d75f00
-*color4:       #0087af
-*color12:      #5f819d
-*color5:       #af0057
-*color13:      #5f5faf
-*color6:       #00afaf
-*color14:      #5e8d87
-*color7:       #606060
-*color15:      #9e9e9e
+!! COLORS
+! real Black
+! URxvt*color0:           #2B2B2B
+! URxvt*color8:           #444444
+! URxvt.background :      #252525
+!
+! ! Red
+! URxvt*color1:           #FF0033
+! URxvt*color9:           #C0392B
+!
+! ! Green
+! URxvt*color2:           #2ecc71
+! URxvt*color10:          #27ae60
+!
+! ! Yellow
+! URxvt*color3:           #f1c40f
+! URxvt*color11:          #f39c12
+!
+! ! Blue
+! URxvt*color4:           #3498db
+! URxvt*color12:          #2980b9
+!
+! ! Magenta
+! URxvt*color5:           #9b59b6
+! URxvt*color13:          #8e44ad
+!
+! ! Cyan
+! URxvt*color6:           #1abc9c
+! URxvt*color14:          #16a085
+!
+! ! White
+! URxvt*color7:           #606060
+! URxvt*color15:          #bdc3c7
+! URxvt.foreground :      #bdc3c7
 
-URxvt*colorUL: #0087af
-URxvt*colorBD: #af8700
-URxvt*colorIT: #606060
+! Black
+*color0:        #303030
+*color8:        #444444
+*background:    #1d1d1d
 
-! }}}
-! {{{ Urxvt settings
+! Red
+*color1:        #af0000
+*color9:        #c0392b
 
+! Green
+*color2:        #87af00
+*color10:       #27ae60
+
+! Yellow
+*color3:        #af8700
+*color11:       #f39c12
+
+! Blue
+*color4:        #0087af
+*color12:       #2980b9
+
+! Magenta
+*color5:        #af0057
+*color13:       #8e44ad
+
+! Cyan
+*color6:        #00afaf
+*color14:       #16a085
+
+! White
+*color7:        #606060
+*color15:       #9e9e9e
+*foreground:    #9e9e9e
+
+
+URxvt*colorUL:  #0087af
+URxvt*colorBD:  #af8700
+URxvt*colorIT:  #606060
+
+! URxvt settings
 URxvt*termName:             rxvt-256color
 URxvt*scrollBar:            false
 URxvt*geometry:             68x20
 URxvt*internalBorder:       20
 URxvt*cursorBlink:          false
-!URxvt*cursorColor:         #
 
 ! Perl extensions
 URxvt*perl-ext-common:      default,clipboard,url-select,keyboard-select
@@ -52,10 +107,9 @@ URxvt*keysym.M-C-v:         perl:clipboard:paste_escaped
 URxvt*clipboard.copycmd:    xclip -i -selection clipboard
 URxvt*clipboard.pastecmd:   xclip -o -selection clipboard
 
-! }}}
-
 ! Fonts
-*font:                      -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-60-*-*
+! *font:                      -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-60-*-*
+*font: -*-tamsyn-medium-*-*--13-*-*-*-*-*-*-1
+*boldFont: -*-tamsyn-medium-*-*--13-*-*-*-*-*-*-1
 
-! {{{ End
 ! vim: ft=xdefaults
