@@ -17,6 +17,7 @@ bspc desktop Web -l monocole
 
 ## RULES
 bspc rule -a Firefox desktop=Web
+bspc rule -a dwb desktop=Web
 bspc rule -a Steam floating=true desktop=Games
 bspc rule -a spotify desktop=Music
 bspc rule -a Gimp floating=true desktop=Graphics

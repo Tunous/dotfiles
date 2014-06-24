@@ -154,7 +154,7 @@ super + space
 
 # Firefox
 super + alt + f
-    firefox
+    dwb
 
 # Ranger
 super + alt + r
