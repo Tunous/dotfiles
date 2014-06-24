@@ -26,16 +26,12 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'bling/vim-airline'
-Plugin 'bling/vim-bufferline'
 Plugin 'a.vim'
 Plugin 'Raimondi/delimitMate'
-Plugin 'junegunn/vim-easy-align'
 Plugin 'svermeulen/vim-easyclip'
-Plugin 'tpope/vim-eunuch'
 Plugin 'tpope/vim-fugitive'
 Plugin 'gregsexton/gitv'
 Plugin 'tpope/vim-repeat'
-Plugin 'justinmk/vim-sneak'
 Plugin 'tpope/vim-surround'
 Plugin 'baskerville/vim-sxhkdrc'
 Plugin 'scrooloose/syntastic'
@@ -45,9 +41,9 @@ Plugin 'honza/vim-snippets'
 Plugin 'tpope/vim-unimpaired'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tommcdo/vim-exchange'
-Plugin 'groenewege/vim-less'
 Plugin 'Tunous/vim-colors-customized'
-Plugin 'Yggdroot/indentLIne'
+
+Plugin 'kien/ctrlp.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -133,7 +129,14 @@ let g:UltiSnipsEditSplit="vertical"
 " {{{ YouCompleteMe
 " -------------------------------------------------------------------------
 let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_global_ycm_extra_conf = '~/src/cpp/.ycm_extra_conf.py'
 
+" }}}
+
+" {{{ Syntastic
+" -------------------------------------------------------------------------
+let g:syntastic_cpp_compiler = 'clang++'
+let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
 " }}}
 
 " }}}
@@ -178,7 +181,10 @@ set shiftwidth=4                    " Number of spaces to use for indenting
 set softtabstop=4                   " Number of spaces that a <Tab> counts for
 set expandtab                       " Convert tabs into spaces
 set smartindent                     " Do smart autoindenting
-set copyindent                      " Copy the previous indentation characters
+set cindent
+set autoindent
+
+set cino=g2,i0
 
 " }}}
 " {{{ Timeout
@@ -198,7 +204,6 @@ set t_vb=
 set nowrap                          " Don't wrap lines
 set list                            " Show list chars
 set listchars=tab:▸\ ,trail:⋅
-set foldmethod=syntax               " Use syntax foldmethod
 set synmaxcol=300                   " Limit syntax highlight of long lines
 set scrolloff=10                    " Offset with the cursor when moving vertically
 set sidescrolloff=15
@@ -222,15 +227,6 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 
-" Resize splits
-nnoremap <Esc>h <C-W><
-nnoremap <Esc>j <C-W>-
-nnoremap <Esc>k <C-W>+
-nnoremap <Esc>l <C-W>>
-
-" Delete focused buffer
-nnoremap <Leader>d :bd<CR>
-
 " }}}
 " {{{ Other
 
@@ -250,10 +246,13 @@ nnoremap <Leader>s :source $MYVIMRC<CR>
 nnoremap <Space> za
 
 " Toggle `set list`
-nmap <Leader>l :set list!<CR>
+nnoremap <Leader>l :set list!<CR>
 
 " Turn off highlighting for current search
 nnoremap <Leader>h :nohlsearch<CR>
+
+nnoremap <Leader>y "+y
+nnoremap <Leader>p "+p
 
 " }}}
 
@@ -325,12 +324,12 @@ endfunction
 augroup Autocommands
   autocmd!
   " Spell check when writing commit logs
-  autocmd filetype    svn,*commit* setlocal spell
+  autocmd FileType    svn,*commit* setlocal spell
 
   " Return to last cursor position
   autocmd BufReadPost * call <SID>SetCursorPosition()
 
-  autocmd FileType    markdown setlocal wrap nolist linebreak
+  autocmd FileType    markdown,text setlocal wrap nolist linebreak
 augroup END
 
 " }}}
