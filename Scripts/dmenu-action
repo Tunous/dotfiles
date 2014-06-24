@@ -5,12 +5,11 @@ Get() { # {{{
   if [[ -n "$1" ]]; then
     choice="$1"
   else
-    choice="$(DGet -p "Select action" -o "Run\nWeb\nWallpaper\nPassword\nScreenshot\nSystem")"
+    choice="$(DGet -p "Select action" -o "Run\nWeb\nPassword\nScreenshot\nSystem")"
   fi
 
   case $choice in
     [Rr]*) Run ;;
-    [Ww]a*) Wallpaper ;;
     [Ww]*) Web ;;
     [Pp]*) Password ;;
     [Ss]y*) System ;;
@@ -18,7 +17,6 @@ Get() { # {{{
   esac
 }
 # }}}
-
 
 # Actions -----------------------------------------------------------------
 
@@ -28,12 +26,11 @@ DGet() { # {{{
   color='#0087af'
 
   # Get options
-  while getopts 'mo:p:f:c:' arg; do
+  while getopts 'o:p:f:c:' arg; do
     case $arg in
       p) prompt="$OPTARG" ;;
       o) options="$OPTARG" ;;
       f) file="$OPTARG" ;;
-      m) geometry="-x 45 -w 300 -l 20" ;;
       c) 
         case $OPTARG in
           Red)     color='#af0000' ;;
@@ -51,10 +48,9 @@ DGet() { # {{{
 
   # Set dmenu arguments
   settings="-i -nb #000000 -nf #9e9e9e -sb "$color" -sf #000000"
-  [[ -z "$geometry" ]] && geometry="-x 45 -w 800"
 
   # Run dmenu
-  echo $(printf "$options" | cat - $file | dmenu -p "$prompt" $geometry $settings)
+  echo $(printf "$options" | cat - $file | dmenu -b -p "$prompt" $settings)
 }
 # }}}
 
@@ -72,7 +68,7 @@ Run() { # {{{
 
   term="no"
 
-  choice="$(DGet -mp "Run program" -f "$cache")"
+  choice="$(DGet -p "Run program" -f "$cache")"
   case $choice in
     ranger*|htop*|vim*) term="yes" ;;
   esac
@@ -91,22 +87,10 @@ Web() { # {{{
 
   # If $opt looks like url try to open it. Otherwise search for it in google
   if [[ $opt  =~ ^.+\..+$ ]] && [[ ! $opt =~ \  ]]; then
-    firefox "$opt" &
+    dwb "$opt" &
   else
-    firefox "http://www.google.com/search?q=$opt" &
+    dwb "http://www.google.com/search?q=$opt" &
   fi
-}
-# }}}
-
-# [wa] Wallpaper - Set random wallpaper from web
-Wallpaper() { # {{{
-    opt=$(DGet -mp "Select source" -o "random\nreddit\nimgur") && [[ -n "$opt" ]] || return
-
-    case $opt in
-        random) wallpaper --random ;;
-        reddit) wallpaper --reddit ;;
-        imgur) wallpaper --imgur ;;
-    esac
 }
 # }}}
 
@@ -122,9 +106,9 @@ Password() { # {{{
   # Select password/Set options
   while :; do
     if [[ $usr = yes ]]; then
-      choice=$(DGet -mp "Select password" -o "[$key]\n[Username: $usr]\n$candidates" -c Yellow)
+      choice=$(DGet -p "Select password" -o "[$key]\n[Username: $usr]\n$candidates" -c Yellow)
     else
-      choice=$(DGet -mp "Select password" -o "[Username: $usr]\n$candidates" -c Yellow)
+      choice=$(DGet -p "Select password" -o "[Username: $usr]\n$candidates" -c Yellow)
     fi
     [[ -z "$choice" ]] && return
     
@@ -162,13 +146,13 @@ Password() { # {{{
 Screen() { # {{{
   choice=$(DGet -p "Take screenshot" -o "Fullscreen\nDelayed fullscreen\nSection" -c Orange) && [[ -n "$choice" ]] || return
 
-  dir="$HOME/Dropbox"
+  dir="$HOME/usr/Dropbox/Images"
   mkdir -p "$dir" && cd "$dir"
 
   case $choice in
-    Fullscreen)          scrot -d 1 && notify 'Taken a fullscreen screenshot' ;;
-    Delayed\ fullscreen) scrot -d 5 && notify 'Taken a fullscreen screenshot' ;;
-    Section)             scrot -s   && notify 'Taken a screenshot of selected section' ;;
+    Fullscreen) scrot -d 1 && notify 'Taken a fullscreen screenshot' ;;
+    Delayed*)   scrot -d 5 && notify 'Taken a fullscreen screenshot' ;;
+    Section)    scrot -s   && notify 'Taken a screenshot of selected section' ;;
   esac
 }
 # }}}
