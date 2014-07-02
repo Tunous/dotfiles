@@ -42,8 +42,9 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'Tunous/vim-colors-customized'
-
 Plugin 'kien/ctrlp.vim'
+Plugin 'christoomey/vim-tmux-navigator'
+Plugin 'tpope/vim-dispatch'
 
 call vundle#end()
 filetype plugin indent on
@@ -207,6 +208,7 @@ set listchars=tab:▸\ ,trail:⋅
 set synmaxcol=300                   " Limit syntax highlight of long lines
 set scrolloff=10                    " Offset with the cursor when moving vertically
 set sidescrolloff=15
+set exrc
 
 call matchadd('ColorColumn', '\%81v', 100) " Show column 80 ONLY when necessary
 
@@ -215,17 +217,14 @@ call matchadd('ColorColumn', '\%81v', 100) " Show column 80 ONLY when necessary
 " }}}
 " {{{ Mappings
 
+" Surround character with spaces
+nnoremap y<Space> a<Space><Esc>hi<Space><Esc>l
+
 " {{{ Nvigation/Resizing
 
 " Better navigation with wrapped lines
 nnoremap j gj
 nnoremap k gk
-
-" Change windows
-nnoremap <C-h> <C-W>h
-nnoremap <C-j> <C-W>j
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
 
 " }}}
 " {{{ Other
