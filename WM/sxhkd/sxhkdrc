@@ -15,7 +15,7 @@ super + Escape
 
 # Refresh panel
 super + alt + z
-    toggle-panel
+    pkill -x panel; $DOTFILES/WM/panel 
 
 # Toggle compton
 super + alt + c
