@@ -1,176 +1,118 @@
-#!/bin/bash
+#!/bin/python
 
-# Get - Select one of available actions for dmenu from these below
-Get() { # {{{
-  if [[ -n "$1" ]]; then
-    choice="$1"
-  else
-    choice="$(DGet -p "Select action" -o "Run\nWeb\nPassword\nScreenshot\nSystem")"
-  fi
+import subprocess
+from sys import argv
+from os import environ
 
-  case $choice in
-    [Rr]*) Run ;;
-    [Ww]*) Web ;;
-    [Pp]*) Password ;;
-    [Ss]y*) System ;;
-    [Ss]*) Screen ;;
-  esac
-}
-# }}}
+def dGet(prompt, usr_input="", color="#0087af"):
+    """Get selected option from user using dmenu"""
 
-# Actions -----------------------------------------------------------------
+    command = [
+        "dmenu",
+        "-b", "-i",
+        "-nf", "#9e9e9e",
+        "-nb", "#000000",
+        "-sf", '#000000',
+        "-sb", color,
+        "-p", prompt
+    ]
 
-# DGet - Run dmenu or dmenu_run with specific options
-DGet() { # {{{
-  local arg prompt options file geometry
-  color='#0087af'
+    try:
+        return subprocess.check_output(command, input=usr_input).decode("utf-8").rstrip()
+    except subprocess.CalledProcessError:
+        # Nothing selected. We can stop this script.
+        raise SystemExit
 
-  # Get options
-  while getopts 'o:p:f:c:' arg; do
-    case $arg in
-      p) prompt="$OPTARG" ;;
-      o) options="$OPTARG" ;;
-      f) file="$OPTARG" ;;
-      c) 
-        case $OPTARG in
-          Red)     color='#af0000' ;;
-          Green)   color='#87af00' ;;
-          Yellow)  color='#af8700' ;;
-          Orange)  color='#d75f00' ;;
-          Blue)    color='#0087af' ;;
-          Magenta) color='#af0057' ;;
-          Cyan)    color='#00afaf' ;;
-        esac
-        ;;
-      *) return 1
-    esac
-  done
+def get(choice=""):
+    if not choice:
+        choice = dGet("Select action", b"Run\nWeb\nPassword\nScreenshot\nSystem").lower()
 
-  # Set dmenu arguments
-  settings="-i -nb #000000 -nf #9e9e9e -sb "$color" -sf #000000"
+    if choice == "run":
+        run()
+    elif choice == "web":
+        web()
+    elif choice == "screenshot":
+        screen()
+    elif choice == "system":
+        system()
+    elif choice == "password":
+        password()
 
-  # Run dmenu
-  echo $(printf "$options" | cat - $file | dmenu -b -p "$prompt" $settings)
-}
-# }}}
+def run():
+    """Run program from $PATH"""
 
-# [r] Run - Execute program from $PATH
-Run() { # {{{
-  cachedir=${XDG_CACHE_HOME:-"$HOME/.cache"}
-  mkdir -p "$cachedir" && cache=$cachedir/dmenu_run
+    apps = subprocess.check_output(["dmenu_path"])
+    prog = dGet("Run application", apps).split()
 
-  NORMIFS=$IFS
-  IFS=:
-  if stest -dqr -n "$cache" $PATH; then
-    stest -flx $PATH | sort -u | tee "$cache"
-  fi
-  IFS=$NORMIFS
+    # Terminal applications
+    if prog in ["ranger", "htop", "vim"]:
+        subprocess.Popen(["urxvt", "-e", prog])
 
-  term="no"
+    else:
+        subprocess.Popen(prog)
 
-  choice="$(DGet -p "Run program" -f "$cache")"
-  case $choice in
-    ranger*|htop*|vim*) term="yes" ;;
-  esac
+def web():
+    """Open url or search in google using dwb"""
 
-  if [[ "$term" = "no" ]]; then
-    echo "$choice" | $SHELL &
-  else
-    urxvt -e $choice &
-  fi
-}
-# }}}
+    option = dGet("Open url/Search web")
+    if option.startswith('f '):
+        option = option[2:]
+        subprocess.Popen(["firefox", option])
+    else:
+        subprocess.Popen(["dwb", option])
 
-# [w] Web - Open specified url in firefox or search for text in google
-Web() { # {{{
-  opt=$(DGet -p "Open url/Search in web") && [[ -n "$opt" ]] || return
+def screen():
+    choice = dGet("Take screenshot", b"Fullscreen\nDelayed fullscreen\nSection", "#d75f00").lower()
 
-  # If $opt looks like url try to open it. Otherwise search for it in google
-  if [[ $opt  =~ ^.+\..+$ ]] && [[ ! $opt =~ \  ]]; then
-    dwb "$opt" &
-  else
-    dwb "http://www.google.com/search?q=$opt" &
-  fi
-}
-# }}}
+    if choice == "delayed fullscreen":
+        delay = 5
+    else:
+        delay = 1
 
-# [p] Password - Autotype selected password into focused window
-# Options:
-# [Tab|Return] - Key to be pressed after typing username
-# [Username: yes|no] - Autotype username?
-Password() { # {{{
-  candidates="$(find "$PASSWORD_STORE_DIR" -name '*gpg' -print | sed "s,$PASSWORD_STORE_DIR/,,;s,\.gpg\$,," | sort)"
-  key="Tab"
-  usr="yes"
+    directory = environ["HOME"] + "/usr/Dropbox/Images"
+    subprocess.call(["mkdir", "-p", directory])
 
-  # Select password/Set options
-  while :; do
-    if [[ $usr = yes ]]; then
-      choice=$(DGet -p "Select password" -o "[$key]\n[Username: $usr]\n$candidates" -c Yellow)
-    else
-      choice=$(DGet -p "Select password" -o "[Username: $usr]\n$candidates" -c Yellow)
-    fi
-    [[ -z "$choice" ]] && return
-    
-    case $choice in
-      "[Tab]")           key="Return" ;;
-      "[Return]")        key="Tab"    ;;
-      "[Username: yes]") usr="no"     ;;
-      "[Username: no]")  usr="yes"    ;;
-      *) break ;;
-    esac
-  done
+    if choice == "section":
+        subprocess.call(["scrot", "-s", "-e mv $f " + directory])
+        subprocess.call(["notify", "Taken a screenshot of selected section"])
+    else:
+        subprocess.call(["scrot", "-d", str(delay), "-e mv $f " + directory])
+        subprocess.call(["notify", "Taken a fullscreen screenshot"])
 
-  output="$(pass "$choice")"
-  exit_code="$?"
-  (( exit_code  > 0 )) && return
+def system():
+    """Preform system command"""
 
-  # Set variables
-  password="$(printf "%s" "$output" | head -n 1)"
-  username="$(printf "%s" "$output" | grep '^username: ' | cut -c 11-)"
+    action = dGet("Select action", b"Poweroff\nReboot\nLogout", "#af0000").lower()
 
-  # Autotype
-  if [[ -n "$password" ]]; then
-    if [[ -n "$username" && "$usr" == "yes" ]]; then
-      xdotool type "$username"
-      xdotool key "$key"
-    fi
+    if action in ["poweroff", "reboot"]:
+        subprocess.call(["systemctl", action])
+    elif action == "logout":
+        subprocess.call(["pkill", "panel"])
+        subprocess.call(["bspc", "quit"])
 
-    xdotool type "$password"
-    [[ -n "$username" && "$usr" == "yes" ]] && xdotool key "Return"
-  fi
-}
-# }}}
+def password():
+    """Autotype selected password into focused window"""
 
-# [s] Screen - Take screenshot with scrot
-Screen() { # {{{
-  choice=$(DGet -p "Take screenshot" -o "Fullscreen\nDelayed fullscreen\nSection" -c Orange) && [[ -n "$choice" ]] || return
+    command = "find " + environ["PASSWORD_STORE_DIR"] + " -name *gpg -print | sed \"s," + environ["PASSWORD_STORE_DIR"] + "/,,;s,.gpg$,,\" | sort"
+    passwords = subprocess.check_output(command, shell=True)
 
-  dir="$HOME/usr/Dropbox/Images"
-  mkdir -p "$dir" && cd "$dir"
+    choice = dGet("Select password", passwords, "#af8700")
+    info = subprocess.check_output(["pass", choice])
+    password = subprocess.check_output(["head", "-n 1"], input=info).decode("utf-8").rstrip()
+    username = subprocess.check_output("grep '^username: ' | cut -c 11-", input=info, shell=True).decode("utf-8").rstrip()
 
-  case $choice in
-    Fullscreen) scrot -d 1 && notify 'Taken a fullscreen screenshot' ;;
-    Delayed*)   scrot -d 5 && notify 'Taken a fullscreen screenshot' ;;
-    Section)    scrot -s   && notify 'Taken a screenshot of selected section' ;;
-  esac
-}
-# }}}
+    if password:
+        if username:
+            subprocess.call(["xdotool", "type", username])
+            subprocess.call(["xdotool", "key", "Tab"])
 
-# [sy] System - Preform system command
-System() { # {{{
-  choice=$(DGet -p "Select action" -o "Poweroff\nReboot\nLogout" -c Red) && [[ -n "$choice" ]] || return
+        subprocess.call(["xdotool", "type", password])
+        if username:
+            subprocess.call(["xdotool", "key", "Return"])
 
-  case $choice in
-    Poweroff) systemctl poweroff ;;
-    Reboot) systemctl reboot ;;
-    Logout) pkill panel; bspc quit ;;
-  esac
-}
-# }}}
+try:
+    arg = argv[1]
+except IndexError:
+    arg = ""
 
-# -------------------------------------------------------------------------
-
-Get "$1"
-
-# vim: fdm=marker
+get(arg)
