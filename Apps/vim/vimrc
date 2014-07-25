@@ -46,6 +46,8 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'tpope/vim-dispatch'
 
+Plugin 'nosami/omnisharp'
+
 call vundle#end()
 filetype plugin indent on
 
@@ -67,11 +69,13 @@ let g:bufferline_echo = 0
 " {{{ DelimitMate
 " -------------------------------------------------------------------------
 " Turn on <Space> and <CR> expansion
-let delimitMate_expand_cr = 1
+let delimitMate_expand_cr = 2
 let delimitMate_expand_space = 1
 
 " Try to balance the closing pairs in the current line
 let delimitMate_balance_matchpairs = 1
+
+let delimitMate_nesting_quotes = ['"','`']
 
 " }}}
 " {{{ Easy align
@@ -133,11 +137,10 @@ let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_global_ycm_extra_conf = '~/src/cpp/.ycm_extra_conf.py'
 
 " }}}
-
 " {{{ Syntastic
 " -------------------------------------------------------------------------
 let g:syntastic_cpp_compiler = 'clang++'
-let g:syntastic_cpp_compiler_options = ' -std=c++11 -stdlib=libc++'
+let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
 " }}}
 
 " }}}
@@ -209,6 +212,7 @@ set synmaxcol=300                   " Limit syntax highlight of long lines
 set scrolloff=10                    " Offset with the cursor when moving vertically
 set sidescrolloff=15
 set exrc
+set clipboard=unnamedplus
 
 call matchadd('ColorColumn', '\%81v', 100) " Show column 80 ONLY when necessary
 
@@ -220,14 +224,9 @@ call matchadd('ColorColumn', '\%81v', 100) " Show column 80 ONLY when necessary
 " Surround character with spaces
 nnoremap y<Space> a<Space><Esc>hi<Space><Esc>l
 
-" {{{ Nvigation/Resizing
-
 " Better navigation with wrapped lines
 nnoremap j gj
 nnoremap k gk
-
-" }}}
-" {{{ Other
 
 " Capitalize word next to cursor
 inoremap <C-u> <Esc>:call Preserve("normal gUiw")<CR>a
@@ -249,11 +248,6 @@ nnoremap <Leader>l :set list!<CR>
 
 " Turn off highlighting for current search
 nnoremap <Leader>h :nohlsearch<CR>
-
-nnoremap <Leader>y "+y
-nnoremap <Leader>p "+p
-
-" }}}
 
 " }}}
 " {{{ Functions
@@ -329,6 +323,7 @@ augroup Autocommands
   autocmd BufReadPost * call <SID>SetCursorPosition()
 
   autocmd FileType    markdown,text setlocal wrap nolist linebreak
+  autocmd FileType    c,cpp let b:delimitMate_eol_marker = ";"
 augroup END
 
 " }}}
