@@ -1,0 +1,10 @@
+#!/bin/bash
+
+prompt="$1"
+input="${*:2}"
+
+[[ -n "$input" ]] && noinput="" || noinput="-noinput"
+
+result=$(echo -e "$input" | dmenu -b -i -nf '#9e9e9e' -nb '#000000' -sf '#000000' -sb '#0087af' -p "$prompt" $noinput)
+
+echo "$result"

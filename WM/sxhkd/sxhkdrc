@@ -3,7 +3,11 @@
 
 # Run system command
 super + alt + Escape
-    dmenu-action system
+    action="$(dmenu-get "Select action" "Poweroff\nReboot\nLogout")"; \
+    pkill panel; \
+    [[ $action == Poweroff ]] && systemctl poweroff; \
+    [[ $action == Reboot ]]   && systemctl reboot; \
+    [[ $action == Logout ]]   && bspc quit
 
 # Close/kill focused window
 super + {q,Q}
@@ -154,18 +158,22 @@ super + space
 
 # Firefox
 super + alt + f
-    dwb
+    firefox
 
 # Ranger
 super + alt + r
     urxvtc -e ranger
+
+# Steam
+super + alt + s
+    steam
 
 # }}}
 # {{{ Special keys
 
 # Open url / search web
 {XF86Search,XF86HomePage,super + w}
-    dmenu-action web
+    dmenu-web
 
 # Toggle muting
 XF86AudioMute
@@ -179,7 +187,7 @@ XF86Audio{Lower,Raise}Volume
 
 # Take screenshot
 Print
-    dmenu-action screen
+    screen.sh
 
 # Run program
 Menu

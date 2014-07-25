@@ -1,0 +1,8 @@
+#!/bin/bash
+
+choice="$(dmenu-get 'Open url/Search web')"
+if [[ "${choice:0:2}" == "f " ]]; then
+    firefox "${choice:2}" &
+else
+    dwb "$choice" &
+fi
