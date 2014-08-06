@@ -12,7 +12,8 @@
             "~/.config/ranger": "ranger/",
             "~/.config/bspwm": "bspwm/",
             "~/.config/sxhkd": "sxhkd/",
-            "~/.config/compton.conf": "compton.conf"
+            "~/.config/compton.conf": "compton.conf",
+            "~/.pentadactylrc": "pentadactylrc"
         }
     },
     {
