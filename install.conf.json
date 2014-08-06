@@ -13,7 +13,8 @@
             "~/.config/bspwm": "bspwm/",
             "~/.config/sxhkd": "sxhkd/",
             "~/.config/compton.conf": "compton.conf",
-            "~/.pentadactylrc": "pentadactylrc"
+            "~/.pentadactylrc": "pentadactylrc",
+            "~/.xinitrc": "xinitrc"
         }
     },
     {
