@@ -11,7 +11,7 @@ sxhkd &
 
 # Configure keys
 setxkbmap pl
-xmodmap $DOTFILES/System/X/Xmodmap
+xmodmap $DOTFILES/Xmodmap
 xcape
 
 # Disable beep and turning off monitor
@@ -24,7 +24,7 @@ unclutter -idle 2 &
 
 wm() {
     # Load X resources
-    xrdb -load $DOTFILES/System/X/Xresources
+    xrdb -load $DOTFILES/Xresources
 
     # Compositing
     compton &

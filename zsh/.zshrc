@@ -15,7 +15,7 @@ alias mv='mv -i'
 
 alias ls="ls --color=auto --group-directories-first"
 alias grep="grep --color=auto"
-alias startX="startx $DOTFILES/System/X/xinitrc"
+alias startX="startx $DOTFILES/xinitrc"
 alias zmv="noglob zmv -W"
 
 ## }}}

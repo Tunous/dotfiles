@@ -24,4 +24,4 @@ bspc rule -a Gimp floating=true desktop=Graphics
 bspc rule -a feh floating=true center=true pseudo_tiled=true
 
 ## PANEL
-$DOTFILES/WM/panel &
+$DOTFILES/panel &
