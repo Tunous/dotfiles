@@ -61,23 +61,10 @@ function take_screenshot() {
   sleep 0.1 # https://bbs.archlinux.org/viewtopic.php?pid=1246173#p1246173
 
   # Take screenshot with selection
-  shot_err="$(scrot -s $1 2>&1 >/dev/null)"
+  scrot -s $1
 
   if [[ "$?" != "0" ]]; then
-    if [[ "$shot_err" =~ "giblib error: no image grabbed" ]]; then
-      echo "You cancelled the selection. Exiting."
-      exit 1
-    else
-      echo "$shot_err" >&2
-      echo "Couldn't make selective shot."
-      echo "Trying to grab active window instead."
-      if ! ($screenshot_window_command &>/dev/null); then
-        notify error "Something went wrong" "Failed to take image"
-        exit 1
-      fi
-
-      [[ "$edit_on_selection_fail" == "true" ]] && edit="true"
-    fi
+    [[ "$edit_on_selection_fail" == "true" ]] && edit="true"
   fi
 }
 
@@ -265,7 +252,11 @@ if [[ -z "$1" ]]; then
   cd $file_dir
 
   # new filename with date
-  img_file="$(date +"$file_name_format")"
+  img_file="$(dmenu-get "Enter name for image" "$(date +"$file_name_format")")"
+  if [[ -z "$img_file" ]]; then
+      notify ok "Canceled taking screenshot"
+      exit
+  fi
   take_screenshot "$img_file"
 else
   # upload file instead of screenshot
@@ -293,10 +284,15 @@ if [ ! -f "$img_file" ]; then
   exit 1
 fi
 
-if [ "$login" = "true" ]; then
-  upload_authenticated_image "$img_file"
+if [[ $(dmenu-get "Upload to imgur?" "Yes\nNo") == "Yes" ]]; then
+    if [ "$login" = "true" ]; then
+      upload_authenticated_image "$img_file"
+    else
+      upload_anonymous_image "$img_file"
+    fi
 else
-  upload_anonymous_image "$img_file"
+    echo -n "$img_file" | xclip -selection clipboard
+    notify ok "Image location copied to clipboard"
 fi
 
 # delete file if configured
