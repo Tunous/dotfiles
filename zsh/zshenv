@@ -4,7 +4,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_DATA_HOME="$HOME/.local/share"
 
-export DOTFILES="$HOME/etc"
+export DOTFILES="$HOME/.dotfiles"
 export PANEL_FIFO="/tmp/panel-fifo"
 
 export ZDOTDIR="$DOTFILES/zsh"

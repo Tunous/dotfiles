@@ -4,6 +4,7 @@
     },
     {
         "link": {
+            "~/.dotfiles": "",
             "~/.tmux.conf": "tmux.conf",
             "~/.vim": "vim/",
             "~/.zshenv": "zsh/zshenv",
