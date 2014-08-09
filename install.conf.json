@@ -3,6 +3,12 @@
         "clean": ["~", "~/.config"]
     },
     {
+        "shell": [
+            ["mkdir -p ~/.config", "Creating config directory"],
+            ["mkdir -p ~/.cache/vim/undofiles", "Creating cache directories"]
+        ]
+    },
+    {
         "link": {
             "~/.dotfiles": "",
             "~/.tmux.conf": "tmux.conf",
