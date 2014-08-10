@@ -1,4 +1,9 @@
 #!/bin/bash
+#
+# Original script:
+# https://github.com/jomo/imgur-screenshot
+# https://imgur.com/apps
+#
 
 ### IMGUR-SCREENSHOT DEFAULT CONFIG ####
 
