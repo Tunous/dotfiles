@@ -121,7 +121,7 @@ zle -N zle-line-init
 KEYTIMEOUT=1
 
 # Syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ## }}}
 
