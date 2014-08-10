@@ -72,8 +72,8 @@ bindkey '^h' backward-delete-char
 bindkey '^r' history-incremental-search-backward
 
 # More motions
-source $ZDOTDIR/opp/opp.zsh
-source $ZDOTDIR/opp/opp/*.zsh
+source $ZDOTDIR/plugins/opp/opp.zsh
+source $ZDOTDIR/plugins/opp/opp/*.zsh
 
 ## }}}
 
@@ -121,7 +121,7 @@ zle -N zle-line-init
 KEYTIMEOUT=1
 
 # Syntax highlighting
-source ~/.dotfiles/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $ZSOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 ## }}}
 
