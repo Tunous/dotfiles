@@ -191,7 +191,7 @@ Print
 
 # Run program
 Menu
-    dmenu-action run
+    dmenu-run
 
 # }}}
 
