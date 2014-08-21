@@ -11,7 +11,7 @@ super + alt + Escape
 
 # Close/kill focused window
 super + {q,Q}
-    bspc window -{c,k}; \
+    bspc window --{close,kill}; \
     ~/.config/bspwm/scripts/remove_desktop.sh
 
 # Reload sxhkd config
@@ -43,49 +43,49 @@ super + shift + {h,j,k,l}
 
 # Cycle windows
 alt + {Tab,grave}
-    bspc window -f {next,prev}
+    bspc window --focus {next,prev}
 
 # Change desktop/Move window to desktop
 super + {_,shift + } bracket{left,right}
-    bspc {desktop -f,window -d} {prev,next}
+    bspc {desktop --focus,window --to-desktop } {prev,next}
 
 super + {_,shift + } {1-9}
-    bspc {desktop -f, window -d} {1-9}
+    bspc {desktop --focus,window --to-desktop } {1-9}
 
 # Focus last window, desktop
 super + {grave,Tab}
-    bspc {window,desktop} -f last
+    bspc {window,desktop} --focus last
 
 # }}}
 # {{{ Mouse
 
 ~button1
-    bspc pointer -g focus
+    bspc pointer --grab focus
 
 super + button{1-3}
-    bspc pointer -g focus; \
-    bspc pointer -g {move,resize_side,resize_corner}
+    bspc pointer --grab focus; \
+    bspc pointer --grab {move,resize_side,resize_corner}
 
 super + !button{1-3}
-    bspc pointer -t %i %i
+    bspc pointer --track %i %i
 
 super + @button{1-3}
-    bspc pointer -u
+    bspc pointer --ungrab
 
 # }}}
 # {{{ Windows
 
 # Toggle layout of desktop
 super + t
-    bspc desktop -l next
+    bspc desktop --layout next
 
 # Toggle state of window
 super + {a,f}
-    bspc window -t {floating,fullscreen}
+    bspc window --toggle {floating,fullscreen}
 
 # Rarely used states
 super + s; {a,s,d,f}
-    bspc window -t {sticky,locked,private,pseudo_tiled}
+    bspc window --toggle {sticky,locked,private,pseudo_tiled}
 
 # States help
 super + s; h
@@ -98,13 +98,13 @@ super + alt + {h,j,k,l}
       d1=down  d2=up    s=+10, \
       d1=up    d2=down  s=-10, \
       d1=right d2=left  s=+10  }; \
-    bspc window -e $d1 $s || bspc window -e $d2 $s
+    bspc window --edge $d1 $s || bspc window --edge $d2 $s
 
 # Balance size
 super + b
-    bspc desktop -B
+    bspc desktop --balance
 super + e
-    bspc desktop -E
+    bspc desktop --equalize
 
 # {{{ Floating
 
@@ -123,26 +123,26 @@ super + alt + {Left,Right,Up,Down}
 
 # Preselect splitting area
 super + ctrl + {h,j,k,l}
-    bspc window -p {left,down,up,right}
+    bspc window --presel {left,down,up,right}
 
 # Move window to preselection
 super + ctrl + space
-    bspc window -w last.manual
+    bspc window --to-window last.manual
 
 # Cancel preselection
 super + ctrl + shift + space
-    bspc desktop -c
+    bspc desktop --cancel-presel
 
 # }}}
 # {{{ Desktops
 
 # Cycle
 super + {comma,period}
-    bspc desktop -C {backward,forward}
+    bspc desktop --circulate {backward,forward}
 
 # Rotate
 super + {r,R}
-    bspc desktop -R {90,270}
+    bspc desktop --rotate {90,270}
 
 # }}}
 
