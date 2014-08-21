@@ -11,7 +11,8 @@ super + alt + Escape
 
 # Close/kill focused window
 super + {q,Q}
-    bspc window -{c,k}
+    bspc window -{c,k}; \
+    ~/.config/bspwm/scripts/remove_desktop.sh
 
 # Reload sxhkd config
 super + Escape
@@ -20,6 +21,10 @@ super + Escape
 # Refresh panel
 super + alt + z
     pkill -x panel; $DOTFILES/panel
+
+super + {N,n}
+    ~/.config/bspwm/scripts/add_desktop.sh; \
+    { , bspc desktop ^$(bspc query -D -m focused | wc -l) --focus }
 
 # Toggle compton
 super + alt + c
@@ -30,13 +35,11 @@ super + alt + c
 
 # Focus window/desktop
 super + {h,j,k,l}
-    w={left;d=prev ,down;d=last ,up;d=last ,right;d=next}; \
-    bspc window $w -f || bspc desktop $d -f
+    ~/.config/bspwm/scripts/navigate.sh --focus {left,down,up,right}
 
 # Move window
 super + shift + {h,j,k,l}
-    w={left; d=prev,down,up,right; d=next}; \
-    bspc window $w -w focused.manual || bspc window -w $w.manual || bspc window -s $w || bspc window -d $d -f
+    ~/.config/bspwm/scripts/navigate.sh --move {left,down,up,right}
 
 # Cycle windows
 alt + {Tab,grave}
@@ -46,8 +49,8 @@ alt + {Tab,grave}
 super + {_,shift + } bracket{left,right}
     bspc {desktop -f,window -d} {prev,next}
 
-super + {_,shift + } {1-6,7,8,9,0}
-    bspc {desktop -f, window -d} {1-6,Web,Games,Music,Graphics}
+super + {_,shift + } {1-9}
+    bspc {desktop -f, window -d} {1-9}
 
 # Focus last window, desktop
 super + {grave,Tab}
