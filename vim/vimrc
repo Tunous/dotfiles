@@ -31,6 +31,7 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'gregsexton/gitv'
 Plugin 'honza/vim-snippets'
+Plugin 'inside/vim-search-pulse'
 Plugin 'kien/ctrlp.vim'
 Plugin 'nosami/omnisharp'
 Plugin 'Raimondi/delimitMate'
@@ -107,16 +108,22 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 
 " }}}
-" {{{ YouCompleteMe
+" {{{ Search pulse
 " -------------------------------------------------------------------------
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_global_ycm_extra_conf = '~/src/cpp/.ycm_extra_conf.py'
+let g:vim_search_pulse_mode = 'pattern'
 
 " }}}
 " {{{ Syntastic
 " -------------------------------------------------------------------------
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
+
+" }}}
+" {{{ YouCompleteMe
+" -------------------------------------------------------------------------
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_global_ycm_extra_conf = '~/src/cpp/.ycm_extra_conf.py'
+
 " }}}
 
 " }}}
