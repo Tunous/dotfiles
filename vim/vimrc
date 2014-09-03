@@ -159,6 +159,7 @@ set showcmd                         " See keystrokes
 
 set shiftwidth=4                    " Number of spaces to use for indenting
 set softtabstop=4                   " Number of spaces that a <Tab> counts for
+set tabstop=4                       " How much space takes tab
 set expandtab                       " Convert tabs into spaces
 set smartindent                     " Do smart autoindenting
 set cindent
