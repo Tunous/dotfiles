@@ -222,7 +222,7 @@ nnoremap <Space> za
 nnoremap <Leader>l :set list!<CR>
 
 " Turn off highlighting for current search
-nnoremap <Leader>h :nohlsearch<CR>
+nnoremap // :nohlsearch<CR>
 
 " }}}
 " {{{ Functions
