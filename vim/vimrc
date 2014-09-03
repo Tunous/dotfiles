@@ -298,7 +298,6 @@ augroup Autocommands
   autocmd BufReadPost * call <SID>SetCursorPosition()
 
   autocmd FileType    markdown,text setlocal wrap nolist linebreak
-  autocmd FileType    c,cpp let b:delimitMate_eol_marker = ";"
 augroup END
 
 " }}}
