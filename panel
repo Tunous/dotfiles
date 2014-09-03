@@ -17,29 +17,11 @@ mkfifo "$PANEL_FIFO"
 exec 3<> "$PANEL_FIFO"
 
 # }}}
-# Functions {{{
-
-Pacman() { # {{{
-  updates="$(checkupdates | wc -l)"
-
-  (( updates == 0 )) && return
-
-  if (( updates == 1 )); then
-    printf "%s" " $(checkupdates)"
-  else
-    printf "%s" " $updates"
-  fi
-}
-
-# }}}
-
-# }}}
 
 # Updating {{{
 
 bspc control --subscribe >"$PANEL_FIFO" &
 xtitle -sf 'T%s' >"$PANEL_FIFO" &
-while :; do echo "I $(Pacman)" >"$PANEL_FIFO"; sleep 300; done &
 while :; do echo "Time" >"$PANEL_FIFO"; sleep 3; done &
 
 # }}}
@@ -47,7 +29,6 @@ while :; do echo "Time" >"$PANEL_FIFO"; sleep 3; done &
 
 while read -r line <"$PANEL_FIFO"; do
   case $line in
-    I*) INFO="${line#?}" ;;
     N*) NOTIFY="${line#?}" ;;
     Time) TIME="%{F-} $(date +%H:%M)" ;;
     T*) TITLE="$(echo ${line#?} | cut -c -130)" ;;
@@ -101,7 +82,7 @@ while read -r line <"$PANEL_FIFO"; do
       ;;
   esac
 
-  echo "%{l}$TITLE %{c} $desktops %{r} $TIME $INFO $NOTIFY"
+  echo "%{l}$TITLE %{c} $desktops %{r} $TIME $NOTIFY"
 done | bar -f "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*","-*-tewi-medium-*-*-*-11-*-*-*-*-*-*-*" -B "#00000000" -F "#ff9e9e9e" -u 2 -d -g 1880x16+20+5 |
     while read line; do eval "$line" ; done # Hande clickable area commands
 
