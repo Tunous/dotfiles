@@ -183,21 +183,23 @@ set ttimeout ttimeoutlen=100
 " }}}
 " {{{ Other
 
-set autoread                        " Read file if it was modified outside
 set autochdir                       " Automatically change working directory
-set hidden                          " Allow hidden buffers
+set autoread                        " Read file if it was modified outside
 set backspace=2                     " Make <Backspace> work correctly
-set visualbell                      " Don't beep and don't flash screen
-set t_vb=
-set nowrap                          " Don't wrap lines
+set clipboard=unnamedplus
+set exrc
+set fillchars=vert:│
+set hidden                          " Allow hidden buffers
 set list                            " Show list chars
 set listchars=tab:▸\ ,trail:⋅
 let &showbreak='↪'
-set synmaxcol=300                   " Limit syntax highlight of long lines
+set nowrap                          " Don't wrap lines
 set scrolloff=10                    " Offset with the cursor when moving vertically
 set sidescrolloff=15
-set exrc
-set clipboard=unnamedplus
+set spell
+set synmaxcol=300                   " Limit syntax highlight of long lines
+set t_vb=
+set visualbell                      " Don't beep and don't flash screen
 
 call matchadd('ColorColumn', '\%81v', 100) " Show column 80 ONLY when necessary
 
