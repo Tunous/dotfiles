@@ -185,6 +185,7 @@ set t_vb=
 set nowrap                          " Don't wrap lines
 set list                            " Show list chars
 set listchars=tab:▸\ ,trail:⋅
+let &showbreak='↪'
 set synmaxcol=300                   " Limit syntax highlight of long lines
 set scrolloff=10                    " Offset with the cursor when moving vertically
 set sidescrolloff=15
