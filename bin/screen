@@ -69,6 +69,7 @@ function take_screenshot() {
   scrot -s $1
 
   if [[ "$?" != "0" ]]; then
+    scrot $1
     [[ "$edit_on_selection_fail" == "true" ]] && edit="true"
   fi
 }
