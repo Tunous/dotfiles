@@ -31,10 +31,12 @@ Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'gmarik/Vundle.vim'
 Plugin 'honza/vim-snippets'
 Plugin 'inside/vim-search-pulse'
-Plugin 'kien/ctrlp.vim'
 Plugin 'nosami/omnisharp'
 Plugin 'Raimondi/delimitMate'
 Plugin 'scrooloose/syntastic'
+Plugin 'Shougo/unite-outline'
+Plugin 'Shougo/unite.vim'
+Plugin 'Shougo/vimproc.vim'
 Plugin 'SirVer/ultisnips'
 Plugin 'svermeulen/vim-easyclip'
 Plugin 'tommcdo/vim-exchange'
@@ -99,6 +101,21 @@ let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
+
+" }}}
+" {{{ Unite
+
+nnoremap [unite] <NOP>
+nmap <Space> [unite]
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#filters#sorter_default#use(['sorter_rank'])
+let g:unite_source_rec_async_command =
+            \ 'ag --follow --nocolor --nogroup --hidden -g ""'
+
+nnoremap [unite]f :Unite -start-insert file_rec/async:!<CR>
+nnoremap [unite]b :Unite -auto-preview buffer<CR>
+nnoremap [unite]o :Unite -auto-preview outline<CR>
 
 " }}}
 " {{{ Search pulse
