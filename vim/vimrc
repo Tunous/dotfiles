@@ -29,7 +29,6 @@ Plugin 'baskerville/vim-sxhkdrc'
 Plugin 'bling/vim-airline'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'gmarik/Vundle.vim'
-Plugin 'gregsexton/gitv'
 Plugin 'honza/vim-snippets'
 Plugin 'inside/vim-search-pulse'
 Plugin 'kien/ctrlp.vim'
@@ -92,12 +91,6 @@ augroup fugitive
   autocmd!
   autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
-
-" }}}
-" {{{ Gitv
-" -------------------------------------------------------------------------
-" Don't map ctrl key - it conflicts with navigation mappings
-let g:Gitv_DoNotMapCtrlKey = 1
 
 " }}}
 " {{{ UltiSnips
