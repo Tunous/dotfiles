@@ -55,13 +55,13 @@ filetype plugin indent on
 " {{{ Plugin configs
 
 " {{{ Airline
-" -------------------------------------------------------------------------
+
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
 " }}}
 " {{{ DelimitMate
-" -------------------------------------------------------------------------
+
 " Turn on <Space> and <CR> expansion
 let delimitMate_expand_cr = 2
 let delimitMate_expand_space = 1
@@ -73,7 +73,7 @@ let delimitMate_nesting_quotes = ['"','`']
 
 " }}}
 " {{{ Easyclip
-" -------------------------------------------------------------------------
+
 " Use 's' for substitution
 let g:EasyClipUseSubstituteDefaults = 1
 
@@ -87,7 +87,7 @@ xmap x          <Plug>MoveMotionXPlug
 
 " }}}
 " {{{ Fugitive
-" -------------------------------------------------------------------------
+
 " Clean fugitive buffers
 augroup fugitive
   autocmd!
@@ -96,7 +96,7 @@ augroup END
 
 " }}}
 " {{{ UltiSnips
-" -------------------------------------------------------------------------
+
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
@@ -119,18 +119,18 @@ nnoremap [unite]o :Unite -auto-preview outline<CR>
 
 " }}}
 " {{{ Search pulse
-" -------------------------------------------------------------------------
+
 let g:vim_search_pulse_mode = 'pattern'
 
 " }}}
 " {{{ Syntastic
-" -------------------------------------------------------------------------
+
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
 
 " }}}
 " {{{ YouCompleteMe
-" -------------------------------------------------------------------------
+
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_global_ycm_extra_conf = '~/src/cpp/.ycm_extra_conf.py'
 
