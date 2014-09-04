@@ -235,7 +235,7 @@ nnoremap <Leader>v :edit $MYVIMRC<CR>
 nnoremap <Leader>s :source $MYVIMRC<CR>
 
 " Toggle fold
-nnoremap <Space> za
+nnoremap <Space><Space> za
 
 " Toggle `set list`
 nnoremap <Leader>l :set list!<CR>
