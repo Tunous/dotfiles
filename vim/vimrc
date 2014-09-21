@@ -24,7 +24,6 @@ let mapleader = " " " Define <Leader> key
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'a.vim'
 Plugin 'baskerville/vim-sxhkdrc'
 Plugin 'bling/vim-airline'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -211,7 +210,8 @@ set synmaxcol=300                   " Limit syntax highlight of long lines
 set t_vb=
 set visualbell                      " Don't beep and don't flash screen
 
-call matchadd('ColorColumn', '\%81v', 100) " Show column 80 ONLY when necessary
+" Show color column ONLY when necessary
+call matchadd('ColorColumn', '\(\%81v\|\%100v\)', 100)
 
 " }}}
 
