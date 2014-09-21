@@ -1,0 +1,71 @@
+[user]
+    email = lukus178@gmail.com
+    name = Tunous
+[color]
+    ui = true
+[gc]
+    auto = 1
+[merge]
+    summary = true
+    verbosity = 1
+    tool = vimdiff
+[mergetool]
+	keepBackup = false
+[diff]
+    mnemonicprefix = true
+[push]
+	default = simple
+[alias]
+    # stage commits chunk by chunk
+    ap = add --patch
+
+    # branch (verbose)
+    b = branch -v
+
+    # commit
+    c = commit
+    # commit all
+    ca = commit -a
+    # amend last commit
+    amend = commit --amend
+
+    # checkout
+    co = checkout
+    # create and switch to a new branch
+    nb = checkout -b
+
+    # grab a change from branch
+    cp = cherry-pick
+
+    # diff unstaged changes
+    d = diff
+    # diff staged changes
+    dc = diff --cached
+    # diff last commited change
+    last = diff HEAD^
+
+    # oneline log
+    l = log --graph --oneline
+
+    # continue rebase
+    rc = rebase --continue
+    # skip rebase
+    rs = rebase --skip
+
+    # remote (verbose)
+    r = remote -v
+
+    # remove files from indes
+    unstage = reset HEAD
+    # go back before last commit
+    uncommit = reset --soft HEAD^
+    # show changes to a file
+    filelog = log -u
+    # fire up the merge tool
+    mt = mergetool
+
+    # status
+    s = status
+
+    # tag
+    t = tag

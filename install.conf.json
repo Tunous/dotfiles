@@ -11,15 +11,16 @@
     {
         "link": {
             "~/.dotfiles": "",
+            "~/.config/bspwm": "bspwm/",
+            "~/.config/compton.conf": "compton.conf",
+            "~/.config/git": "git/",
+            "~/.config/ranger": "ranger/",
+            "~/.config/sxhkd": "sxhkd/",
+            "~/.pentadactylrc": "pentadactylrc",
             "~/.tmux.conf": "tmux.conf",
             "~/.vim": "vim/",
-            "~/.zshenv": "zsh/zshenv",
-            "~/.config/ranger": "ranger/",
-            "~/.config/bspwm": "bspwm/",
-            "~/.config/sxhkd": "sxhkd/",
-            "~/.config/compton.conf": "compton.conf",
-            "~/.pentadactylrc": "pentadactylrc",
-            "~/.xinitrc": "xinitrc"
+            "~/.xinitrc": "xinitrc",
+            "~/.zshenv": "zsh/zshenv"
         }
     },
     {
