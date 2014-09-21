@@ -17,7 +17,7 @@ set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
 syntax on
 filetype off
 
-let mapleader = "," " Define <Leader> key
+let mapleader = " " " Define <Leader> key
 
 " }}}
 " {{{ Plugins
