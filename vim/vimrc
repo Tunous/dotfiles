@@ -7,7 +7,7 @@
 "       \__/    (__\_|_)|___|\__/|___||__|  \___) \_______)
 "
 
-" {{{ General
+" {{{1 General
 
 set nocompatible
 set encoding=utf-8 " Use UTF-8 for encoding
@@ -19,8 +19,7 @@ filetype plugin indent on
 
 let mapleader = " " " Define <Leader> key
 
-" }}}
-" {{{ Plugins
+" {{{1 Plugins
 
 " Load vim-plug
 if empty(glob("~/.vim/autoload/plug.vim"))
@@ -54,15 +53,14 @@ Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-
 
 call plug#end()
 
-" {{{ Plugin configs
+" {{{2 Plugin configs
 
-" {{{ Airline
+" {{{3 Airline
 
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 
-" }}}
-" {{{ DelimitMate
+" {{{3 DelimitMate
 
 " Turn on <Space> and <CR> expansion
 let delimitMate_expand_cr = 2
@@ -73,8 +71,7 @@ let delimitMate_balance_matchpairs = 1
 
 let delimitMate_nesting_quotes = ['"','`']
 
-" }}}
-" {{{ Easyclip
+" {{{3 Easyclip
 
 " Use 's' for substitution
 let g:EasyClipUseSubstituteDefaults = 1
@@ -87,8 +84,7 @@ nmap xX         <Plug>MoveMotionReplaceLinePlug
 nmap xx         <Plug>MoveMotionLinePlug
 xmap x          <Plug>MoveMotionXPlug
 
-" }}}
-" {{{ Fugitive
+" {{{3 Fugitive
 
 " Clean fugitive buffers
 augroup fugitive
@@ -96,16 +92,14 @@ augroup fugitive
   autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
 
-" }}}
-" {{{ UltiSnips
+" {{{3 UltiSnips
 
 let g:UltiSnipsExpandTrigger="<c-j>"
 let g:UltiSnipsJumpForwardTrigger="<c-j>"
 let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 let g:UltiSnipsEditSplit="vertical"
 
-" }}}
-" {{{ Unite
+" {{{3 Unite
 
 nnoremap [unite] <NOP>
 nmap <Space> [unite]
@@ -119,37 +113,29 @@ nnoremap [unite]f :Unite -start-insert file_rec/async:!<CR>
 nnoremap [unite]b :Unite -auto-preview buffer<CR>
 nnoremap [unite]o :Unite -auto-preview outline<CR>
 
-" }}}
-" {{{ Search pulse
+" {{{3 Search pulse
 
 let g:vim_search_pulse_mode = 'pattern'
 
-" }}}
-" {{{ Syntastic
+" {{{3 Syntastic
 
 let g:syntastic_cpp_compiler = 'clang++'
 let g:syntastic_cpp_compiler_options = '-std=c++11 -stdlib=libc++'
 
-" }}}
-" {{{ YouCompleteMe
+" {{{3 YouCompleteMe
 
 let g:ycm_autoclose_preview_window_after_completion = 1
 let g:ycm_global_ycm_extra_conf = '~/src/cpp/.ycm_extra_conf.py'
 
-" }}}
-
-" }}}
-" }}}
-" {{{ Theme
+" {{{1 Theme
 
 set background=dark
 let g:customized_use_xresources = 1
 colorscheme customized
 
-" }}}
-" {{{ Setttings
+" {{{1 Setttings
 
-" {{{ Bakcup, swap and undo files
+" {{{2 Bakcup, swap and undo files
 
 set nobackup
 set nowritebackup
@@ -157,24 +143,21 @@ set noswapfile
 set undodir=$XDG_CACHE_HOME/vim/undofiles
 set undofile
 
-" }}}
-" {{{ Search options
+" {{{2 Search options
 
 set hlsearch                        " Highlight search terms
 set incsearch                       " Show search matches as I type
 set ignorecase                      " Ignore case when searching...
 set smartcase                       " unless I use uppercase characters
 
-" }}}
-" {{{ Command, status line
+" {{{2 Command, status line
 
 set wildmenu                        " Use wildmenu for autocompletion
 set noshowmode                      " Don't show current mode
 set laststatus=2                    " Always show statusline
 set showcmd                         " See keystrokes
 
-" }}}
-" {{{ Tabs and indenting
+" {{{2 Tabs and indenting
 
 set shiftwidth=4                    " Number of spaces to use for indenting
 set softtabstop=4                   " Number of spaces that a <Tab> counts for
@@ -186,14 +169,12 @@ set autoindent
 
 set cino=g2,i0
 
-" }}}
-" {{{ Timeout
+" {{{2 Timeout
 
 set timeout timeoutlen=1000
 set ttimeout ttimeoutlen=100
 
-" }}}
-" {{{ Other
+" {{{2 Other
 
 set autochdir                       " Automatically change working directory
 set autoread                        " Read file if it was modified outside
@@ -216,10 +197,7 @@ set visualbell                      " Don't beep and don't flash screen
 " Show color column ONLY when necessary
 call matchadd('ColorColumn', '\(\%81v\|\%100v\)', 100)
 
-" }}}
-
-" }}}
-" {{{ Mappings
+" {{{1 Mappings
 
 " Surround character with spaces
 nnoremap y<Space> a<Space><Esc>hi<Space><Esc>l
@@ -246,10 +224,9 @@ nnoremap <Leader>l :set list!<CR>
 " Turn off highlighting for current search
 nnoremap // :nohlsearch<CR>
 
-" }}}
-" {{{ Functions
+" {{{1 Functions
 
-" {{{ Open files with ranger
+" {{{2 Open files with ranger
 
 function! RangerChooser()
   let temp = tempname()
@@ -277,8 +254,7 @@ endfunction
 command! -bar RangerChooser call RangerChooser()
 nnoremap <Leader>r :<C-U>RangerChooser<CR>
 
-" }}}
-" {{{ Return to last cursor position
+" {{{2 Return to last cursor position
 
 function! s:SetCursorPosition()
   if &filetype !~ 'svn\|commit\c'
@@ -289,8 +265,7 @@ function! s:SetCursorPosition()
   endif
 endfunction
 
-" }}}
-" {{{ Save current position and execute command
+" {{{2 Save current position and execute command
 
 function! Preserve(command)
   " Save last search, and cursor position.
@@ -306,10 +281,7 @@ function! Preserve(command)
   call cursor(l, c)
 endfunction
 
-" }}}
-
-" }}}
-" {{{ Autocommands
+" {{{1 Autocommands
 
 augroup Autocommands
   autocmd!
