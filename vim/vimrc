@@ -34,12 +34,12 @@ Plug 'bling/vim-airline'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'honza/vim-snippets'
 Plug 'inside/vim-search-pulse'
-Plug 'nosami/omnisharp', { 'for': 'cs' }
+Plug 'nosami/omnisharp', { 'for': 'cs', 'do': 'cd server && xbuild' }
 Plug 'Raimondi/delimitMate'
 Plug 'scrooloose/syntastic'
 Plug 'Shougo/unite-outline'
 Plug 'Shougo/unite.vim'
-Plug 'Shougo/vimproc.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
 Plug 'SirVer/ultisnips'
 Plug 'svermeulen/vim-easyclip'
 Plug 'tommcdo/vim-exchange'
