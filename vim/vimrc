@@ -225,6 +225,15 @@ nnoremap <Leader>l :set list!<CR>
 " Turn off highlighting for current search
 nnoremap // :nohlsearch<CR>
 
+" Faster saving
+nnoremap <Leader>w :w<CR>
+
+" Execute q recording
+nnoremap Q @q
+
+" Redo
+nnoremap U <C-r>
+
 " {{{1 Functions
 
 " {{{2 Open files with ranger
