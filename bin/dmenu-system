@@ -1,0 +1,16 @@
+#!/bin/bash
+#
+# dmenu-system
+# Short dmenu script to shutdown, reboot or logout user
+#
+
+action="$(echo -e "Poweroff\nReboot\nLogout" | dmenu-get "Select action")"
+
+if [[ $action == Poweroff ]]; then
+    systemctl poweroff
+elif [[ $action == Reboot ]]; then
+    systemctl reboot
+elif [[ $action == Logout ]]; then
+    pkill panel
+    bspc quit
+fi

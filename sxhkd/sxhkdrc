@@ -3,11 +3,7 @@
 
 # Run system command
 super + alt + Escape
-    action="$(dmenu-get "Select action" "Poweroff\nReboot\nLogout")"; \
-    pkill panel; \
-    [[ $action == Poweroff ]] && systemctl poweroff; \
-    [[ $action == Reboot ]]   && systemctl reboot; \
-    [[ $action == Logout ]]   && bspc quit
+    dmenu-system
 
 # Close/kill focused window
 super + {q,Q}
