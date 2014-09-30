@@ -1,10 +1,11 @@
 #!/bin/bash
 
-prompt="$1"
-input="${*:2}"
+if [[ "$1" == "--no-input" ]]; then
+    noinput="-noinput"
+    shift
+else
+    input=$(cat)
+fi
 
-[[ -n "$input" ]] && noinput="" || noinput="-noinput"
-
-result=$(echo -e "$input" | dmenu -b -i -nf '#9e9e9e' -nb '#000000' -sf '#000000' -sb '#0087af' -p "$prompt" $noinput)
-
-echo "$result"
+prompt="$@"
+echo "$input" | dmenu -b -i -nf '#9e9e9e' -nb '#000000' -sf '#000000' -sb '#0087af' -p "$prompt" $noinput
