@@ -31,6 +31,17 @@ precmd() {
   print -Pn "\e]2;%100<...<%~%<<\a"
 }
 
+# Replaces ... -> ../.. on the fly
+rationalise-dot() {
+    if [[ $LBUFFER = *..  ]]; then
+        LBUFFER+=/..
+    else
+        LBUFFER+=.
+    fi
+}
+zle -N rationalise-dot
+bindkey . rationalise-dot
+
 ## }}}
 
 ## OPTIONS {{{
