@@ -22,6 +22,7 @@ super + Escape
 super + alt + z
     pkill -x panel; $DOTFILES/panel
 
+# Create (and focus) new desktop
 super + {N,n}
     ~/.config/bspwm/scripts/add_desktop.sh; \
     { , bspc desktop ^$(bspc query -D -m focused | wc -l) --focus }
@@ -166,6 +167,10 @@ super + alt + f
 # Ranger
 super + alt + r
     urxvtc -e ranger
+
+# Spotify
+super + alt + m
+    spotify
 
 # Steam
 super + alt + s
