@@ -174,7 +174,7 @@ super + alt + s
 
 # Open url / search web
 {XF86Search,XF86HomePage,super + w}
-    firefox "http://google.com/search?q=$(dmenu-get 'Search web')" &
+    dmenu-web
 
 # Toggle muting
 XF86AudioMute
