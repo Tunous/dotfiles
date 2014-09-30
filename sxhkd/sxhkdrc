@@ -146,15 +146,12 @@ super + {r,R}
 # Other -----------------------------------------------------------------------
 # {{{ Programs
 
-# Urxvt
+# URxvt
 super + Return
     urxvtc
+# Floating URxvt
 super + shift + Return
-    urxvtc -e sh -c "tmux new -As $(hostname)"
-
-# Dmenu
-super + space
-    dmenu-action
+    bspc rule --add URxvt --one-shot floating=on && urxvtc
 
 # Firefox
 super + alt + f
