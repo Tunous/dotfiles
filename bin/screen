@@ -258,7 +258,7 @@ if [[ -z "$1" ]]; then
   cd $file_dir
 
   # new filename with date
-  img_file="$(dmenu-get "Enter name for image" "$(date +"$file_name_format")")"
+  img_file="$(date +"$file_name_format" | dmenu-get "Enter name for image")"
   if [[ -z "$img_file" ]]; then
       notify ok "Canceled taking screenshot"
       exit
@@ -290,7 +290,7 @@ if [ ! -f "$img_file" ]; then
   exit 1
 fi
 
-if [[ $(dmenu-get "Upload to imgur?" "Yes\nNo") == "Yes" ]]; then
+if [[ $(echo -e "Yes\nNo" | dmenu-get "Upload to imgur?") == "Yes" ]]; then
     if [ "$login" = "true" ]; then
       upload_authenticated_image "$img_file"
     else
