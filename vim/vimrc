@@ -186,7 +186,7 @@ set fillchars=vert:│
 set hidden                          " Allow hidden buffers
 set list                            " Show list chars
 set listchars=tab:▸\ ,trail:⋅
-let &showbreak='↪'
+let &showbreak='↪ '
 set nowrap                          " Don't wrap lines
 set scrolloff=10                    " Offset with the cursor when moving vertically
 set sidescrolloff=15
