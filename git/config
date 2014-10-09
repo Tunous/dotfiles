@@ -5,6 +5,8 @@
     ui = true
 [gc]
     auto = 1
+[help]
+	autocorrect = 1
 [merge]
     summary = true
     verbosity = 1
