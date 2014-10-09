@@ -190,7 +190,6 @@ let &showbreak='↪ '
 set nowrap                          " Don't wrap lines
 set scrolloff=10                    " Offset with the cursor when moving vertically
 set sidescrolloff=15
-set spell
 set synmaxcol=300                   " Limit syntax highlight of long lines
 set t_vb=
 set visualbell                      " Don't beep and don't flash screen
