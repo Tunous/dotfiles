@@ -300,7 +300,7 @@ augroup Autocommands
   " Return to last cursor position
   autocmd BufReadPost * call <SID>SetCursorPosition()
 
-  autocmd FileType    markdown,text setlocal wrap nolist linebreak
+  autocmd FileType    markdown,text setlocal wrap nolist linebreak spell
 augroup END
 
 " }}}
