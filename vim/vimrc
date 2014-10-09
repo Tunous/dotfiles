@@ -51,6 +51,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang --omnisharp-completer' }
 Plug 'wellle/targets.vim'
+Plug 'whatyouhide/vim-gotham'
 
 call plug#end()
 
@@ -131,8 +132,7 @@ let g:ycm_global_ycm_extra_conf = '~/src/cpp/.ycm_extra_conf.py'
 " {{{1 Theme
 
 set background=dark
-let g:customized_use_xresources = 1
-colorscheme customized
+colorscheme gotham
 
 " {{{1 Setttings
 

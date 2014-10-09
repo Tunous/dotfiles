@@ -4,7 +4,7 @@
 #
 
 # Set wallpaper
-hsetroot -tile ~/usr/Dropbox/Images/Arch1.png
+hsetroot -tile ~/usr/Dropbox/Images/Batman.jpg
 
 # Set bindings
 sxhkd &
@@ -25,6 +25,7 @@ unclutter -idle 2 &
 wm() {
     # Load X resources
     xrdb -load $DOTFILES/Xresources
+    xrdb -merge $DOTFILES/Xcolors/gotham
 
     # Compositing
     compton &
