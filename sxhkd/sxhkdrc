@@ -195,6 +195,9 @@ Print
 Menu
     dmenu-run
 
+super + space
+    dmenu-tmux
+
 # }}}
 
 # {{{ End
