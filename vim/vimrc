@@ -31,6 +31,7 @@ Plug 'mattn/emmet-vim', { 'for': ['html', 'php', 'css', 'xml'] }
 Plug 'tommcdo/vim-exchange'
 Plug 'tpope/vim-fugitive'
 Plug 'whatyouhide/vim-gotham'
+Plug 'scrooloose/nerdtree'
 Plug 'nosami/omnisharp', { 'for': 'cs', 'do': 'cd server && xbuild' }
 Plug 'tpope/vim-repeat'
 Plug 'inside/vim-search-pulse'
@@ -47,6 +48,9 @@ Plug 'Shougo/unite.vim'
 Plug 'Shougo/unite-outline'
 Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
 Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --clang-completer --system-libclang --omnisharp-completer' }
+
+
+" }}}2
 
 call plug#end()
 
@@ -88,6 +92,10 @@ augroup fugitive
   autocmd!
   autocmd BufReadPost fugitive://* set bufhidden=delete
 augroup END
+
+" {{{3 NerdTREE
+
+nnoremap <Leader>n :NERDTreeToggle<CR>
 
 " {{{3 UltiSnips
 
