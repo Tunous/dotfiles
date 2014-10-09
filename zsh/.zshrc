@@ -134,6 +134,9 @@ KEYTIMEOUT=1
 # Syntax highlighting
 source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# LS_COLORS
+eval $(dircolors -b $DOTFILES/dircolors)
+
 ## }}}
 
 # vim: fdm=marker:
