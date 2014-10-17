@@ -236,6 +236,9 @@ nnoremap Q @q
 " Redo
 nnoremap U <C-r>
 
+" Toggle spelling
+nnoremap sp :set spell!<CR>
+
 " {{{1 Functions
 
 " {{{2 Open files with ranger
