@@ -1,0 +1,102 @@
+#!/bin/bash
+#
+# window-control
+#
+# Control focusing, moving and resizing bspwm windows
+#
+
+action="$1"
+direction="$2"
+
+[[ "$direction" == "left" ]]  && desktop_direction="prev"
+[[ "$direction" == "right" ]] && desktop_direction="next"
+
+if [[ "$action" == "--focus" ]]; then
+    # Focus window in selected direction
+    bspc window $direction --focus
+
+    if (( $? )); then
+        # Focus floating window
+        bspc window ${desktop_direction}.floating --focus
+
+        if (( $? )); then
+            # Focus desktop
+            [[ "$desktop_direction" ]] && bspc desktop $desktop_direction --focus
+        fi
+    fi
+elif [[ "$action" == "--move" ]]; then
+    current_window=$(bspc query -W -w focused)
+
+    # If there is no focused window then we don't have to move anything
+    [[ -z $current_window ]] && exit
+
+    if [[ -n "$(bspc query -W --window focused.tiled)" ]]; then
+        # Try to move window to preselection in chosen direction
+        bspc window --to-window ${direction}.manual
+
+        # If failed swap window with one in selected direction
+        if (( $? )); then
+            bspc window --swap $direction
+
+            # If this failed then move window another desktop
+            if (( $? )); then
+                current_desktop=$(bspc query -D -d focused)
+                num_desktops=$(bspc query -D -m focused | wc -l)
+                [[ $current_desktop == $num_desktops && "$direction" == "right" ]] && move_last=1 || move_last=0
+                [[ $current_desktop == 1 && "$direction" == "left" ]] && move_first=1 || move_first=0
+
+                # If this is the last or first desktop create new one and move
+                # focused window there
+                if (( move_last || move_first )) ; then
+                    ~/.config/bspwm/scripts/add_desktop.sh
+                    bspc window --to-desktop $desktop_direction --focus
+                else
+                    bspc window --to-desktop $desktop_direction
+                    ~/.config/bspwm/scripts/remove_desktop.sh
+                    bspc window --focus $current_window
+                fi
+            fi
+        fi
+    else
+        # Move floating window
+        if [[ "$direction" == "left" ]]; then
+            float="-x -20"
+        elif [[ "$direction" == "down" ]]; then
+            float="-y +20"
+        elif [[ "$direction" == "up" ]]; then
+            float="-y -20"
+        elif [[ "$direction" == "right" ]]; then
+            float="-x +20"
+        fi
+
+        xdo move $float
+    fi
+elif [[ "$action" == "--resize" ]]; then
+    if [[ "$direction" == "left" ]]; then
+        d1=left
+        d2=right
+        size=-10
+        float="-w -20"
+    elif [[ "$direction" == "down" ]]; then
+        d1=down
+        d2=up
+        size=+10
+        float="-h +20"
+    elif [[ "$direction" == "up" ]]; then
+        d1=up
+        d2=down
+        size=-10
+        float="-h -20"
+    elif [[ "$direction" == "right" ]]; then
+        d1=right
+        d2=left
+        size=+10
+        float="-w +20"
+    fi
+
+    if [[ -n "$(bspc query -W --window focused.tiled)" ]]; then
+        bspc window --edge $d1 $size || bspc window --edge $d2 $size
+    else
+        xdo resize $float
+    fi
+fi
