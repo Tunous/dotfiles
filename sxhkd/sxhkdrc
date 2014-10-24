@@ -33,11 +33,11 @@ super + alt + c
 
 # Focus window/desktop
 super + {h,j,k,l}
-    ~/.config/bspwm/scripts/navigate.sh --focus {left,down,up,right}
+    ~/.config/bspwm/scripts/window-control --focus {left,down,up,right}
 
 # Move window
 super + shift + {h,j,k,l}
-    ~/.config/bspwm/scripts/navigate.sh --move {left,down,up,right}
+    ~/.config/bspwm/scripts/window-control --move {left,down,up,right}
 
 # Cycle windows
 alt + {Tab,grave}
@@ -89,32 +89,14 @@ super + s; {a,s,d,f}
 super + s; h
     notify "[A] Sticky [S] Locked [D] Private [F] Pseudo tiled"
 
-
-# Resize window
 super + alt + {h,j,k,l}
-    { d1=left  d2=right s=-10, \
-      d1=down  d2=up    s=+10, \
-      d1=up    d2=down  s=-10, \
-      d1=right d2=left  s=+10  }; \
-    bspc window --edge $d1 $s || bspc window --edge $d2 $s
+    ~/.config/bspwm/scripts/window-control --resize {left,down,up,right}
 
 # Balance size
 super + b
     bspc desktop --balance
 super + e
     bspc desktop --equalize
-
-# {{{ Floating
-
-# Move
-super + {Left,Right,Up,Down}
-    xdo move {-x -20,-x +20,-y -20,-y +20}
-
-# Resize
-super + alt + {Left,Right,Up,Down}
-   xdo resize {-w -20,-w +20,-h -20, -h +20}
-
-# }}}
 
 # }}}
 # {{{ Preselection
