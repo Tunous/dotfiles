@@ -4,7 +4,7 @@
 # Use dmenu to select and start tmuxomatic project
 #
 
-projects=$(find ~/usr/tmux -type f -printf '%f\n')
+projects=$(find ~/usr/tmux -type f -printf '%f\n' | sort)
 choice=$(echo "$projects" | dmenu-get "Select project")
 
 cd ~/usr/tmux
