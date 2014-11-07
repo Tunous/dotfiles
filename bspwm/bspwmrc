@@ -15,9 +15,9 @@ bspc config auto_cancel                 true
 bspc monitor --reset-desktops 1
 
 ## RULES
-bspc rule -a Steam floating=true desktop=Games
-bspc rule -a spotify desktop=Music
-bspc rule -a Gimp floating=true desktop=Graphics
+bspc rule -a Steam floating=true
+bspc rule -a spotify
+bspc rule -a Gimp floating=true
 bspc rule -a feh floating=true center=true pseudo_tiled=true
 
 ## PANEL
