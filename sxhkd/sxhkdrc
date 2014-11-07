@@ -148,6 +148,11 @@ super + alt + m
 super + alt + s
     steam
 
+# Android studio
+super + alt + a
+    bspc config focus_follows_pointer false; \
+    android-studio
+
 # }}}
 # {{{ Special keys
 
