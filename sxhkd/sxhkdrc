@@ -109,10 +109,6 @@ super + ctrl + {h,j,k,l}
 super + ctrl + space
     bspc window --to-window last.manual
 
-# Cancel preselection
-super + ctrl + shift + space
-    bspc desktop --cancel-presel
-
 # }}}
 # {{{ Desktops
 
