@@ -41,4 +41,8 @@ set hintkeys=HJKLASDFGYUIOPQWERTNMZXCVB
 " It's Firefox!
 set titlestring=Firefox
 
+" Trello shortcuts
+set passkeys+=trello.com:jkb/cdeflmnqstvwx?<Esc><Space><CR><Left><Down><Up><Right><CR>
+map -modes=n Q <Esc>
+
 " vim: set ft=vim:
