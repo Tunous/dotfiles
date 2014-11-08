@@ -1,15 +1,15 @@
 #! /bin/sh
 
 ##  SETTINGS
-bspc config border_width                0
-bspc config window_gap                  0
-bspc config top_padding                 28
-bspc config split_ratio                 0.5
-bspc config borderless_monocle          true
-bspc config focus_follows_pointer       true
-bspc config pointer_follows_monitor     true
-bspc config auto_alternate              true
-bspc config auto_cancel                 true
+bspc config border_width                 1
+bspc config window_gap                   12
+bspc config top_padding                  28
+bspc config split_ratio                  0.5
+bspc config borderless_monocle           true
+bspc config focus_follows_pointer        true
+bspc config pointer_follows_monitor      true
+bspc config auto_alternate               true
+bspc config auto_cancel                  true
 
 ## DESKTOPS
 bspc monitor --reset-desktops 1
