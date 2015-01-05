@@ -4,7 +4,7 @@
 #
 
 # Set wallpaper
-hsetroot -tile ~/usr/Dropbox/Images/Batman.jpg
+hsetroot -tile ~/usr/Dropbox/Images/portal_by_lemmino.png
 
 # Set bindings
 sxhkd &
