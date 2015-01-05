@@ -6,17 +6,17 @@
 [gc]
     auto = 1
 [help]
-	autocorrect = 1
+    autocorrect = 1
 [merge]
     summary = true
     verbosity = 1
     tool = vimdiff
 [mergetool]
-	keepBackup = false
+    keepBackup = false
 [diff]
     mnemonicprefix = true
 [push]
-	default = simple
+    default = simple
 [alias]
     # stage commits chunk by chunk
     ap = add --patch
@@ -61,13 +61,10 @@
     unstage = reset HEAD
     # go back before last commit
     uncommit = reset --soft HEAD^
-    # show changes to a file
-    filelog = log -u
     # fire up the merge tool
     mt = mergetool
 
     # status
     s = status
 
-    # tag
-    t = tag
+    wip = "!git add -A; git commit -m \"WIP: $(fortune -n45 -s zippy)\""
