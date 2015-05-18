@@ -4,6 +4,7 @@
 bspc config border_width                 1
 bspc config window_gap                   12
 bspc config top_padding                  28
+bspc config bottom_padding               15
 bspc config split_ratio                  0.5
 bspc config borderless_monocle           true
 bspc config focus_follows_pointer        true
@@ -25,6 +26,7 @@ bspc rule -a Steam floating=true
 bspc rule -a spotify
 bspc rule -a Gimp floating=true
 bspc rule -a feh floating=true center=true pseudo_tiled=true
+bspc rule -a skype floating=true
 
 ## PANEL
 $DOTFILES/panel &

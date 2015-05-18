@@ -38,6 +38,8 @@ wm() {
     urxvtd &
     # Notifications
     twmnd &
+    # Tray
+    stalonetray &
 
     exec $1
 }
