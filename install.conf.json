@@ -22,8 +22,7 @@
             "~/.config/sxhkd": "sxhkd/",
             "~/.tmux.conf": "tmux.conf",
             "~/.vim": "vim/",
-            "~/.xinitrc": "xinitrc",
-            "~/.zshenv": "zsh/zshenv"
+            "~/.xinitrc": "xinitrc"
         }
     },
     {
