@@ -25,7 +25,7 @@ unclutter -idle 2 &
 wm() {
     # Load X resources
     xrdb -load $DOTFILES/Xresources
-    xrdb -merge $DOTFILES/Xcolors/gotham
+    xrdb -merge $DOTFILES/Xcolors/s3r0modmod
 
     # Compositing
     compton &

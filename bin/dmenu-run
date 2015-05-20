@@ -1,3 +1,3 @@
 #!/bin/bash
 
-dmenu_run -b -i -nf '#9e9e9e' -nb '#000000' -sf '#000000' -sb '#0087af' -p "Run application"
+dmenu_run -l 6 -nb "#0e1116" -sb "#222222" -x 810 -y 430 -w 300 -h 20 -p " > " -dim 0.2

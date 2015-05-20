@@ -8,4 +8,4 @@ else
 fi
 
 prompt="$@"
-echo "$input" | dmenu -b -i -nf '#9e9e9e' -nb '#000000' -sf '#000000' -sb '#0087af' -p "$prompt" $noinput
+echo "$input" | dmenu -b -i -nf '#aaaaaa' -nb '#0a0f14' -sf '#0a0f14' -sb '#33859d' -p "$prompt" $noinput

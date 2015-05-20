@@ -7,16 +7,4 @@ if [[ -z "$choice" ]]; then
     exit
 fi
 
-info=$(pass $choice)
-password=$(echo "$info" | head -n 1)
-username=$(echo "$info" | grep '^username: ' | cut -c 11-)
-
-if [[ -n "$password" ]]; then
-    if [[ -n "$username" ]]; then
-        xdotool type $username
-        xdotool key "Tab"
-    fi
-
-    xdotool type $password
-    [[ -n "$username" ]] && xdotool key "Return"
-fi
+pass -c $choice
