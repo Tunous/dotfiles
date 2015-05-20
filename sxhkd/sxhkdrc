@@ -7,7 +7,7 @@ super + alt + Escape
 
 # Close/kill focused window
 super + {q,Q}
-    [[ $(bspc query -W | wc -l) == 0 && $(bspc query -D) == 1 ]] && dmenu-system; \
+    [ (bspc query -W | wc -l) = 0 -a (bspc query -D) = 1 ]; and dmenu-system; \
     bspc window --{close,kill}; \
     ~/.config/bspwm/scripts/remove_desktop.sh
 
@@ -22,11 +22,11 @@ super + alt + z
 # Create (and focus) new desktop
 super + {N,n}
     ~/.config/bspwm/scripts/add_desktop.sh; \
-    { , bspc desktop ^$(bspc query -D -m focused | wc -l) --focus }
+    { , bspc desktop "^"(bspc query -D -m focused | wc -l) --focus }
 
 # Toggle compton
 super + alt + c
-    pkill compton || compton
+    pkill compton; or compton
 
 # }}}
 # {{{ Navigation
@@ -130,7 +130,7 @@ super + Return
     urxvtc
 # Floating URxvt
 super + shift + Return
-    bspc rule --add URxvt --one-shot floating=on && urxvtc
+    bspc rule --add URxvt --one-shot floating=on; and urxvtc
 
 # Firefox
 super + alt + f
@@ -168,12 +168,12 @@ super + alt + i
 # Toggle muting
 XF86AudioMute
     volume !; \
-    notify "$(volume bar)"
+    notify (volume bar)
 
 # Lower, raise volume
 XF86Audio{Lower,Raise}Volume
     volume {-,+}; \
-    notify "$(volume bar)"
+    notify (volume bar)
 
 # Take screenshot
 Print
