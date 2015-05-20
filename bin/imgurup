@@ -1,0 +1,30 @@
+#!/bin/sh
+
+# upload images to imgur.com
+# appends links and deletion links to the log
+# depends: curl
+
+# use stdin if there is no argument
+test -z "$@" && FILES="-" || FILES="$@"
+
+LOGDIR=$HOME/var/imgur
+LOG=$LOGDIR/image.log
+
+# create log directory
+mkdir -p $LOGDIR
+
+# from http://imgur.com/tools/imgurbash.sh
+APIKEY='b3625162d3418ac51a9ee805b1840452'
+
+# upload all
+for IMG in "$FILES"; do
+    RESP=$(curl -F "image=@$IMG" -F "key=$APIKEY" \
+        http://imgur.com/api/upload.xml 2> /dev/null)
+
+    URL=$(echo $RESP | sed 's|.*<original_image>\(.*\)</original_image>.*|\1|')
+    DELETEURL=$(echo $RESP | sed 's|.*<delete_page>\(.*\)</delete_page>.*|\1|')
+
+    echo "$URL" >> $LOG
+    echo "$DELETEURL" >> $LOG
+    echo "$URL"
+done

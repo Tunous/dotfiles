@@ -177,7 +177,7 @@ XF86Audio{Lower,Raise}Volume
 
 # Take screenshot
 Print
-    screen
+    take-screen
 
 # Run program
 Menu

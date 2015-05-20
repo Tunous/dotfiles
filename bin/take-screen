@@ -1,0 +1,17 @@
+#!/bin/bash
+
+FILE="$HOME/usr/Dropbox/Images/Imgur$(date +%Y_%m_%d-%H:%M:%S).png"
+
+$(maim -s "$FILE")
+
+if [[ $? != 0 ]];then
+    notify-send "Failed taking screenshot"
+    exit
+fi
+
+LINK="$(imgurup "$FILE")"
+echo -n "$LINK" | xclip -selection clipboard
+
+notify-send "${LINK}: Copied to clipboard"
+
+firefox $LINK
