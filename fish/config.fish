@@ -27,3 +27,5 @@ set -x GNUPGHOME "$XDG_DATA_HOME/GnuPG"
 set -x PASSWORD_STORE_DIR "$XDG_DATA_HOME/passwords-store"
 set -x LESSHISTFILE "/dev/null"
 set -x XAUTHORITY "$XDG_CACHE_HOME/Xauthority"
+
+source "$DOTFILES/fish/android.fish"
