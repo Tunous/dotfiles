@@ -28,9 +28,19 @@ while :; do echo "Time" >"$PANEL_FIFO"; sleep 3; done &
 # Printing {{{
 
 tmux-sessions() {
-    for i in $(seq 1 $(tmux list-sessions | wc -l)); do
-        echo -n "• "
-    done
+    if [ "$(tmux list-sessions 2>/dev/null | wc -l)" -gt 0 ]; then
+        echo -n "%{F#ff0087af}"
+
+        while read -r line; do
+            if [[ $line == *"(attached)"* ]]; then
+                echo -n "%{F#ff8c9440}○ %{F#ff0087af}"
+            else
+                echo -n "○ "
+            fi
+        done <<< "$(tmux list-sessions 2>/dev/null)"
+
+        echo -n "%{F-}"
+    fi
 }
 
 while read -r line <"$PANEL_FIFO"; do
@@ -83,8 +93,8 @@ while read -r line <"$PANEL_FIFO"; do
       ;;
   esac
 
-  echo "%{l}$TITLE %{c} $desktops %{r} $TIME $NOTIFY $(tmux-sessions)"
-done | bar -f "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*","-*-tewi-medium-*-*-*-11-*-*-*-*-*-*-*" -B "#00000000" -F "#ff9e9e9e" -u 2 -d -g 1880x16+20+5 |
+  echo "%{l}$TITLE %{c} $desktops $(tmux-sessions) %{r} $TIME $NOTIFY"
+done | lemonbar -f "-*-tewi-medium-*-*-*-11-*-*-*-*-*-*-*" -f "-*-stlarch-medium-r-*-*-10-*-*-*-*-*-*-*" -B "#00000000" -F "#ff9e9e9e" -u 2 -d -g 1880x16+20+5 |
     while read line; do eval "$line" ; done # Hande clickable area commands
 
 # }}}
