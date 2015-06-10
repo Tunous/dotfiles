@@ -41,6 +41,9 @@ wm() {
     # Tray
     stalonetray &
 
+    # Fix for the java applications
+    wmname LG3D &
+
     exec $1
 }
 
