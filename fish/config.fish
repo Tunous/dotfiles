@@ -12,7 +12,7 @@ fish_vi_mode
 # Remove greeting message
 set fish_greeting
 
-set -x PATH $PATH "$DOTFILES/bin" "$HOME/bin"
+set -x PATH $PATH "$DOTFILES/bin" "$HOME/bin" "/usr/bin/core_perl"
 
 set -x EDITOR vim
 

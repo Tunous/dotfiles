@@ -150,12 +150,10 @@ super + alt + s
 
 # Android studio
 super + alt + a
-    bspc config focus_follows_pointer false; \
     android-studio
 
 # IntelliJ IDEA
 super + alt + i
-    bspc config focus_follows_pointer false; \
     idea.sh
 
 # }}}
