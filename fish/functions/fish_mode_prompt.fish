@@ -1,4 +1,6 @@
-function fish_vi_prompt
+function fish_mode_prompt --description 'Displays the current mode'
+  # Do nothing if not in vi mode
+  if set -q __fish_vi_mode
     switch $fish_bind_mode
         case default
             set_color blue
@@ -7,7 +9,5 @@ function fish_vi_prompt
         case visual
             set_color --bold red
     end
-    echo
-    echo -n " » "
-    set_color normal
+  end
 end
