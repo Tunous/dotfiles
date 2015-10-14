@@ -68,3 +68,7 @@
     s = status
 
     wip = "!git add -A; git commit -m \"WIP: $(fortune -n45 -s zippy)\""
+
+    gimp = mergetool --tool=gimp
+[mergetool "gimp"]
+    cmd = gimp --new-instance \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
