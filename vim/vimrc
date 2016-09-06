@@ -27,7 +27,6 @@ Plug 'bling/vim-airline'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-dispatch'
 Plug 'tpope/vim-fugitive'
-Plug 'nosami/omnisharp', { 'for': 'cs', 'do': 'cd server; and xbuild' }
 Plug 'tpope/vim-repeat'
 Plug 'inside/vim-search-pulse'
 Plug 'tpope/vim-surround'
@@ -37,7 +36,6 @@ Plug 'wellle/targets.vim'
 Plug 'tomtom/tcomment_vim'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-unimpaired'
-Plug 'Shougo/unite.vim'
 Plug 'Shougo/vimproc.vim', { 'do': 'make -f make_unix.mak' }
 Plug 'junegunn/vim-pseudocl'
 Plug 'junegunn/vim-oblique'
@@ -81,19 +79,6 @@ autocmd! User Oblique
 autocmd! User ObliqueRepeat
 autocmd  User Oblique       call search_pulse#Pulse()
 autocmd  User ObliqueRepeat call search_pulse#Pulse()
-
-" {{{3 Unite
-
-nnoremap [unite] <NOP>
-nmap <Space> [unite]
-
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
-let g:unite_source_rec_async_command =
-            \ 'ag --follow --nocolor --nogroup --hidden -g ""'
-
-nnoremap [unite]f :Unite -start-insert file_rec/async:!<CR>
-nnoremap [unite]b :Unite buffer<CR>
 
 " {{{3 Search pulse
 

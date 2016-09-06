@@ -7,7 +7,7 @@ set __fish_git_prompt_color_branch blue
 set __fish_git_prompt_char_dirtystate '⚡'
 
 # Use vi mode
-fish_vi_mode
+fish_vi_key_bindings
 
 # Remove greeting message
 set fish_greeting
@@ -27,5 +27,3 @@ set -x GNUPGHOME "$XDG_DATA_HOME/GnuPG"
 set -x PASSWORD_STORE_DIR "$XDG_DATA_HOME/passwords-store"
 set -x LESSHISTFILE "/dev/null"
 set -x XAUTHORITY "$XDG_CACHE_HOME/Xauthority"
-
-source "$DOTFILES/fish/android.fish"

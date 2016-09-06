@@ -3,24 +3,26 @@
 # xinitrc
 #
 
+export DOTFILES="$HOME/etc"
+
 # Set wallpaper
-hsetroot -tile ~/usr/Dropbox/Images/Minimalistic_light_bulbs.jpg
+# hsetroot -tile ~/usr/Dropbox/Images/Minimalistic_light_bulbs.jpg
 
 # Set bindings
 sxhkd &
 
 # Configure keys
-setxkbmap pl
+# setxkbmap pl
 xmodmap $DOTFILES/Xmodmap
 xcape
 
 # Disable beep and turning off monitor
-xset b off
-xset -dpms
+# xset b off
+# xset -dpms
 
 # Default cursor
-xsetroot -cursor_name left_ptr
-unclutter -idle 2 &
+# xsetroot -cursor_name left_ptr
+# unclutter -idle 2 &
 
 wm() {
     # Load X resources
@@ -28,7 +30,7 @@ wm() {
     xrdb -merge $DOTFILES/Xcolors/s3r0modmod
 
     # Compositing
-    compton &
+    # compton &
 
     # Fonts
     xset +fp /usr/share/fonts/local
@@ -37,9 +39,9 @@ wm() {
     # Terminal
     urxvtd &
     # Notifications
-    twmnd &
+    # twmnd &
     # Tray
-    stalonetray &
+    # stalonetray &
 
     # Fix for the java applications
     wmname LG3D &
@@ -47,5 +49,5 @@ wm() {
     exec $1
 }
 
-[[ -z $1 ]] && wm bspwm
-wm $1
+#[[ -z $1 ]] && wm bspwm
+wm gnome-session
