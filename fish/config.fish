@@ -12,16 +12,16 @@ fish_vi_mode
 # Remove greeting message
 set fish_greeting
 
-set -x PATH $PATH "$DOTFILES/bin" "$HOME/bin" "/usr/bin/core_perl"
-
 set -x EDITOR vim
 
 set -x XDG_CONFIG_HOME "$HOME/.config"
 set -x XDG_CACHE_HOME "$HOME/.cache"
 set -x XDG_DATA_HOME "$HOME/.local/share"
 
-set -x DOTFILES "$HOME/.dotfiles"
+set -x DOTFILES "$HOME/etc"
 set -x PANEL_FIFO "/tmp/panel-fifo"
+
+set -x PATH $PATH "$DOTFILES/bin" "$HOME/bin" "/usr/bin/core_perl"
 
 set -x GNUPGHOME "$XDG_DATA_HOME/GnuPG"
 set -x PASSWORD_STORE_DIR "$XDG_DATA_HOME/passwords-store"
