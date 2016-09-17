@@ -1,0 +1,102 @@
+#!/bin/bash
+#
+# node-control
+#
+# Control focusing, moving and resizing of bspwm nodes
+#
+
+action="$1"
+direction="$2"
+
+[[ "$direction" == "west" ]]  && desktop_direction="prev"
+[[ "$direction" == "east" ]] && desktop_direction="next"
+
+if [[ "$action" == "--focus" ]]; then
+    # Focus node in selected direction
+    bspc node $direction --focus
+
+    if (( $? )); then
+        # Focus floating node
+        bspc node ${desktop_direction}.floating --focus
+
+        if (( $? )); then
+            # Focus desktop
+            [[ "$desktop_direction" ]] && bspc desktop $desktop_direction --focus
+        fi
+    fi
+elif [[ "$action" == "--move" ]]; then
+    current_node=$(bspc query --nodes --node focused)
+
+    # If there is no focused node then we don't have to move anything
+    [[ -z $current_node ]] && exit
+
+    if [[ -n "$(bspc query --nodes --node focused.tiled)" ]]; then
+        # Try to move node to preselection in chosen direction
+        bspc node --to-node ${direction}.manual
+
+        # If failed swap node with one in selected direction
+        if (( $? )); then
+            bspc node --swap $direction
+
+            # If this failed then move node another desktop
+            if (( $? )); then
+                current_desktop=$(bspc query --desktops --desktop focused)
+                num_desktops=$(bspc query --desktops --monitor focused | wc -l)
+                [[ $current_desktop == $num_desktops && "$direction" == "right" ]] && move_last=1 || move_last=0
+                [[ $current_desktop == 1 && "$direction" == "west" ]] && move_first=1 || move_first=0
+
+                # If this is the last or first desktop create new one and move
+                # focused node there
+                if (( move_last || move_first )) ; then
+                    ~/.config/bspwm/scripts/add_desktop.sh
+                    bspc node --to-desktop $desktop_direction --focus
+                else
+                    bspc node --to-desktop $desktop_direction
+                    ~/.config/bspwm/scripts/remove_desktop.sh
+                    bspc node --focus $current_node
+                fi
+            fi
+        fi
+    else
+        # Move floating node
+        if [[ "$direction" == "west" ]]; then
+            float="-x -20"
+        elif [[ "$direction" == "south" ]]; then
+            float="-y +20"
+        elif [[ "$direction" == "north" ]]; then
+            float="-y -20"
+        elif [[ "$direction" == "east" ]]; then
+            float="-x +20"
+        fi
+
+        xdo move $float
+    fi
+elif [[ "$action" == "--resize" ]]; then
+    if [[ "$direction" == "west" ]]; then
+        d1=west
+        d2=east
+        size=-10
+        float="-w -20"
+    elif [[ "$direction" == "south" ]]; then
+        d1=south
+        d2=north
+        size=+10
+        float="-h +20"
+    elif [[ "$direction" == "north" ]]; then
+        d1=north
+        d2=south
+        size=-10
+        float="-h -20"
+    elif [[ "$direction" == "east" ]]; then
+        d1=east
+        d2=west
+        size=+10
+        float="-w +20"
+    fi
+
+    if [[ -n "$(bspc query --nodes --node focused.tiled)" ]]; then
+        bspc node --edge $d1 $size || bspc node --edge $d2 $size
+    else
+        xdo resize $float
+    fi
+fi

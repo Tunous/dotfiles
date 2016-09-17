@@ -2,13 +2,15 @@
 # {{{ Closing/reloading
 
 # Run system command
+# Displays dmenu bar with options to perform
+# actions such as shutting down pc or logging out
 super + alt + Escape
     dmenu-system
 
-# Close/kill focused window
+# Close/kill focused node
 super + {q,Q}
-    [ (bspc query -W | wc -l) = 0 -a (bspc query -D) = 1 ]; and dmenu-system; \
-    bspc window --{close,kill}; \
+    [ (bspc query --nodes | wc -l) = 0 -a (bspc query --desktops) = 1 ]; and dmenu-system; \
+    bspc node --{close,kill}; \
     ~/.config/bspwm/scripts/remove_desktop.sh
 
 # Reload sxhkd config
@@ -31,28 +33,28 @@ super + alt + c
 # }}}
 # {{{ Navigation
 
-# Focus window/desktop
+# Focus node/desktop
 super + {h,j,k,l}
-    ~/.config/bspwm/scripts/window-control --focus {left,down,up,right}
+    ~/.config/bspwm/scripts/node-control --focus {west,south,north,east}
 
-# Move window
+# Move node
 super + shift + {h,j,k,l}
-    ~/.config/bspwm/scripts/window-control --move {left,down,up,right}
+    ~/.config/bspwm/scripts/node-control --move {west,south,north,east}
 
-# Cycle windows
+# Cycle nodes
 alt + {Tab,grave}
-    bspc window --focus {next,prev}
+    bspc node --focus {next,prev}
 
-# Change desktop/Move window to desktop
+# Change desktop/Move node to desktop
 super + {_,shift + } bracket{left,right}
-    bspc {desktop --focus,window --to-desktop } {prev,next}
+    bspc {desktop --focus,node --to-desktop } {prev,next}
 
 super + {_,shift + } {1-9}
-    bspc {desktop --focus,window --to-desktop } {1-9}
+    bspc {desktop --focus,node --to-desktop } {1-9}
 
-# Focus last window, desktop
+# Focus last node, desktop
 super + {grave,Tab}
-    bspc {window,desktop} --focus last
+    bspc {node,desktop} --focus last
 
 # }}}
 # {{{ Mouse
@@ -71,26 +73,26 @@ super + @button{1-3}
     bspc pointer --ungrab
 
 # }}}
-# {{{ Windows
+# {{{ nodes
 
 # Toggle layout of desktop
 super + t
     bspc desktop --layout next
 
-# Toggle state of window
+# Toggle state of node
 super + {a,f}
-    bspc window --toggle {floating,fullscreen}
+    bspc node --toggle {floating,fullscreen}
 
 # Rarely used states
 super + s; {a,s,d,f}
-    bspc window --toggle {sticky,locked,private,pseudo_tiled}
+    bspc node --toggle {sticky,locked,private,pseudo_tiled}
 
 # States help
 super + s; h
     notify "[A] Sticky [S] Locked [D] Private [F] Pseudo tiled"
 
 super + alt + {h,j,k,l}
-    ~/.config/bspwm/scripts/window-control --resize {left,down,up,right}
+    ~/.config/bspwm/scripts/node-control --resize {west,south,north,east}
 
 # Balance size
 super + b
@@ -103,11 +105,11 @@ super + e
 
 # Preselect splitting area
 super + ctrl + {h,j,k,l}
-    bspc window --presel {left,down,up,right}
+    bspc node --presel {left,down,up,right}
 
-# Move window to preselection
+# Move node to preselection
 super + ctrl + space
-    bspc window --to-window last.manual
+    bspc node --to-node last.manual
 
 # }}}
 # {{{ Desktops

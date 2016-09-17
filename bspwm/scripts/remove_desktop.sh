@@ -15,9 +15,9 @@
 # safe to remove.
 
 # Only try to remove the desktop if there are no windows left on it
-if [[ $(bspc query -W -d focused | wc -l) == 0 ]]; then
-    current_desktop=$(bspc query -D -d focused)
-    num_desktops=$(bspc query -D -m focused | wc -l)
+if [[ $(bspc query --nodes --desktop focused | wc -l) == 0 ]]; then
+    current_desktop=$(bspc query --desktops --desktop focused)
+    num_desktops=$(bspc query --desktops --monitor focused | wc -l)
 
     if [[ ${current_desktop} != ${num_desktops} ]]; then
         # We'll swap the desktops so that the current desktop is actually the last desktop...bubblesort style.

@@ -25,4 +25,8 @@ wmname LG3D &
 # Configure keys
 bash -c "sleep 5; setxkbmap pl && xmodmap $DOTFILES/Xmodmap && xcape" &
 
-exec gnome-session
+if [ -z $1 ]; then
+    exec bspwm
+else
+    exec gnome-session
+fi
