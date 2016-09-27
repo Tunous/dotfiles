@@ -9,29 +9,9 @@ Installation
 To install these dotfiles simplly clone this repository and run installation script:
 
 ```
-$ git clone https://github.com/Tunous/dotfiles.git ~/.dotfiles
-$ ~/.dotfiles/install
+$ git clone https://github.com/Tunous/dotfiles.git ~/etc
+$ ~/etc/install
 ```
-
-Programs Used
--------------
-
-* `bar`
-* `bspwm`
-* `compton`
-* `dmenu2`
-* `feh`
-* `firefox`
-* `git`
-* `pass`
-* `ranger`
-* `rxvt-unicode`
-* `sxhkd`
-* `tmux`
-* `twmn`
-* `unclutter`
-* `vim`
-* `zsh`
 
 Thanks to
 ---------

@@ -17,6 +17,8 @@ xset fp rehash
 wmname LG3D &
 
 if [ -z $1 ]; then
+    compton &
+
     # Configure keys
     setxkbmap pl
     setxkbmap -option ctrl:nocaps

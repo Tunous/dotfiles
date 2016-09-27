@@ -34,7 +34,6 @@ URxvt*clipboard.copycmd:    xclip -i -selection clipboard
 URxvt*clipboard.pastecmd:   xclip -o -selection clipboard
 
 ! Fonts
-! *font:                      -*-tamzenforpowerline-medium-*-*-*-12-*-*-*-*-60-*-*
 *font: -*-tamsyn-medium-*-*--13-*-*-*-*-*-*-1
 *boldFont: -*-tamsyn-medium-*-*--13-*-*-*-*-*-*-1
 
