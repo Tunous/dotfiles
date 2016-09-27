@@ -72,3 +72,5 @@
     gimp = mergetool --tool=gimp
 [mergetool "gimp"]
     cmd = gimp --new-instance \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+[core]
+	autocrlf = input
