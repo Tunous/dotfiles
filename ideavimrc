@@ -1,0 +1,19 @@
+# Better version of line joining command powered by IDE
+noremap J :action EditorJoinLines<CR>
+
+# Allow deletion with back space from normal mode
+# Useful when IDE highlights something that could be deleted
+noremap <BS> :action EditorBackSpace<CR>
+
+# Enable surrounding extension
+set surround
+
+# Make yank command work how it should
+noremap Y y$
+
+# Keep more context visible when scrolling
+set scrolloff=15
+
+# Quick scrolling shortcuts. Sadly Shift + Space doesn't work
+noremap <Space> <C-d>
+noremap <C-Space> <C-u>
