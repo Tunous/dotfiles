@@ -13,15 +13,11 @@
     - [mkdir -p ~/.cache/vim/undofiles, Creating vim cache directories]
 
 - link:
-    ~/.config/bspwm: 'bspwm'
-    ~/.config/compton.conf: 'compton.conf'
     ~/.config/fish/completions: 'fish/completions'
     ~/.config/fish/functions: 'fish/functions'
     ~/.config/fish/config.fish: 'fish/config.fish'
     ~/.config/git: 'git'
-    ~/.config/sxhkd: 'sxhkd'
     ~/.vim: 'vim'
-    ~/.xinitrc: 'xinitrc'
     ~/.ideavimrc: 'ideavimrc'
 
 - shell:
