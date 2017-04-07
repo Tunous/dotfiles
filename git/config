@@ -70,7 +70,24 @@
     wip = "!git add -A; git commit -m \"WIP: $(fortune -n45 -s zippy)\""
 
     gimp = mergetool --tool=gimp
+
+# Resolving image conflicts in gimp
 [mergetool "gimp"]
     cmd = gimp --new-instance \"$MERGED\" \"$LOCAL\" \"$BASE\" \"$REMOTE\"
+
 [core]
-	autocrlf = input
+    autocrlf = input
+
+# GitHub shortcuts
+[url "git@github.com:"]
+    insteadOf = "gh:"
+    pushInsteadOf = "github:"
+    pushInsteadOf = "git://github.com/"
+[url "git://github.com/"]
+    insteadOf = "github:"
+[url "git@gist.github.com:"]
+    insteadOf = "gst:"
+    pushInsteadOf = "gist:"
+    pushInsteadOf = "git://gist.github.com/"
+[url "git://gist.github.com/"]
+    insteadOf = "gist:"
