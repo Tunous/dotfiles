@@ -20,8 +20,7 @@ set -x XDG_DATA_HOME "$HOME/.local/share"
 
 set -x DOTFILES "$HOME/etc"
 
-set -x PATH $PATH "$HOME/bin" "$HOME/.gem/ruby/2.3.0/bin" "/usr/bin/core_perl"
+set -x PATH $PATH "$HOME/bin" "$HOME/.gem/ruby/2.4.0/bin" "/usr/bin/core_perl"
 
 set -x GNUPGHOME "$XDG_DATA_HOME/GnuPG"
-set -x PASSWORD_STORE_DIR "$XDG_DATA_HOME/passwords-store"
 set -x LESSHISTFILE "/dev/null"
