@@ -1,19 +1,34 @@
 # Better version of line joining command powered by IDE
-noremap J :action EditorJoinLines<CR>
+nnoremap J :action EditorJoinLines<CR>
 
 # Allow deletion with back space from normal mode
 # Useful when IDE highlights something that could be deleted
-noremap <BS> :action EditorBackSpace<CR>
+nnoremap <BS> :action EditorBackSpace<CR>
+
+# Make yank command work how it should
+nnoremap Y y$
+
+# Use built-in search
+nnoremap / :action Find<CR>
+
+# Keep the original mapping for overriding methods only in in normal mode
+nnoremap <C-o> :action OverrideMethods<CR>
+
+# Easier navigation to first non-whitespace character
+nnoremap 0 ^
+
+# Insert mode fix for some actions
+inoremap <S-F6> <C-o>:action RenameElement<CR>
+nnoremap <S-F6> i<C-o>:action RenameElement<CR>
+nnoremap <A-C-V> :action IntroduceVariable<CR>i
+nnoremap <A-C-F> :action IntroduceField<CR>i
 
 # Enable surrounding extension
 set surround
 
-# Make yank command work how it should
-noremap Y y$
+# Relative and absolute line numbers
+#set relativenumber
+#set number
 
 # Keep more context visible when scrolling
 set scrolloff=15
-
-# Quick scrolling shortcuts. Sadly Shift + Space doesn't work
-noremap <Space> <C-d>
-noremap <C-Space> <C-u>
